@@ -26,8 +26,8 @@ class CollectionsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static ?string $navigationGroup = 'Catalogue';   
-    //protected static ?string $navigationParentItem = 'Catalogue';
-
+    protected static ?string $navigationParent = 'Books';
+protected static ?int $navigationSort = 1; // Ordre dans le sous-menu
 
     public static function getLabel() : string {
         return __('Collections');

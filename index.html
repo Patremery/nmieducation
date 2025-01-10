@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NMI Education</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+         :root {
+            --primary-blue: #0066cc;
+        }
+        
+        .navbar {
+            background-color: var(--primary-blue) !important;
+        }
+        
+        .banner {
+            background-image: url('https://placehold.co/1200x300/cccccc/ffffff');
+            padding: 50px 0;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .banner h1 {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .card {
+            transition: transform 0.2s;
+            margin-bottom: 20px;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card:hover {
+            transform: scale(1.05);
+        }
+        
+        .card-img-top {
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .nouveautes .badge {
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+        }
+        
+        .navbar-nav {
+            margin: 0 auto;
+        }
+        
+        .navbar-nav .nav-link {
+            padding: 0 1.5rem;
+            color: white !important;
+        }
+        
+        .navbar-brand {
+            text-align: center;
+            margin: 0.5rem auto;
+        }
+        
+        .literature-section,
+        .catalogue-section {
+            margin: 50px 0;
+        }
+        
+        .ebook-section {
+            background-color: #f8f9fa;
+            padding: 50px 0;
+            text-align: center;
+            margin: 50px 0;
+        }
+        
+        .platform-logos img {
+            height: 30px;
+            margin: 20px;
+        }
+        
+        footer {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        footer h5 {
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        footer ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        footer ul li {
+            margin-bottom: 10px;
+        }
+        
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .social-icons a {
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .qr-code {
+            margin: 20px 0;
+            max-width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand mx-auto" href="#">
+                <img src="/api/placeholder/100/50" alt="NMI Education">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">À propos de nous</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Notre métier</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Notre catalogue</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Actualité</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Nous contacter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Banner -->
+    <div class="banner">
+        <h1>Nos livres</h1>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <!-- Nouveautés -->
+        <div class="nouveautes mb-5">
+            <span class="badge bg-danger">Nouveaux</span>
+            <div class="row mt-3">
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="/api/placeholder/200x300" class="card-img-top" alt="Livre">
+                        <div class="card-body">
+                            <h5>Le prix de la bêtise</h5>
+                            <p class="text-muted">David Enghewing</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="/api/placeholder/200x300" class="card-img-top" alt="Livre">
+                        <div class="card-body">
+                            <h5>Deutsch 3e</h5>
+                            <p class="text-muted">Collection Eveil</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="/api/placeholder/200x300" class="card-img-top" alt="Livre">
+                        <div class="card-body">
+                            <h5>Septembre fou!</h5>
+                            <p class="text-muted">Botemogue & Christian Tialso</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="/api/placeholder/200x300" class="card-img-top" alt="Livre">
+                        <div class="card-body">
+                            <h5>Français 4e</h5>
+                            <p class="text-muted">Collection Eveil</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filtres -->
+        <div class="filters mb-5">
+            <div class="row">
+                <div class="col-md-3 mb-2">
+                    <select class="form-select">
+                        <option>Trier par titres</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-2">
+                    <select class="form-select">
+                        <option>Trier par thèmes</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-2">
+                    <select class="form-select">
+                        <option>Trier par genres</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-2">
+                    <select class="form-select">
+                        <option>Trier par catégories</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manuels Scolaires -->
+        <div class="catalogue-section">
+            <h2>Manuels Scolaires</h2>
+            <div class="row mt-4">
+                <div class="col-md-2">
+                    <div class="card">
+                        <img src="/api/placeholder/150x200" class="card-img-top" alt="Manuel">
+                        <div class="card-body p-2">
+                            <h6 class="mb-0">Deutsch 3e</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="card">
+                        <img src="/api/placeholder/150x200" class="card-img-top" alt="Manuel">
+                        <div class="card-body p-2">
+                            <h6 class="mb-0">Anglais 4e</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="card">
+                        <img src="/api/placeholder/150x200" class="card-img-top" alt="Manuel">
+                        <div class="card-body p-2">
+                            <h6 class="mb-0">Biology</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="card">
+                        <img src="/api/placeholder/150x200" class="card-img-top" alt="Manuel">
+                        <div class="card-body p-2">
+                            <h6 class="mb-0">Chemistry</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="card">
+                        <img src="/api/placeholder/150x200" class="card-img-top" alt="Manuel">
+                        <div class="card-body p-2">
+                            <h6 class="mb-0">Espagnol</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="card">
+                        <img src="/api/placeholder/150x200" class="card-img-top" alt="Manuel">
+                        <div class="card-body p-2">
+                            <h6 class="mb-0">Informatique</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-end mt-3">
+                <a href="#" class="text-primary">Plus de Manuels Scolaires →</a>
+            </div>
+        </div>
+
+        <!-- Littérature générale -->
+        <div class="literature-section">
+            <h2>Littérature générale</h2>
+            <div class="row mt-4">
+                <div class="col-md-2">
+                    <div class="card">
+                        <img src="/api/placeholder/150x200" class="card-img-top" alt="Livre">
+                        <div class="card-body p-2">
+                            <h6 class="mb-0">A special Birthday Wish</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Répétez pour les autres livres -->
+            </div>
+            <div class="text-end mt-3">
+                <a href="#" class="text-primary">Plus d'ouvrages jeunesse →</a>
+            </div>
+        </div>
+
+        <!-- E-books Section -->
+        <div class="ebook-section">
+            <div class="container">
+                <h3>Nos manuels scolaires et nos œuvres littéraires sont également disponible en un clic !</h3>
+                <p class="mt-3">Les ouvrages édités par NMI Education sont disponibles en lecture et en téléchargement au format numérique sur les plateformes dédiées</p>
+                <div class="platform-logos">
+                    <img src="/api/placeholder/120x40" alt="Platform 1">
+                    <img src="/api/placeholder/120x40" alt="Platform 2">
+                    <img src="/api/placeholder/120x40" alt="Platform 3">
+                </div>
+            </div>
+        </div>
+
+        <!-- Littérature générale (deuxième section) -->
+        <div class="literature-section">
+            <h2>Littérature générale</h2>
+            <div class="row mt-4">
+                <div class="col-md-2">
+                    <div class="card">
+                        <img src="/api/placeholder/150x200" class="card-img-top" alt="Livre">
+                        <div class="card-body p-2">
+                            <h6 class="mb-0">Bantou</h6>
+                            <small class="text-muted">Christian Tialso</small>
+                        </div>
+                    </div>
+                </div>
+                <!-- Autres livres -->
+            </div>
+            <div class="text-end mt-3">
+                <a href="#" class="text-primary">Plus d'ouvrages →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="/api/placeholder/150x75" alt="NMI Education" class="mb-3">
+                    <p>Nouvelle Maison Internationale d'Edition</p>
+                    <p>Tel: 00237 654 000 200</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h5>Suivez notre actualité</h5>
+                    <img src="/api/placeholder/100x100" alt="QR Code" class="qr-code">
+                </div>
+                <div class="col-md-3">
+                    <h5>À PROPOS DE NOUS</h5>
+                    <ul>
+                        <li><a href="#">Notre histoire</a></li>
+                        <li><a href="#">Présentation</a></li>
+                        <li><a href="#">Nos services</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>MANUELS SCOLAIRES</h5>
+                    <ul>
+                        <li><a href="#">Sous système Anglophone</a></li>
+                        <li><a href="#">Sous système Francophone</a></li>
+                        <li><a href="#">Guides pédagogiques</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <small>© nmieducation.com © 2024</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@
