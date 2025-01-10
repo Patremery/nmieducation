@@ -1,4 +1,31 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
+
+/* Style des flèches */
+
+:root {
+    --bs-primary: #0171bd;
+    --bs-primary-rgb: 1, 113, 189;
+    --bs-primary-dark: #0171bd;
+    --bs-primary-darker: #0171bd;
+}
+
+/* Pour assurer la compatibilité avec les classes utilitaires */
+
+.bg-primary {
+    background-color: var(--bs-primary) !important;
+}
+
+.btn-primary {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--bs-primary-dark);
+    border-color: var(--bs-primary-dark);
+}
+
 body {
     font-family: "Montserrat", sans-serif;
 }
@@ -9,10 +36,54 @@ body {
 
 .nav-link {
     color: white !important;
-    font-weight: 600 !important;
+    font-weight: 500 !important;
     transition: color 0.3s ease;
 }
 
 .nav-link:hover {
     color: #ffa500 !important;
+}
+
+.sectionTitle {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.custom-dots {
+    bottom: -25px;
+}
+
+.custom-dots li {
+    margin: 0 5px;
+}
+
+.custom-dots li button:before {
+    font-size: 12px;
+    color: #d0d0d0;
+    opacity: 0.5;
+}
+
+.custom-dots li.slick-active button:before {
+    color: #dc3545;
+    /* Couleur rouge danger de Bootstrap */
+    opacity: 1;
+}
+
+.custom-arrow {
+    font-size: 22px;
+    color: "sky";
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.custom-arrow:hover {
+    background: #dc3545;
+    color: white;
 }

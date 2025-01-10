@@ -3,10 +3,7 @@ import Logo from "../assets/img/logo.png";
 
 const Navbar: React.FC = () => {
     return (
-        <nav
-            className="navbar navbar-expand-lg navbar-dark"
-            style={{ backgroundColor: "#0066cc" }}
-        >
+        <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
             <div className="container flex-column">
                 <a className="navbar-brand text-center mb-3" href="#">
                     <img

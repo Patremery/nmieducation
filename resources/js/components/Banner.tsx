@@ -18,13 +18,15 @@ const Banner: React.FC = () => {
                     url(${BannerImage})`,
                 backgroundSize: "cover, 20px 20px, cover",
                 backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                backgroundBlendMode: "-moz-initial",
                 padding: "70px 0",
                 textAlign: "center",
                 color: "white",
                 position: "relative",
             }}
         >
-            <h1 style={{ position: "relative", zIndex: 1 }}>Nos livres</h1>
+            <h1 style={{ position: "relative", zIndex: 1 }}>Nos Livres</h1>
         </div>
     );
 };

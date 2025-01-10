@@ -2,13 +2,7 @@ import React from "react";
 import Logo from "../assets/img/logo.png";
 const Footer: React.FC = () => {
     return (
-        <footer
-            style={{
-                backgroundColor: "#0066cc",
-                color: "white",
-                padding: "50px 0 20px",
-            }}
-        >
+        <footer className="bg-primary text-white py-5">
             <div className="container">
                 <div className="row">
                     <div className="col-md-3">
