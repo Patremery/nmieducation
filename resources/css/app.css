@@ -10,8 +10,7 @@
     --bs-primary-darker: #0171bd;
 }
 
-
-/* Pour assurer la compatibilité avec les classes utilitaires */
+/* Pour assurer la compatibilité avec les Classroom utilitaires */
 
 .bg-primary {
     background-color: var(--bs-primary) !important;

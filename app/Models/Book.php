@@ -11,15 +11,19 @@ class Book extends Model
     use HasFactory, HasStatus;
 
     protected $guarded = [];
+    protected $casts = [
+        'images' => 'array',
+        'new' => 'boolean'
+    ];
 
     public function author()
     {
-        return $this->belongsTo(Author::class);
+        return $this->belongsTo(Author::class, 'author_id');
     }
 
     public function category()
     {
-        return $this->belongsTo(BookCategory::class, 'book_category_id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     public function language()
@@ -29,6 +33,6 @@ class Book extends Model
 
     public function collection()
     {
-        return $this->belongsTo(Collection::class);
+        return $this->belongsTo(Collection::class, 'collection_id');
     }
 }

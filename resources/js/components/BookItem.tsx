@@ -1,17 +1,41 @@
 import React from "react";
 import BookCover from "../assets/img/cover.png";
+import { motion } from "framer-motion";
+import { Link } from "@inertiajs/react";
+import { Book } from "../types/interfaces";
 
-const BookItem = () => {
+interface BookItemProps {
+    index: number;
+    book: Book;
+}
+
+const BookItem: React.FC<BookItemProps> = ({ index, book }) => {
     return (
-        <div
-            className="card"
-            style={{
-                background: "transparent",
-                border: "1px solid light-grey",
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+                duration: 0.5,
+                delay: index * 0.1,
             }}
+            whileHover={{
+                scale: 1.05,
+                transition: { duration: 0.2 },
+            }}
+            className="book-card"
         >
-            <img src={BookCover} className="card-img-top" alt="Livre" />
-            <div className="card-body text-center informations">
+            <Link href={`/book/${book.id}`} type="button">
+                <img
+                    src={book.cover}
+                    className="card-img-top"
+                    alt="Livre"
+                    style={{ objectFit: "contain" }}
+                />
+            </Link>
+            <div
+                className="card-body text-center informations py-3"
+                style={{ backgroundColor: "rgb(240, 240, 240)" }}
+            >
                 <hr
                     style={{
                         border: "none",
@@ -22,7 +46,11 @@ const BookItem = () => {
                             "linear-gradient(to right, transparent, #d0d0d0 50%, transparent)",
                     }}
                 />
-                <p className="text-muted">David Enghewing</p>
+                <p className="text-muted my-1">
+                    {book.author.length > 15
+                        ? `${book.author.substring(0, 15)}...`
+                        : book.author}
+                </p>
                 <hr
                     style={{
                         border: "none",
@@ -33,9 +61,15 @@ const BookItem = () => {
                             "linear-gradient(to right, transparent, #d0d0d0 50%, transparent)",
                     }}
                 />
-                <h5>Le prix de la bêtise</h5>
+
+                <h5
+                    className="my-1 mx-2"
+                    style={{ fontSize: 18, fontWeight: 600 }}
+                >
+                    {book.title}
+                </h5>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

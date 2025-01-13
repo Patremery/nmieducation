@@ -10,6 +10,8 @@ class BookLanguage extends Model
 {
     use HasFactory, HasStatus;
 
+    public $timestamps = false;
+
     protected $guarded = [];
 
     public function books()

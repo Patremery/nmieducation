@@ -1,5 +1,6 @@
 import React from "react";
 import Logo from "../assets/img/logo.png";
+import { Link as InertiaLink } from "@inertiajs/react";
 
 const Navbar: React.FC = () => {
     return (
@@ -24,34 +25,34 @@ const Navbar: React.FC = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav mx-auto">
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <InertiaLink className="nav-link" href="/">
                                 Accueil
-                            </a>
+                            </InertiaLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <InertiaLink className="nav-link" href="/about">
                                 À propos de nous
-                            </a>
+                            </InertiaLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                Notre métier
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <InertiaLink className="nav-link" href="/catalogue">
                                 Notre catalogue
-                            </a>
+                            </InertiaLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <InertiaLink className="nav-link" href="/about">
+                                Notre métier
+                            </InertiaLink>
+                        </li>
+                        <li className="nav-item">
+                            <InertiaLink className="nav-link" href="/home">
                                 Actualité
-                            </a>
+                            </InertiaLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <InertiaLink className="nav-link" href="/contact">
                                 Nous contacter
-                            </a>
+                            </InertiaLink>
                         </li>
                     </ul>
                 </div>

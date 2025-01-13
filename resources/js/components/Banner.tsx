@@ -1,7 +1,11 @@
 import React from "react";
 import BannerImage from "../assets/img/banner.jpg";
 
-const Banner: React.FC = () => {
+interface BannerProps {
+    title: string;
+}
+
+const Banner: React.FC<BannerProps> = ({ title }) => {
     return (
         <div
             className="banner"
@@ -26,7 +30,7 @@ const Banner: React.FC = () => {
                 position: "relative",
             }}
         >
-            <h1 style={{ position: "relative", zIndex: 1 }}>Nos Livres</h1>
+            <h1 style={{ position: "relative", zIndex: 1 }}>{title}</h1>
         </div>
     );
 };

@@ -1,16 +1,16 @@
 import React from "react";
-import BookCover from "../assets/img/cover.png";
 import BookItem from "./BookItem";
+import { Book } from "../types/interfaces";
 
-const GeneralLiterature: React.FC = () => {
+const GeneralLiterature: React.FC<{ books: Book[] }> = ({ books }) => {
     return (
         <div className="literature-section mt-5">
             <h4 className="sectionTitle">Littérature générale</h4>
             <hr />
             <div className="row mt-4">
-                {Array.from({ length: 6 }).map((_, index) => (
+                {books.slice(0, 6).map((book, index) => (
                     <div className="col-md-2">
-                        <BookItem key={index} />
+                        <BookItem index={index} book={book} />
                     </div>
                 ))}
             </div>

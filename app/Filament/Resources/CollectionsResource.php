@@ -18,6 +18,7 @@ use Filament\Tables\Table;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Section;
+use Filament\Tables\Columns\ImageColumn;
 
 class CollectionsResource extends Resource
 {
@@ -27,7 +28,7 @@ class CollectionsResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static ?string $navigationGroup = 'Catalogue';   
     protected static ?string $navigationParent = 'Books';
-protected static ?int $navigationSort = 1; // Ordre dans le sous-menu
+    protected static ?int $navigationSort = 1; // Ordre dans le sous-menu
 
     public static function getLabel() : string {
         return __('Collections');
@@ -67,7 +68,6 @@ protected static ?int $navigationSort = 1; // Ordre dans le sous-menu
                                     ->columnSpanFull(),
                             ])->columnSpan(['lg' => 2]),
 
-                        // Barre latérale (1/3 de l'écran)
                         Grid::make()
                             ->schema([
                                 Section::make('Statut')
@@ -90,7 +90,7 @@ protected static ?int $navigationSort = 1; // Ordre dans le sous-menu
     {
         return $table
             ->columns([
-                TextColumn::make('featured_image')
+                ImageColumn::make('featured_image')
                             ->sortable()
                             ->searchable(),
                 TextColumn::make('name')
@@ -105,10 +105,10 @@ protected static ?int $navigationSort = 1; // Ordre dans le sous-menu
                 TextColumn::make('status')
                     ->sortable()
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        DefaultStatusEnum::PUBLISHED->value => 'success',
-                        DefaultStatusEnum::UNPUBLISHED->value => 'danger',
-                        DefaultStatusEnum::DRAFT->value => 'warning',
+                    ->color(fn (DefaultStatusEnum $state): string => match ($state) {
+                        DefaultStatusEnum::PUBLISHED => 'success',
+                        DefaultStatusEnum::UNPUBLISHED => 'danger',
+                        DefaultStatusEnum::DRAFT => 'warning',
                         default => 'danger',
                     }),
                 TextColumn::make('description')

@@ -2,30 +2,28 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PartnersResource\Pages;
-use App\Filament\Resources\PartnersResource\RelationManagers;
-use App\Models\Partners;
+use App\Filament\Resources\ClassroomResource\Pages;
+use App\Filament\Resources\ClassroomResource\RelationManagers;
+use App\Models\Classroom;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class PartnersResource extends Resource
+class ClassroomResource extends Resource
 {
-    protected static ?string $model = Partners::class;
+    protected static ?string $model = Classroom::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Catalogue';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')->required(),
-Forms\Components\TextInput::make('logo_url')->required(),
-Forms\Components\TextInput::make('website')->required(),
-Forms\Components\TextInput::make('description')->required()
+                Forms\Components\TextInput::make('name')->required()
             ]);
     }
 
@@ -33,10 +31,7 @@ Forms\Components\TextInput::make('description')->required()
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
-Tables\Columns\TextColumn::make('logo_url')->sortable()->searchable(),
-Tables\Columns\TextColumn::make('website')->sortable()->searchable(),
-Tables\Columns\TextColumn::make('description')->sortable()->searchable()
+                Tables\Columns\TextColumn::make('name')->sortable()->searchable()
             ])
             ->filters([
                 //
@@ -55,7 +50,7 @@ Tables\Columns\TextColumn::make('description')->sortable()->searchable()
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManagePartners::route('/'),
+            'index' => Pages\ManageClassroom::route('/'),
         ];
     }
 }

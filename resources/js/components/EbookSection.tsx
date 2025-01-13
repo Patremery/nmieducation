@@ -9,7 +9,7 @@ const EbookSection: React.FC = () => {
         <div
             className="ebook-section mt-5"
             style={{
-                backgroundColor: "#f5f5f5",
+                backgroundColor: "#f7f7f7",
                 marginLeft: "calc(-50vw + 50%)",
                 marginRight: "calc(-50vw + 50%)",
                 width: "100vw",

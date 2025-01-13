@@ -1,0 +1,40 @@
+import React from "react";
+import InnerPageLayout from "../layouts/InnerPageLayout";
+import BookSlider from "../components/Slider";
+import SingleBookInformations from "../components/SingleBookInformations";
+import { Book } from "../types/interfaces";
+
+interface BookPresentationProps {
+    book: Book;
+    similarBooks: Book[];
+}
+
+const BookPresentation: React.FC<BookPresentationProps> = ({
+    book,
+    similarBooks,
+}) => {
+    const response = book.data;
+    const similars = similarBooks.data;
+    return (
+        <InnerPageLayout title="Nos Livres">
+            <div className="container-fluid">
+                <SingleBookInformations book={response} />
+                <div className="text-center">
+                    <h3
+                        className="mt-5 text-primary"
+                        style={{ fontWeight: 700 }}
+                    >
+                        Autres ouvrages
+                    </h3>
+                    <h5>qui pourraient vous intéresser</h5>
+                </div>
+
+                <div className="row mt-3 py-4 mb-5" style={{ padding: 70 }}>
+                    <BookSlider books={similars} slideNumber={5} />
+                </div>
+            </div>
+        </InnerPageLayout>
+    );
+};
+
+export default BookPresentation;

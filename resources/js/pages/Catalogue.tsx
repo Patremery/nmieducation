@@ -8,11 +8,11 @@ import EbookSection from "../components/EbookSection";
 import InnerPageLayout from "../layouts/InnerPageLayout";
 import { Book } from "../types/interfaces";
 
-interface HomeProps {
+interface CatalogueProps {
     books: Book[];
 }
 
-const Home: React.FC<HomeProps> = ({ books }) => {
+const Catalogue: React.FC<CatalogueProps> = ({ books }) => {
     const apiBooks = books.data;
     console.log("API Books: ", apiBooks);
     const containerVariants = {
@@ -80,4 +80,4 @@ const Home: React.FC<HomeProps> = ({ books }) => {
     );
 };
 
-export default Home;
+export default Catalogue;

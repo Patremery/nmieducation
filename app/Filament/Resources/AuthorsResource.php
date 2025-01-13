@@ -59,14 +59,13 @@ class AuthorsResource extends Resource
                                     ->afterStateUpdated(function ($state, $set) {
                                         $set('slug', str()->slug($state));
                                     }),
-                                TextInput::make('title')
-                                        ->label("Profession")
-                                        ->required(),
+                                TextInput::make('profession')
+                                        ->label("Profession"),
                                 Hidden::make('slug')
                                     ->unique(ignoreRecord: true)
                                     ->required(),
                                 RichEditor::make('biography')
-                                    ->required()
+                             
                                     ->columnSpanFull(),
                             ])->columnSpan(['lg' => 2]),
 
@@ -82,8 +81,7 @@ class AuthorsResource extends Resource
                                     ->schema([
                                         FileUpload::make('photo')
                                             ->label("Photo de l'auteur")
-                                            ->image()
-                                            ->required(),
+                                            ->image(),
                                     ]),
 
                                 

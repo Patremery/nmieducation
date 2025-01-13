@@ -12,7 +12,6 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -32,10 +31,10 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login(Login::class)
-            //->brandLogo(settings('site_logo'))
+            ->brandLogo(asset(settings('site_logo')))
+            ->brandLogoHeight("70px")
             ->passwordReset()
             ->sidebarCollapsibleOnDesktop()
-//            ->sidebarFullyCollapsibleOnDesktop()
             ->spa()
             ->profile(Profile::class, false)
             ->viteTheme('resources/css/filament/admin/theme.css')
