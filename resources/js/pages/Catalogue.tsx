@@ -7,6 +7,7 @@ import GeneralLiterature from "../components/GeneralLiterature";
 import EbookSection from "../components/EbookSection";
 import InnerPageLayout from "../layouts/InnerPageLayout";
 import { Book } from "../types/interfaces";
+import KidsBooks from "../components/KidsBooks";
 
 interface CatalogueProps {
     books: Book[];
@@ -35,6 +36,10 @@ const Catalogue: React.FC<CatalogueProps> = ({ books }) => {
 
     const generalLiterature = () => {
         return apiBooks.filter((book) => book.category === "literature");
+    };
+
+    const kidsBooks = () => {
+        return apiBooks.filter((book) => book.category === "kids");
     };
 
     const itemVariants = {
@@ -70,6 +75,10 @@ const Catalogue: React.FC<CatalogueProps> = ({ books }) => {
 
                 <motion.div variants={itemVariants}>
                     <GeneralLiterature books={generalLiterature()} />
+                </motion.div>
+
+                <motion.div variants={itemVariants}>
+                    <KidsBooks books={kidsBooks()} />
                 </motion.div>
 
                 <motion.div variants={itemVariants}>

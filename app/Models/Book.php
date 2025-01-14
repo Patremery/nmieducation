@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Http\Resources\BookResource;
 use App\Traits\HasStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Book extends Model
 {
@@ -16,9 +18,9 @@ class Book extends Model
         'new' => 'boolean'
     ];
 
-    public function author()
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(Author::class, 'author_id');
+        return $this->belongsTo(Author::class);
     }
 
     public function category()
@@ -34,5 +36,10 @@ class Book extends Model
     public function collection()
     {
         return $this->belongsTo(Collection::class, 'collection_id');
+    }
+
+    public function toResource()
+    {
+        return new BookResource($this);
     }
 }

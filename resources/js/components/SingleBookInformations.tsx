@@ -14,7 +14,7 @@ const SingleBookInformations = ({ book }: { book: Book }) => {
                         <img
                             src={book.cover}
                             alt={book.title}
-                            className="img-fluid"
+                            className="img-fluid img-responsive"
                             style={{
                                 width: 300,
                                 objectFit: "contain",

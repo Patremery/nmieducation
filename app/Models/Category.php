@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Resources\CategoryResource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -16,7 +17,7 @@ class Category extends Model
         'LITERATURE' => 'literature',
         'SCHOOL' => 'school',
         'GUIDES' => 'guides',
-        // ... autres catégories système
+        'KIDS' => 'kids',
     ];
 
     // Scope pour les catégories système
@@ -29,5 +30,10 @@ class Category extends Model
     public function isSystem(): bool
     {
         return in_array($this->code, array_values(self::SYSTEM_CATEGORIES));
+    }
+
+    public function toResource()
+    {
+        return new CategoryResource($this);
     }
 } 

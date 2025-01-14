@@ -1,5 +1,4 @@
 import React from "react";
-import BookCover from "../assets/img/cover.png";
 import { motion } from "framer-motion";
 import { Link } from "@inertiajs/react";
 import { Book } from "../types/interfaces";
@@ -7,9 +6,10 @@ import { Book } from "../types/interfaces";
 interface BookItemProps {
     index: number;
     book: Book;
+    height?: number;
 }
 
-const BookItem: React.FC<BookItemProps> = ({ index, book }) => {
+const BookItem: React.FC<BookItemProps> = ({ index, book, height }) => {
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -27,9 +27,13 @@ const BookItem: React.FC<BookItemProps> = ({ index, book }) => {
             <Link href={`/book/${book.id}`} type="button">
                 <img
                     src={book.cover}
-                    className="card-img-top"
-                    alt="Livre"
-                    style={{ objectFit: "contain" }}
+                    className="img-fluid img-responsive"
+                    alt={book.title}
+                    style={{
+                        objectFit: "cover",
+                        width: "100%",
+                        height: height ? height : "400px",
+                    }}
                 />
             </Link>
             <div
@@ -66,7 +70,9 @@ const BookItem: React.FC<BookItemProps> = ({ index, book }) => {
                     className="my-1 mx-2"
                     style={{ fontSize: 18, fontWeight: 600 }}
                 >
-                    {book.title}
+                    {book.title.length > 15
+                        ? `${book.title.substring(0, 15)}...`
+                        : book.title}
                 </h5>
             </div>
         </motion.div>

@@ -3,6 +3,7 @@ type PlatformUrl = string | null;
 interface Book {
     id: number;
     title: string;
+    //author: Author;
     author: string;
     year: number;
     isbn: string;
@@ -47,5 +48,13 @@ enum BookAudience {
     ADULT = "Adulte",
 }
 
-export type { Book, BookCollection, PlatformUrl };
+interface Author {
+    id: number;
+    name: string;
+    profession: string;
+    biography: string;
+    photo: string;
+}
+
+export type { Book, BookCollection, PlatformUrl, Author };
 export { BookFormat, BookLanguage, BookAudience };

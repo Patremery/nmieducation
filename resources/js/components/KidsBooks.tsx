@@ -2,15 +2,15 @@ import React from "react";
 import ItemGrid from "./ItemGrid";
 import { Book } from "../types/interfaces";
 
-const GeneralLiterature: React.FC<{ books: Book[] }> = ({ books }) => {
+const KidsBooks: React.FC<{ books: Book[] }> = ({ books }) => {
     return (
         <ItemGrid
-            title="Littérature Générale"
+            title="Littérature Jeunesse"
             items={books}
             itemsToShow={6}
-            height={350}
+            height={150}
         />
     );
 };
 
-export default GeneralLiterature;
+export default KidsBooks;

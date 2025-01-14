@@ -45,7 +45,7 @@ const BookSlider = ({ slideNumber, books }: SliderProperties) => {
             {books.length > 0 ? (
                 <Slider {...settings}>
                     {books.map((book, index) => (
-                        <div className="px-2">
+                        <div key={index} className="px-2">
                             <BookItem index={index} book={book} />
                         </div>
                     ))}

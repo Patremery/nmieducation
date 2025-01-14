@@ -125,10 +125,13 @@ class BooksResource extends Resource
                                                 ->label("Auteur")
                                                 ->options(Author::query()->published()->pluck("name", "id"))
                                                 ->columns(2)
-                                                 ->visible(fn (Get $get) => static::isCategoryType(
+                                                 ->visible(fn (Get $get) => (static::isCategoryType(
                                         $get('category_id'),
                                         'literature'
-                                    )),
+                                    )) or (static::isCategoryType(
+                                        $get('category_id'),
+                                        'kids'
+                                    ))),
                                         DatePicker::make('publication_date')
                                             ->label("Date de publication"),
                                         TextInput::make('ISBN')

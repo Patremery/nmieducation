@@ -40,35 +40,38 @@ const EbookSection: React.FC = () => {
                             disponibles en lecture et en téléchargement au
                             format numérique sur les plateformes dédiées
                         </p>
-                        <div className="platform-logos d-flex justify-content-start gap-4">
+                        <div className="platform-logos d-flex px-2 gap-2">
                             <img
                                 src={Adinkra}
+                                className="img-fluid img-responsive"
                                 style={{
-                                    width: "120px",
+                                    width: "100px",
                                     height: "auto",
                                     objectFit: "contain",
                                     objectPosition: "center",
                                 }}
-                                alt="Platform 1"
+                                alt="Adinkra"
                             />
                             <img
                                 src={Youscribe}
+                                className="img-fluid img-responsive"
                                 style={{
-                                    width: "120px",
+                                    width: "100px",
                                     height: "auto",
                                     objectFit: "contain",
                                     objectPosition: "center",
                                 }}
-                                alt="Platform 2"
+                                alt="Youscribe"
                             />
                             <img
                                 src={Amazon}
                                 style={{
-                                    width: "120px",
+                                    width: "100px",
                                     height: "auto",
                                     objectFit: "contain",
                                     objectPosition: "center",
                                 }}
+                                className="img-fluid img-responsive"
                                 alt="Platform 3"
                             />
                         </div>

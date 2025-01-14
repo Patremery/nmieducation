@@ -14,6 +14,7 @@ const BookPresentation: React.FC<BookPresentationProps> = ({
     similarBooks,
 }) => {
     const response = book.data;
+    console.log("response: ", book);
     const similars = similarBooks.data;
     return (
         <InnerPageLayout title="Nos Livres">

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Resources\AuthorResource;
 use App\Traits\HasStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,4 +17,6 @@ class Author extends Model
     {
         return $this->hasMany(Book::class);
     }
+
+    
 }

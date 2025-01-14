@@ -20,11 +20,11 @@ class CatalogController extends Controller
 
     public function show($id)
     {
-        $book = new BookResource(Book::findOrFail($id));
+        $book = Book::findOrFail($id)->toResource();
         $similarBooks = BookResource::collection(Book::published()
-                                    ->where("id", "!=", $id)
-                                    ->where('category_id', $book->category_id)
-                                    ->with(['author', 'category', 'collection', 'language'])->get());
+                        ->where("id", "!=", $id)
+                        ->where('category_id', $book->category_id)
+                        ->with(['author','category', 'collection', 'language'])->get());
 
         return Inertia::render('BookPresentation', [
             'book' => $book,
