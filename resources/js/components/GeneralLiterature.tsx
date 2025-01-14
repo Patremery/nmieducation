@@ -1,15 +1,17 @@
 import React from "react";
 import ItemGrid from "./ItemGrid";
 import { Book } from "../types/interfaces";
+import CategoryLine from "./CategoryLine";
 
 const GeneralLiterature: React.FC<{ books: Book[] }> = ({ books }) => {
     return (
-        <ItemGrid
-            title="Littérature Générale"
-            items={books}
-            itemsToShow={6}
-            height={350}
-        />
+        <>
+            <CategoryLine
+                title="Littérature Générale"
+                items={books}
+                itemsToShow={6}
+            />
+        </>
     );
 };
 

@@ -8,7 +8,7 @@ const SingleBookInformations = ({ book }: { book: Book }) => {
             className="row"
             style={{ padding: "100px", backgroundColor: "#F7F7F7" }}
         >
-            <div className="col-md-9 d-flex gap-2">
+            <div className="col-md-9 d-flex gap-4">
                 <div>
                     {book.cover && (
                         <img
@@ -18,7 +18,7 @@ const SingleBookInformations = ({ book }: { book: Book }) => {
                             style={{
                                 width: 300,
                                 objectFit: "contain",
-                                aspectRatio: "3/4",
+                                //aspectRatio: "3/4",
                             }}
                         />
                     )}

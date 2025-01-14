@@ -17,6 +17,7 @@ const NewArrivals: React.FC<{ books: Book[] }> = ({ books }) => {
                     paddingTop: 30,
                     paddingBottom: 100,
                 }}
+                className="text-center"
             >
                 <BookSlider books={books} slideNumber={4} />
             </div>

@@ -1,23 +1,18 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Filters from "../components/Filters";
-import SchoolBooks from "../components/SchoolBooks";
 import EbookSection from "../components/EbookSection";
 import InnerPageLayout from "../layouts/InnerPageLayout";
+import ItemGrid from "../components/ItemGrid";
 
-interface CatalogTemplateProps {
-    title: string;
+interface CatalogCategoryProps {
+    code: string;
     books: any[];
-    category: string;
 }
 
-const CatalogTemplate: React.FC<CatalogTemplateProps> = ({
-    title,
-    books,
-    category,
-}) => {
+const CatalogCategory: React.FC<CatalogCategoryProps> = ({ code, books }) => {
     return (
-        <InnerPageLayout title={title}>
+        <InnerPageLayout title={code}>
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -30,7 +25,11 @@ const CatalogTemplate: React.FC<CatalogTemplateProps> = ({
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.2 }}
                 >
-                    <SchoolBooks books={books} />
+                    <ItemGrid
+                        items={books.data}
+                        title={code}
+                        itemsToShow={12}
+                    />
                 </motion.div>
                 <motion.div
                     initial={{ opacity: 0 }}
@@ -44,4 +43,4 @@ const CatalogTemplate: React.FC<CatalogTemplateProps> = ({
     );
 };
 
-export default CatalogTemplate;
+export default CatalogCategory;

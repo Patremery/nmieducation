@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\BookResource;
 use App\Models\Book;
-use Illuminate\Http\Request;
+use App\Models\Category;
 use Inertia\Inertia;
 
 class CatalogController extends Controller
@@ -32,10 +32,17 @@ class CatalogController extends Controller
         ]);
     }
 
-    public function template($id)
+    public function category(string $code)
     {
-        return Inertia::render('CatalogTemplate', [
-            'id' => $id
+        $category = Category::where('code', $code)->first();
+
+        $books = BookResource::collection(Book::published()
+                        ->where('category_id', $category->id)
+                        ->with(['author','category', 'collection', 'language'])->get());
+
+        return Inertia::render('CatalogCategory', [
+            'code' => $code,
+            'books' => $books
         ]);
     }
 

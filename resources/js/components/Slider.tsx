@@ -6,9 +6,14 @@ import { Book } from "../types/interfaces";
 interface SliderProperties {
     slideNumber: number;
     books: Book[];
+    imageHeight?: number;
 }
 
-const BookSlider = ({ slideNumber, books }: SliderProperties) => {
+const BookSlider = ({
+    slideNumber,
+    books,
+    imageHeight = 300,
+}: SliderProperties) => {
     const settings = {
         dots: true,
         infinite: true,
@@ -46,7 +51,11 @@ const BookSlider = ({ slideNumber, books }: SliderProperties) => {
                 <Slider {...settings}>
                     {books.map((book, index) => (
                         <div key={index} className="px-2">
-                            <BookItem index={index} book={book} />
+                            <BookItem
+                                index={index}
+                                book={book}
+                                height={imageHeight}
+                            />
                         </div>
                     ))}
                 </Slider>

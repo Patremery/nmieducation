@@ -16,6 +16,12 @@ const BookPresentation: React.FC<BookPresentationProps> = ({
     const response = book.data;
     console.log("response: ", book);
     const similars = similarBooks.data;
+    const getImageHeight = () => {
+        if (response.category === "kids") {
+            return 200;
+        }
+        return 400;
+    };
     return (
         <InnerPageLayout title="Nos Livres">
             <div className="container-fluid">
@@ -31,7 +37,11 @@ const BookPresentation: React.FC<BookPresentationProps> = ({
                 </div>
 
                 <div className="row mt-3 py-4 mb-5" style={{ padding: 70 }}>
-                    <BookSlider books={similars} slideNumber={5} />
+                    <BookSlider
+                        books={similars}
+                        slideNumber={5}
+                        imageHeight={getImageHeight()}
+                    />
                 </div>
             </div>
         </InnerPageLayout>

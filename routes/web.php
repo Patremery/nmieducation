@@ -13,6 +13,9 @@ Route::get('/about', function () {
 
 Route::get('/catalogue', [CatalogController::class, 'index']);
 
-Route::get('catalogue/template/{id}', [CatalogController::class, 'template']);
+Route::get('catalogue/category/{code}', [CatalogController::class, 'category']);
+
 
 Route::get('/book/{id}', [CatalogController::class, 'show'])->name('book.show');
+
+

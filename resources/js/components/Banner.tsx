@@ -2,7 +2,7 @@ import React from "react";
 import BannerImage from "../assets/img/banner.jpg";
 
 interface BannerProps {
-    title: string;
+    title?: string;
 }
 
 const Banner: React.FC<BannerProps> = ({ title }) => {

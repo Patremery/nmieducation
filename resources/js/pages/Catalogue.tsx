@@ -8,6 +8,7 @@ import EbookSection from "../components/EbookSection";
 import InnerPageLayout from "../layouts/InnerPageLayout";
 import { Book } from "../types/interfaces";
 import KidsBooks from "../components/KidsBooks";
+import CategoryLine from "../components/CategoryLine";
 
 interface CatalogueProps {
     books: Book[];
@@ -66,19 +67,40 @@ const Catalogue: React.FC<CatalogueProps> = ({ books }) => {
                 </motion.div>
 
                 <motion.div variants={itemVariants}>
+                    <h2 className="text-center mb-5">
+                        <span
+                            className="text-primary"
+                            style={{ fontWeight: 600 }}
+                        >
+                            Catalogue
+                        </span>
+                    </h2>
                     <Filters />
                 </motion.div>
 
                 <motion.div variants={itemVariants}>
-                    <SchoolBooks books={schoolBooks()} />
+                    <CategoryLine
+                        title="Manuels Scolaires"
+                        items={schoolBooks()}
+                        itemsToShow={6}
+                    />
                 </motion.div>
 
                 <motion.div variants={itemVariants}>
-                    <GeneralLiterature books={generalLiterature()} />
+                    <CategoryLine
+                        title="Littérature Générale"
+                        items={generalLiterature()}
+                        itemsToShow={6}
+                    />
                 </motion.div>
 
                 <motion.div variants={itemVariants}>
-                    <KidsBooks books={kidsBooks()} />
+                    <CategoryLine
+                        title="Littérature Jeunesse"
+                        items={kidsBooks()}
+                        itemsToShow={6}
+                        height={150}
+                    />
                 </motion.div>
 
                 <motion.div variants={itemVariants}>

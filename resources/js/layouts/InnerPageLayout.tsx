@@ -5,7 +5,7 @@ import Banner from "../components/Banner";
 
 interface InnerPageLayoutProps {
     children: ReactNode;
-    title: string;
+    title?: string;
 }
 
 const InnerPageLayout: React.FC<InnerPageLayoutProps> = ({

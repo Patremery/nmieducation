@@ -22,7 +22,8 @@ const BookItem: React.FC<BookItemProps> = ({ index, book, height }) => {
                 scale: 1.05,
                 transition: { duration: 0.2 },
             }}
-            className="book-card"
+            className="book-card mb-3"
+            style={{ backgroundColor: "rgb(240, 240, 240)" }}
         >
             <Link href={`/book/${book.id}`} type="button">
                 <img
@@ -32,14 +33,12 @@ const BookItem: React.FC<BookItemProps> = ({ index, book, height }) => {
                     style={{
                         objectFit: "cover",
                         width: "100%",
+                        padding: 5,
                         height: height ? height : "400px",
                     }}
                 />
             </Link>
-            <div
-                className="card-body text-center informations py-3"
-                style={{ backgroundColor: "rgb(240, 240, 240)" }}
-            >
+            <div className="card-body text-center informations py-2">
                 <hr
                     style={{
                         border: "none",
@@ -68,10 +67,10 @@ const BookItem: React.FC<BookItemProps> = ({ index, book, height }) => {
 
                 <h5
                     className="my-1 mx-2"
-                    style={{ fontSize: 18, fontWeight: 600 }}
+                    style={{ fontSize: 16, fontWeight: 600 }}
                 >
-                    {book.title.length > 15
-                        ? `${book.title.substring(0, 15)}...`
+                    {book.title.length > 18
+                        ? `${book.title.substring(0, 18)}...`
                         : book.title}
                 </h5>
             </div>
