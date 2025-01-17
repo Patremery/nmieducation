@@ -13,11 +13,8 @@ const BookPresentation: React.FC<BookPresentationProps> = ({
     book,
     similarBooks,
 }) => {
-    const response = book.data;
-    console.log("response: ", book);
-    const similars = similarBooks.data;
     const getImageHeight = () => {
-        if (response.category === "kids") {
+        if (book.category === "kids") {
             return 200;
         }
         return 400;
@@ -25,7 +22,7 @@ const BookPresentation: React.FC<BookPresentationProps> = ({
     return (
         <InnerPageLayout title="Nos Livres">
             <div className="container-fluid">
-                <SingleBookInformations book={response} />
+                <SingleBookInformations book={book} />
                 <div className="text-center">
                     <h3
                         className="mt-5 text-primary"
@@ -38,7 +35,7 @@ const BookPresentation: React.FC<BookPresentationProps> = ({
 
                 <div className="row mt-3 py-4 mb-5" style={{ padding: 70 }}>
                     <BookSlider
-                        books={similars}
+                        books={similarBooks}
                         slideNumber={5}
                         imageHeight={getImageHeight()}
                     />

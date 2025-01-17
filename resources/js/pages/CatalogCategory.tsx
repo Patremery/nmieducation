@@ -25,11 +25,7 @@ const CatalogCategory: React.FC<CatalogCategoryProps> = ({ code, books }) => {
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.2 }}
                 >
-                    <ItemGrid
-                        items={books.data}
-                        title={code}
-                        itemsToShow={12}
-                    />
+                    <ItemGrid items={books} title={code} itemsToShow={12} />
                 </motion.div>
                 <motion.div
                     initial={{ opacity: 0 }}

@@ -2,12 +2,9 @@ import React from "react";
 import { motion } from "framer-motion";
 import NewArrivals from "../components/NewArrivals";
 import Filters from "../components/Filters";
-import SchoolBooks from "../components/SchoolBooks";
-import GeneralLiterature from "../components/GeneralLiterature";
 import EbookSection from "../components/EbookSection";
 import InnerPageLayout from "../layouts/InnerPageLayout";
 import { Book } from "../types/interfaces";
-import KidsBooks from "../components/KidsBooks";
 import CategoryLine from "../components/CategoryLine";
 
 interface CatalogueProps {
@@ -15,8 +12,6 @@ interface CatalogueProps {
 }
 
 const Catalogue: React.FC<CatalogueProps> = ({ books }) => {
-    const apiBooks = books.data;
-    console.log("API Books: ", apiBooks);
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -28,19 +23,19 @@ const Catalogue: React.FC<CatalogueProps> = ({ books }) => {
     };
 
     const newBooks = () => {
-        return apiBooks.filter((book) => book.new === "Yes");
+        return books.filter((book) => book.new === "Yes");
     };
 
     const schoolBooks = () => {
-        return apiBooks.filter((book) => book.category === "school");
+        return books.filter((book) => book.category === "school");
     };
 
     const generalLiterature = () => {
-        return apiBooks.filter((book) => book.category === "literature");
+        return books.filter((book) => book.category === "literature");
     };
 
     const kidsBooks = () => {
-        return apiBooks.filter((book) => book.category === "kids");
+        return books.filter((book) => book.category === "kids");
     };
 
     const itemVariants = {
