@@ -18,6 +18,7 @@ class Category extends Model
         'SCHOOL' => 'school',
         'GUIDES' => 'guides',
         'KIDS' => 'kids',
+        'CATALOG' => 'catalog',
     ];
 
     // Scope pour les catégories système

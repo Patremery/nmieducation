@@ -112,6 +112,7 @@ class BooksResource extends Resource
                                     ->columnSpanFull(),
                                 FileUpload::make('images')
                                         ->multiple()
+                                        ->image()
                                         ->columnSpanFull(),
                                
                             ])->columnSpan(['lg' => 2]),
@@ -179,7 +180,14 @@ class BooksResource extends Resource
                                     ->schema([
                                         FileUpload::make('featured_image')
                                             ->label("Image de couverture")
+                                            ->image()
                                             ->required(),
+                                        FileUpload::make('file')
+                                            ->label("Fichier Numérique")
+                                            ->acceptedFileTypes(['application/pdf'])
+                                            ->columnSpanFull()
+                                            ->visible(fn (Get $get) => (in_array($get('category_id'), [3, 5])))
+                                            ->required(fn(Get $get) => (in_array($get('category_id'), [3, 5]))),
                                     ]),
                             ])->columnSpan(['lg' => 1]),
                     ]),
