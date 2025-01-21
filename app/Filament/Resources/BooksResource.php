@@ -144,7 +144,6 @@ class BooksResource extends Resource
                                                 ->searchable()
                                                 ->enum(BookFormat::class)
                                                 ->live()
-                                                ->helperText(fn (Get $get) => ($get('support')) )
                                                 ->required(), 
                                         TextInput::make('ISBN')
                                                 ->label("ISBN"),
@@ -174,7 +173,7 @@ class BooksResource extends Resource
                                         TextInput::make('adinkra_url')->label("URL Adinkra"),
                                         TextInput::make('youscribe_url')->label("URL YouScribe"),
                                         TextInput::make('lq_url')->label("URL Librairies de Quartier"),
-                                ])->visible(fn (Get $get) => ($get('support') == "both" or $get('support') == "digital")),
+                                ])->visible(fn (Get $get) => in_array($get('support'), ["both", "digital"])),
 
                                 Section::make('Images')
                                     ->schema([
