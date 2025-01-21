@@ -76,6 +76,7 @@ const Catalogue: React.FC<CatalogueProps> = ({ books }) => {
                 <motion.div variants={itemVariants}>
                     <CategoryLine
                         title="Manuels Scolaires"
+                        code="school"
                         items={schoolBooks()}
                         itemsToShow={6}
                     />
@@ -84,6 +85,7 @@ const Catalogue: React.FC<CatalogueProps> = ({ books }) => {
                 <motion.div variants={itemVariants}>
                     <CategoryLine
                         title="Littérature Générale"
+                        code="literature"
                         items={generalLiterature()}
                         itemsToShow={6}
                     />
@@ -92,6 +94,7 @@ const Catalogue: React.FC<CatalogueProps> = ({ books }) => {
                 <motion.div variants={itemVariants}>
                     <CategoryLine
                         title="Littérature Jeunesse"
+                        code="kids"
                         items={kidsBooks()}
                         itemsToShow={6}
                         height={150}

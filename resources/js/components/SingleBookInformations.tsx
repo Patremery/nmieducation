@@ -3,13 +3,20 @@ import { Book } from "../types/interfaces";
 
 const SingleBookInformations = ({ book }: { book: Book }) => {
     console.log("book: ", book);
+    const limitWords = (text: string, wordLimit: number) => {
+        const words = text.split(" ");
+        if (words.length <= wordLimit) {
+            return text;
+        }
+        return words.slice(0, wordLimit).join(" ") + "...";
+    };
     return (
         <div
             className="row"
             style={{ padding: "100px", backgroundColor: "#F7F7F7" }}
         >
             <div className="col-md-9 d-flex gap-4">
-                <div>
+                <div style={{ flexShrink: 0 }}>
                     {book.cover && (
                         <img
                             src={book.cover}
@@ -53,7 +60,7 @@ const SingleBookInformations = ({ book }: { book: Book }) => {
                     <h5>
                         <strong>Description :</strong>
                     </h5>
-                    <p>{book.description}</p>
+                    <p>{limitWords(book.description, 100)}</p>
                 </div>
             </div>
 
@@ -75,7 +82,8 @@ const SingleBookInformations = ({ book }: { book: Book }) => {
                             >
                                 {book.price ? (
                                     <>
-                                        {book.price} <span>XAF</span>
+                                        {book.price.toLocaleString()}{" "}
+                                        <span>XAF</span>
                                     </>
                                 ) : (
                                     <span>Gratuit</span>

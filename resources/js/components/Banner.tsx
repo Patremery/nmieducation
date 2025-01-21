@@ -30,7 +30,9 @@ const Banner: React.FC<BannerProps> = ({ title }) => {
                 position: "relative",
             }}
         >
-            <h1 style={{ position: "relative", zIndex: 1 }}>{title}</h1>
+            <h1 style={{ position: "relative", zIndex: 1, fontSize: 30 }}>
+                {title}
+            </h1>
         </div>
     );
 };

@@ -2,18 +2,20 @@
 
 namespace App\Enums;
 
-enum BookFormat: string
+enum AudienceEnum: string
 {
-    case PAPER = 'paper';
-    case DIGITAL = 'digital';
-    case BOTH = 'both';
+    case GENERAL_PUBLIC = 'Grand Public';
+    case PARENTS = 'Parents';
+    case CHILDREN = 'Enfants';
+    case TEACHERS = 'Enseignants';
 
     public function label(): string
     {
-        return match($this) {
-            self::PAPER => 'Papier',
-            self::DIGITAL => 'Numérique',
-            self::BOTH => 'Papier et numérique',
+        return match ($this) {
+            self::GENERAL_PUBLIC => 'Grand Public',
+            self::PARENTS => 'Parents',
+            self::CHILDREN => 'Enfants',
+            self::TEACHERS => 'Enseignants',
         };
     }
 

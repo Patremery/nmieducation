@@ -25,9 +25,9 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Get;
 use App\Services\CategoryService;
 use Filament\Tables\Columns\ImageColumn;
-use Illuminate\Support\Facades\Storage;
 use App\Enums\BookFormat;
 use Filament\Forms\Components\Toggle;
+use App\Enums\AudienceEnum;
 
 class BooksResource extends Resource
 {
@@ -105,6 +105,7 @@ class BooksResource extends Resource
                                         'school'
                                     )),
                                 RichEditor::make('description')
+                                    ->maxLength(600)
                                     ->required()
                                     ->columnSpanFull(),
                                 Textarea::make('summary')
@@ -125,7 +126,8 @@ class BooksResource extends Resource
                                                 ->label("Auteur")
                                                 ->options(Author::query()->published()->pluck("name", "id"))
                                                 ->columns(2)
-                                                 ->visible(fn (Get $get) => (static::isCategoryType(
+                                                ->searchable()
+                                                ->visible(fn (Get $get) => (static::isCategoryType(
                                         $get('category_id'),
                                         'literature'
                                     )) or (static::isCategoryType(
@@ -134,16 +136,18 @@ class BooksResource extends Resource
                                     ))),
                                         DatePicker::make('publication_date')
                                             ->label("Date de publication"),
-                                        TextInput::make('ISBN')
-                                                ->label("ISBN"),
+                                       
                                         Select::make('support')
                                                 ->label("Type de Support")
-                                                ->options([
-                                                    BookFormat::options(),
-                                                ])
+                                                ->options(BookFormat::options())
+                                                ->searchable()
                                                 ->enum(BookFormat::class)
                                                 ->live()
-                                                ->required(),
+                                                ->helperText(fn (Get $get) => ($get('support')) )
+                                                ->required(), 
+                                        TextInput::make('ISBN')
+                                                ->label("ISBN"),
+                                        
                                         TextInput::make('theme')
                                                 ->visible(fn (Get $get) => static::isCategoryType(
                                                     $get('category_id'),
@@ -156,21 +160,20 @@ class BooksResource extends Resource
                                                 ->suffix("XAF"),
                                         Select::make('audience')
                                                 ->label("Public Cible")
-                                                ->options([
-                                                "Grand Public",
-                                                "Parents",
-                                                "Enfants",
-                                                "Enseignants"
-                                                ])
+                                                ->options(AudienceEnum::options())
+                                                ->enum(AudienceEnum::class)
+                                                ->live()
+                                                ->searchable()
+                                                ->required(),
                                     ]),
 
                                 Section::make('Liens')
                                     ->schema([
-                                        TextInput::make('amazon_url'),
-                                        TextInput::make('adinkra_url'),
-                                        TextInput::make('youscribe_url'),
-                                        TextInput::make('lq_url'),
-                                ]) ->visible(fn (Get $get) => ($get('support') == BookFormat::BOTH->label() or $get('support') == BookFormat::DIGITAL->label())),
+                                    TextInput::make('amazon_url')->label("URL Amazon"),
+                                        TextInput::make('adinkra_url')->label("URL Adinkra"),
+                                        TextInput::make('youscribe_url')->label("URL YouScribe"),
+                                        TextInput::make('lq_url')->label("URL Librairies de Quartier"),
+                                ])->visible(fn (Get $get) => ($get('support') == "both" or $get('support') == "digital")),
 
                                 Section::make('Images')
                                     ->schema([

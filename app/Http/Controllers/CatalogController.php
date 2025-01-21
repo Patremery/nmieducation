@@ -42,6 +42,7 @@ class CatalogController extends Controller
 
         return Inertia::render('CatalogCategory', [
             'code' => $code,
+            'title' => $category->label,
             'books' => $books
         ]);
     }

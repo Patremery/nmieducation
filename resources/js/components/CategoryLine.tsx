@@ -2,9 +2,11 @@
 import React from "react";
 import ItemGrid from "./ItemGrid";
 import { Book } from "../types/interfaces";
+import { Link } from "@inertiajs/react";
 
 interface CategoryLineProps {
     title: string;
+    code: string;
     items: Book[];
     itemsToShow?: number;
     height?: number;
@@ -12,6 +14,7 @@ interface CategoryLineProps {
 
 const CategoryLine: React.FC<CategoryLineProps> = ({
     title,
+    code,
     items,
     itemsToShow = 6,
     height = 300,
@@ -22,9 +25,12 @@ const CategoryLine: React.FC<CategoryLineProps> = ({
             <hr />
             <ItemGrid items={items} itemsToShow={itemsToShow} height={height} />
             <div className="text-end mt-3">
-                <a href="#" className="text-primary">
+                <Link
+                    href={`/catalogue/category/${code}`}
+                    className="text-primary"
+                >
                     Plus de {title} →
-                </a>
+                </Link>
             </div>
         </div>
     );

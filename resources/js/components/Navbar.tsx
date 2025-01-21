@@ -34,10 +34,45 @@ const Navbar: React.FC = () => {
                                 À propos de nous
                             </InertiaLink>
                         </li>
-                        <li className="nav-item">
-                            <InertiaLink className="nav-link" href="/catalogue">
+                        <li className="nav-item dropdown">
+                            <InertiaLink
+                                className="nav-link dropdown-toggle"
+                                href="/catalogue"
+                                id="navbarDropdown"
+                            >
                                 Notre catalogue
                             </InertiaLink>
+                            <ul
+                                className="dropdown-menu"
+                                style={{ borderRadius: 0 }}
+                                aria-labelledby="navbarDropdown"
+                            >
+                                <li>
+                                    <InertiaLink
+                                        className="dropdown-item"
+                                        href="/catalogue/category/school"
+                                    >
+                                        Manuels Scolaires
+                                    </InertiaLink>
+                                </li>
+                                {/* <hr className="dropdown-divider" /> */}
+                                <li>
+                                    <InertiaLink
+                                        className="dropdown-item"
+                                        href="/catalogue/category/literature"
+                                    >
+                                        Littérature Générale
+                                    </InertiaLink>
+                                </li>
+                                <li>
+                                    <InertiaLink
+                                        className="dropdown-item"
+                                        href="/catalogue/category/kids"
+                                    >
+                                        Littérature pour enfants
+                                    </InertiaLink>
+                                </li>
+                            </ul>
                         </li>
                         <li className="nav-item">
                             <InertiaLink className="nav-link" href="/about">

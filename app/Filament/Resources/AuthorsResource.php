@@ -6,6 +6,7 @@ use App\Enums\DefaultStatusEnum;
 use App\Filament\Resources\AuthorsResource\Pages;
 use App\Models\Author;
 use App\Traits\DefaultStatusField;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -76,6 +77,14 @@ class AuthorsResource extends Resource
                                     ->schema([
                                         self::getStatusField()
                                     ]),
+                                DatePicker::make('latest_publication_date')
+                                        ->label("Date de dernière publication"),
+                                TextInput::make('facebook_url')
+                                        ->label("Profil Facebook"),
+                                TextInput::make('linkedin_url')
+                                        ->label("Profil LinkedIn"),
+                                TextInput::make('twitter_url')
+                                        ->label("Profil Twitter"),
 
                                 Section::make('Photo')
                                     ->schema([
