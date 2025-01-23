@@ -72,6 +72,22 @@ const Navbar: React.FC = () => {
                                         Littérature pour enfants
                                     </InertiaLink>
                                 </li>
+                                <li>
+                                    <InertiaLink
+                                        className="dropdown-item"
+                                        href="/catalogue/category/guides"
+                                    >
+                                        Guides Pédagogiques
+                                    </InertiaLink>
+                                </li>
+                                <li>
+                                    <InertiaLink
+                                        className="dropdown-item"
+                                        href="/catalogue/category/catalog"
+                                    >
+                                        Catalogues
+                                    </InertiaLink>
+                                </li>
                             </ul>
                         </li>
                         <li className="nav-item">

@@ -23,23 +23,30 @@ const BookPresentation: React.FC<BookPresentationProps> = ({
         <InnerPageLayout title="Nos Livres">
             <div className="container-fluid">
                 <SingleBookInformations book={book} />
-                <div className="text-center">
-                    <h3
-                        className="mt-5 text-primary"
-                        style={{ fontWeight: 700 }}
-                    >
-                        Autres ouvrages
-                    </h3>
-                    <h5>qui pourraient vous intéresser</h5>
-                </div>
+                {similarBooks.length > 5 && (
+                    <>
+                        <div className="text-center">
+                            <h3
+                                className="mt-5 text-primary"
+                                style={{ fontWeight: 700 }}
+                            >
+                                Autres ouvrages
+                            </h3>
+                            <h5>qui pourraient vous intéresser</h5>
+                        </div>
 
-                <div className="row mt-3 py-4 mb-5" style={{ padding: 70 }}>
-                    <BookSlider
-                        books={similarBooks}
-                        slideNumber={5}
-                        imageHeight={getImageHeight()}
-                    />
-                </div>
+                        <div
+                            className="row mt-3 py-4 mb-5"
+                            style={{ padding: 70 }}
+                        >
+                            <BookSlider
+                                books={similarBooks}
+                                slideNumber={5}
+                                imageHeight={getImageHeight()}
+                            />
+                        </div>
+                    </>
+                )}
             </div>
         </InnerPageLayout>
     );

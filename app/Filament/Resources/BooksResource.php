@@ -180,13 +180,17 @@ class BooksResource extends Resource
                                         FileUpload::make('featured_image')
                                             ->label("Image de couverture")
                                             ->image()
+                                            ->default(fn ($record) => $record->file ?? null)
+                                            ->preserveFilenames()
                                             ->required(),
                                         FileUpload::make('file')
                                             ->label("Fichier Numérique")
                                             ->acceptedFileTypes(['application/pdf'])
                                             ->columnSpanFull()
                                             ->visible(fn (Get $get) => (in_array($get('category_id'), [3, 5])))
-                                            ->required(fn(Get $get) => (in_array($get('category_id'), [3, 5]))),
+                                            ->required(fn (Get $get) => (in_array($get('category_id'), [3, 5])))
+                                            ->default(fn ($record) => $record->file ?? null)
+                                            ->preserveFilenames(),
                                     ]),
                             ])->columnSpan(['lg' => 1]),
                     ]),
@@ -201,8 +205,8 @@ class BooksResource extends Resource
                     ->height(70)
                     ,
                 TextColumn::make('title')->sortable()->searchable(),
-                TextColumn::make('description')->html()->searchable(),
-                TextColumn::make('summary')->sortable()->searchable(),
+                //TextColumn::make('description')->html()->searchable(),
+                //TextColumn::make('summary')->sortable()->searchable(),
                 TextColumn::make('author.name')->sortable()->searchable(),
                 
                 TextColumn::make('language.name')->sortable()->searchable(),

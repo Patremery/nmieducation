@@ -32,6 +32,7 @@ class BookResource extends JsonResource
             'summary' => $this->summary,
             'themes' => $this->themes ?? [],
             'audience' => $this->audience,
+            'file' => url($this->file),
         ];
     }
 }

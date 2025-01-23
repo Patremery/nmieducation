@@ -138,3 +138,11 @@ footer ul li a:hover {
 .dropdown-menu {
     margin-top: 0;
 }
+
+.font-weight-600 {
+    font-weight: 600;
+}
+
+.font-weight-700 {
+    font-weight: 700;
+}

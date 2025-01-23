@@ -3,17 +3,16 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TeamsResource\Pages;
-use App\Filament\Resources\TeamsResource\RelationManagers;
 use App\Models\Team;
 use App\Traits\DefaultStatusField;
-use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-
 
 class TeamsResource extends Resource
 {
@@ -29,10 +28,12 @@ class TeamsResource extends Resource
             ->schema([
                 TextInput::make('name')->required(),
                 TextInput::make('position')->required(),
-                TextInput::make('photo')->required(),
+                FileUpload::make('photo')
+                    ->image()
+                    ->required(),
                 TextInput::make('facebook_url')->required(),
                 TextInput::make('linkedin_url')->required(),
-                TextInput::make('bio')->required(),
+                RichEditor::make('bio')->required(),
                 self::getStatusField()
             ]);
     }

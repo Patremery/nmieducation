@@ -5,6 +5,7 @@ namespace App\Providers\Filament;
 use App\Filament\Pages\App\Profile;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use App\Filament\Pages\Auth\Login;
+use App\Filament\Widgets\DashboardHighlight;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -50,6 +51,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
+                DashboardHighlight::class,
                 /* Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class, */
             ])
