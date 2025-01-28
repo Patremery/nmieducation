@@ -4,6 +4,7 @@ import Filters from "../components/Filters";
 import EbookSection from "../components/EbookSection";
 import InnerPageLayout from "../layouts/InnerPageLayout";
 import ItemGrid from "../components/ItemGrid";
+import { BannerProps } from "../types/interfaces";
 
 interface CatalogCategoryProps {
     code: string;
@@ -16,8 +17,11 @@ const CatalogCategory: React.FC<CatalogCategoryProps> = ({
     title,
     books,
 }) => {
+    const banner: BannerProps = {
+        title: title,
+    };
     return (
-        <InnerPageLayout title={"Nos Livres"}>
+        <InnerPageLayout banner={banner}>
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

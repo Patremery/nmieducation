@@ -10,16 +10,19 @@ class AuthorController extends Controller
 {
     public function index()
     {
-        $authors = AuthorResource::collection(Author::active()->all());
+        $data = Author::published()->get(); 
+        $authors = AuthorResource::collection($data);
+        //dd($authors);
         
         return Inertia::render('Authors', [
-            'authors' => $authors
+            'authors' => $data,
+            'title' => 'Auteurs'
         ]);
     }
 
-    public function view($name)
+    public function view(string $slug)
     {
-        $author = new AuthorResource(Author::where('name', $name)->first());
+        $author = new AuthorResource(Author::where('name', $slug)->first());
         return Inertia::render('SingleAuthor', [
             'author' => $author
         ]);

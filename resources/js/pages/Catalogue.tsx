@@ -4,7 +4,7 @@ import NewArrivals from "../components/NewArrivals";
 import Filters from "../components/Filters";
 import EbookSection from "../components/EbookSection";
 import InnerPageLayout from "../layouts/InnerPageLayout";
-import { Book } from "../types/interfaces";
+import { BannerProps, Book } from "../types/interfaces";
 import CategoryLine from "../components/CategoryLine";
 
 interface CatalogueProps {
@@ -48,9 +48,11 @@ const Catalogue: React.FC<CatalogueProps> = ({ books }) => {
             },
         },
     };
-
+    const banner: BannerProps = {
+        title: "Nos Livres",
+    };
     return (
-        <InnerPageLayout title="Nos Livres">
+        <InnerPageLayout banner={banner}>
             <motion.div
                 className="container mt-5"
                 variants={containerVariants}

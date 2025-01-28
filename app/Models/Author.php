@@ -12,11 +12,15 @@ class Author extends Model
     use HasFactory, HasStatus;
 
     protected $guarded = [];
+    //protected $with = ['books'];
 
     public function books()
     {
         return $this->hasMany(Book::class);
     }
 
-    
+    public function toResource()
+    {
+        return new AuthorResource($this);
+    }
 }

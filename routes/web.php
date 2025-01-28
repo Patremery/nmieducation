@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -15,8 +16,9 @@ Route::get('/catalogue', [CatalogController::class, 'index']);
 
 Route::get('catalogue/category/{code}', [CatalogController::class, 'category']);
 
-Route::get('authors', [CatalogController::class, 'authors']);
+Route::get('/authors', [AuthorController::class, 'index'])->name('authors');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
 Route::get('/book/{id}', [CatalogController::class, 'show'])->name('book.show');
 
-Route::get('authors/{name}', [CatalogController::class, 'view_author'])->name('author.show');
+Route::get('/authors/{slug}', [AuthorController::class, 'view'])->name('author.show');

@@ -2,7 +2,7 @@ import React from "react";
 import InnerPageLayout from "../layouts/InnerPageLayout";
 import BookSlider from "../components/Slider";
 import SingleBookInformations from "../components/SingleBookInformations";
-import { Book } from "../types/interfaces";
+import { BannerProps, Book } from "../types/interfaces";
 
 interface BookPresentationProps {
     book: Book;
@@ -19,8 +19,11 @@ const BookPresentation: React.FC<BookPresentationProps> = ({
         }
         return 400;
     };
+    const banner: BannerProps = {
+        title: "Nos Livres",
+    };
     return (
-        <InnerPageLayout title="Nos Livres">
+        <InnerPageLayout banner={banner}>
             <div className="container-fluid">
                 <SingleBookInformations book={book} />
                 {similarBooks.length > 5 && (

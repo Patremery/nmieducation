@@ -146,3 +146,14 @@ footer ul li a:hover {
 .font-weight-700 {
     font-weight: 700;
 }
+
+.form-control {
+    background-color: #f8f9fa;
+    border: none;
+}
+
+.form-control::placeholder {
+    color: #6c757d;
+    font-size: 14px;
+    opacity: 1;
+}

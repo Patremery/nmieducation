@@ -1,3 +1,5 @@
+import React from "react";
+
 type PlatformUrl = string | null;
 
 interface Book {
@@ -24,6 +26,12 @@ interface Book {
     lq_url: PlatformUrl;
 }
 
+interface BannerProps {
+    title?: string;
+    description?: React.ReactNode;
+    backgroundImage?: string;
+    textAlign?: "center" | "left" | "right";
+}
 // Interface pour la collection de livres
 interface BookCollection {
     books: Book[];
@@ -50,11 +58,15 @@ enum BookAudience {
 
 interface Author {
     id: number;
-    name: string;
-    profession: string;
-    biography: string;
-    photo: string;
+    name?: string;
+    slug?: string;
+    books?: Book[];
+    profession?: string;
+    biography?: string;
+    photo?: string;
+    linkedin?: string;
+    facebook?: string;
 }
 
-export type { Book, BookCollection, PlatformUrl, Author };
+export type { Book, BookCollection, PlatformUrl, Author, BannerProps };
 export { BookFormat, BookLanguage, BookAudience };

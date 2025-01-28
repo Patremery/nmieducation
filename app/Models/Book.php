@@ -18,6 +18,8 @@ class Book extends Model
         'new' => 'boolean'
     ];
 
+    //protected $with = ['author'];
+
     public function author(): BelongsTo
     {
         return $this->belongsTo(Author::class);

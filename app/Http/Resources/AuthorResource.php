@@ -17,9 +17,15 @@ class AuthorResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'slug' => $this->slug,
             'profession' => $this->profession,
             'biography' => $this->biography,
             'photo' => $this->photo,
+            'linkedin' => $this->linkedin_url,
+            'facebook' => $this->facebook_url,
+            'twitter' => $this->twitter_url,
+            //'latest_book' => $this->books->published()->latest()->first(),
+            //'books' => BookResource::collection($this->whenLoaded('books')),
         ];
     }
 }

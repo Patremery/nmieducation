@@ -88,6 +88,14 @@ const Navbar: React.FC = () => {
                                         Catalogues
                                     </InertiaLink>
                                 </li>
+                                <li>
+                                    <InertiaLink
+                                        className="dropdown-item"
+                                        href="/authors"
+                                    >
+                                        Auteurs
+                                    </InertiaLink>
+                                </li>
                             </ul>
                         </li>
                         <li className="nav-item">
