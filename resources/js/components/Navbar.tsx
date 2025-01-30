@@ -108,10 +108,45 @@ const Navbar: React.FC = () => {
                                 Actualité
                             </InertiaLink>
                         </li>
-                        <li className="nav-item">
-                            <InertiaLink className="nav-link" href="/contact">
+                        <li className="nav-item dropdown">
+                            <InertiaLink
+                                className="nav-link dropdown-toggle"
+                                href="/contact"
+                                id="navbarDropdown"
+                            >
                                 Nous contacter
                             </InertiaLink>
+                            <ul
+                                className="dropdown-menu"
+                                style={{ borderRadius: 0 }}
+                                aria-labelledby="navbarDropdown"
+                            >
+                                <li>
+                                    <InertiaLink
+                                        className="dropdown-item"
+                                        href="/submit-your-manuscrit"
+                                    >
+                                        Envoyer un Manuscrit
+                                    </InertiaLink>
+                                </li>
+
+                                <li>
+                                    <InertiaLink
+                                        className="dropdown-item"
+                                        href="/become-distributor"
+                                    >
+                                        Devenir distributeur
+                                    </InertiaLink>
+                                </li>
+                                <li>
+                                    <InertiaLink
+                                        className="dropdown-item"
+                                        href="/join-us"
+                                    >
+                                        Candidature Spontanée
+                                    </InertiaLink>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>

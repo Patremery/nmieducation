@@ -7,21 +7,26 @@ import { BannerProps } from "../types/interfaces";
 interface InnerPageLayoutProps {
     children: ReactNode;
     banner?: BannerProps;
+    displayBanner?: boolean;
 }
 
 const InnerPageLayout: React.FC<InnerPageLayoutProps> = ({
     children,
     banner,
+    displayBanner = true,
 }) => {
     return (
         <div className="min-vh-100 d-flex flex-column">
             <Navbar />
-            <Banner
-                title={banner?.title}
-                description={banner?.description}
-                backgroundImage={banner?.backgroundImage}
-                textAlign={banner?.textAlign || "center"}
-            />
+            {displayBanner && (
+                <Banner
+                    title={banner?.title}
+                    description={banner?.description}
+                    backgroundImage={banner?.backgroundImage}
+                    textAlign={banner?.textAlign || "center"}
+                    className={banner?.className}
+                />
+            )}
             <main className="flex-grow-1">{children}</main>
             <Footer />
         </div>

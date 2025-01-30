@@ -157,3 +157,130 @@ footer ul li a:hover {
     font-size: 14px;
     opacity: 1;
 }
+
+.call-to-action {
+    background-color: #f5950e;
+    color: white;
+    border: none;
+    border-radius: 1px;
+    font-weight: 600;
+}
+
+.call-to-action:hover {
+    background-color: orange;
+    color: white;
+}
+
+.card-button {
+    background-color: #0171be;
+    color: white;
+    border: none;
+    border-radius: 1px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.card-button:hover {
+    background-color: orange;
+    color: white;
+}
+
+.display-7 {
+    font-size: 2.2rem;
+}
+
+/* Add to your CSS file */
+
+.hero-banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+}
+
+.rounded-circle {
+    object-fit: cover;
+}
+
+.bg-primary {
+    background-color: #0056b3 !important;
+    /* Adjust to match your brand color */
+}
+
+.text-primary {
+    color: #0056b3 !important;
+    /* Adjust to match your brand color */
+}
+
+/* For statistics circles */
+
+.stat-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0056b3;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.hero-banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.7),
+        rgba(0, 0, 0, 0.1)
+    );
+    z-index: 1;
+}
+
+.carousel-item .position-absolute {
+    z-index: 2;
+}
+
+.carousel-indicators {
+    z-index: 3;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    z-index: 3;
+}
+
+.carousel-item {
+    transition: transform 0.6s ease-in-out;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+    color: #000;
+}
+
+.carousel-indicators {
+    bottom: -50px;
+}
+
+.carousel-indicators [data-bs-target] {
+    background-color: #000;
+}
+
+.carousel-item {
+    padding-bottom: 50px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(1);
+}

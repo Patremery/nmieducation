@@ -8,9 +8,6 @@ use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/about', function () {
-    return Inertia::render('About');
-});
 
 Route::get('/catalogue', [CatalogController::class, 'index']);
 
@@ -18,6 +15,10 @@ Route::get('catalogue/category/{code}', [CatalogController::class, 'category']);
 
 Route::get('/authors', [AuthorController::class, 'index'])->name('authors');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/become-distributor', [HomeController::class, 'becomeDistributor'])->name('become-distributor');
+Route::get('/join-us', [HomeController::class, 'joinUs'])->name('join-us');
+Route::get('/submit-your-manuscrit', [HomeController::class, 'manuscriptSubmission'])->name('manuscript-submission');
 
 Route::get('/book/{id}', [CatalogController::class, 'show'])->name('book.show');
 

@@ -34,4 +34,20 @@ class HomeController extends Controller
             'contacts' => $data
         ]);
     }
+
+    public function becomeDistributor() {
+        return Inertia::render('BecomeDistributor');
+    }
+
+    public function joinUs() {
+        return Inertia::render('JoinUs');
+    }
+
+    public function manuscriptSubmission() {
+        return Inertia::render('ManuscriptSubmission');
+    }
+
+    public function about() {
+        return Inertia::render('About');
+    }
 }

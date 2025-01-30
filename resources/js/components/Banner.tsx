@@ -6,6 +6,8 @@ const Banner: React.FC<BannerProps> = ({
     title,
     description,
     backgroundImage = BannerImage,
+    textAlign,
+    className,
 }) => {
     return (
         <div
@@ -35,13 +37,13 @@ const Banner: React.FC<BannerProps> = ({
                     position: "relative",
                     zIndex: 1,
                     fontSize: 30,
-                    textAlign: "center",
+                    textAlign: textAlign,
                 }}
             >
                 {title}
             </h1>
-            <div className="row text-left px-5">
-                <div className="col-md-6" style={{ fontSize: 27 }}>
+            <div className="row px-5 mx-5">
+                <div className={className} style={{ textAlign: textAlign }}>
                     {description}
                 </div>
             </div>

@@ -31,6 +31,7 @@ interface BannerProps {
     description?: React.ReactNode;
     backgroundImage?: string;
     textAlign?: "center" | "left" | "right";
+    className?: string;
 }
 // Interface pour la collection de livres
 interface BookCollection {
