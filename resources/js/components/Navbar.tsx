@@ -104,7 +104,7 @@ const Navbar: React.FC = () => {
                             </InertiaLink>
                         </li>
                         <li className="nav-item">
-                            <InertiaLink className="nav-link" href="/home">
+                            <InertiaLink className="nav-link" href="/blog">
                                 Actualité
                             </InertiaLink>
                         </li>

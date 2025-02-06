@@ -5,6 +5,7 @@ interface Slide {
     image: string;
     title: string;
     subtitle: string;
+    slogan?: string;
 }
 
 interface HeroSliderProps {
@@ -13,11 +14,12 @@ interface HeroSliderProps {
 
 const HeroSlider: React.FC<HeroSliderProps> = ({ slides }) => {
     return (
-        <div className="position-relative">
+        <div className="position-relative mb-2">
             <div
                 id="heroCarousel"
                 className="carousel slide"
                 data-bs-ride="carousel"
+                style={{ height: "500px" }}
             >
                 {/* Carousel Indicators */}
                 <div className="carousel-indicators">
@@ -35,29 +37,48 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ slides }) => {
                 </div>
 
                 {/* Carousel Items */}
-                <div className="carousel-inner">
+                <div className="carousel-inner h-100">
                     {slides.map((slide, index) => (
                         <div
                             key={slide.id}
-                            className={`carousel-item ${
+                            className={`carousel-item h-100 ${
                                 index === 0 ? "active" : ""
                             }`}
                         >
                             <div
-                                className="hero-banner"
+                                className="hero-banner w-100 h-100"
                                 style={{
-                                    height: "400px",
                                     backgroundImage: `url(${slide.image})`,
                                     backgroundSize: "cover",
                                     backgroundPosition: "center",
                                 }}
                             >
-                                <div className="position-absolute top-50 start-0 translate-middle-y p-5 text-white">
-                                    <h1 className="display-4">
+                                <div
+                                    className="position-absolute top-50 start-0 translate-middle-y text-white"
+                                    style={{ padding: 100 }}
+                                >
+                                    <p
+                                        className="m-0 text-white"
+                                        style={{ fontSize: 24 }}
+                                    >
                                         {slide.title}
-                                        <br />
+                                    </p>
+                                    <h2 className="display-4 font-weight-600">
                                         {slide.subtitle}
-                                    </h1>
+                                    </h2>
+
+                                    {slide.slogan && (
+                                        <p
+                                            className="display-5 text-white"
+                                            style={{
+                                                fontFamily:
+                                                    "'Dancing Script', cursive",
+                                                fontSize: "2.5rem",
+                                            }}
+                                        >
+                                            {slide.slogan}
+                                        </p>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -75,7 +96,7 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ slides }) => {
                         className="carousel-control-prev-icon"
                         aria-hidden="true"
                     ></span>
-                    <span className="visually-hidden">Previous</span>
+                    <span className="visually-hidden">Précédent</span>
                 </button>
                 <button
                     className="carousel-control-next"
@@ -87,7 +108,7 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ slides }) => {
                         className="carousel-control-next-icon"
                         aria-hidden="true"
                     ></span>
-                    <span className="visually-hidden">Next</span>
+                    <span className="visually-hidden">Suivant</span>
                 </button>
             </div>
         </div>

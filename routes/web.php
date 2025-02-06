@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImportController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -23,3 +24,7 @@ Route::get('/submit-your-manuscrit', [HomeController::class, 'manuscriptSubmissi
 Route::get('/book/{id}', [CatalogController::class, 'show'])->name('book.show');
 
 Route::get('/authors/{slug}', [AuthorController::class, 'view'])->name('author.show');
+
+Route::get('/import-posts', [ImportController::class, 'import']);
+
+Route::get('/blog', [HomeController::class, 'blog'])->name('blog.index');

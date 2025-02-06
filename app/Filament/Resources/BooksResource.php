@@ -113,6 +113,8 @@ class BooksResource extends Resource
                                 FileUpload::make('images')
                                         ->multiple()
                                         ->image()
+                                        ->disk('public')
+                                        ->directory('books')
                                         ->columnSpanFull(),
                                
                             ])->columnSpan(['lg' => 2]),

@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap");
 
 /* Style des flèches */
 
@@ -268,19 +269,15 @@ footer ul li a:hover {
     color: #000;
 }
 
-.carousel-indicators {
-    bottom: -50px;
-}
-
 .carousel-indicators [data-bs-target] {
-    background-color: #000;
-}
-
-.carousel-item {
-    padding-bottom: 50px;
+    background-color: #f8f8f8;
 }
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
     filter: invert(1);
+}
+
+p {
+    color: #686666;
 }

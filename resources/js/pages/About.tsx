@@ -2,32 +2,26 @@ import React from "react";
 import InnerPageLayout from "../layouts/InnerPageLayout";
 import HeroSlider from "../components/HeroSlider";
 import TeamCarousel from "../components/TeamCarousel";
+import Slide1Image from "../assets/img/reading.jpg";
+import DeskImage from "../assets/img/nmieducation-desks.jpg";
+import { Team } from "../types/interfaces";
+import AfricaMapImage from "../assets/img/map.png";
 
-const About = () => {
+const About = ({ team }: { team: Team[] }) => {
     const slides = [
         {
             id: 1,
-            image: "/path/to/hero-image1.jpg",
+            image: Slide1Image,
+            title: "Bienvenue chez",
+            subtitle: "NMI Education",
+            slogan: "L'éditeur futuriste",
+        },
+        {
+            id: 1,
+            image: Slide1Image,
             title: "Bienvenue à",
             subtitle: "NMI Education",
         },
-        {
-            id: 2,
-            image: "/path/to/hero-image2.jpg",
-            title: "Notre Vision",
-            subtitle: "L'excellence dans l'éducation",
-        },
-        // Add more slides as needed
-    ];
-
-    const teamMembers = [
-        {
-            id: 1,
-            image: "/path/to/member1.jpg",
-            name: "Mme Ngassam Claire",
-            position: "Position",
-        },
-        // Add more team members here
     ];
 
     return (
@@ -108,16 +102,18 @@ const About = () => {
                     </div>
                 </div>
 
-                <div className="bg-primary text-white p-5">
-                    <div className="container">
-                        <div className="row">
+                <div className="bg-primary text-white" style={{ padding: 50 }}>
+                    <div className="container px-5">
+                        <div className="row px-5">
                             <div
-                                className="col-md-5 px-5"
-                                style={{ borderRight: "8px solid black" }}
+                                className="col-md-5 px-5 d-flex flex-column"
+                                style={{
+                                    borderRight: "8px solid orange",
+                                }}
                             >
                                 <p
                                     className="lead mb-0 display-7 font-weight-600"
-                                    style={{ color: "black" }}
+                                    style={{ color: "orange" }}
                                 >
                                     NOTRE
                                 </p>
@@ -132,13 +128,15 @@ const About = () => {
                                 </p>
                                 <small className="text-white italic mt-0">
                                     <i>
-                                        {" "}
                                         Créativité, Rigueur, Ouverture d'esprit
                                     </i>
                                 </small>
                             </div>
-                            <div className="col-md-7">
-                                <p className="lead d-flex align-items-center h-100 mb-0">
+                            <div
+                                className="col-md-7"
+                                style={{ paddingLeft: 50 }}
+                            >
+                                <p className="lead text-white d-flex align-items-center h-100 mb-0">
                                     NMI Education ambitionne de se maintenir
                                     comme leader incontestable de l'édition et
                                     de l'impression du manuel scolaire de
@@ -151,8 +149,8 @@ const About = () => {
                 </div>
 
                 {/* Nos Missions Section */}
-                <div className="container p-5">
-                    <div className="row">
+                <div className="container m-5">
+                    <div className="row p-5">
                         <div className="col-md-6">
                             <h2 className="mb-4 h5 font-weight-600 text-primary">
                                 NOS MISSIONS
@@ -210,8 +208,8 @@ const About = () => {
                         </div>
                         <div className="col-md-6">
                             <img
-                                src="/path/to/mission-image.jpg"
-                                alt="Mission"
+                                src={DeskImage}
+                                alt="NMI Education"
                                 className="img-fluid rounded"
                             />
                         </div>
@@ -239,9 +237,9 @@ const About = () => {
                             l'édifice, contribuant à donner vie à nos projets
                             éditoriaux et à faire rayonner notre catalogue.
                         </p>
-                        <div className="row justify-content-center">
+                        <div className="row justify-content-center py-5">
                             <div className="col-12">
-                                <TeamCarousel members={teamMembers} />
+                                <TeamCarousel members={team} />
                             </div>
                         </div>
                     </div>
@@ -263,26 +261,121 @@ const About = () => {
                     </p>
                     <div className="row align-items-center">
                         <div className="col-md-6">
-                            {/* Statistics */}
-                            <div className="d-flex align-items-center mb-4">
-                                <div
-                                    className="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
-                                    style={{ width: "80px", height: "80px" }}
-                                >
-                                    <span className="h3 mb-0">60</span>
+                            <div className="px-5">
+                                {/* Statistics */}
+                                <div className="d-flex align-items-center mb-4 ">
+                                    <div
+                                        className="rounded-circle bg-white text-white d-flex align-items-center justify-content-center"
+                                        style={{
+                                            width: "80px",
+                                            height: "80px",
+                                            border: "8px solid #0057b3",
+                                        }}
+                                    >
+                                        <span className="h4 mb-0 text-primary font-weight-600">
+                                            60
+                                        </span>
+                                    </div>
+                                    <div className="ms-3">
+                                        <p
+                                            className="mb-0"
+                                            style={{ fontSize: "1.3rem" }}
+                                        >
+                                            Plus de{" "}
+                                            <strong>
+                                                60% de couverture du marché
+                                            </strong>{" "}
+                                            <br />
+                                            local
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className="ms-3">
-                                    <p className="mb-0">
-                                        ans de savoir-faire dans le monde de
-                                        l'édition
-                                    </p>
+
+                                <div className="d-flex align-items-center mb-4">
+                                    <div
+                                        className="rounded-circle bg-white text-white d-flex align-items-center justify-content-center"
+                                        style={{
+                                            width: "80px",
+                                            height: "80px",
+                                            border: "8px solid #0057b3",
+                                        }}
+                                    >
+                                        <span className="h4 mb-0 text-primary font-weight-600">
+                                            54
+                                        </span>
+                                    </div>
+                                    <div className="ms-3">
+                                        <p
+                                            className="mb-0"
+                                            style={{ fontSize: "1.3rem" }}
+                                        >
+                                            Plus de{" "}
+                                            <strong>
+                                                54 livres et manuels scolaires
+                                            </strong>{" "}
+                                            <br />
+                                            agréés
+                                        </p>
+                                    </div>
                                 </div>
+                                <div className="d-flex align-items-center mb-4">
+                                    <div
+                                        className="rounded-circle bg-white text-white d-flex align-items-center justify-content-center"
+                                        style={{
+                                            width: "80px",
+                                            height: "80px",
+                                            border: "8px solid #0057b3",
+                                        }}
+                                    >
+                                        <span className="h4 mb-0 text-primary font-weight-600">
+                                            150
+                                        </span>
+                                    </div>
+                                    <div className="ms-3">
+                                        <p
+                                            className="mb-0"
+                                            style={{ fontSize: "1.3rem" }}
+                                        >
+                                            Plus de <strong>150 auteurs</strong>{" "}
+                                            <br />
+                                            locaux, en Asie et en Europe
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="d-flex align-items-center mb-4">
+                                    <div
+                                        className="rounded-circle bg-white text-white d-flex align-items-center justify-content-center"
+                                        style={{
+                                            width: "80px",
+                                            height: "80px",
+                                            border: "8px solid #0057b3",
+                                        }}
+                                    >
+                                        <span className="h4 mb-0 text-primary font-weight-600">
+                                            10
+                                        </span>
+                                    </div>
+                                    <div className="ms-3">
+                                        <p
+                                            className="mb-0"
+                                            style={{ fontSize: "1.3rem" }}
+                                        >
+                                            Plus de{" "}
+                                            <strong>
+                                                10 partenaires imprimeurs
+                                            </strong>{" "}
+                                            <br />
+                                            locaux et internationaux.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Repeat for other stats */}
                             </div>
-                            {/* Repeat for other stats */}
                         </div>
                         <div className="col-md-6">
                             <img
-                                src="/path/to/africa-map.jpg"
+                                src={AfricaMapImage}
                                 alt="Africa Map"
                                 className="img-fluid"
                             />

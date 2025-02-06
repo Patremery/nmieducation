@@ -90,7 +90,10 @@ class AuthorsResource extends Resource
                                     ->schema([
                                         FileUpload::make('photo')
                                             ->label("Photo de l'auteur")
-                                            ->image(),
+                                            ->image()
+                                            ->default(fn ($state) => $state)
+                                            ->disk('public')
+                                            ->directory('authors'),
                                     ]),
 
                                 

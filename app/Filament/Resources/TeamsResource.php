@@ -11,6 +11,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -29,11 +30,14 @@ class TeamsResource extends Resource
                 TextInput::make('name')->required(),
                 TextInput::make('position')->required(),
                 FileUpload::make('photo')
+                    ->default(fn ($state) => $state)
                     ->image()
+                    ->disk('public')
+                    ->directory('teams')
                     ->required(),
-                TextInput::make('facebook_url')->required(),
-                TextInput::make('linkedin_url')->required(),
-                RichEditor::make('bio')->required(),
+                TextInput::make('facebook_url'),
+                TextInput::make('linkedin_url'),
+                RichEditor::make('bio'),
                 self::getStatusField()
             ]);
     }
@@ -42,13 +46,12 @@ class TeamsResource extends Resource
     {
         return $table
             ->columns([
+                ImageColumn::make('photo')->sortable(),
                 TextColumn::make('name')->sortable()->searchable(),
                 TextColumn::make('position')->sortable()->searchable(),
-                TextColumn::make('photo')->sortable()->searchable(),
                 TextColumn::make('facebook_url')->sortable()->searchable(),
                 TextColumn::make('linkedin_url')->sortable()->searchable(),
-                TextColumn::make('bio')->sortable()->searchable(),
-                TextColumn::make('status')->sortable()->searchable()
+                TextColumn::make('status')->sortable()
             ])
             ->filters([
                 //

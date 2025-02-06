@@ -38,7 +38,29 @@ interface BookCollection {
     books: Book[];
 }
 
-// Énumérations optionnelles pour les valeurs fixes
+interface Post {
+    id: number;
+    title: string;
+    slug: string;
+    content: string;
+    featured_image: string;
+    published_at: string;
+    categories: BlogCategory[];
+    tags?: BlogTag[];
+}
+
+interface BlogCategory {
+    id: number;
+    name: string;
+    slug: string;
+}
+
+interface BlogTag {
+    id: number;
+    name: string;
+    slug: string;
+}
+
 enum BookFormat {
     PAPER = "Papier uniquement",
     DIGITAL = "Numérique uniquement",
@@ -69,5 +91,25 @@ interface Author {
     facebook?: string;
 }
 
-export type { Book, BookCollection, PlatformUrl, Author, BannerProps };
+interface Team {
+    id: number;
+    name: string;
+    position: string;
+    photo: string;
+    facebook?: string;
+    linkedin?: string;
+    bio?: string;
+}
+
+export type {
+    Book,
+    BookCollection,
+    PlatformUrl,
+    Author,
+    BannerProps,
+    Team,
+    Post,
+    BlogCategory,
+    BlogTag,
+};
 export { BookFormat, BookLanguage, BookAudience };

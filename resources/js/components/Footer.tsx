@@ -1,6 +1,7 @@
 import React from "react";
 import Logo from "../assets/img/logo.png";
 import QRCode from "../assets/img/qrcode.webp";
+import CopyrightSection from "./CopyrightSection";
 
 const Footer: React.FC = () => {
     return (
@@ -101,36 +102,7 @@ const Footer: React.FC = () => {
                     </div>
                 </div>
             </footer>
-            <div
-                className="row copyright-section"
-                style={{
-                    backgroundColor: "rgb(5 93 153)",
-                    padding: "20px",
-                }}
-            >
-                <div className="col-6 text-start">
-                    <small className="text-white">
-                        nmieducation.com © 2025
-                    </small>
-                </div>
-                <div className="col-6 text-center d-flex gap-2 justify-content-end">
-                    <small>
-                        <a href="#" className="text-white text-decoration-none">
-                            Nous Contacter
-                        </a>
-                    </small>
-                    <small>
-                        <a href="#" className="text-white text-decoration-none">
-                            Politique de Confidentialité
-                        </a>
-                    </small>
-                    <small>
-                        <a href="#" className="text-white text-decoration-none">
-                            Mentions légales
-                        </a>
-                    </small>
-                </div>
-            </div>
+            <CopyrightSection />
         </>
     );
 };

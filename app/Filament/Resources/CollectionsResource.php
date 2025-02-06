@@ -79,7 +79,10 @@ class CollectionsResource extends Resource
                                     ->schema([
                                         FileUpload::make('featured_image')
                                             ->label("Image principale")
-                                            ->required(),
+                                            ->default(fn ($state) => $state)
+                                            ->image()
+                                            ->disk('public')
+                                            ->directory('collections'),
                                     ]),
                             ])->columnSpan(['lg' => 1]),
                     ]),

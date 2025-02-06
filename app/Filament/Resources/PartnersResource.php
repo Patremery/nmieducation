@@ -6,9 +6,13 @@ use App\Filament\Resources\PartnersResource\Pages;
 use App\Filament\Resources\PartnersResource\RelationManagers;
 use App\Models\Partners;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class PartnersResource extends Resource
@@ -22,10 +26,14 @@ class PartnersResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')->required(),
-Forms\Components\TextInput::make('logo_url')->required(),
-Forms\Components\TextInput::make('website')->required(),
-Forms\Components\TextInput::make('description')->required()
+                TextInput::make('name')->required(),
+                FileUpload::make('logo_url')
+                    ->default(fn ($state) => $state)
+                    ->image()
+                    ->disk('public')
+                    ->directory('partners'),
+                TextInput::make('website'),
+                TextInput::make('description')
             ]);
     }
 
@@ -33,10 +41,10 @@ Forms\Components\TextInput::make('description')->required()
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
-Tables\Columns\TextColumn::make('logo_url')->sortable()->searchable(),
-Tables\Columns\TextColumn::make('website')->sortable()->searchable(),
-Tables\Columns\TextColumn::make('description')->sortable()->searchable()
+                ImageColumn::make('logo_url')->sortable()->searchable(),
+                TextColumn::make('name')->sortable()->searchable(),
+                TextColumn::make('website')->sortable()->searchable(),
+                TextColumn::make('description')->sortable()->searchable()
             ])
             ->filters([
                 //

@@ -1,14 +1,8 @@
 import React from "react";
-
-interface TeamMember {
-    id: number;
-    image: string;
-    name: string;
-    position: string;
-}
+import { Team } from "../types/interfaces";
 
 interface TeamCarouselProps {
-    members: TeamMember[];
+    members: Team[];
 }
 
 const TeamCarousel: React.FC<TeamCarouselProps> = ({ members }) => {
@@ -53,7 +47,7 @@ const TeamCarousel: React.FC<TeamCarouselProps> = ({ members }) => {
                                             className="text-center"
                                         >
                                             <img
-                                                src={member.image}
+                                                src={member.photo}
                                                 alt={member.name}
                                                 className="rounded-circle mb-3"
                                                 style={{
