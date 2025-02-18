@@ -3,15 +3,15 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\BlogCategoriesResource\Pages;
-use App\Filament\Resources\BlogCategoriesResource\RelationManagers;
 use App\Models\BlogCategory;
-use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Database\Eloquent\Collection;
 
 class BlogCategoriesResource extends Resource
 {
@@ -19,14 +19,35 @@ class BlogCategoriesResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'Blog';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')->required(),
-Forms\Components\TextInput::make('slug')->required(),
-Forms\Components\TextInput::make('parent_id')->required(),
-Forms\Components\TextInput::make('order')->required()
+                TextInput::make('name')
+                        ->label('Nom')
+                        ->live()
+                        ->afterStateUpdated(function ($state, $set) 
+                        {
+                            $set('slug', str()->slug($state));
+                        })
+                        ->required(),
+                TextInput::make('slug')
+                        ->unique(ignoreRecord: true)
+                        ->required(),
+                Select::make('parent_id')
+                        ->label('Catégorie parente')
+                        ->options(function (BlogCategory $record = null): Collection {
+                            return BlogCategory::query()
+                                ->when($record, function ($query) use ($record) {
+                                    $query->where('id', '!=', $record->id);
+                                })
+                                ->pluck('name', 'id');
+                        })
+                        ->searchable()
+                        ->preload(),
+                TextInput::make('order')
             ]);
     }
 
@@ -34,10 +55,14 @@ Forms\Components\TextInput::make('order')->required()
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
-Tables\Columns\TextColumn::make('slug')->sortable()->searchable(),
-Tables\Columns\TextColumn::make('parent_id')->sortable()->searchable(),
-Tables\Columns\TextColumn::make('order')->sortable()->searchable()
+                TextColumn::make('name')->sortable()->searchable(),
+                TextColumn::make('slug')->searchable(),
+                TextColumn::make('parent_id')
+                        ->sortable()
+                        ->formatStateUsing(function ($state) {
+                            return BlogCategory::find($state)->name;
+                        }),
+                TextColumn::make('order')->sortable()->searchable()
             ])
             ->filters([
                 //

@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\Post;
+use App\Models\BlogCategory;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PostPolicy
+class BlogCategoryPolicy
 {
     use HandlesAuthorization;
 
@@ -15,15 +15,15 @@ class PostPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_posts');
+        return $user->can('view_any_blog::categories');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Post $post): bool
+    public function view(User $user, BlogCategory $blogCategory): bool
     {
-        return $user->can('view_posts');
+        return $user->can('view_blog::categories');
     }
 
     /**
@@ -31,23 +31,23 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_posts');
+        return $user->can('create_blog::categories');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Post $post): bool
+    public function update(User $user, BlogCategory $blogCategory): bool
     {
-        return $user->can('update_posts');
+        return $user->can('update_blog::categories');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Post $post): bool
+    public function delete(User $user, BlogCategory $blogCategory): bool
     {
-        return $user->can('delete_posts');
+        return $user->can('delete_blog::categories');
     }
 
     /**
@@ -55,15 +55,15 @@ class PostPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_posts');
+        return $user->can('delete_any_blog::categories');
     }
 
     /**
      * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, Post $post): bool
+    public function forceDelete(User $user, BlogCategory $blogCategory): bool
     {
-        return $user->can('force_delete_posts');
+        return $user->can('force_delete_blog::categories');
     }
 
     /**
@@ -71,15 +71,15 @@ class PostPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_posts');
+        return $user->can('force_delete_any_blog::categories');
     }
 
     /**
      * Determine whether the user can restore.
      */
-    public function restore(User $user, Post $post): bool
+    public function restore(User $user, BlogCategory $blogCategory): bool
     {
-        return $user->can('restore_posts');
+        return $user->can('restore_blog::categories');
     }
 
     /**
@@ -87,15 +87,15 @@ class PostPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_posts');
+        return $user->can('restore_any_blog::categories');
     }
 
     /**
      * Determine whether the user can replicate.
      */
-    public function replicate(User $user, Post $post): bool
+    public function replicate(User $user, BlogCategory $blogCategory): bool
     {
-        return $user->can('replicate_posts');
+        return $user->can('replicate_blog::categories');
     }
 
     /**
@@ -103,6 +103,6 @@ class PostPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_posts');
+        return $user->can('reorder_blog::categories');
     }
 }

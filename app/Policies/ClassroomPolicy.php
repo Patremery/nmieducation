@@ -2,26 +2,28 @@
 
 namespace App\Policies;
 
-use App\Models\Classroom;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Models\Classroom;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ClassroomPolicy
 {
+    use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_Classroom');
+        return $user->can('view_any_classroom');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Classroom $Classroom): bool
+    public function view(User $user, Classroom $classroom): bool
     {
-        return $user->can('view_Classroom');
+        return $user->can('view_classroom');
     }
 
     /**
@@ -29,74 +31,78 @@ class ClassroomPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_Classroom');
+        return $user->can('create_classroom');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Classroom $Classroom): bool
+    public function update(User $user, Classroom $classroom): bool
     {
-        return $user->can('update_Classroom');
+        return $user->can('update_classroom');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Classroom $Classroom): bool
+    public function delete(User $user, Classroom $classroom): bool
     {
-        return $user->can('delete_Classroom');
+        return $user->can('delete_classroom');
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determine whether the user can bulk delete.
      */
-    public function restore(User $user, Classroom $Classroom): bool
-    {
-        return $user->can('restore_Classroom');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Classroom $Classroom): bool
-    {
-        return $user->can('force_delete_Classroom');
-    }
-
-
-    public function import_data(User $user): bool
-    {
-        return $user->can('import_data_Classroom');
-    }
-
-    public function download_template_file(User $user): bool
-    {
-        return $user->can('download_template_file_Classroom');
-    }
-
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_Classroom');
+        return $user->can('delete_any_classroom');
     }
 
-    public function restoreAny(User $user): bool
+    /**
+     * Determine whether the user can permanently delete.
+     */
+    public function forceDelete(User $user, Classroom $classroom): bool
     {
-        return $user->can('restore_any_Classroom');
+        return $user->can('force_delete_classroom');
     }
 
+    /**
+     * Determine whether the user can permanently bulk delete.
+     */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_Classroom');
+        return $user->can('force_delete_any_classroom');
     }
 
-    public function replicate(User $user, Classroom $Classroom): bool
+    /**
+     * Determine whether the user can restore.
+     */
+    public function restore(User $user, Classroom $classroom): bool
     {
-        return $user->can('replicate_Classroom');
+        return $user->can('restore_classroom');
     }
 
+    /**
+     * Determine whether the user can bulk restore.
+     */
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('restore_any_classroom');
+    }
+
+    /**
+     * Determine whether the user can replicate.
+     */
+    public function replicate(User $user, Classroom $classroom): bool
+    {
+        return $user->can('replicate_classroom');
+    }
+
+    /**
+     * Determine whether the user can reorder.
+     */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_Classroom');
+        return $user->can('reorder_classroom');
     }
 }

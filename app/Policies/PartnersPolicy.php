@@ -2,12 +2,14 @@
 
 namespace App\Policies;
 
-use App\Models\Partners;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Models\Partners;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PartnersPolicy
 {
+    use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      */
@@ -49,7 +51,31 @@ class PartnersPolicy
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determine whether the user can bulk delete.
+     */
+    public function deleteAny(User $user): bool
+    {
+        return $user->can('delete_any_partners');
+    }
+
+    /**
+     * Determine whether the user can permanently delete.
+     */
+    public function forceDelete(User $user, Partners $partners): bool
+    {
+        return $user->can('force_delete_partners');
+    }
+
+    /**
+     * Determine whether the user can permanently bulk delete.
+     */
+    public function forceDeleteAny(User $user): bool
+    {
+        return $user->can('force_delete_any_partners');
+    }
+
+    /**
+     * Determine whether the user can restore.
      */
     public function restore(User $user, Partners $partners): bool
     {
@@ -57,44 +83,24 @@ class PartnersPolicy
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the user can bulk restore.
      */
-    public function forceDelete(User $user, Partners $partners): bool
-    {
-        return $user->can('force_delete_partners');
-    }
-
-
-    public function import_data(User $user): bool
-    {
-        return $user->can('import_data_partners');
-    }
-
-    public function download_template_file(User $user): bool
-    {
-        return $user->can('download_template_file_partners');
-    }
-
-    public function deleteAny(User $user): bool
-    {
-        return $user->can('delete_any_partners');
-    }
-
     public function restoreAny(User $user): bool
     {
         return $user->can('restore_any_partners');
     }
 
-    public function forceDeleteAny(User $user): bool
-    {
-        return $user->can('force_delete_any_partners');
-    }
-
+    /**
+     * Determine whether the user can replicate.
+     */
     public function replicate(User $user, Partners $partners): bool
     {
         return $user->can('replicate_partners');
     }
 
+    /**
+     * Determine whether the user can reorder.
+     */
     public function reorder(User $user): bool
     {
         return $user->can('reorder_partners');

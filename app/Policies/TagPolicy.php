@@ -2,26 +2,28 @@
 
 namespace App\Policies;
 
-use App\Models\Tag;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Models\Tag;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class TagPolicy
 {
+    use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_tag');
+        return $user->can('view_any_tags');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Tag $tags): bool
+    public function view(User $user, Tag $tag): bool
     {
-        return $user->can('view_tag');
+        return $user->can('view_tags');
     }
 
     /**
@@ -29,74 +31,78 @@ class TagPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_tag');
+        return $user->can('create_tags');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Tag $tags): bool
+    public function update(User $user, Tag $tag): bool
     {
-        return $user->can('update_tag');
+        return $user->can('update_tags');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Tag $tags): bool
+    public function delete(User $user, Tag $tag): bool
     {
-        return $user->can('delete_tag');
+        return $user->can('delete_tags');
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determine whether the user can bulk delete.
      */
-    public function restore(User $user, Tag $tags): bool
-    {
-        return $user->can('restore_tag');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Tag $tags): bool
-    {
-        return $user->can('force_delete_tag');
-    }
-
-
-    public function import_data(User $user): bool
-    {
-        return $user->can('import_data_tag');
-    }
-
-    public function download_template_file(User $user): bool
-    {
-        return $user->can('download_template_file_tag');
-    }
-
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_tag');
+        return $user->can('delete_any_tags');
     }
 
-    public function restoreAny(User $user): bool
+    /**
+     * Determine whether the user can permanently delete.
+     */
+    public function forceDelete(User $user, Tag $tag): bool
     {
-        return $user->can('restore_any_tag');
+        return $user->can('force_delete_tags');
     }
 
+    /**
+     * Determine whether the user can permanently bulk delete.
+     */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_tag');
+        return $user->can('force_delete_any_tags');
     }
 
-    public function replicate(User $user, Tag $tags): bool
+    /**
+     * Determine whether the user can restore.
+     */
+    public function restore(User $user, Tag $tag): bool
     {
-        return $user->can('replicate_tag');
+        return $user->can('restore_tags');
     }
 
+    /**
+     * Determine whether the user can bulk restore.
+     */
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('restore_any_tags');
+    }
+
+    /**
+     * Determine whether the user can replicate.
+     */
+    public function replicate(User $user, Tag $tag): bool
+    {
+        return $user->can('replicate_tags');
+    }
+
+    /**
+     * Determine whether the user can reorder.
+     */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_tag');
+        return $user->can('reorder_tags');
     }
 }

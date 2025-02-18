@@ -11,10 +11,12 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -24,6 +26,13 @@ class PostsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+     // Ajout du label de navigation
+    protected static ?string $navigationLabel = 'Articles';
+    
+    // Ajout du slug de navigation (optionnel, mais recommandé)
+    protected static ?string $slug = 'posts';
+    protected static ?string $navigationGroup = 'Blog';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -31,14 +40,15 @@ class PostsResource extends Resource
                 TextInput::make('title')
                     ->label('Titre')
                     ->required(),
-                Hidden::make('user_id')
-                    ->value(auth()->id()),
+                //Hidden::make('user_id')
+                   // ->value(auth()->user()->id),
                 TextInput::make('slug')->required(),
-                TextInput::make('description')
+                Textarea::make('description')
                     ->label('Résumé')
                     ->required(),
                 RichEditor::make('content')
                     ->label('Contenu')
+                    ->columnSpanFull()
                     ->required(),
                 FileUpload::make('featured_image')
                     ->label('Image mise en avant')
@@ -50,8 +60,14 @@ class PostsResource extends Resource
                 TextInput::make('ordering')
                     ->label('Ordering')
                     ->required(),
-                TextInput::make('status')
+                Select::make('status')
                     ->label('Statut')
+                    ->options([
+                        'draft' => 'Brouillon',
+                        'published' => 'Publié',
+                        'scheduled' => 'Programmé',
+                        'archived' => 'Archivé',
+                    ])
                     ->required(),
                 /* TextInput::make('sticky_until')
                     ->label('Date d\'expiration')
@@ -76,15 +92,14 @@ class PostsResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('user_id')->sortable()->searchable(),
+                //TextColumn::make('user_id')->sortable()->searchable(),
+                ImageColumn::make('featured_image')->label(''),
                 TextColumn::make('title')->sortable()->searchable(),
-                TextColumn::make('slug')->sortable()->searchable(),
-                TextColumn::make('description')->sortable()->searchable(),
-                TextColumn::make('content')->sortable()->searchable(),
-                TextColumn::make('featured_image')->sortable()->searchable(),
+                //TextColumn::make('slug')->sortable()->searchable(),
+                
                 TextColumn::make('ordering')->sortable()->searchable(),
                 TextColumn::make('status')->sortable()->searchable(),
-                TextColumn::make('sticky_until')->sortable()->searchable(),
+                //TextColumn::make('sticky_until')->sortable()->searchable(),
                 TextColumn::make('published_at')->sortable()->searchable()
             ])
             ->filters([

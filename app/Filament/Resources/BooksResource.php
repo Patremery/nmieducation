@@ -37,11 +37,6 @@ class BooksResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
     protected static ?string $navigationGroup = 'Catalogue';
 
-    public function __construct(private CategoryService $categoryService)
-    {
-        //
-    }
-
     public static function getLabel() : string {
         return __('Livres');
     }

@@ -64,4 +64,12 @@ class HomeController extends Controller
             'posts' => $posts
         ]);
     }
+
+    public function article($slug) {
+        $post = PostResource::make(Post::published()->where('slug', $slug)->first());
+
+        return Inertia::render('Article', [
+            'post' => $post
+        ]);
+    }
 }
