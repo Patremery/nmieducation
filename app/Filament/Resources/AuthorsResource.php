@@ -93,7 +93,8 @@ class AuthorsResource extends Resource
                                             ->image()
                                             ->default(fn ($state) => $state)
                                             ->disk('public')
-                                            ->directory('authors'),
+                                            ->directory('authors')
+                                            ->optimize('webp'),
                                     ]),
 
                                 

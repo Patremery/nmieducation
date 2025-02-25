@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use App\Enums\ClassroomsEnum;
 use App\Http\Resources\BookResource;
 use App\Traits\HasStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Book extends Model
 {
@@ -15,14 +16,15 @@ class Book extends Model
     protected $guarded = [];
     protected $casts = [
         'images' => 'array',
-        'new' => 'boolean'
+        'new' => 'boolean',
+        'classrooms' => 'array',
     ];
 
     //protected $with = ['author'];
 
-    public function author(): BelongsTo
+    public function authors(): BelongsToMany
     {
-        return $this->belongsTo(Author::class);
+        return $this->belongsToMany(Author::class, 'author_book');
     }
 
     public function category()
@@ -38,6 +40,17 @@ class Book extends Model
     public function collection()
     {
         return $this->belongsTo(Collection::class, 'collection_id');
+    }
+
+    public function getClassroomEnumsAttribute()
+    {
+        if (!$this->classrooms) {
+            return [];
+        }
+        
+        return array_map(function ($value) {
+            return ClassroomsEnum::from($value);
+        }, $this->classrooms);
     }
 
     public function toResource()

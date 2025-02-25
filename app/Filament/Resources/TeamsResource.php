@@ -34,6 +34,7 @@ class TeamsResource extends Resource
                     ->image()
                     ->disk('public')
                     ->directory('teams')
+                    ->optimize('webp')
                     ->required(),
                 TextInput::make('facebook_url'),
                 TextInput::make('linkedin_url'),
@@ -80,7 +81,7 @@ class TeamsResource extends Resource
             'index' => Pages\ListTeams::route('/'),
             'create' => Pages\CreateTeams::route('/create'),
             'view' => Pages\ViewTeams::route('/{record}'),
-            'edit' => Pages\EditTeams::route('/{record}/edit'),
+            'edit' => Pages\EditTeams::route('/{record}/edit'), 
         ];
     }
 }

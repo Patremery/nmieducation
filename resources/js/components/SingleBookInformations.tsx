@@ -43,12 +43,16 @@ const SingleBookInformations = ({ book }: { book: Book }) => {
                             {book.title}
                         </h4>
 
-                        {book.author && (
+                        {book.authors && book.authors.length > 0 && (
                             <>
                                 <h5 style={{ fontSize: 16, fontWeight: 600 }}>
                                     Auteur(s) :
                                 </h5>
-                                <p>{book.author}</p>
+                                <p>
+                                    {book.authors
+                                        .map((author) => author.name)
+                                        .join(", ")}
+                                </p>
                             </>
                         )}
 
@@ -300,6 +304,8 @@ const SingleBookInformations = ({ book }: { book: Book }) => {
                 title={book.title}
                 showModal={showModal}
                 handleCloseModal={handleCloseModal}
+                bookCategory={book.category}
+                guideId={book.id}
             />
         </>
     );

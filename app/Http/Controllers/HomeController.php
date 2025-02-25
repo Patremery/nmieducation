@@ -15,7 +15,7 @@ class HomeController extends Controller
 {
      public function index()
     {
-        $books = BookResource::collection(Book::published()->with(['author', 'category', 'collection', 'language'])->get());
+        $books = BookResource::collection(Book::published()->with(['authors', 'category', 'collection', 'language'])->get());
 
         return Inertia::render('Home', [
             'books' => $books

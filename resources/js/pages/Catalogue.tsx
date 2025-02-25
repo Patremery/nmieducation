@@ -72,7 +72,7 @@ const Catalogue: React.FC<CatalogueProps> = ({ books }) => {
                             Catalogue
                         </span>
                     </h2>
-                    <Filters />
+                    {/* <Filters /> */}
                 </motion.div>
 
                 <motion.div variants={itemVariants}>

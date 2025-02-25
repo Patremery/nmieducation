@@ -5,8 +5,7 @@ type PlatformUrl = string | null;
 interface Book {
     id: number;
     title: string;
-    //author: Author;
-    author: string;
+    authors: Author[];
     year: number;
     isbn: string;
     description: string;
@@ -24,6 +23,7 @@ interface Book {
     adinkra_url: PlatformUrl;
     youscribe_url: PlatformUrl;
     lq_url: PlatformUrl;
+    classrooms: string[];
 }
 
 interface BannerProps {
@@ -67,11 +67,6 @@ enum BookFormat {
     BOTH = "Papier et numérique",
 }
 
-enum BookLanguage {
-    FRENCH = "Français",
-    ENGLISH = "Anglais",
-}
-
 enum BookAudience {
     GENERAL = "Grand Public",
     PROFESSIONAL = "Professionnel",
@@ -81,14 +76,19 @@ enum BookAudience {
 
 interface Author {
     id: number;
-    name?: string;
-    slug?: string;
+    name: string;
+    slug: string;
     books?: Book[];
     profession?: string;
     biography?: string;
     photo?: string;
     linkedin?: string;
     facebook?: string;
+}
+
+interface BookLanguage {
+    id: number;
+    name: string;
 }
 
 interface Team {
@@ -101,6 +101,15 @@ interface Team {
     bio?: string;
 }
 
+interface Collection {
+    id: number;
+    name: string;
+    slug: string;
+    description?: string;
+    image?: string;
+    books?: Book[];
+}
+
 export type {
     Book,
     BookCollection,
@@ -111,5 +120,7 @@ export type {
     Post,
     BlogCategory,
     BlogTag,
+    BookLanguage,
+    Collection,
 };
-export { BookFormat, BookLanguage, BookAudience };
+export { BookFormat, BookAudience };

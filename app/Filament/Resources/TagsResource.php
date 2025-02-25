@@ -23,7 +23,7 @@ class TagsResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')->required(),
+                TextInput::make('name')->columnSpanFull()->required(),
                 TextInput::make('slug')->required(),
                 TextInput::make('order_column')->required()
             ]);
@@ -62,9 +62,9 @@ class TagsResource extends Resource
     {
         return [
             'index' => Pages\ListTags::route('/'),
-            'create' => Pages\CreateTags::route('/create'),
+           /*  'create' => Pages\CreateTags::route('/create'),
             'view' => Pages\ViewTags::route('/{record}'),
-            'edit' => Pages\EditTags::route('/{record}/edit'),
+            'edit' => Pages\EditTags::route('/{record}/edit'), */
         ];
     }
 }

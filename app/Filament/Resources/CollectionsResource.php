@@ -81,6 +81,7 @@ class CollectionsResource extends Resource
                                             ->label("Image principale")
                                             ->default(fn ($state) => $state)
                                             ->image()
+                                            ->optimize('webp')
                                             ->disk('public')
                                             ->directory('collections'),
                                     ]),
@@ -103,8 +104,6 @@ class CollectionsResource extends Resource
                             ->toggleable(isToggledHiddenByDefault: true)
                             ->sortable()
                             ->searchable(),
-                TextColumn::make('language.name')
-                            ->sortable(),
                 TextColumn::make('status')
                     ->sortable()
                     ->badge()
@@ -118,6 +117,7 @@ class CollectionsResource extends Resource
                             ->toggleable(isToggledHiddenByDefault: true)
                             ->searchable(),
                 TextColumn::make('summary')
+                            ->toggleable(isToggledHiddenByDefault: true)
                             ->sortable()
                             ->searchable(),
                 TextColumn::make('images')

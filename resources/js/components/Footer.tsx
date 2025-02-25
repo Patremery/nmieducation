@@ -10,13 +10,17 @@ const Footer: React.FC = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-3">
-                            <img
-                                src={Logo}
-                                alt="NMI Education"
-                                width="120"
-                                style={{ filter: "brightness(0) invert(1)" }}
-                                className="mb-3"
-                            />
+                            <a href="/">
+                                <img
+                                    src={Logo}
+                                    alt="NMI Education"
+                                    width="120"
+                                    style={{
+                                        filter: "brightness(0) invert(1)",
+                                    }}
+                                    className="mb-3"
+                                />
+                            </a>
                             <p>
                                 Nomayos, Entrée route Ngoumou <br />
                                 Tel: 00237 654 000 200

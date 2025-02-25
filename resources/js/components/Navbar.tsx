@@ -6,7 +6,7 @@ const Navbar: React.FC = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
             <div className="container flex-column">
-                <a className="navbar-brand text-center mb-3" href="#">
+                <a className="navbar-brand text-center mb-3" href="/">
                     <img
                         src={Logo}
                         alt="NMI Education"

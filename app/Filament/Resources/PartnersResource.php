@@ -31,6 +31,7 @@ class PartnersResource extends Resource
                     ->default(fn ($state) => $state)
                     ->image()
                     ->disk('public')
+                    ->optimize('webp')
                     ->directory('partners'),
                 TextInput::make('website'),
                 TextInput::make('description')

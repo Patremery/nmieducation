@@ -28,6 +28,9 @@ use Filament\Tables\Columns\ImageColumn;
 use App\Enums\BookFormat;
 use Filament\Forms\Components\Toggle;
 use App\Enums\AudienceEnum;
+use App\Enums\ClassroomsEnum;
+use App\Enums\CoursesEnum;
+use App\Enums\LiteratureGenreEnum;
 
 class BooksResource extends Resource
 {
@@ -65,6 +68,16 @@ class BooksResource extends Resource
     {
         return $form
             ->schema([
+                Select::make('category_id')
+                        ->label("Catégorie")
+                        ->options(function () {
+                            return app(CategoryService::class)
+                                ->getAllActive()
+                                ->pluck('label', 'id');
+                        })
+                        ->searchable()
+                        ->live()
+                        ->required(),
                 Grid::make([
                     'default' => 1,
                     'lg' => 3,
@@ -75,23 +88,12 @@ class BooksResource extends Resource
                                 TextInput::make('title')
                                     ->required()
                                     ->columnSpanFull(),
-                                Select::make('category_id')
-                                    ->label("Catégorie")
-                                    ->options(function () {
-                                        return app(CategoryService::class)
-                                            ->getAllActive()
-                                            ->pluck('label', 'id');
-                                    })
-                                    ->searchable()
-                                    ->live()
-                                    ->required(),
                                 Toggle::make("new")
                                         ->label("Nouveauté")
                                         ->default(false),
                                 Select::make('book_language_id')
                                         ->label("Langue")
                                         ->options(BookLanguage::query()->published()->pluck("name", "id")),
-                                
                                 Select::make('collection_id')
                                     ->label("Collection")
                                     ->options(Collection::query()->published()->pluck("name", "id"))
@@ -110,7 +112,8 @@ class BooksResource extends Resource
                                         ->image()
                                         ->disk('public')
                                         ->directory('books')
-                                        ->columnSpanFull(),
+                                        ->columnSpanFull()
+                                        ->optimize('webp'),
                                
                             ])->columnSpan(['lg' => 2]),
 
@@ -120,18 +123,17 @@ class BooksResource extends Resource
                                     ->schema([
                                         self::getStatusField(),
                                         
-                                        Select::make('author_id')
-                                                ->label("Auteur")
+                                        Select::make('authors')
+                                                ->label("Auteurs")
+                                                ->multiple()
+                                                ->relationship('authors', 'name')
                                                 ->options(Author::query()->published()->pluck("name", "id"))
-                                                ->columns(2)
+                                                ->preload()
                                                 ->searchable()
-                                                ->visible(fn (Get $get) => (static::isCategoryType(
-                                        $get('category_id'),
-                                        'literature'
-                                    )) or (static::isCategoryType(
-                                        $get('category_id'),
-                                        'kids'
-                                    ))),
+                                                ->visible(fn (Get $get) => 
+                                                    static::isCategoryType($get('category_id'), 'literature') or 
+                                                    static::isCategoryType($get('category_id'), 'kids')
+                                                ),
                                         DatePicker::make('publication_date')
                                             ->label("Date de publication"),
                                        
@@ -144,11 +146,48 @@ class BooksResource extends Resource
                                                 ->required(), 
                                         TextInput::make('ISBN')
                                                 ->label("ISBN"),
+                                        Select::make('classrooms')
+                                                ->label("Classes")
+                                                ->options(ClassroomsEnum::options())
+                                                //->enum(ClassroomsEnum::class)
+                                                ->searchable()
+                                                ->multiple()
+                                                ->visible(fn (Get $get) => static::isCategoryType(
+                                                    $get('category_id'),
+                                                    'school'
+                                                ) or static::isCategoryType(
+                                                    $get('category_id'),
+                                                    'catalog'
+                                                ) or static::isCategoryType(
+                                                    $get('category_id'),
+                                                    'literature'
+                                                ) or static::isCategoryType(
+                                                    $get('category_id'),
+                                                    'guides'
+                                                )),
+                                        Select::make('subject')
+                                                ->label("Sujet")
+                                                ->options(CoursesEnum::options())
+                                                ->searchable()
+                                                ->visible(fn (Get $get) => static::isCategoryType(
+                                                    $get('category_id'),
+                                                    'school'
+                                                ) or static::isCategoryType(
+                                                    $get('category_id'),
+                                                    'guides'
+                                                )),
                                         
-                                        TextInput::make('theme')
+                                        Select::make('theme')
+                                                ->label("Genre")
+                                                ->options(LiteratureGenreEnum::options())
+                                                ->enum(LiteratureGenreEnum::class)
+                                                ->searchable()
                                                 ->visible(fn (Get $get) => static::isCategoryType(
                                                     $get('category_id'),
                                                     'literature'
+                                                ) or static::isCategoryType(
+                                                    $get('category_id'),
+                                                    'kids'
                                                 )),
                                         TextInput::make('pages')
                                                 ->numeric()
@@ -179,6 +218,7 @@ class BooksResource extends Resource
                                             ->image()
                                             ->default(fn ($record) => $record->file ?? null)
                                             ->preserveFilenames()
+                                            ->optimize('webp')
                                             ->required(),
                                         FileUpload::make('file')
                                             ->label("Fichier Numérique")
@@ -187,10 +227,11 @@ class BooksResource extends Resource
                                             ->visible(fn (Get $get) => (in_array($get('category_id'), [3, 5])))
                                             ->required(fn (Get $get) => (in_array($get('category_id'), [3, 5])))
                                             ->default(fn ($record) => $record->file ?? null)
+                                            ->optimize('webp')
                                             ->preserveFilenames(),
                                     ]),
                             ])->columnSpan(['lg' => 1]),
-                    ]),
+                    ])->visible(fn (Get $get) => $get('category_id')),
             ]);
     }
 
@@ -204,8 +245,14 @@ class BooksResource extends Resource
                 TextColumn::make('title')->sortable()->searchable(),
                 //TextColumn::make('description')->html()->searchable(),
                 //TextColumn::make('summary')->sortable()->searchable(),
-                TextColumn::make('author.name')->sortable()->searchable(),
-                
+                TextColumn::make('authors.name')
+                    ->label('Auteurs')
+                    ->sortable()
+                    ->searchable()
+                    ->listWithLineBreaks()
+                    ->limitList(3)
+                    ->expandableLimitedList()
+                    ->formatStateUsing(fn ($state, $record) => $record->authors->pluck('name')->join(', ')),
                 TextColumn::make('language.name')->sortable()->searchable(),
                 TextColumn::make('category.name')->sortable()->searchable(),
                 TextColumn::make('publication_date')->sortable()->searchable(),

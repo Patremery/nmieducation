@@ -7,22 +7,36 @@ interface DownloadGuideModalProps {
     showModal: boolean;
     handleCloseModal: () => void;
     title: string;
+    guideId: number;
+    bookCategory: string;
 }
 
 const DownloadGuideModal: React.FC<DownloadGuideModalProps> = ({
     showModal,
     handleCloseModal,
     title,
+    bookCategory,
+    guideId,
 }) => {
     const { data, setData, post, processing, errors } = useForm({
-        name: "",
+        username: "",
         email: "",
         phone: "",
+        bookCategory: bookCategory,
+        guideId: guideId,
     });
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        post("/your-endpoint");
+        post("/download-guide", {
+            data: {
+                name: data.username,
+                email: data.email,
+                phone: data.phone,
+                guideId: guideId,
+                bookCategory: bookCategory,
+            },
+        });
         handleCloseModal();
     };
 
@@ -91,11 +105,11 @@ const DownloadGuideModal: React.FC<DownloadGuideModalProps> = ({
                                                 <input
                                                     type="text"
                                                     className="form-control"
-                                                    id="name"
-                                                    value={data.name}
+                                                    id="username"
+                                                    value={data.username}
                                                     onChange={(e) =>
                                                         setData(
-                                                            "name",
+                                                            "username",
                                                             e.target.value
                                                         )
                                                     }
@@ -106,9 +120,9 @@ const DownloadGuideModal: React.FC<DownloadGuideModalProps> = ({
                                                             "#f8f9fa",
                                                     }}
                                                 />
-                                                {errors.name && (
+                                                {errors.username && (
                                                     <div className="text-danger">
-                                                        {errors.name}
+                                                        {errors.username}
                                                     </div>
                                                 )}
                                             </div>

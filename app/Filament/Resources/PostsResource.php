@@ -8,7 +8,6 @@ use App\Models\Post;
 use App\Models\Tag;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -19,6 +18,9 @@ use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use FilamentTiptapEditor\TiptapEditor;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Section;
 
 class PostsResource extends Resource
 {
@@ -37,54 +39,69 @@ class PostsResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('title')
-                    ->label('Titre')
-                    ->required(),
-                //Hidden::make('user_id')
-                   // ->value(auth()->user()->id),
-                TextInput::make('slug')->required(),
-                Textarea::make('description')
-                    ->label('Résumé')
-                    ->required(),
-                RichEditor::make('content')
-                    ->label('Contenu')
-                    ->columnSpanFull()
-                    ->required(),
-                FileUpload::make('featured_image')
-                    ->label('Image mise en avant')
-                    ->image()
-                    ->disk('public')
-                    ->directory('blog')
-                    ->default(fn($state) => $state)
-                    ->required(),
-                TextInput::make('ordering')
-                    ->label('Ordering')
-                    ->required(),
-                Select::make('status')
-                    ->label('Statut')
-                    ->options([
-                        'draft' => 'Brouillon',
-                        'published' => 'Publié',
-                        'scheduled' => 'Programmé',
-                        'archived' => 'Archivé',
-                    ])
-                    ->required(),
-                /* TextInput::make('sticky_until')
-                    ->label('Date d\'expiration')
-                    ->required(), */
-                DatePicker::make('published_at')
-                    ->label('Date de publication')
-                    ->required(),
-                Select::make('blog_categories_id')
-                    ->label('Catégories')
-                    ->options(BlogCategory::all()->pluck('name', 'id'))
-                    ->multiple()
-                    ->required(),
-                Select::make('tags')
-                    ->label('Tags')
-                    ->options(Tag::all()->pluck('name', 'id'))
-                    ->multiple()
-                    ->required(),
+                Grid::make([
+                    'default' => 1,
+                    'lg' => 3,
+                ])
+                ->schema([
+                    Section::make('Informations principales')
+                        ->columnSpan(2)
+                        ->schema([
+                            TextInput::make('title')
+                                ->label('Titre')
+                                ->required(),
+                            TextInput::make('slug')->required(),
+                            Textarea::make('description')
+                                ->label('Résumé')
+                                ->required(),
+                            TiptapEditor::make('content')
+                                ->label('Contenu')
+                                ->profile('default')
+                                ->maxContentWidth('5xl')
+                                ->disk('public')
+                                ->directory('posts')
+                                ->columnSpanFull()
+                                ->required(),
+                        ]),
+                    
+                    Section::make('Paramètres de publication')
+                        ->columnSpan(1)
+                        ->schema([
+                            FileUpload::make('featured_image')
+                                ->label('Image mise en avant')
+                                ->image()
+                                ->disk('public')
+                                ->directory('blog')
+                                ->default(fn($state) => $state)
+                                ->optimize('webp')
+                                ->required(),
+                            TextInput::make('ordering')
+                                ->label('Ordering')
+                                ->required(),
+                            Select::make('status')
+                                ->label('Statut')
+                                ->options([
+                                    'draft' => 'Brouillon',
+                                    'published' => 'Publié',
+                                    'scheduled' => 'Programmé',
+                                    'archived' => 'Archivé',
+                                ])
+                                ->required(),
+                            DatePicker::make('published_at')
+                                ->label('Date de publication')
+                                ->required(),
+                            Select::make('blog_categories_id')
+                                ->label('Catégories')
+                                ->options(BlogCategory::all()->pluck('name', 'id'))
+                                ->multiple()
+                                ->required(),
+                            Select::make('tags')
+                                ->label('Tags')
+                                ->options(Tag::all()->pluck('name', 'id'))
+                                ->multiple()
+                                ->required(),
+                        ]),
+                ]),
             ]);
     }
 

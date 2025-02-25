@@ -10,6 +10,12 @@ interface BookItemProps {
 }
 
 const BookItem: React.FC<BookItemProps> = ({ index, book, height }) => {
+    const authorNames = book.authors.map((author) => author.name).join(", ");
+    const truncatedAuthors =
+        authorNames.length > 15
+            ? `${authorNames.substring(0, 15)}...`
+            : authorNames;
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -49,11 +55,7 @@ const BookItem: React.FC<BookItemProps> = ({ index, book, height }) => {
                             "linear-gradient(to right, transparent, #d0d0d0 50%, transparent)",
                     }}
                 />
-                <p className="text-muted my-1">
-                    {book.author.length > 15
-                        ? `${book.author.substring(0, 15)}...`
-                        : book.author}
-                </p>
+                <p className="text-muted my-1">{truncatedAuthors}</p>
                 <hr
                     style={{
                         border: "none",

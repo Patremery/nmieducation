@@ -10,8 +10,8 @@ class BookResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'author' => $this->author?->name ?? 'NMI Education',
-            //'author' => (new AuthorResource($this->author))->toArray(request()),
+            //'author' => $this->author?->name ?? 'NMI Education',
+            'authors' => $this->getAuthors(),
             'title' => $this->title,
             'category' => $this->category->code,
             'price' => $this->price,
@@ -30,10 +30,16 @@ class BookResource extends JsonResource
             'description' => strip_tags($this->description),
             'cover' => asset($this->featured_image),
             'summary' => $this->summary,
-            'themes' => $this->themes ?? [],
             'audience' => $this->audience,
             'file' => url($this->file),
+            'classrooms' => $this->classrooms ?? [],
+            'genre' => $this->theme,
         ];
+    }
+
+    public function getAuthors()
+    {
+        return AuthorResource::collection($this->authors);
     }
 }
 

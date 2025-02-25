@@ -11,7 +11,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Collection;
 
 class BlogCategoriesResource extends Resource
 {
@@ -27,6 +26,7 @@ class BlogCategoriesResource extends Resource
             ->schema([
                 TextInput::make('name')
                         ->label('Nom')
+                        ->columnSpanFull()
                         ->live()
                         ->afterStateUpdated(function ($state, $set) 
                         {
@@ -34,11 +34,12 @@ class BlogCategoriesResource extends Resource
                         })
                         ->required(),
                 TextInput::make('slug')
+                        ->columnSpanFull()
                         ->unique(ignoreRecord: true)
                         ->required(),
                 Select::make('parent_id')
                         ->label('Catégorie parente')
-                        ->options(function (BlogCategory $record = null): Collection {
+                        ->options(function (BlogCategory $record = null) {
                             return BlogCategory::query()
                                 ->when($record, function ($query) use ($record) {
                                     $query->where('id', '!=', $record->id);
