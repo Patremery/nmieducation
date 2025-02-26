@@ -95,6 +95,7 @@ class CollectionsResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('featured_image')
+                            ->label('')
                             ->sortable()
                             ->searchable(),
                 TextColumn::make('name')

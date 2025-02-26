@@ -7,23 +7,20 @@ interface DownloadGuideModalProps {
     showModal: boolean;
     handleCloseModal: () => void;
     title: string;
-    guideId: number;
-    bookCategory: string;
+    bookId: number;
 }
 
 const DownloadGuideModal: React.FC<DownloadGuideModalProps> = ({
     showModal,
     handleCloseModal,
     title,
-    bookCategory,
-    guideId,
+    bookId,
 }) => {
     const { data, setData, post, processing, errors } = useForm({
         username: "",
         email: "",
         phone: "",
-        bookCategory: bookCategory,
-        guideId: guideId,
+        bookId: bookId,
     });
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -33,8 +30,7 @@ const DownloadGuideModal: React.FC<DownloadGuideModalProps> = ({
                 name: data.username,
                 email: data.email,
                 phone: data.phone,
-                guideId: guideId,
-                bookCategory: bookCategory,
+                bookId: bookId,
             },
         });
         handleCloseModal();

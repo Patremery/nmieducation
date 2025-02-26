@@ -11,6 +11,7 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -47,7 +48,10 @@ class CategoryResource extends Resource
             ->columns([
                 TextColumn::make('code')->sortable()->searchable(),
                 TextColumn::make('label')->sortable()->searchable(),
-                TextColumn::make('is_active')->sortable()->searchable()
+                IconColumn::make('is_active')->sortable()->searchable()
+                    ->boolean()
+                    ->trueIcon('heroicon-o-check-circle')
+                    ->falseIcon('heroicon-o-x-circle')
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('is_active'),

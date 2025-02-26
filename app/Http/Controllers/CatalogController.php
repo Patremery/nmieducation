@@ -11,12 +11,12 @@ use App\Models\BookLanguage;
 use App\Models\Category;
 use App\Models\Collection;
 use App\Models\Download;
-use App\Models\Role;
-use App\Models\User;
+use App\Models\Downloader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class CatalogController extends Controller
 {
@@ -119,43 +119,40 @@ class CatalogController extends Controller
     {
         //dd($request->all());
         $request->validate([
-            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:255',
-            'guideId' => 'required|integer',
+            'bookId' => 'required|integer',
         ]);
 
         return DB::transaction(function () use ($request) {
-            $book = Book::findOrFail($request->input('guideId'));
+            $book = Book::findOrFail($request->input('bookId'));
 
             //check if user already exists
-            $user = User::where('email', $request->input('email'))->first();
+            $downloader = Downloader::where('email', $request->input('email'))->first();
 
-            if(!$user) {
+            if(!$downloader) {
                 //store user informations
-                $user = User::create([
-                    'name' => $request->input('name'),
+                $downloader = Downloader::create([
+                    'name' => $request->input('username'),
                     'email' => $request->input('email'),
                     'phone' => $request->input('phone'),
                 ]);
-
-                $user->roles()->attach(Role::where('name', 'downloader')->first());
             }
 
             // Store download in database
             Download::create([
-                'downloader_id' => $user->id,
+                'downloader_id' => $downloader->id,
                 'book_id' => $book->id,
                 'ip_address' => $request->ip(),
                 'user_agent' => $request->userAgent(),
             ]);
 
             //Send email to user
-            Mail::to($user->email)->send(new DownloadBookEmail($user, $book));
+            Mail::to($downloader->email)->send(new DownloadBookEmail($downloader, $book));
 
-            return response()->json([
-                'message' => 'Guide downloaded successfully'
-            ]);
+            return Redirect::back()->with('success', 'Félicitations ! Votre document a été envoyé à votre adresse email avec succès. Consultez votre messagerie pour le télécharger.');
+            //return to_route('BookPresentation', $book)->with('success', 'Document downloaded successfully');
         });
     }
 }

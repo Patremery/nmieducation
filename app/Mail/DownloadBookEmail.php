@@ -7,6 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Attachment;
 
 class DownloadBookEmail extends Mailable
 {
@@ -28,7 +29,7 @@ class DownloadBookEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Download Book Email',
+            subject: 'Votre document : ' . $this->book->title,
         );
     }
 
@@ -38,7 +39,11 @@ class DownloadBookEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.download-book',
+            markdown: 'emails.download-book',
+            with: [
+                'user' => $this->user,
+                'book' => $this->book,
+            ],
         );
     }
 
@@ -49,6 +54,14 @@ class DownloadBookEmail extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+        if (!$this->book->file) {
+            return [];
+        }
+        
+        return [
+            Attachment::fromPath(storage_path('app/public/' . $this->book->file))
+                ->as($this->book->title . '.pdf')
+                ->withMime('application/pdf'),
+        ];
     }
 }

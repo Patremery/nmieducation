@@ -115,13 +115,13 @@ class AuthorsResource extends Resource
                             ->label("Nom")
                             ->sortable()
                             ->searchable(),
-                TextColumn::make('title')
-                            ->label("Titre")
+                TextColumn::make('profession')
+                            ->label("Profession")
                             ->sortable()
                             ->searchable(),
-                TextColumn::make('biography')
+               /*  TextColumn::make('biography')
                             ->label("Biographie")
-                            ->searchable(),
+                            ->searchable(), */
                 TextColumn::make('status')
                     ->sortable()
                     ->badge()

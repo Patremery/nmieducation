@@ -304,8 +304,7 @@ const SingleBookInformations = ({ book }: { book: Book }) => {
                 title={book.title}
                 showModal={showModal}
                 handleCloseModal={handleCloseModal}
-                bookCategory={book.category}
-                guideId={book.id}
+                bookId={book.id}
             />
         </>
     );

@@ -240,6 +240,7 @@ class BooksResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('featured_image')
+                    ->label('')
                     ->height(70)
                     ,
                 TextColumn::make('title')->sortable()->searchable(),
@@ -254,10 +255,10 @@ class BooksResource extends Resource
                     ->expandableLimitedList()
                     ->formatStateUsing(fn ($state, $record) => $record->authors->pluck('name')->join(', ')),
                 TextColumn::make('language.name')->sortable()->searchable(),
-                TextColumn::make('category.name')->sortable()->searchable(),
-                TextColumn::make('publication_date')->sortable()->searchable(),
+                TextColumn::make('category.label')->sortable()->searchable(),
+                //TextColumn::make('publication_date')->sortable()->searchable(),
                 TextColumn::make('ISBN')->label("Code ISBN")->sortable()->searchable(),
-                TextColumn::make('images')->sortable()->searchable(),
+                //TextColumn::make('images')->sortable()->searchable(),
                 TextColumn::make('status')
                     ->sortable()
                     ->badge()

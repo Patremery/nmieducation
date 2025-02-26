@@ -3,6 +3,7 @@ import InnerPageLayout from "../layouts/InnerPageLayout";
 import BookSlider from "../components/Slider";
 import SingleBookInformations from "../components/SingleBookInformations";
 import { BannerProps, Book } from "../types/interfaces";
+import { usePage } from "@inertiajs/react";
 
 interface BookPresentationProps {
     book: Book;
@@ -22,9 +23,18 @@ const BookPresentation: React.FC<BookPresentationProps> = ({
     const banner: BannerProps = {
         title: "Nos Livres",
     };
+
+    const { props } = usePage();
+    const flash = props.flash as { success?: string; error?: string };
+
     return (
         <InnerPageLayout banner={banner}>
             <div className="container-fluid">
+                {flash?.success && (
+                    <div className="alert alert-success mt-3">
+                        {flash.success}
+                    </div>
+                )}
                 <SingleBookInformations book={book} />
                 {similarBooks.length > 5 && (
                     <>

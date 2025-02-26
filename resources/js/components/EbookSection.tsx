@@ -41,39 +41,54 @@ const EbookSection: React.FC = () => {
                             format numérique sur les plateformes dédiées
                         </p>
                         <div className="platform-logos d-flex px-2 gap-2">
-                            <img
-                                src={Adinkra}
-                                className="img-fluid img-responsive"
-                                style={{
-                                    width: "100px",
-                                    height: "auto",
-                                    objectFit: "contain",
-                                    objectPosition: "center",
-                                }}
-                                alt="Adinkra"
-                            />
-                            <img
-                                src={Youscribe}
-                                className="img-fluid img-responsive"
-                                style={{
-                                    width: "100px",
-                                    height: "auto",
-                                    objectFit: "contain",
-                                    objectPosition: "center",
-                                }}
-                                alt="Youscribe"
-                            />
-                            <img
-                                src={Amazon}
-                                style={{
-                                    width: "100px",
-                                    height: "auto",
-                                    objectFit: "contain",
-                                    objectPosition: "center",
-                                }}
-                                className="img-fluid img-responsive"
-                                alt="Platform 3"
-                            />
+                            <a
+                                href="https://www.adinkra-jeunesse.com/books.php"
+                                target="_blank"
+                            >
+                                <img
+                                    src={Adinkra}
+                                    className="img-fluid img-responsive"
+                                    style={{
+                                        width: "100px",
+                                        height: "auto",
+                                        objectFit: "contain",
+                                        objectPosition: "center",
+                                    }}
+                                    alt="Adinkra"
+                                />
+                            </a>
+                            <a
+                                href="https://www.youscribe.com/nmi_education/"
+                                target="_blank"
+                            >
+                                <img
+                                    src={Youscribe}
+                                    className="img-fluid img-responsive"
+                                    style={{
+                                        width: "100px",
+                                        height: "auto",
+                                        objectFit: "contain",
+                                        objectPosition: "center",
+                                    }}
+                                    alt="Youscribe"
+                                />
+                            </a>
+                            <a
+                                href="https://kdp.amazon.com/en_US/bookshelf?ref_=kdp_kdp_TAC_TN_bs"
+                                target="_blank"
+                            >
+                                <img
+                                    src={Amazon}
+                                    style={{
+                                        width: "100px",
+                                        height: "auto",
+                                        objectFit: "contain",
+                                        objectPosition: "center",
+                                    }}
+                                    className="img-fluid img-responsive"
+                                    alt="Platform 3"
+                                />
+                            </a>
                         </div>
                     </div>
                 </div>

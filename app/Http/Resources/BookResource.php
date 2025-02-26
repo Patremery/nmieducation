@@ -31,7 +31,7 @@ class BookResource extends JsonResource
             'cover' => asset($this->featured_image),
             'summary' => $this->summary,
             'audience' => $this->audience,
-            'file' => url($this->file),
+            //'file' => url($this->file),
             'classrooms' => $this->classrooms ?? [],
             'genre' => $this->theme,
         ];

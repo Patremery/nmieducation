@@ -21,6 +21,7 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Joaopaulolndev\FilamentGeneralSettings\FilamentGeneralSettingsPlugin;
+use RickDBCN\FilamentEmail\FilamentEmail;
 use Solutionforest\FilamentScaffold\FilamentScaffoldPlugin;
 
 class AdminPanelProvider extends PanelProvider
@@ -69,6 +70,7 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 FilamentScaffoldPlugin::make(),
                 FilamentShieldPlugin::make(),
+                FilamentEmail::make(),
                 FilamentGeneralSettingsPlugin::make()
                     ->canAccess(fn() => auth()->id() === 1)
                     ->setSort(3)
