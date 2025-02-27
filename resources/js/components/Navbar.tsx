@@ -34,6 +34,11 @@ const Navbar: React.FC = () => {
                                 À propos de nous
                             </InertiaLink>
                         </li>
+                        <li className="nav-item">
+                            <InertiaLink className="nav-link" href="/about">
+                                Notre métier
+                            </InertiaLink>
+                        </li>
                         <li className="nav-item dropdown">
                             <InertiaLink
                                 className="nav-link dropdown-toggle"
@@ -98,11 +103,7 @@ const Navbar: React.FC = () => {
                                 </li>
                             </ul>
                         </li>
-                        <li className="nav-item">
-                            <InertiaLink className="nav-link" href="/about">
-                                Notre métier
-                            </InertiaLink>
-                        </li>
+
                         <li className="nav-item">
                             <InertiaLink className="nav-link" href="/blog">
                                 Actualité

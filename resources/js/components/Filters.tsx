@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Author, BookLanguage, Collection } from "../types/interfaces";
-import { router } from "@inertiajs/react";
+import { router, usePage } from "@inertiajs/react";
 
 interface FiltersProps {
     authors: Author[];
@@ -21,6 +21,7 @@ const Filters: React.FC<FiltersProps> = ({
     collections,
     subjects,
 }) => {
+    const { url } = usePage();
     const [selectedAuthor, setSelectedAuthor] = useState<string | null>(null);
     const [selectedLanguage, setSelectedLanguage] = useState<string | null>(
         null
@@ -36,45 +37,123 @@ const Filters: React.FC<FiltersProps> = ({
 
     const baseUrl = `/catalogue/category/${categoryCode}`;
 
-    const updateUrlWithParams = (paramName: string, paramValue: string) => {
-        // Créer un objet URLSearchParams avec les paramètres actuels
-        const searchParams = new URLSearchParams(window.location.search);
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const authorSlug = urlParams.get("author_slug");
+        const lang = urlParams.get("lang");
+        const classroom = urlParams.get("classroom");
+        const theme = urlParams.get("theme");
+        const collection = urlParams.get("collection");
+        const subject = urlParams.get("subject");
 
-        // Ajouter ou mettre à jour le paramètre
-        searchParams.set(paramName, paramValue);
-
-        // Naviguer vers l'URL avec les paramètres mis à jour
-        router.get(`${baseUrl}?${searchParams.toString()}`);
-    };
-
-    const handleAuthorSelect = (authorSlug: string) => {
         setSelectedAuthor(authorSlug);
-        updateUrlWithParams("author_slug", authorSlug);
+        setSelectedLanguage(lang);
+        setSelectedClassroom(classroom);
+        setSelectedTheme(theme);
+        setSelectedCollection(collection);
+        setSelectedSubject(subject);
+    }, [url]);
+
+    const handleAuthorSelect = (slug: string) => {
+        if (slug === "") {
+            // Créer un objet URLSearchParams avec les paramètres actuels
+            const searchParams = new URLSearchParams(window.location.search);
+            // Supprimer le paramètre author_slug
+            searchParams.delete("author_slug");
+            // Naviguer vers l'URL avec les paramètres mis à jour
+            router.get(
+                `${baseUrl}${
+                    searchParams.toString() ? `?${searchParams.toString()}` : ""
+                }`
+            );
+        } else {
+            // Créer un objet URLSearchParams avec les paramètres actuels
+            const searchParams = new URLSearchParams(window.location.search);
+            // Ajouter ou mettre à jour le paramètre author_slug
+            searchParams.set("author_slug", slug);
+            // Naviguer vers l'URL avec les paramètres mis à jour
+            router.get(`${baseUrl}?${searchParams.toString()}`);
+        }
     };
 
     const handleLanguageSelect = (language: string) => {
-        setSelectedLanguage(language);
-        updateUrlWithParams("lang", language);
+        if (language === "") {
+            const searchParams = new URLSearchParams(window.location.search);
+            searchParams.delete("lang");
+            router.get(
+                `${baseUrl}${
+                    searchParams.toString() ? `?${searchParams.toString()}` : ""
+                }`
+            );
+        } else {
+            const searchParams = new URLSearchParams(window.location.search);
+            searchParams.set("lang", language);
+            router.get(`${baseUrl}?${searchParams.toString()}`);
+        }
     };
 
     const handleClassroomSelect = (classroom: string) => {
-        setSelectedClassroom(classroom);
-        updateUrlWithParams("classroom", classroom);
+        if (classroom === "") {
+            const searchParams = new URLSearchParams(window.location.search);
+            searchParams.delete("classroom");
+            router.get(
+                `${baseUrl}${
+                    searchParams.toString() ? `?${searchParams.toString()}` : ""
+                }`
+            );
+        } else {
+            const searchParams = new URLSearchParams(window.location.search);
+            searchParams.set("classroom", classroom);
+            router.get(`${baseUrl}?${searchParams.toString()}`);
+        }
     };
 
     const handleThemeSelect = (theme: string) => {
-        setSelectedTheme(theme);
-        updateUrlWithParams("theme", theme);
+        if (theme === "") {
+            const searchParams = new URLSearchParams(window.location.search);
+            searchParams.delete("theme");
+            router.get(
+                `${baseUrl}${
+                    searchParams.toString() ? `?${searchParams.toString()}` : ""
+                }`
+            );
+        } else {
+            const searchParams = new URLSearchParams(window.location.search);
+            searchParams.set("theme", theme);
+            router.get(`${baseUrl}?${searchParams.toString()}`);
+        }
     };
 
     const handleCollectionSelect = (collection: string) => {
-        setSelectedCollection(collection);
-        updateUrlWithParams("collection", collection);
+        if (collection === "") {
+            const searchParams = new URLSearchParams(window.location.search);
+            searchParams.delete("collection");
+            router.get(
+                `${baseUrl}${
+                    searchParams.toString() ? `?${searchParams.toString()}` : ""
+                }`
+            );
+        } else {
+            const searchParams = new URLSearchParams(window.location.search);
+            searchParams.set("collection", collection);
+            router.get(`${baseUrl}?${searchParams.toString()}`);
+        }
     };
 
     const handleSubjectSelect = (subject: string) => {
-        setSelectedSubject(subject);
-        updateUrlWithParams("subject", subject);
+        if (subject === "") {
+            const searchParams = new URLSearchParams(window.location.search);
+            searchParams.delete("subject");
+            router.get(
+                `${baseUrl}${
+                    searchParams.toString() ? `?${searchParams.toString()}` : ""
+                }`
+            );
+        } else {
+            const searchParams = new URLSearchParams(window.location.search);
+            searchParams.set("subject", subject);
+            router.get(`${baseUrl}?${searchParams.toString()}`);
+        }
     };
 
     return (
@@ -82,128 +161,289 @@ const Filters: React.FC<FiltersProps> = ({
             <div className="row">
                 {["literature", "kids"].includes(categoryCode) && (
                     <div className="col-md-3 mb-2">
-                        <select
-                            className="form-select"
-                            style={{
-                                backgroundColor: "#f0f0f0",
-                                padding: "10px 20px",
-                            }}
-                            onChange={(e) => handleAuthorSelect(e.target.value)}
-                        >
-                            <option>
-                                {selectedAuthor ?? "Trier par auteurs"}{" "}
-                            </option>
-                            {authors.map((author) => (
-                                <option key={author.id} value={author.slug}>
-                                    {author.name}
-                                </option>
-                            ))}
-                        </select>
+                        <div className="filter-group">
+                            <div className="position-relative">
+                                <select
+                                    className="form-select"
+                                    style={{
+                                        backgroundColor: "#f0f0f0",
+                                        padding: "10px 20px",
+                                    }}
+                                    onChange={(e) =>
+                                        handleAuthorSelect(e.target.value)
+                                    }
+                                    value={selectedAuthor || ""}
+                                >
+                                    <option value="">Tous les auteurs</option>
+                                    {authors.map((author) => (
+                                        <option
+                                            key={author.id}
+                                            value={author.slug}
+                                        >
+                                            {author.name}
+                                        </option>
+                                    ))}
+                                </select>
+
+                                {selectedAuthor && (
+                                    <div className="selected-filter mt-2 d-flex align-items-center">
+                                        <span className="badge bg-primary me-2">
+                                            {authors.find(
+                                                (a) => a.slug === selectedAuthor
+                                            )?.name || selectedAuthor}
+                                        </span>
+                                        <button
+                                            type="button"
+                                            className="btn btn-sm btn-outline-secondary border-0"
+                                            onClick={() =>
+                                                handleAuthorSelect("")
+                                            }
+                                            aria-label="Supprimer le filtre"
+                                        >
+                                            <i className="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 )}
                 {categoryCode === "school" && (
                     <div className="col-md-3 mb-2">
-                        <select
-                            className="form-select"
-                            style={{
-                                backgroundColor: "#f0f0f0",
-                                padding: "10px 20px",
-                            }}
-                            onChange={(e) =>
-                                handleCollectionSelect(e.target.value)
-                            }
-                        >
-                            <option>Trier par Collection</option>
-                            {collections.map((collection) => (
-                                <option
-                                    key={collection.id}
-                                    value={collection.slug}
+                        <div className="filter-group">
+                            <div className="position-relative">
+                                <select
+                                    className="form-select"
+                                    style={{
+                                        backgroundColor: "#f0f0f0",
+                                        padding: "10px 20px",
+                                    }}
+                                    onChange={(e) =>
+                                        handleCollectionSelect(e.target.value)
+                                    }
+                                    value={selectedCollection || ""}
                                 >
-                                    {collection.name}
-                                </option>
-                            ))}
-                        </select>
+                                    <option value="">
+                                        Toutes les collections
+                                    </option>
+                                    {collections.map((collection) => (
+                                        <option
+                                            key={collection.id}
+                                            value={collection.slug}
+                                        >
+                                            {collection.name}
+                                        </option>
+                                    ))}
+                                </select>
+
+                                {selectedCollection && (
+                                    <div className="selected-filter mt-2 d-flex align-items-center">
+                                        <span className="badge bg-primary me-2">
+                                            {collections.find(
+                                                (c) =>
+                                                    c.slug ===
+                                                    selectedCollection
+                                            )?.name || selectedCollection}
+                                        </span>
+                                        <button
+                                            type="button"
+                                            className="btn btn-sm btn-outline-secondary border-0"
+                                            onClick={() =>
+                                                handleCollectionSelect("")
+                                            }
+                                            aria-label="Supprimer le filtre"
+                                        >
+                                            <i className="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 )}
                 <div className="col-md-3 mb-2">
-                    <select
-                        className="form-select"
-                        style={{
-                            backgroundColor: "#f0f0f0",
-                            padding: "10px 20px",
-                        }}
-                        onChange={(e) => handleLanguageSelect(e.target.value)}
-                    >
-                        <option>
-                            {selectedLanguage ?? "Trier par Langue"}
-                        </option>
-                        {languages.map((language) => (
-                            <option key={language.id} value={language.id}>
-                                {language.name}
-                            </option>
-                        ))}
-                    </select>
+                    <div className="filter-group">
+                        <div className="position-relative">
+                            <select
+                                className="form-select"
+                                style={{
+                                    backgroundColor: "#f0f0f0",
+                                    padding: "10px 20px",
+                                }}
+                                onChange={(e) =>
+                                    handleLanguageSelect(e.target.value)
+                                }
+                                value={selectedLanguage || ""}
+                            >
+                                <option value="">Toutes les langues</option>
+                                {languages.map((language) => (
+                                    <option
+                                        key={language.id}
+                                        value={language.id}
+                                    >
+                                        {language.name}
+                                    </option>
+                                ))}
+                            </select>
+
+                            {selectedLanguage && (
+                                <div className="selected-filter mt-2 d-flex align-items-center">
+                                    <span className="badge bg-primary me-2">
+                                        {languages.find(
+                                            (l) =>
+                                                l.id.toString() ===
+                                                selectedLanguage
+                                        )?.name || selectedLanguage}
+                                    </span>
+                                    <button
+                                        type="button"
+                                        className="btn btn-sm btn-outline-secondary border-0"
+                                        onClick={() => handleLanguageSelect("")}
+                                        aria-label="Supprimer le filtre"
+                                    >
+                                        <i className="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </div>
                 {["catalog", "school", "guides"].includes(categoryCode) && (
                     <div className="col-md-3 mb-2">
-                        <select
-                            className="form-select"
-                            style={{
-                                backgroundColor: "#f0f0f0",
-                                padding: "10px 20px",
-                            }}
-                            onChange={(e) =>
-                                handleClassroomSelect(e.target.value)
-                            }
-                        >
-                            <option>Trier par Classes</option>
-                            {classrooms.map((classroom) => (
-                                <option key={classroom} value={classroom}>
-                                    {classroom}
-                                </option>
-                            ))}
-                        </select>
+                        <div className="filter-group">
+                            <div className="position-relative">
+                                <select
+                                    className="form-select"
+                                    style={{
+                                        backgroundColor: "#f0f0f0",
+                                        padding: "10px 20px",
+                                    }}
+                                    onChange={(e) =>
+                                        handleClassroomSelect(e.target.value)
+                                    }
+                                    value={selectedClassroom || ""}
+                                >
+                                    <option value="">Toutes les classes</option>
+                                    {classrooms.map((classroom) => (
+                                        <option
+                                            key={classroom}
+                                            value={classroom}
+                                        >
+                                            {classroom}
+                                        </option>
+                                    ))}
+                                </select>
+
+                                {selectedClassroom && (
+                                    <div className="selected-filter mt-2 d-flex align-items-center">
+                                        <span className="badge bg-primary me-2">
+                                            {selectedClassroom}
+                                        </span>
+                                        <button
+                                            type="button"
+                                            className="btn btn-sm btn-outline-secondary border-0"
+                                            onClick={() =>
+                                                handleClassroomSelect("")
+                                            }
+                                            aria-label="Supprimer le filtre"
+                                        >
+                                            <i className="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 )}
 
                 {(categoryCode === "literature" || categoryCode === "kids") && (
                     <div className="col-md-3 mb-2">
-                        <select
-                            className="form-select"
-                            style={{
-                                backgroundColor: "#f0f0f0",
-                                padding: "10px 20px",
-                            }}
-                            onChange={(e) => handleThemeSelect(e.target.value)}
-                        >
-                            <option>Trier par Genre</option>
-                            {themes.map((theme) => (
-                                <option key={theme} value={theme}>
-                                    {theme}
-                                </option>
-                            ))}
-                        </select>
+                        <div className="filter-group">
+                            <div className="position-relative">
+                                <select
+                                    className="form-select"
+                                    style={{
+                                        backgroundColor: "#f0f0f0",
+                                        padding: "10px 20px",
+                                    }}
+                                    onChange={(e) =>
+                                        handleThemeSelect(e.target.value)
+                                    }
+                                    value={selectedTheme || ""}
+                                >
+                                    <option value="">Tous les genres</option>
+                                    {themes.map((theme) => (
+                                        <option key={theme} value={theme}>
+                                            {theme}
+                                        </option>
+                                    ))}
+                                </select>
+
+                                {selectedTheme && (
+                                    <div className="selected-filter mt-2 d-flex align-items-center">
+                                        <span className="badge bg-primary me-2">
+                                            {selectedTheme}
+                                        </span>
+                                        <button
+                                            type="button"
+                                            className="btn btn-sm btn-outline-secondary border-0"
+                                            onClick={() =>
+                                                handleThemeSelect("")
+                                            }
+                                            aria-label="Supprimer le filtre"
+                                        >
+                                            <i className="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 )}
                 {(categoryCode === "school" || categoryCode === "guides") && (
                     <div className="col-md-3 mb-2">
-                        <select
-                            className="form-select"
-                            style={{
-                                backgroundColor: "#f0f0f0",
-                                padding: "10px 20px",
-                            }}
-                            onChange={(e) =>
-                                handleSubjectSelect(e.target.value)
-                            }
-                        >
-                            <option>Trier par Matière</option>
-                            {subjects.map((subject) => (
-                                <option key={subject} value={subject}>
-                                    {subject}
-                                </option>
-                            ))}
-                        </select>
+                        <div className="filter-group">
+                            <div className="position-relative">
+                                <select
+                                    className="form-select"
+                                    style={{
+                                        backgroundColor: "#f0f0f0",
+                                        padding: "10px 20px",
+                                    }}
+                                    onChange={(e) =>
+                                        handleSubjectSelect(e.target.value)
+                                    }
+                                    value={selectedSubject || ""}
+                                >
+                                    <option value="">
+                                        Toutes les matières
+                                    </option>
+                                    {subjects.map((subject) => (
+                                        <option key={subject} value={subject}>
+                                            {subject}
+                                        </option>
+                                    ))}
+                                </select>
+
+                                {selectedSubject && (
+                                    <div className="selected-filter mt-2 d-flex align-items-center">
+                                        <span className="badge bg-primary me-2">
+                                            {selectedSubject}
+                                        </span>
+                                        <button
+                                            type="button"
+                                            className="btn btn-sm btn-outline-secondary border-0"
+                                            onClick={() =>
+                                                handleSubjectSelect("")
+                                            }
+                                            aria-label="Supprimer le filtre"
+                                        >
+                                            <i className="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 )}
             </div>
