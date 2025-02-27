@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Resources\BookResource;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\TeamResource;
+use App\Mail\ContactMail;
 use App\Models\Book;
+use App\Models\Contact;
 use App\Models\Post;
 use App\Models\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
 class HomeController extends Controller
@@ -71,5 +75,25 @@ class HomeController extends Controller
         return Inertia::render('Article', [
             'post' => $post
         ]);
+    }
+
+    public function saveContact(Request $request) {
+        //dd($request->all());
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'subject' => 'string',
+            'message' => 'string',
+        ]);
+
+        DB::transaction(function () use ($request) {
+
+            $contact = Contact::create($request->all());
+            Mail::to(settings('support_email'))->send(new ContactMail($contact));
+
+            return redirect()->back()->with('success', 'Message envoyé avec succès');
+        });
+
     }
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "@inertiajs/react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -16,6 +16,7 @@ const DownloadGuideModal: React.FC<DownloadGuideModalProps> = ({
     title,
     bookId,
 }) => {
+    const [isSuccess, setIsSuccess] = useState(false);
     const { data, setData, post, processing, errors } = useForm({
         username: "",
         email: "",
@@ -32,7 +33,14 @@ const DownloadGuideModal: React.FC<DownloadGuideModalProps> = ({
                 phone: data.phone,
                 bookId: bookId,
             },
+            onSuccess: () => {
+                setIsSuccess(true);
+            },
         });
+    };
+
+    const resetAndClose = () => {
+        setIsSuccess(false);
         handleCloseModal();
     };
 
@@ -54,25 +62,28 @@ const DownloadGuideModal: React.FC<DownloadGuideModalProps> = ({
                                 <div className="modal-header">
                                     <div className="d-flex flex-column text-center">
                                         <h5 className="modal-title font-weight-600 text-primary">
-                                            Télécharger
-                                            <br />
-                                            {title}
+                                            {isSuccess
+                                                ? "Téléchargement réussi!"
+                                                : `Télécharger ${title}`}
                                         </h5>
-                                        <i className="text-muted">
-                                            Veuillez remplir le formulaire
-                                            ci-dessous pour télécharger le
-                                            guide.
-                                        </i>
+                                        {!isSuccess && (
+                                            <i className="text-muted">
+                                                Veuillez remplir le formulaire
+                                                ci-dessous pour télécharger le
+                                                guide.
+                                            </i>
+                                        )}
                                     </div>
                                     <button
                                         type="button"
                                         className="close border-0 btn btn-outline-warning btn-sm"
-                                        onClick={handleCloseModal}
+                                        onClick={resetAndClose}
                                         style={{
                                             position: "absolute",
                                             right: "1rem",
                                             top: "1rem",
                                         }}
+                                        disabled={processing}
                                     >
                                         <span className="badge">
                                             <i className="fas fa-times"></i>
@@ -80,147 +91,194 @@ const DownloadGuideModal: React.FC<DownloadGuideModalProps> = ({
                                     </button>
                                 </div>
                                 <div className="modal-body">
-                                    <form onSubmit={handleSubmit}>
-                                        <div className="form-group mb-3">
-                                            <label
-                                                htmlFor="name"
-                                                className="py-2 font-weight-600 text-muted"
-                                                style={{
-                                                    fontSize: "14px",
-                                                }}
+                                    {processing && (
+                                        <div className="text-center mb-4">
+                                            <div
+                                                className="spinner-border text-primary"
+                                                role="status"
                                             >
-                                                Noms et Prénoms
-                                                <span className="text-danger px-1">
-                                                    *
+                                                <span className="visually-hidden">
+                                                    Chargement...
                                                 </span>
-                                            </label>
-                                            <div className="input-group">
-                                                <span className="input-group-text">
-                                                    <i className="fas fa-user"></i>
-                                                </span>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    id="username"
-                                                    value={data.username}
-                                                    onChange={(e) =>
-                                                        setData(
-                                                            "username",
-                                                            e.target.value
-                                                        )
-                                                    }
-                                                    required
-                                                    style={{
-                                                        borderRadius: "1px",
-                                                        backgroundColor:
-                                                            "#f8f9fa",
-                                                    }}
-                                                />
-                                                {errors.username && (
-                                                    <div className="text-danger">
-                                                        {errors.username}
-                                                    </div>
-                                                )}
                                             </div>
+                                            <p className="mt-2">
+                                                Traitement en cours, veuillez
+                                                patienter...
+                                            </p>
                                         </div>
-                                        <div className="form-group mb-3">
-                                            <label
-                                                htmlFor="email"
-                                                className="py-2 font-weight-600 text-muted"
-                                                style={{
-                                                    fontSize: "14px",
-                                                }}
-                                            >
-                                                Email
-                                                <span className="text-danger px-1">
-                                                    *
-                                                </span>
-                                            </label>
-                                            <div className="input-group">
-                                                <span className="input-group-text">
-                                                    <i className="fas fa-envelope"></i>
-                                                </span>
-                                                <input
-                                                    type="email"
-                                                    className="form-control"
-                                                    id="email"
-                                                    value={data.email}
-                                                    onChange={(e) =>
-                                                        setData(
-                                                            "email",
-                                                            e.target.value
-                                                        )
-                                                    }
-                                                    required
-                                                    style={{
-                                                        borderRadius: "1px",
-                                                        backgroundColor:
-                                                            "#f8f9fa",
-                                                    }}
-                                                />
-                                                {errors.email && (
-                                                    <div className="text-danger">
-                                                        {errors.email}
-                                                    </div>
-                                                )}
+                                    )}
+
+                                    {isSuccess ? (
+                                        <div className="text-center py-4">
+                                            <div className="mb-3">
+                                                <i
+                                                    className="fas fa-check-circle text-success"
+                                                    style={{ fontSize: "4rem" }}
+                                                ></i>
                                             </div>
-                                        </div>
-                                        <div className="form-group mb-3">
-                                            <label
-                                                htmlFor="phone"
-                                                className="py-2 font-weight-600 text-muted"
-                                                style={{
-                                                    fontSize: "14px",
-                                                }}
-                                            >
-                                                Numéro de téléphone
-                                            </label>
-                                            <div className="input-group">
-                                                <PhoneInput
-                                                    country={"fr"} // Default country
-                                                    value={data.phone}
-                                                    onChange={(phone) =>
-                                                        setData("phone", phone)
-                                                    }
-                                                    inputStyle={{
-                                                        borderRadius: "1px",
-                                                        backgroundColor:
-                                                            "#f8f9fa",
-                                                        width: "100%",
-                                                    }}
-                                                />
-                                                {errors.phone && (
-                                                    <div className="text-danger">
-                                                        {errors.phone}
-                                                    </div>
-                                                )}
-                                            </div>
-                                        </div>
-                                        <div className="modal-footer border-0">
+                                            <h4 className="mb-3">
+                                                Félicitations!
+                                            </h4>
+                                            <p>
+                                                Votre document a été envoyé à
+                                                votre adresse email avec succès.
+                                                Consultez votre messagerie pour
+                                                le télécharger.
+                                            </p>
                                             <button
                                                 type="button"
-                                                className="btn btn-secondary border-0"
-                                                style={{
-                                                    borderRadius: "1px",
-                                                }}
-                                                onClick={handleCloseModal}
+                                                className="btn btn-primary mt-3"
+                                                onClick={resetAndClose}
                                             >
-                                                Annuler
-                                            </button>
-                                            <button
-                                                type="submit"
-                                                className="btn btn-primary"
-                                                style={{
-                                                    borderRadius: "1px",
-                                                }}
-                                                disabled={processing}
-                                            >
-                                                {processing
-                                                    ? "Veuillez patienter..."
-                                                    : "Télécharger"}
+                                                Fermer
                                             </button>
                                         </div>
-                                    </form>
+                                    ) : (
+                                        <form onSubmit={handleSubmit}>
+                                            <div className="form-group mb-3">
+                                                <label
+                                                    htmlFor="name"
+                                                    className="py-2 font-weight-600 text-muted"
+                                                    style={{
+                                                        fontSize: "14px",
+                                                    }}
+                                                >
+                                                    Noms et Prénoms
+                                                    <span className="text-danger px-1">
+                                                        *
+                                                    </span>
+                                                </label>
+                                                <div className="input-group">
+                                                    <span className="input-group-text">
+                                                        <i className="fas fa-user"></i>
+                                                    </span>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        id="username"
+                                                        value={data.username}
+                                                        onChange={(e) =>
+                                                            setData(
+                                                                "username",
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        required
+                                                        style={{
+                                                            borderRadius: "1px",
+                                                            backgroundColor:
+                                                                "#f8f9fa",
+                                                        }}
+                                                    />
+                                                    {errors.username && (
+                                                        <div className="text-danger">
+                                                            {errors.username}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <div className="form-group mb-3">
+                                                <label
+                                                    htmlFor="email"
+                                                    className="py-2 font-weight-600 text-muted"
+                                                    style={{
+                                                        fontSize: "14px",
+                                                    }}
+                                                >
+                                                    Email
+                                                    <span className="text-danger px-1">
+                                                        *
+                                                    </span>
+                                                </label>
+                                                <div className="input-group">
+                                                    <span className="input-group-text">
+                                                        <i className="fas fa-envelope"></i>
+                                                    </span>
+                                                    <input
+                                                        type="email"
+                                                        className="form-control"
+                                                        id="email"
+                                                        value={data.email}
+                                                        onChange={(e) =>
+                                                            setData(
+                                                                "email",
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        required
+                                                        style={{
+                                                            borderRadius: "1px",
+                                                            backgroundColor:
+                                                                "#f8f9fa",
+                                                        }}
+                                                    />
+                                                    {errors.email && (
+                                                        <div className="text-danger">
+                                                            {errors.email}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <div className="form-group mb-3">
+                                                <label
+                                                    htmlFor="phone"
+                                                    className="py-2 font-weight-600 text-muted"
+                                                    style={{
+                                                        fontSize: "14px",
+                                                    }}
+                                                >
+                                                    Numéro de téléphone
+                                                </label>
+                                                <div className="input-group">
+                                                    <PhoneInput
+                                                        country={"cm"}
+                                                        value={data.phone}
+                                                        onChange={(phone) =>
+                                                            setData(
+                                                                "phone",
+                                                                phone
+                                                            )
+                                                        }
+                                                        inputStyle={{
+                                                            borderRadius: "1px",
+                                                            backgroundColor:
+                                                                "#f8f9fa",
+                                                            width: "100%",
+                                                        }}
+                                                    />
+                                                    {errors.phone && (
+                                                        <div className="text-danger">
+                                                            {errors.phone}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <div className="modal-footer border-0">
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-secondary border-0"
+                                                    style={{
+                                                        borderRadius: "1px",
+                                                    }}
+                                                    onClick={resetAndClose}
+                                                >
+                                                    Annuler
+                                                </button>
+                                                <button
+                                                    type="submit"
+                                                    className="btn btn-primary"
+                                                    style={{
+                                                        borderRadius: "1px",
+                                                    }}
+                                                    disabled={processing}
+                                                >
+                                                    {processing
+                                                        ? "Veuillez patienter..."
+                                                        : "Télécharger"}
+                                                </button>
+                                            </div>
+                                        </form>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -228,7 +286,7 @@ const DownloadGuideModal: React.FC<DownloadGuideModalProps> = ({
                     <div
                         className="modal-backdrop fade show"
                         style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
-                        onClick={handleCloseModal}
+                        onClick={resetAndClose}
                     ></div>
                 </>
             )}

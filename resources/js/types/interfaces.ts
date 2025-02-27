@@ -9,6 +9,7 @@ interface Book {
     year: number;
     isbn: string;
     description: string;
+    collection: Collection;
     category: string;
     theme: string;
     audience: string;

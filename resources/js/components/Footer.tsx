@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
                                     className="mb-3"
                                 />
                             </a>
-                            <p>
+                            <p className="text-white">
                                 Nomayos, Entrée route Ngoumou <br />
                                 Tel: 00237 654 000 200
                             </p>

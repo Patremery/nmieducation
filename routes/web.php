@@ -30,3 +30,5 @@ Route::get('/import-posts', [ImportController::class, 'import']);
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog.index');
 Route::get('/posts/{slug}', [HomeController::class, 'article'])->name('article.show');
 Route::post('/download-guide', [CatalogController::class, 'downloadGuide'])->name('download-guide');
+
+Route::post('/contact', [HomeController::class, 'saveContact'])->name('contact');

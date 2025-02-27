@@ -35,7 +35,15 @@ const CatalogCategory: React.FC<CatalogCategoryProps> = ({
     subjects,
 }) => {
     const banner: BannerProps = {
-        title: title,
+        title: "Notre Catalogue",
+    };
+
+    const getDisplayHeight = () => {
+        if (["kids", "catalog"].includes(code)) {
+            return 150;
+        }
+        console.log(books);
+        return 300;
     };
 
     return (
@@ -66,7 +74,12 @@ const CatalogCategory: React.FC<CatalogCategoryProps> = ({
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.2 }}
                 >
-                    <ItemGrid items={books} title={code} itemsToShow={12} />
+                    <ItemGrid
+                        items={books}
+                        title={code}
+                        height={getDisplayHeight()}
+                        itemsToShow={12}
+                    />
                 </motion.div>
                 <motion.div
                     initial={{ opacity: 0 }}

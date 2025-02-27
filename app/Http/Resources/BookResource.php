@@ -19,7 +19,7 @@ class BookResource extends JsonResource
             'new' => $this->new ? 'Yes' : 'No',
             'support' => $this->support,
             'pages' => $this->pages,
-            'collection' => CollectionResource::make($this->collection),
+            'collection' => $this->collection ? new CollectionResource($this->whenLoaded("collection")) : null,
             'publicationDate' => $this->publication_date,
             'language' => $this->language->name,
             'youscribe_url' => $this->youscribe_url,

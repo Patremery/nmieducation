@@ -55,7 +55,11 @@ const BookItem: React.FC<BookItemProps> = ({ index, book, height }) => {
                             "linear-gradient(to right, transparent, #d0d0d0 50%, transparent)",
                     }}
                 />
-                <p className="text-muted my-1">{truncatedAuthors}</p>
+                <p className="text-muted my-1">
+                    {book.category === "school" && book.collection
+                        ? book.collection.name
+                        : truncatedAuthors}
+                </p>
                 <hr
                     style={{
                         border: "none",

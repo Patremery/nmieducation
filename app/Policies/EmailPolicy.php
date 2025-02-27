@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\Download;
+use RickDBCN\FilamentEmail\Models\Email;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class DownloadPolicy
+class EmailPolicy
 {
     use HandlesAuthorization;
 
@@ -15,15 +15,15 @@ class DownloadPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_downloads');
+        return $user->can('view_any_email');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Download $download): bool
+    public function view(User $user, Email $email): bool
     {
-        return $user->can('view_downloads');
+        return $user->can('view_email');
     }
 
     /**
@@ -31,23 +31,23 @@ class DownloadPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_downloads');
+        return $user->can('create_email');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Download $download): bool
+    public function update(User $user, Email $email): bool
     {
-        return $user->can('update_downloads');
+        return $user->can('update_email');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Download $download): bool
+    public function delete(User $user, Email $email): bool
     {
-        return $user->can('delete_downloads');
+        return $user->can('delete_email');
     }
 
     /**
@@ -55,15 +55,15 @@ class DownloadPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_downloads');
+        return $user->can('delete_any_email');
     }
 
     /**
      * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, Download $download): bool
+    public function forceDelete(User $user, Email $email): bool
     {
-        return $user->can('force_delete_downloads');
+        return $user->can('force_delete_email');
     }
 
     /**
@@ -71,15 +71,15 @@ class DownloadPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_downloads');
+        return $user->can('force_delete_any_email');
     }
 
     /**
      * Determine whether the user can restore.
      */
-    public function restore(User $user, Download $download): bool
+    public function restore(User $user, Email $email): bool
     {
-        return $user->can('restore_downloads');
+        return $user->can('restore_email');
     }
 
     /**
@@ -87,15 +87,15 @@ class DownloadPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_downloads');
+        return $user->can('restore_any_email');
     }
 
     /**
      * Determine whether the user can replicate.
      */
-    public function replicate(User $user, Download $download): bool
+    public function replicate(User $user, Email $email): bool
     {
-        return $user->can('replicate_downloads');
+        return $user->can('replicate_email');
     }
 
     /**
@@ -103,6 +103,6 @@ class DownloadPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_downloads');
+        return $user->can('reorder_email');
     }
 }

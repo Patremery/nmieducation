@@ -17,11 +17,9 @@ class Collection extends Model
         'images' => 'array',
     ];
 
-
     public function books()
     {
         return $this->hasMany(Book::class);
     }
-
     
 }

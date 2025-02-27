@@ -8,7 +8,6 @@ const SingleBookInformations = ({ book }: { book: Book }) => {
     const handleOpenModal = () => setShowModal(true);
     const handleCloseModal = () => setShowModal(false);
 
-    console.log("book: ", book);
     const limitWords = (text: string, wordLimit: number) => {
         const words = text.split(" ");
         if (words.length <= wordLimit) {

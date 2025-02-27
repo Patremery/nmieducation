@@ -19,7 +19,7 @@ interface ContactProps {
 
 const Contact: React.FC<ContactProps> = ({ contacts }) => {
     const description = (
-        <p>
+        <p className="text-white">
             <strong>
                 Basée à Yaoundé l'équipe d'experts de <em>NMI Education</em> est
                 là pour répondre à toutes vos préoccupations.

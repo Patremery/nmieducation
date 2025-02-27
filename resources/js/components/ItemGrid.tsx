@@ -1,4 +1,3 @@
-// resources/js/components/ItemGrid.tsx
 import React from "react";
 import BookItem from "./BookItem";
 import { Book } from "../types/interfaces";
