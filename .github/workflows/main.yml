@@ -1,1 +1,31 @@
+on: push
+name: 🚀 Deploy website on push to production
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
 
+      - name: Use Node.js 21
+        uses: actions/setup-node@v2
+        with:
+          node-version: "21"
+      - name: Install Composer Dependencies
+        run: composer install
+
+      - name: Directory Permissions
+        run: chmod -R 777 storage bootstrap/cache
+      - name: Install NPM Dependencies
+        run: npm install
+      - name: Build Project Assets
+        run: npm run build
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: vps83585.serveur-vps.net
+          username: ${{ secrets.ftp_username }}
+          password: ${{ secrets.ftp_password }}
+          server-dir: /web/

@@ -6,10 +6,21 @@ export default defineConfig({
         laravel({
             input: [
                 "resources/css/app.css",
-                "resources/js/app.js",
+                "resources/js/app.tsx",
                 "resources/css/filament/admin/theme.css",
             ],
             refresh: true,
         }),
     ],
+    resolve: {
+        extensions: [".js", ".ts", ".jsx", ".tsx", ".json"],
+    },
+    build: {
+        rollupOptions: {
+            onwarn(warning, warn) {
+                console.log(warning);
+                warn(warning);
+            },
+        },
+    },
 });
