@@ -1,7 +1,7 @@
 @component('mail::message')
 # Nouveau message de contact
 
-<h2>Nouveau message de contact</h2>
+<h2>Nouveau message de contact </h2>
 
 <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
     <tr style="background-color: #f5f5f5;">
