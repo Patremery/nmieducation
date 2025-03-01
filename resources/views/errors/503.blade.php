@@ -23,6 +23,7 @@
             box-sizing: border-box;
         }
         
+        
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--light-color);
