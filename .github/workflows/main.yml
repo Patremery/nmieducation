@@ -12,16 +12,17 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "21"
-      - name: Install NPM Dependencies
-        run: npm install
-      - name: Build Project Assets
-        run: npm run build
 
       - name: Install Composer Dependencies
         run: composer install --no-scripts --no-interaction --prefer-dist
 
       - name: Generate autoload files
         run: composer dump-autoload
+
+      - name: Install NPM Dependencies
+        run: npm install
+      - name: Build Project Assets
+        run: npm run build
 
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
