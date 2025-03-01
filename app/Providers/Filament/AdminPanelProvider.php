@@ -6,6 +6,7 @@ use App\Filament\Pages\App\Profile;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use App\Filament\Pages\Auth\Login;
 use App\Filament\Widgets\DashboardHighlight;
+use Brickx\MaintenanceSwitch\MaintenanceSwitchPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -71,6 +72,7 @@ class AdminPanelProvider extends PanelProvider
                 FilamentScaffoldPlugin::make(),
                 FilamentShieldPlugin::make(),
                 FilamentEmail::make(),
+                MaintenanceSwitchPlugin::make(),
                 FilamentGeneralSettingsPlugin::make()
                     ->canAccess(fn() => auth()->id() === 1)
                     ->setSort(3)

@@ -1,8 +1,39 @@
-import React from "react";
+import { useForm } from "@inertiajs/react";
+import React, { useState } from "react";
 
 const DistributorForm = () => {
+    const [isSuccess, setIsSuccess] = useState(false);
+    const { data, setData, post, processing, errors, reset } = useForm({
+        companyName: "",
+        registrationNumber: "",
+        creationDate: "",
+        address: "",
+        city: "",
+        phone: "",
+        email: "",
+        businessType: "",
+        legalRep: "",
+        repPhone: "",
+        idNumber: "",
+        idDate: "",
+    });
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        post("/distributor-registration", {
+            onSuccess: () => {
+                setIsSuccess(true);
+                reset();
+            },
+        });
+    };
+
+    const handleNewMessage = () => {
+        setIsSuccess(false);
+    };
+
     return (
-        <form className="row g-3">
+        <form className="row g-3" onSubmit={handleSubmit}>
             <div className="col-12">
                 <label htmlFor="companyName" className="form-label">
                     Nom légal de l'entreprise *
@@ -29,13 +60,12 @@ const DistributorForm = () => {
             </div>
             <div className="col-md-6">
                 <label htmlFor="creationDate" className="form-label">
-                    Date de création *
+                    Date de création
                 </label>
                 <input
                     type="date"
                     className="form-control form-control-lg"
                     id="creationDate"
-                    required
                 />
             </div>
 

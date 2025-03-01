@@ -9,7 +9,7 @@ const EbookSection: React.FC = () => {
         <div
             className="ebook-section mt-5"
             style={{
-                backgroundColor: "#f7f7f7",
+                backgroundColor: "rgb(224 224 224)",
                 marginLeft: "calc(-50vw + 50%)",
                 marginRight: "calc(-50vw + 50%)",
                 width: "100vw",
@@ -32,7 +32,12 @@ const EbookSection: React.FC = () => {
 
                 <div className="row">
                     <div className="col-sm-6 text-center">
-                        <img src={BookImage} width="50%" alt="" />
+                        <img
+                            src={BookImage}
+                            width="50%"
+                            alt=""
+                            className="img-fluid"
+                        />
                     </div>
                     <div className="col-sm-6">
                         <p className="mt-3 text-start">
@@ -40,10 +45,11 @@ const EbookSection: React.FC = () => {
                             disponibles en lecture et en téléchargement au
                             format numérique sur les plateformes dédiées
                         </p>
-                        <div className="platform-logos d-flex px-2 gap-4">
+                        <div className="platform-logos d-flex flex-column flex-md-row align-items-center align-items-md-start gap-4 mt-4">
                             <a
                                 href="https://www.adinkra-jeunesse.com/books.php"
                                 target="_blank"
+                                className="mb-3 mb-md-0 text-center"
                             >
                                 <img
                                     src={Adinkra}
@@ -60,6 +66,7 @@ const EbookSection: React.FC = () => {
                             <a
                                 href="https://www.youscribe.com/nmi_education/"
                                 target="_blank"
+                                className="mb-3 mb-md-0 text-center"
                             >
                                 <img
                                     src={Youscribe}
@@ -76,6 +83,7 @@ const EbookSection: React.FC = () => {
                             <a
                                 href="https://kdp.amazon.com/en_US/bookshelf?ref_=kdp_kdp_TAC_TN_bs"
                                 target="_blank"
+                                className="mb-3 mb-md-0 text-center"
                             >
                                 <img
                                     src={Amazon}
@@ -86,13 +94,33 @@ const EbookSection: React.FC = () => {
                                         objectPosition: "center",
                                     }}
                                     className="img-fluid img-responsive"
-                                    alt="Platform 3"
+                                    alt="Amazon Kindle"
                                 />
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <style>{`
+                @media (max-width: 767.98px) {
+                    .ebook-section {
+                        padding: 30px 15px !important;
+                    }
+                    
+                    .platform-logos {
+                        margin-top: 2rem;
+                    }
+                    
+                    .platform-logos a {
+                        margin-bottom: 1.5rem;
+                    }
+                    
+                    .platform-logos img {
+                        width: 120px !important;
+                    }
+                }
+            `}</style>
         </div>
     );
 };

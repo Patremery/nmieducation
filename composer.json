@@ -17,6 +17,7 @@
         "php": "^8.2",
         "awcodes/filament-tiptap-editor": "^3.5",
         "bezhansalleh/filament-shield": "^3.3",
+        "brickx/maintenance-switch": "^1.0",
         "filament/filament": "^3.2",
         "inertiajs/inertia-laravel": "^2.0",
         "joaopaulolndev/filament-general-settings": "^1.0",

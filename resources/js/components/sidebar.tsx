@@ -1,6 +1,7 @@
 import React from "react";
 import { Post } from "../types/interfaces";
 import PostGridItem from "./PostGridItem";
+import PostListItems from "./PostListItems";
 
 const Sidebar = ({
     latestPosts,
@@ -16,7 +17,7 @@ const Sidebar = ({
 
             <div className="recent-posts">
                 {latestPosts.map((post) => (
-                    <PostGridItem key={post.id} post={post} />
+                    <PostListItems key={post.id} post={post} />
                 ))}
             </div>
         </div>
