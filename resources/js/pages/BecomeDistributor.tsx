@@ -22,7 +22,7 @@ const BecomeDistributor = () => {
         <InnerPageLayout banner={banner}>
             <div className="container p-2">
                 <div className="row px-5 mt-5">
-                    <div className="col-md-12 text-center ">
+                    <div className="col-md-10 text-center mx-auto">
                         <h2 className="font-weight-600">
                             Rejoignez notre réseau de distribution
                         </h2>
@@ -31,7 +31,7 @@ const BecomeDistributor = () => {
                 </div>
 
                 <div className="row px-5 my-5">
-                    <div className="col-sm-12">
+                    <div className="col-sm-10 mx-auto">
                         <DistributorForm />
                     </div>
                 </div>

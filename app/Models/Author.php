@@ -12,7 +12,6 @@ class Author extends Model
     use HasFactory, HasStatus;
 
     protected $guarded = [];
-    //protected $with = ['books'];
 
     public function books()
     {

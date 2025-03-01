@@ -33,6 +33,7 @@ interface BannerProps {
     backgroundImage?: string;
     textAlign?: "center" | "left" | "right";
     className?: string;
+    padding?: string;
 }
 // Interface pour la collection de livres
 interface BookCollection {

@@ -18,27 +18,34 @@ const SingleBookInformations = ({ book }: { book: Book }) => {
     return (
         <>
             <div
-                className="row"
-                style={{ padding: "100px", backgroundColor: "#F7F7F7" }}
+                className="row py-3 py-md-4 py-lg-5 px-2 px-md-3 px-lg-4 "
+                style={{ backgroundColor: "#F7F7F7" }}
             >
-                <div className="col-md-9 d-flex gap-4">
-                    <div style={{ flexShrink: 0 }}>
+                <div className="col-12 col-lg-9 d-flex flex-column flex-md-row gap-3 gap-md-4 mb-4 mb-lg-0">
+                    <div
+                        className="text-center text-md-start mx-auto mx-md-0"
+                        style={{ flexShrink: 0 }}
+                    >
                         {book.cover && (
                             <img
                                 src={book.cover}
                                 alt={book.title}
                                 className="img-fluid img-responsive"
                                 style={{
-                                    width: 300,
+                                    maxWidth: "100%",
+                                    width: "auto",
+                                    maxHeight: "300px",
                                     objectFit: "contain",
-                                    //aspectRatio: "3/4",
                                 }}
                             />
                         )}
                     </div>
 
-                    <div className="">
-                        <h4 className="mb-4" style={{ fontWeight: 700 }}>
+                    <div className="mt-3 mt-md-0">
+                        <h4
+                            className="mb-2 mb-md-3"
+                            style={{ fontWeight: 700 }}
+                        >
                             {book.title}
                         </h4>
 
@@ -56,13 +63,13 @@ const SingleBookInformations = ({ book }: { book: Book }) => {
                         )}
 
                         {book.releaseDate && (
-                            <p>
+                            <p className="mb-2">
                                 <strong>Parution :</strong> {book.releaseDate}
                             </p>
                         )}
 
                         {book.isbn && (
-                            <p>
+                            <p className="mb-2">
                                 <strong>ISBN :</strong> {book.isbn}
                             </p>
                         )}
@@ -74,10 +81,10 @@ const SingleBookInformations = ({ book }: { book: Book }) => {
                     </div>
                 </div>
 
-                <div className="col-md-3">
+                <div className="col-12 col-md-8 col-lg-3 mx-auto">
                     <div
                         className="card shadow py-3"
-                        style={{ height: "500px", overflowY: "auto" }}
+                        style={{ maxHeight: "500px", overflowY: "auto" }}
                     >
                         <div className="card-body">
                             <div className="text-center">
@@ -86,7 +93,7 @@ const SingleBookInformations = ({ book }: { book: Book }) => {
                                     className=""
                                     style={{
                                         fontWeight: 700,
-                                        fontSize: 30,
+                                        fontSize: "1.75rem",
                                         color: "orangered",
                                     }}
                                 >
@@ -242,7 +249,6 @@ const SingleBookInformations = ({ book }: { book: Book }) => {
                                         <ul
                                             className="dropdown-menu text-center"
                                             style={{
-                                                //width: "50%",
                                                 margin: "0 auto",
                                             }}
                                         >

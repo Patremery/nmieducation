@@ -17,14 +17,14 @@ const CategoryLine: React.FC<CategoryLineProps> = ({
     code,
     items,
     itemsToShow = 6,
-    height = 300,
+    height = 270,
 }) => {
     return (
         <div className="item-section">
             <h4 className="sectionTitle">{title}</h4>
             <hr />
             <ItemGrid items={items} itemsToShow={itemsToShow} height={height} />
-            <div className="text-end mt-3">
+            <div className="text-end py-3">
                 <Link
                     href={`/catalogue/category/${code}`}
                     className="text-primary"

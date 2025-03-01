@@ -64,20 +64,6 @@ const DistributorForm = () => {
                     required
                 />
             </div>
-            <div className="col-md-6">
-                <label htmlFor="country" className="form-label">
-                    Pays *
-                </label>
-                <select
-                    className="form-select form-select-lg"
-                    id="country"
-                    required
-                >
-                    <option value="">Veuillez sectionner</option>
-                    <option value="cm">Cameroun</option>
-                    {/* Add other countries */}
-                </select>
-            </div>
 
             {/* Contact Info */}
             <div className="col-md-6">
@@ -109,7 +95,7 @@ const DistributorForm = () => {
                     Type d'affaires *
                 </label>
                 <select
-                    className="form-select form-select-lg"
+                    className="form-select form-select-lg form-control"
                     id="businessType"
                     required
                 >

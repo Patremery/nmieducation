@@ -27,7 +27,12 @@ const InnerPageLayout: React.FC<InnerPageLayoutProps> = ({
                     className={banner?.className}
                 />
             )}
-            <main className="flex-grow-1">{children}</main>
+            <main
+                className="flex-grow-1"
+                style={{ backgroundColor: "#F7F7F7" }}
+            >
+                {children}
+            </main>
             <Footer />
         </div>
     );

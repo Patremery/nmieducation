@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\AuthorResource;
+use App\Http\Resources\BookResource;
 use App\Models\Author;
+use App\Models\Book;
 use Inertia\Inertia;
 
 class AuthorController extends Controller
@@ -22,9 +24,14 @@ class AuthorController extends Controller
 
     public function view(string $slug)
     {
-        $author = new AuthorResource(Author::where('name', $slug)->first());
-        return Inertia::render('SingleAuthor', [
-            'author' => $author
+        
+        $author = AuthorResource::make(Author::where('slug', $slug)->first());
+        //$books = BookResource::collection($author->books);
+      
+        //dd($author);
+        return Inertia::render('ViewAuthors', [
+            'author' => $author,
+            //'books' => $books,
         ]);
     }
 }

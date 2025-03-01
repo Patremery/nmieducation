@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import NewArrivals from "../components/NewArrivals";
-import Filters from "../components/Filters";
 import EbookSection from "../components/EbookSection";
 import InnerPageLayout from "../layouts/InnerPageLayout";
 import { BannerProps, Book } from "../types/interfaces";

@@ -26,7 +26,7 @@ const AuthorItem: React.FC<AuthorItemProps> = ({ index, author, height }) => {
             className="book-card mb-3"
             style={{ backgroundColor: "rgb(240, 240, 240)" }}
         >
-            <Link href={`/authors/${author.slug}`} type="button">
+            <Link href={`/author/${author.slug}`} type="button">
                 <img
                     src={author.photo || DefaultAuthorImage}
                     className="img-fluid img-responsive"

@@ -80,7 +80,7 @@ const ManuscritForm = () => {
 
             <div className="col-md-6">
                 <select
-                    className="form-select form-select-lg"
+                    className="form-select form-select-lg form-control"
                     value={data.country}
                     onChange={(e) => setData("country", e.target.value)}
                 >

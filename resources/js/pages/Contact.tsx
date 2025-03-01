@@ -4,6 +4,7 @@ import { BannerProps } from "../types/interfaces";
 import BannerImage from "../assets/img/nmi-office.jpg";
 import ContactForm from "../components/ContactForm";
 import { FaFacebook, FaYoutube, FaTwitter, FaLinkedin } from "react-icons/fa";
+import { Link } from "@inertiajs/react";
 interface ContactProps {
     contacts: {
         address: string;
@@ -32,7 +33,7 @@ const Contact: React.FC<ContactProps> = ({ contacts }) => {
         description: description,
         backgroundImage: BannerImage,
         textAlign: "left",
-        className: "p-5 display-7 font-weight-600",
+        className: "p-3 p-md-5 display-7 font-weight-600",
     };
 
     const content = {
@@ -43,9 +44,9 @@ const Contact: React.FC<ContactProps> = ({ contacts }) => {
 
     return (
         <InnerPageLayout banner={banner}>
-            <div className="container p-2">
-                <div className="row px-5 mt-5">
-                    <div className="col-md-12 text-center ">
+            <div className="container p-2 p-md-3">
+                <div className="row px-2 px-md-4 px-lg-5 mt-3 mt-md-5">
+                    <div className="col-md-12 text-center">
                         <h2 className="font-weight-600">Nous contacter</h2>
                         <div className="lead text-primary">
                             {content.introduction}
@@ -53,8 +54,8 @@ const Contact: React.FC<ContactProps> = ({ contacts }) => {
                         <small>{content.small}</small>
                     </div>
                 </div>
-                <div className="row px-5 mb-5">
-                    <div className="col-md-4 p-3">
+                <div className="row px-2 px-md-4 px-lg-5 mb-4 mb-md-5">
+                    <div className="col-md-4 p-2 p-md-3 mb-3 mb-md-0">
                         <div
                             className="card h-100 shadow-sm border-0 p-2"
                             style={{ backgroundColor: "#f8f9fa" }}
@@ -73,16 +74,16 @@ const Contact: React.FC<ContactProps> = ({ contacts }) => {
                                     ultra-personnalisé pour la réalisation de
                                     votre projet
                                 </p>
-                                <a
+                                <Link
                                     href="/submit-your-manuscrit"
-                                    className="btn  btn-lg w-100 card-button btn-primary"
+                                    className="btn btn-lg w-100 card-button btn-primary"
                                 >
                                     Soumettre un manuscrit
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4 p-3">
+                    <div className="col-md-4 p-2 p-md-3 mb-3 mb-md-0">
                         <div
                             className="card h-100 shadow-sm border-0 p-2"
                             style={{ backgroundColor: "#f8f9fa" }}
@@ -101,16 +102,16 @@ const Contact: React.FC<ContactProps> = ({ contacts }) => {
                                     les titres que compte notre vaste catalogue
                                     de livres.
                                 </p>
-                                <a
+                                <Link
                                     href="/become-distributor"
                                     className="btn btn-primary card-button btn-lg w-100"
                                 >
                                     Demander nos offres
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4 p-3">
+                    <div className="col-md-4 p-2 p-md-3">
                         <div
                             className="card h-100 shadow-sm border-0 p-2"
                             style={{ backgroundColor: "#f8f9fa" }}
@@ -129,17 +130,17 @@ const Contact: React.FC<ContactProps> = ({ contacts }) => {
                                     recrute en permanence des talents pour
                                     enrichir son équipe.
                                 </p>
-                                <a
+                                <Link
                                     href="/join-us"
                                     className="btn btn-primary btn-lg w-100 card-button"
                                 >
                                     Candidature spontanée
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="row bg-light mx-5 p-5">
+                <div className="row bg-light mx-2 mx-md-4 mx-lg-5 p-3 p-md-5">
                     <div className="col-md-12 text-center">
                         <h3 className="font-weight-600">
                             Vous avez une question ?
@@ -152,21 +153,29 @@ const Contact: React.FC<ContactProps> = ({ contacts }) => {
                         </p>
                         <p className="">
                             Toujours à l'écoute, l'équipe de NMI s'engage à vous
-                            répondre <br /> dans les meilleurs délais
+                            répondre{" "}
+                            <span className="d-none d-md-inline">
+                                <br />
+                            </span>{" "}
+                            dans les meilleurs délais
                         </p>
                     </div>
                 </div>
-                <div className="row px-5 my-5">
-                    <div className="col-sm-6">
+                <div className="row px-2 px-md-4 px-lg-5 my-4 my-md-5">
+                    <div className="col-md-6 mb-4 mb-md-0">
                         <ContactForm />
-                        <div className="mt-5">
+                        <div className="mt-4 mt-md-5">
                             <h4 className="font-weight-600">Contact</h4>
                             <p className="mb-0">{contacts.address}</p>
-                            <strong className="mb-0">{contacts.phone}</strong>
-                            <strong className="mb-0">
+                            <strong className="mb-0 d-block">
+                                {contacts.phone}
+                            </strong>
+                            <strong className="mb-0 d-block">
                                 {contacts.postalCode}
                             </strong>
-                            <strong className="mb-0">{contacts.email}</strong>
+                            <strong className="mb-0 d-block">
+                                {contacts.email}
+                            </strong>
                         </div>
                         <div className="mt-2">
                             <div className="d-flex gap-3">
@@ -206,8 +215,12 @@ const Contact: React.FC<ContactProps> = ({ contacts }) => {
                         </div>
                     </div>
                     <div
-                        className="col-sm-6"
-                        style={{ position: "relative", height: "600px" }}
+                        className="col-md-6"
+                        style={{
+                            position: "relative",
+                            height: "400px",
+                            minHeight: "300px",
+                        }}
                     >
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3980.948123201123!2d11.5162493157572!3d3.866197997070048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x108bcf7b5c5b5b5b%3A0x5b5b5b5b5b5b5b5b!2sNMI%20Education!5e0!3m2!1sfr!2scm!4v1633020000000!5m2!1sfr!2scm"

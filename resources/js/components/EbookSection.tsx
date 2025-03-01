@@ -40,14 +40,14 @@ const EbookSection: React.FC = () => {
                             disponibles en lecture et en téléchargement au
                             format numérique sur les plateformes dédiées
                         </p>
-                        <div className="platform-logos d-flex px-2 gap-2">
+                        <div className="platform-logos d-flex px-2 gap-4">
                             <a
                                 href="https://www.adinkra-jeunesse.com/books.php"
                                 target="_blank"
                             >
                                 <img
                                     src={Adinkra}
-                                    className="img-fluid img-responsive"
+                                    className="img-fluid img-responsive pt-2"
                                     style={{
                                         width: "100px",
                                         height: "auto",

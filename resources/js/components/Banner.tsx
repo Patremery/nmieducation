@@ -8,6 +8,7 @@ const Banner: React.FC<BannerProps> = ({
     backgroundImage = BannerImage,
     textAlign,
     className,
+    padding = "100px 0",
 }) => {
     return (
         <div
@@ -27,25 +28,35 @@ const Banner: React.FC<BannerProps> = ({
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
                 backgroundBlendMode: "-moz-initial",
-                padding: "70px 0",
+                padding: padding,
                 color: "white",
                 position: "relative",
             }}
         >
-            <h1
-                style={{
-                    position: "relative",
-                    zIndex: 1,
-                    fontSize: 30,
-                    textAlign: textAlign,
-                }}
-            >
-                {title}
-            </h1>
-            <div className="row px-5 mx-5">
-                <div className={className} style={{ textAlign: textAlign }}>
-                    {description}
-                </div>
+            <div className="container">
+                {title && (
+                    <h1
+                        style={{
+                            position: "relative",
+                            zIndex: 1,
+                            fontSize: 30,
+                            textAlign: textAlign,
+                            marginBottom: description ? "1.5rem" : "0",
+                        }}
+                    >
+                        {title}
+                    </h1>
+                )}
+                {description && (
+                    <div className="row">
+                        <div
+                            className={className}
+                            style={{ textAlign: textAlign }}
+                        >
+                            {description}
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );

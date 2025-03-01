@@ -42,8 +42,8 @@ const CatalogCategory: React.FC<CatalogCategoryProps> = ({
         if (["kids", "catalog"].includes(code)) {
             return 150;
         }
-        console.log(books);
-        return 300;
+
+        return 270;
     };
 
     return (

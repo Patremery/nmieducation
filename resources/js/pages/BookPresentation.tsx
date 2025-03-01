@@ -25,33 +25,33 @@ const BookPresentation: React.FC<BookPresentationProps> = ({
 
     return (
         <InnerPageLayout banner={banner}>
-            <div className="container-fluid">
+            <div className="container p-5">
                 <SingleBookInformations book={book} />
-                {similarBooks.length > 5 && (
-                    <>
-                        <div className="text-center">
-                            <h3
-                                className="mt-5 text-primary"
-                                style={{ fontWeight: 700 }}
-                            >
-                                Autres ouvrages
-                            </h3>
-                            <h5>qui pourraient vous intéresser</h5>
-                        </div>
-
-                        <div
-                            className="row mt-3 py-4 mb-5"
-                            style={{ padding: 70 }}
-                        >
-                            <BookSlider
-                                books={similarBooks}
-                                slideNumber={5}
-                                imageHeight={getImageHeight()}
-                            />
-                        </div>
-                    </>
-                )}
             </div>
+            {similarBooks.length > 5 && (
+                <div
+                    className="container-fluid p-4"
+                    style={{ backgroundColor: "#FFFFFF" }}
+                >
+                    <div className="text-center mt-4 mt-md-5">
+                        <h3
+                            className="text-primary"
+                            style={{ fontWeight: 700 }}
+                        >
+                            Autres ouvrages
+                        </h3>
+                        <h5>qui pourraient vous intéresser</h5>
+                    </div>
+
+                    <div className="row mt-3 py-3 py-md-4 mb-4 mb-md-5 px-2 px-md-4 px-lg-5">
+                        <BookSlider
+                            books={similarBooks}
+                            slideNumber={5}
+                            imageHeight={getImageHeight()}
+                        />
+                    </div>
+                </div>
+            )}
         </InnerPageLayout>
     );
 };

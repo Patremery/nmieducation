@@ -3,12 +3,12 @@ import parse from "html-react-parser";
 import { Post } from "../types/interfaces";
 import { Link } from "@inertiajs/react";
 
-interface PostGridItemProps {
+interface PostListItemsProps {
     post: Post;
     isLoading?: boolean;
 }
 
-const PostGridItem = ({ post, isLoading = false }: PostGridItemProps) => {
+const PostListItems = ({ post, isLoading = false }: PostListItemsProps) => {
     const limitTitle = (title: string, limit: number = 65) => {
         const tempElement = document.createElement("div");
         tempElement.innerHTML = title;
@@ -160,4 +160,4 @@ const PostGridItem = ({ post, isLoading = false }: PostGridItemProps) => {
     );
 };
 
-export default PostGridItem;
+export default PostListItems;

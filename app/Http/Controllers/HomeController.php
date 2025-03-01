@@ -71,9 +71,13 @@ class HomeController extends Controller
 
     public function article($slug) {
         $post = PostResource::make(Post::published()->where('slug', $slug)->first());
+        $similarPosts = PostResource::collection(Post::published()->with(['categories', 'tags'])->where('id', '!=', $post->id)->limit(3)->get());
+        $latestPosts = PostResource::collection(Post::published()->with(['categories', 'tags'])->latest()->limit(3)->get());
 
         return Inertia::render('Article', [
-            'post' => $post
+            'post' => $post,
+            'similarPosts' => $similarPosts,
+            'latestPosts' => $latestPosts
         ]);
     }
 

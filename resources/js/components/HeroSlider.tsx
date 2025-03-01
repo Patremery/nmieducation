@@ -19,7 +19,7 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ slides }) => {
                 id="heroCarousel"
                 className="carousel slide"
                 data-bs-ride="carousel"
-                style={{ height: "500px" }}
+                style={{ height: "350px", minHeight: "350px" }}
             >
                 {/* Carousel Indicators */}
                 <div className="carousel-indicators">
@@ -54,26 +54,40 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ slides }) => {
                                 }}
                             >
                                 <div
-                                    className="position-absolute top-50 start-0 translate-middle-y text-white"
-                                    style={{ padding: 100 }}
+                                    className="position-absolute top-50 start-0 translate-middle-y text-white p-3 p-sm-4 p-md-5"
+                                    style={{
+                                        maxWidth: "100%",
+                                        paddingLeft: "15px",
+                                        paddingRight: "15px",
+                                    }}
                                 >
                                     <p
                                         className="m-0 text-white"
-                                        style={{ fontSize: 24 }}
+                                        style={{
+                                            fontSize:
+                                                "clamp(1rem, 2vw, 1.5rem)",
+                                        }}
                                     >
                                         {slide.title}
                                     </p>
-                                    <h2 className="display-4 font-weight-600">
+                                    <h2
+                                        className="font-weight-600"
+                                        style={{
+                                            fontSize:
+                                                "clamp(1.5rem, 4vw, 2.5rem)",
+                                        }}
+                                    >
                                         {slide.subtitle}
                                     </h2>
 
                                     {slide.slogan && (
                                         <p
-                                            className="display-5 text-white"
+                                            className="text-white d-none d-sm-block"
                                             style={{
                                                 fontFamily:
                                                     "'Dancing Script', cursive",
-                                                fontSize: "2.5rem",
+                                                fontSize:
+                                                    "clamp(1.5rem, 3vw, 2.5rem)",
                                             }}
                                         >
                                             {slide.slogan}

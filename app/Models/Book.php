@@ -20,7 +20,7 @@ class Book extends Model
         'classrooms' => 'array',
     ];
 
-    //protected $with = ['author'];
+    //protected $with = ['authors'];
 
     public function authors(): BelongsToMany
     {

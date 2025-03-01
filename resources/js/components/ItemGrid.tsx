@@ -12,13 +12,13 @@ interface ItemGridProps {
 const ItemGrid: React.FC<ItemGridProps> = ({
     items,
     itemsToShow = 6,
-    height = 300,
+    height = 250,
 }) => {
     return (
         <div className="literature-section">
-            <div className="row">
+            <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
                 {items.slice(0, itemsToShow).map((book, index) => (
-                    <div key={index} className="col-md-2">
+                    <div key={index} className="col">
                         <BookItem index={index} book={book} height={height} />
                     </div>
                 ))}

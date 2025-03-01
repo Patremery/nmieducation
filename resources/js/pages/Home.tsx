@@ -1,6 +1,6 @@
 import React from "react";
 import { Book } from "../types/interfaces";
-import Catalogue from "../pages/catalogue";
+import Catalogue from "../pages/Catalogue";
 
 interface HomeProps {
     books: Book[];
