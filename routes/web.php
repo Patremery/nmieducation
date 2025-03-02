@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImportController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -38,3 +39,12 @@ Route::get('/posts/{slug}', [HomeController::class, 'article'])->name('article.s
 Route::post('/download-guide', [CatalogController::class, 'downloadGuide'])->name('download-guide');
 
 Route::post('/contact', [HomeController::class, 'saveContact'])->name('contact');
+
+Route::get("/storage-link", function() {
+    try {
+            Artisan::call('storage:link');
+            return 'Storage link has been created successfully.';
+        } catch (\Exception $e) {
+            return 'Error: ' . $e->getMessage();
+        }
+});
