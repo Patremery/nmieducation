@@ -207,6 +207,7 @@
                 font-size: 1rem;
             }
         }
+
     </style>
 </head>
 <body>
