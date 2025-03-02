@@ -28,7 +28,11 @@ jobs:
         run: php artisan storage:link
 
       - name: Install NPM Dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Configure FTP include
+        run: |
+          echo "!node_modules/" > .git-ftp-include
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
