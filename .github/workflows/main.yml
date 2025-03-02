@@ -30,6 +30,18 @@ jobs:
       - name: Link Storage
         run: php artisan storage:link
 
+      - name: Clear Cache
+        run: php artisan cache:clear
+
+      - name: Clear View Cache
+        run: php artisan view:clear
+
+      - name: Clear Config Cache
+        run: php artisan config:clear
+
+      - name: Clear Route Cache
+        run: php artisan route:clear
+
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
