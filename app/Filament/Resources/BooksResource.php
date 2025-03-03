@@ -114,6 +114,7 @@ class BooksResource extends Resource
                                         ->directory('books')
                                         ->columnSpanFull()
                                         ->optimize('webp'),
+                                        //->getFilename(fn ($file, $record) => ($record?->slug ?? 'book') . '-' . time() . '.' . $file->getClientOriginalExtension()),
                                
                             ])->columnSpan(['lg' => 2]),
 

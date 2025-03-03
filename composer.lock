@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9340fc2d6798b6b257771f1a67649f8d",
+    "content-hash": "b9c18b4e35487f3c415ed66330b7bcdf",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -2439,16 +2439,16 @@
         },
         {
             "name": "joshembling/image-optimizer",
-            "version": "v1.4.4",
+            "version": "v1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/joshembling/image-optimizer.git",
-                "reference": "56f74bb5afdaabe87189b3cc49e04023b7973730"
+                "reference": "a7bc45d2b86098639c0ce3c382a47a35ff9a1d0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joshembling/image-optimizer/zipball/56f74bb5afdaabe87189b3cc49e04023b7973730",
-                "reference": "56f74bb5afdaabe87189b3cc49e04023b7973730",
+                "url": "https://api.github.com/repos/joshembling/image-optimizer/zipball/a7bc45d2b86098639c0ce3c382a47a35ff9a1d0d",
+                "reference": "a7bc45d2b86098639c0ce3c382a47a35ff9a1d0d",
                 "shasum": ""
             },
             "require": {
@@ -2511,7 +2511,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-17T12:28:28+00:00"
+            "time": "2025-02-24T14:07:06+00:00"
         },
         {
             "name": "kirschbaum-development/eloquent-power-joins",

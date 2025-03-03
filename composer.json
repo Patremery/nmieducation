@@ -21,7 +21,7 @@
         "filament/filament": "^3.2",
         "inertiajs/inertia-laravel": "^2.0",
         "joaopaulolndev/filament-general-settings": "^1.0",
-        "joshembling/image-optimizer": "^1.4",
+        "joshembling/image-optimizer": "^1.5",
         "laravel/framework": "^11.9",
         "laravel/pail": "^1.2",
         "laravel/tinker": "^2.9",
