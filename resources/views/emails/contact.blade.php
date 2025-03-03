@@ -29,15 +29,10 @@
     </div>
 </div>
 
-@component('mail::panel')
-ce message provient d'un formulaire de contact sur le site {{ config('app.name') }}
-@endcomponent
-
-
 Cordialement,<br>
 L'équipe de {{ config('app.name') }}
 
 @component('mail::subcopy')
-Ce message vous a été envoyé suite à votre demande de téléchargement sur notre site. Si vous n'êtes pas à l'origine de cette demande, veuillez ignorer cet email.
+ce message provient d'un formulaire de contact sur le site {{ config('app.name') }}
 @endcomponent
 @endcomponent

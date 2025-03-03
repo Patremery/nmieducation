@@ -28,10 +28,9 @@ class BookResource extends JsonResource
             'adinkra_url' => $this->adinkra_url,
             'isbn' => $this->ISBN,
             'description' => strip_tags($this->description),
-            'cover' => asset($this->featured_image),
+            'cover' => asset("storage/".$this->featured_image),
             'summary' => $this->summary,
             'audience' => $this->audience,
-            //'file' => url($this->file),
             'classrooms' => $this->classrooms ?? [],
             'genre' => $this->theme,
         ];

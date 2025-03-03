@@ -20,7 +20,7 @@ const ManuscritForm = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        post("/manuscript-submission", {
+        post("/submit-your-manuscrit", {
             onSuccess: () => {
                 setIsSuccess(true);
                 reset();

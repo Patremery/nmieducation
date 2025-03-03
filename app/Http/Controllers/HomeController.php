@@ -6,9 +6,11 @@ use App\Http\Resources\BookResource;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\TeamResource;
 use App\Mail\ContactMail;
+use App\Mail\ManuscritSubmissionEmail;
 use App\Models\Book;
 use App\Models\Contact;
 use App\Models\Post;
+use App\Models\Submission;
 use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -99,5 +101,13 @@ class HomeController extends Controller
             return redirect()->back()->with('success', 'Message envoyé avec succès');
         });
 
+    }
+
+    public function storeManuscript(Request $request) {
+        DB::transaction(function() use ($request) {
+            $manuscrit = Submission::create($request->all());
+            
+        Mail::to(settings("support_email"))->send(new ManuscritSubmissionEmail($manuscrit));
+        });
     }
 }
