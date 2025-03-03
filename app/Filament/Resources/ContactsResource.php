@@ -3,31 +3,30 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ContactsResource\Pages;
-use App\Filament\Resources\ContactsResource\RelationManagers;
 use App\Models\Contact;
-use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ContactsResource extends Resource
 {
     protected static ?string $model = Contact::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = "CMS";
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')->required(),
-Forms\Components\TextInput::make('email')->required(),
-Forms\Components\TextInput::make('phone')->required(),
-Forms\Components\TextInput::make('subject')->required(),
-Forms\Components\TextInput::make('message')->required()
+                TextInput::make('name')->required(),
+                TextInput::make('email')->required(),
+                TextInput::make('phone')->required(),
+                TextInput::make('subject')->required(),
+                TextInput::make('message')->required()
             ]);
     }
 
@@ -35,11 +34,26 @@ Forms\Components\TextInput::make('message')->required()
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
-Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
-Tables\Columns\TextColumn::make('phone')->sortable()->searchable(),
-Tables\Columns\TextColumn::make('subject')->sortable()->searchable(),
-Tables\Columns\TextColumn::make('message')->sortable()->searchable()
+                TextColumn::make('name')
+                        ->label("Noms")
+                        ->sortable()
+                        ->searchable(),
+                TextColumn::make('email')
+                        ->label("Adresse E-mail")
+                        ->sortable()
+                        ->searchable(),
+                TextColumn::make('phone')
+                        ->label("Téléphone")
+                        ->sortable()
+                        ->searchable(),
+                TextColumn::make('subject')
+                        ->label("Objet")
+                        ->sortable()
+                        ->searchable(),
+                TextColumn::make('message')
+                        ->label("Message")
+                        ->sortable()
+                        ->searchable()
             ])
             ->filters([
                 //
@@ -66,9 +80,9 @@ Tables\Columns\TextColumn::make('message')->sortable()->searchable()
     {
         return [
             'index' => Pages\ListContacts::route('/'),
-            'create' => Pages\CreateContacts::route('/create'),
+            //'create' => Pages\CreateContacts::route('/create'),
             'view' => Pages\ViewContacts::route('/{record}'),
-            'edit' => Pages\EditContacts::route('/{record}/edit'),
+            //'edit' => Pages\EditContacts::route('/{record}/edit'),
         ];
     }
 }

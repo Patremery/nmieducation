@@ -33,7 +33,7 @@ class PostsResource extends Resource
     
     // Ajout du slug de navigation (optionnel, mais recommandé)
     protected static ?string $slug = 'posts';
-    protected static ?string $navigationGroup = 'Blog';
+    protected static ?string $navigationGroup = 'CMS';
 
     public static function form(Form $form): Form
     {

@@ -23,7 +23,7 @@ class DownloadsResource extends Resource
     protected static ?string $model = Download::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Catalogue';
+    protected static ?string $navigationGroup = 'CMS';
     protected static ?string $navigationLabel = 'Téléchargements';
     protected static ?string $pluralNavigationLabel = 'Téléchargements';
     protected static ?string $pluralModelLabel = 'Téléchargements';
