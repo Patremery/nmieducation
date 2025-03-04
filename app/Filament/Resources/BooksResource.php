@@ -86,6 +86,7 @@ class BooksResource extends Resource
                         Section::make('Informations principales')
                             ->schema([
                                 TextInput::make('title')
+                                    ->label('Titre')
                                     ->required()
                                     ->columnSpanFull(),
                                 Toggle::make("new")
@@ -106,6 +107,7 @@ class BooksResource extends Resource
                                     ->required()
                                     ->columnSpanFull(),
                                 Textarea::make('summary')
+                                    ->label('Résumé')
                                     ->columnSpanFull(),
                                 FileUpload::make('images')
                                         ->multiple()
@@ -194,6 +196,7 @@ class BooksResource extends Resource
                                                 ->numeric()
                                                 ->suffix("pages"),
                                         TextInput::make('price')
+                                                ->label('Prix')
                                                 ->suffix("XAF"),
                                         Select::make('audience')
                                                 ->label("Public Cible")
@@ -244,7 +247,10 @@ class BooksResource extends Resource
                     ->label('')
                     ->height(70)
                     ,
-                TextColumn::make('title')->sortable()->searchable(),
+                TextColumn::make('title')
+                        ->label('Titre')
+                        ->sortable()
+                        ->searchable(),
                 //TextColumn::make('description')->html()->searchable(),
                 //TextColumn::make('summary')->sortable()->searchable(),
                 TextColumn::make('authors.name')
@@ -255,20 +261,27 @@ class BooksResource extends Resource
                     ->limitList(3)
                     ->expandableLimitedList()
                     ->formatStateUsing(fn ($state, $record) => $record->authors->pluck('name')->join(', ')),
-                TextColumn::make('language.name')->sortable()->searchable(),
-                TextColumn::make('category.label')->sortable()->searchable(),
+                TextColumn::make('language.name')
+                        ->label('Langue')
+                        ->sortable()
+                        ->searchable(),
+                TextColumn::make('category.label')
+                        ->label('Catégorie')
+                        ->sortable()
+                        ->searchable(),
                 //TextColumn::make('publication_date')->sortable()->searchable(),
                 TextColumn::make('ISBN')->label("Code ISBN")->sortable()->searchable(),
                 //TextColumn::make('images')->sortable()->searchable(),
                 TextColumn::make('status')
-                    ->sortable()
-                    ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        DefaultStatusEnum::PUBLISHED->value => 'success',
-                        DefaultStatusEnum::UNPUBLISHED->value => 'danger',
-                        DefaultStatusEnum::DRAFT->value => 'warning',
-                        default => 'danger',
-                    })
+                        ->label("Statut")
+                        ->sortable()
+                        ->badge()
+                        ->color(fn (string $state): string => match ($state) {
+                            DefaultStatusEnum::PUBLISHED->value => 'success',
+                            DefaultStatusEnum::UNPUBLISHED->value => 'danger',
+                            DefaultStatusEnum::DRAFT->value => 'warning',
+                            default => 'danger',
+                        })
             ])
             ->filters([
                 //

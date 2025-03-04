@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Logo from "../assets/img/logo.png";
 import QRCode from "../assets/img/qr.png";
 import CopyrightSection from "./CopyrightSection";
 import { Link } from "@inertiajs/react";
+import { useSettings } from "../hooks/useSettings";
 
 const Footer: React.FC = () => {
+    const settings = useSettings();
+    useEffect(() => {
+        console.log(settings);
+    }, []);
     return (
         <>
             <footer className="bg-primary text-white py-4 py-md-5">
@@ -24,7 +29,7 @@ const Footer: React.FC = () => {
                             </Link>
                             <p className="text-white mb-3">
                                 Nomayos, Entrée route Ngoumou <br />
-                                Tel: 00237 654 000 200
+                                Tel: {settings.support_phone}
                             </p>
                         </div>
                         <div className="col-12 col-sm-6 col-lg-3 text-center text-sm-start">

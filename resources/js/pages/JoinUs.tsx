@@ -17,9 +17,18 @@ const JoinUs = () => {
             <div className="container" style={{ padding: "50px 20px" }}>
                 <div className="row">
                     {/* Left Column - Form */}
-                    <div className="col-lg-12">
-                        <h2 className="mb-4 text-center font-weight-600">
+                    <div className="col-lg-10 mx-auto">
+                        <h2 className="mb-4 font-weight-700 position-relative d-inline-block text-center">
                             Vous êtes passionné(e) par le monde de l'édition ?
+                            <span
+                                className="position-absolute bg-warning"
+                                style={{
+                                    height: "4px",
+                                    width: "50%",
+                                    bottom: "-10px",
+                                    left: "25%",
+                                }}
+                            ></span>
                         </h2>
                         <p className="lead mb-4">
                             Rejoignez notre équipe dynamique et expérimentée.
@@ -35,10 +44,10 @@ const JoinUs = () => {
                     </div>
 
                     <div className="row">
-                        <div className="col-lg-7 col-md-12">
+                        <div className="col-lg-6 col-md-12">
                             <JobForm />
                         </div>
-                        <div className="col-lg-5 col-md-12">
+                        <div className="col-lg-4 col-md-12">
                             <h2 className="h3 mb-4 font-weight-600">
                                 En rejoignant l'équipe de NMI Education, vous
                                 aurez l'opportunité de participer au rayonnement

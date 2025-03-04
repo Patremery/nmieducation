@@ -3,9 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CategoryResource\Pages;
-use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Models\Category;
-use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
@@ -13,9 +11,8 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CategoryResource extends Resource
 {
@@ -23,6 +20,7 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Catalogue';
+    protected static ?string $label = 'Catégories';
 
     public static function form(Form $form): Form
     {
@@ -37,6 +35,7 @@ class CategoryResource extends Resource
                     ->required(),
                     
                 Toggle::make('is_active')
+                    ->label('Actif')
                     ->default(true)
                     ->disabled(fn (?Category $record) => $record?->isSystem()),
             ]);
@@ -46,12 +45,18 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('label')
+                        ->label('Nom')
+                        ->sortable()
+                        ->searchable(),
                 TextColumn::make('code')->sortable()->searchable(),
-                TextColumn::make('label')->sortable()->searchable(),
-                IconColumn::make('is_active')->sortable()->searchable()
-                    ->boolean()
-                    ->trueIcon('heroicon-o-check-circle')
-                    ->falseIcon('heroicon-o-x-circle')
+                ToggleColumn::make('is_active')
+                    ->label('Actif')
+                    ->sortable()
+                    ->searchable()
+                    //->boolean()
+                    //->trueIcon('heroicon-o-check-circle')
+                    //->falseIcon('heroicon-o-x-circle')
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('is_active'),

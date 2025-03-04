@@ -34,7 +34,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login(Login::class)
-            ->brandLogo(asset(settings('site_logo')))
+            ->brandLogo(asset('storage/'.settings('site_logo')))
             ->brandLogoHeight("70px")
             ->passwordReset()
             ->sidebarCollapsibleOnDesktop()

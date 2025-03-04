@@ -7,6 +7,7 @@ use App\Filament\Resources\PartnersResource\RelationManagers;
 use App\Models\Partners;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -21,20 +22,26 @@ class PartnersResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Catalogue';
+    protected static ?string $label = 'Partenaires';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('name')->required(),
+                TextInput::make('name')
+                        ->label('Nom')
+                        ->required(),
+                TextInput::make('website')
+                        ->label('Site Web'),
                 FileUpload::make('logo_url')
                     ->default(fn ($state) => $state)
                     ->image()
                     ->disk('public')
                     ->optimize('webp')
-                    ->directory('partners'),
-                TextInput::make('website'),
-                TextInput::make('description')
+                    ->directory('partners')
+                    ->columnSpanFull(),
+                
+                RichEditor::make('description')->columnSpanFull(),
             ]);
     }
 
@@ -42,10 +49,12 @@ class PartnersResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('logo_url')->sortable()->searchable(),
                 TextColumn::make('name')->sortable()->searchable(),
                 TextColumn::make('website')->sortable()->searchable(),
-                TextColumn::make('description')->sortable()->searchable()
+                
+                ImageColumn::make('logo_url')->sortable()->searchable(),
+                
+                TextColumn::make('description')->searchable()
             ])
             ->filters([
                 //

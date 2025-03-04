@@ -5,6 +5,7 @@ import BannerImage from "../assets/img/nmi-office.jpg";
 import ContactForm from "../components/ContactForm";
 import { FaFacebook, FaYoutube, FaTwitter, FaLinkedin } from "react-icons/fa";
 import { Link } from "@inertiajs/react";
+
 interface ContactProps {
     contacts: {
         address: string;

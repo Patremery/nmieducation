@@ -8,7 +8,6 @@ use App\Models\Author;
 use App\Traits\DefaultStatusField;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -55,6 +54,7 @@ class AuthorsResource extends Resource
                         Section::make('Informations principales')
                             ->schema([
                                 TextInput::make('name')
+                                    ->label('Nom')
                                     ->required()
                                     ->live()
                                     ->afterStateUpdated(function ($state, $set) {
@@ -65,8 +65,10 @@ class AuthorsResource extends Resource
                                 Hidden::make('slug')
                                     ->unique(ignoreRecord: true)
                                     ->required(),
+                                DatePicker::make('latest_publication_date')
+                                        ->label("Date de dernière publication"),
                                 RichEditor::make('biography')
-                             
+                                    ->label('Biographie')
                                     ->columnSpanFull(),
                             ])->columnSpan(['lg' => 2]),
 
@@ -75,16 +77,16 @@ class AuthorsResource extends Resource
                             ->schema([
                                 Section::make('Statut')
                                     ->schema([
-                                        self::getStatusField()
+                                        self::getStatusField(),
+                                        
+                                        TextInput::make('facebook_url')
+                                                ->label("Profil Facebook"),
+                                        TextInput::make('linkedin_url')
+                                                ->label("Profil LinkedIn"),
+                                        TextInput::make('twitter_url')
+                                                ->label("Profil Twitter"),
                                     ]),
-                                DatePicker::make('latest_publication_date')
-                                        ->label("Date de dernière publication"),
-                                TextInput::make('facebook_url')
-                                        ->label("Profil Facebook"),
-                                TextInput::make('linkedin_url')
-                                        ->label("Profil LinkedIn"),
-                                TextInput::make('twitter_url')
-                                        ->label("Profil Twitter"),
+                                
 
                                 Section::make('Photo')
                                     ->schema([

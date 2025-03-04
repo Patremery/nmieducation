@@ -36,7 +36,22 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         return array_merge(parent::share($request), [
-            //
+            'settings' => [
+                'support_phone' => settings('support_phone'),
+                'support_email' => settings('support_email'),
+                /* 'facebook' => settings('facebook'),
+                'twitter' => settings('twitter'),
+                'instagram' => settings('instagram'),
+                'linkedin' => settings('linkedin'),
+                'youtube' => settings('youtube'),
+                'address' => settings('address'), */
+                'site_name' => settings('site_name'),
+                'site_description' => settings('site_description'),
+                'logo' => asset('storage/'.settings('site_logo')),
+                'favicon' => asset('storage/'.settings('site_favicon')),
+               
+                'theme_color' => settings('theme_color'),
+            ],
         ]);
     }
 }
