@@ -6,6 +6,7 @@ enum BookFormat: string
 {
     case PAPER = 'paper';
     case DIGITAL = 'digital';
+    
     case BOTH = 'both';
 
     public function label(): string
