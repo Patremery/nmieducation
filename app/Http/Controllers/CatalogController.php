@@ -29,11 +29,11 @@ class CatalogController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function show(string $slug)
     {
-        $book = Book::findOrFail($id)->toResource();
+        $book = Book::where("slug", $slug)->first()->toResource();
         $similarBooks = BookResource::collection(Book::published()
-                        ->where("id", "!=", $id)
+                        ->where("slug", "!=", $slug)
                         ->where('category_id', $book->category_id)
                         ->with(['authors','category', 'collection', 'language'])->get());
 

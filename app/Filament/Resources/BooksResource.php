@@ -86,6 +86,16 @@ class BooksResource extends Resource
                             ->schema([
                                 TextInput::make('title')
                                     ->label('Titre')
+                                    ->unique(ignoreRecord: true)
+                                    ->required()
+                                    ->live()
+                                    ->afterStateUpdated(function ($state, $set) {
+                                        $set('slug', str()->slug($state));
+                                    })
+                                    ->columnSpanFull(),
+                                TextInput::make('slug')
+                                    ->label('permalien')
+                                    ->unique(ignoreRecord: true)
                                     ->required()
                                     ->columnSpanFull(),
                                 Toggle::make("new")

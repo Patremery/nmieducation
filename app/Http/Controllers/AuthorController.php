@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Resources\AuthorResource;
 use App\Http\Resources\BookResource;
 use App\Models\Author;
-use App\Models\Book;
 use Inertia\Inertia;
 
 class AuthorController extends Controller
@@ -14,7 +13,6 @@ class AuthorController extends Controller
     {
         $data = Author::published()->get(); 
         $authors = AuthorResource::collection($data);
-        //dd($authors);
         
         return Inertia::render('Authors', [
             'authors' => $data,
@@ -26,12 +24,12 @@ class AuthorController extends Controller
     {
         
         $author = AuthorResource::make(Author::where('slug', $slug)->first());
-        //$books = BookResource::collection($author->books);
+        $books = BookResource::collection($author->books()->with('authors', 'category', 'collection', 'language')->get());
       
         //dd($author);
-        return Inertia::render('ViewAuthors', [
+        return Inertia::render('ViewAuthor', [
             'author' => $author,
-            //'books' => $books,
+            'books' => $books,
         ]);
     }
 }

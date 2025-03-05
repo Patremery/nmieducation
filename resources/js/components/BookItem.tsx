@@ -60,7 +60,7 @@ const BookItem: React.FC<BookItemProps> = ({ index, book, height }) => {
             }}
         >
             <Link
-                href={`/book/${book.id}`}
+                href={`/book/${book.slug}`}
                 type="button"
                 className="d-block text-center flex-grow-1"
                 style={{

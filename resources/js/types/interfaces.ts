@@ -5,6 +5,7 @@ type PlatformUrl = string | null;
 interface Book {
     id: number;
     title: string;
+    slug: string;
     authors: Author[];
     year: number;
     isbn: string;
@@ -80,7 +81,7 @@ interface Author {
     id: number;
     name: string;
     slug: string;
-    books?: Book[];
+    //books?: Book[];
     profession?: string;
     biography?: string;
     photo?: string;

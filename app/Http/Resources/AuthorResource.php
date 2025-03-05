@@ -25,7 +25,7 @@ class AuthorResource extends JsonResource
             'facebook' => $this->facebook_url,
             'twitter' => $this->twitter_url,
             //'latest_book' => $this->books->published()->latest()->first(),
-            'books' => BookResource::collection($this->whenLoaded('books')),
+           // 'books' => BookResource::collection($this->whenLoaded('books')),
         ];
     }
 }

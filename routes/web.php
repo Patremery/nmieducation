@@ -30,7 +30,7 @@ Route::post('/join-us', [HomeController::class, 'storeApplication'])->name('appl
 Route::get('/submit-your-manuscrit', [HomeController::class, 'manuscriptSubmission'])->name('manuscript-submission');
 Route::post('/submit-your-manuscrit', [HomeController::class, 'storeManuscript'])->name('manuscript.store');
 
-Route::get('/book/{id}', [CatalogController::class, 'show'])->name('book.show');
+Route::get('/book/{slug}', [CatalogController::class, 'show'])->name('book.show');
 
 Route::get('/import-posts', [ImportController::class, 'import']);
 

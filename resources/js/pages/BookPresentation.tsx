@@ -46,7 +46,7 @@ const BookPresentation: React.FC<BookPresentationProps> = ({
                     <div className="row mt-3 py-3 py-md-4 mb-4 mb-md-5 px-2 px-md-4 px-lg-5">
                         <BookSlider
                             books={similarBooks}
-                            slideNumber={5}
+                            slideNumber={similarBooks.length > 5 ? 6 : 5}
                             imageHeight={getImageHeight()}
                         />
                     </div>

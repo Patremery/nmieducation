@@ -45,6 +45,12 @@ const BookSlider = ({
             },
         ],
     };
+    const getImageHeight = (category: string) => {
+        if (category === "kids") {
+            return 200;
+        }
+        return 270;
+    };
     return (
         <>
             {books.length > 0 ? (
@@ -54,7 +60,7 @@ const BookSlider = ({
                             <BookItem
                                 index={index}
                                 book={book}
-                                height={imageHeight}
+                                height={getImageHeight(book.category)}
                             />
                         </div>
                     ))}

@@ -5,6 +5,10 @@ namespace App\Enums;
 enum ClassroomsEnum: string
 {
     // Primary School (6 years)
+    case PRENURSERY = 'Prenursery';
+    case NURSERY_ONE = 'Nursery one';
+    case NURSERY_TWO = 'Nursery two';
+    case NURSERY_THREE = 'Nursery three';
     case CLASS_1 = 'class_1';
     case CLASS_2 = 'class_2';
     case CLASS_3 = 'class_3';
@@ -22,6 +26,9 @@ enum ClassroomsEnum: string
     // Secondary School - Second Cycle (2 years)
     case LOWER_SIXTH = 'lower_sixth';  // Lower Sixth (GCE AS Level)
     case UPPER_SIXTH = 'upper_sixth';  // Upper Sixth (GCE A Level)
+    case PETITE_SECTION = 'Petite Section';
+    case MOYENNE_SECTION = 'Moyenne Section';
+    case GRANDE_SECTION = 'Grande Section';
     case SIL = 'sil';
     case CP = 'cp';
     case CE1 = 'ce1';
@@ -41,6 +48,10 @@ enum ClassroomsEnum: string
     public function label(): string
     {
         return match($this) {
+            self::PRENURSERY => 'Pre-Nursery',
+            self::NURSERY_ONE => 'Nursery One',
+            self::NURSERY_TWO => 'Nursery Two',
+            self::NURSERY_THREE => 'Nursery Three',
             self::CLASS_1 => 'Class 1',
             self::CLASS_2 => 'Class 2',
             self::CLASS_3 => 'Class 3',
@@ -61,6 +72,9 @@ enum ClassroomsEnum: string
             self::SECONDE => 'Seconde',
             self::PREMIERE => 'Première',
             self::TERMINALE => 'Terminale',
+            self::PETITE_SECTION => 'Maternelle Petite Section',
+            self::MOYENNE_SECTION => 'Maternelle Moyenne Section',
+            self::GRANDE_SECTION => 'Maternelle Grande Section',
             self::SIL => 'SIL',
             self::CP => 'CP',
             self::CE1 => 'CE1',
