@@ -77,7 +77,6 @@
         "post-create-project-cmd": [
             "NiftyCo\\Skeletor\\Runner::execute",
             "@php artisan key:generate --ansi",
-            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi",
             "@php artisan db:seed --ansi",
             "npm install",

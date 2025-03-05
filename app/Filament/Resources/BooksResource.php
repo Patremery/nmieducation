@@ -2,13 +2,11 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\DefaultStatusEnum;
 use App\Filament\Resources\BooksResource\Pages;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\BookLanguage;
 use App\Models\Collection;
-use App\Traits\DefaultStatusField;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
@@ -31,10 +29,11 @@ use App\Enums\AudienceEnum;
 use App\Enums\ClassroomsEnum;
 use App\Enums\CoursesEnum;
 use App\Enums\LiteratureGenreEnum;
+use App\Traits\HasStatus;
 
 class BooksResource extends Resource
 {
-    use DefaultStatusField;
+    use HasStatus;
     protected static ?string $model = Book::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
@@ -231,7 +230,7 @@ class BooksResource extends Resource
                                             ->visible(fn (Get $get) => (in_array($get('category_id'), [3, 5])))
                                             ->required(fn (Get $get) => (in_array($get('category_id'), [3, 5])))
                                             ->default(fn ($record) => $record->file ?? null)
-                                            ->optimize('webp')
+                                            ->optimize('pdf')
                                             ->preserveFilenames(),
                                     ]),
                             ])->columnSpan(['lg' => 1]),
@@ -272,16 +271,7 @@ class BooksResource extends Resource
                 //TextColumn::make('publication_date')->sortable()->searchable(),
                 TextColumn::make('ISBN')->label("Code ISBN")->sortable()->searchable(),
                 //TextColumn::make('images')->sortable()->searchable(),
-                TextColumn::make('status')
-                        ->label("Statut")
-                        ->sortable()
-                        ->badge()
-                        ->color(fn (string $state): string => match ($state) {
-                            DefaultStatusEnum::PUBLISHED->value => 'success',
-                            DefaultStatusEnum::UNPUBLISHED->value => 'danger',
-                            DefaultStatusEnum::DRAFT->value => 'warning',
-                            default => 'danger',
-                        })
+                self::getStatusColumn(),
             ])
             ->filters([
                 //

@@ -69,7 +69,7 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->plugins([
-                FilamentScaffoldPlugin::make(),
+                //FilamentScaffoldPlugin::make(),
                 FilamentShieldPlugin::make(),
                 FilamentEmail::make(),
                 MaintenanceSwitchPlugin::make(),

@@ -6,6 +6,7 @@ use App\Enums\DefaultStatusEnum;
 use App\Filament\Resources\CollectionsResource\Pages;
 use App\Models\Collection;
 use App\Traits\DefaultStatusField;
+use App\Traits\HasStatus;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
@@ -22,7 +23,7 @@ use Filament\Tables\Columns\ImageColumn;
 
 class CollectionsResource extends Resource
 {
-    use DefaultStatusField;
+    use HasStatus;
     protected static ?string $model = Collection::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';

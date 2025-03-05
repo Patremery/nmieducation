@@ -5,8 +5,7 @@ namespace App\Filament\Resources;
 use App\Enums\DefaultStatusEnum;
 use App\Filament\Resources\BookLanguagesResource\Pages;
 use App\Models\BookLanguage;
-use App\Traits\DefaultStatusField;
-use Filament\Forms\Components\Select;
+use App\Traits\HasStatus;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -16,7 +15,7 @@ use Filament\Tables\Columns\TextColumn;
 
 class BookLanguagesResource extends Resource
 {
-    use DefaultStatusField;
+    use HasStatus;
     protected static ?string $model = BookLanguage::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-language';
@@ -57,15 +56,7 @@ class BookLanguagesResource extends Resource
                             ->label("Drapeau")
                             ->sortable()
                             ->searchable(),
-                TextColumn::make('status')
-                    ->sortable()
-                    ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        DefaultStatusEnum::PUBLISHED->value => 'success',
-                        DefaultStatusEnum::UNPUBLISHED->value => 'danger',
-                        DefaultStatusEnum::DRAFT->value => 'warning',
-                        default => 'danger',
-                    })
+                self::getStatusColumn()
             ])
             ->filters([
                 //

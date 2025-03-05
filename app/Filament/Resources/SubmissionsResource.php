@@ -20,7 +20,8 @@ class SubmissionsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = "CMS";
-    protected static ?string $label = "Soumissions";
+
+    protected static ?string $label = "Manuscrits";
 
     public static function form(Form $form): Form
     {

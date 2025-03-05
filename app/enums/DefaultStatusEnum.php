@@ -10,9 +10,9 @@ enum DefaultStatusEnum: string
 
     public function label(): string {
         return match($this) {
-            self::PUBLISHED => __('Published'),
-            self::UNPUBLISHED => __('Unpublished'),
-            self::DRAFT => __('Draft'),
+            self::PUBLISHED => __('Publié'),
+            self::UNPUBLISHED => __('Désactivé'),
+            self::DRAFT => __('Brouillon'),
         };
     }
 

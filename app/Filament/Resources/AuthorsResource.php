@@ -6,6 +6,7 @@ use App\Enums\DefaultStatusEnum;
 use App\Filament\Resources\AuthorsResource\Pages;
 use App\Models\Author;
 use App\Traits\DefaultStatusField;
+use App\Traits\HasStatus;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
@@ -21,7 +22,7 @@ use Filament\Forms\Components\RichEditor;
 
 class AuthorsResource extends Resource
 {
-    use DefaultStatusField;
+    use HasStatus;
     protected static ?string $model = Author::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
@@ -124,15 +125,7 @@ class AuthorsResource extends Resource
                /*  TextColumn::make('biography')
                             ->label("Biographie")
                             ->searchable(), */
-                TextColumn::make('status')
-                    ->sortable()
-                    ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        DefaultStatusEnum::PUBLISHED->value => 'success',
-                        DefaultStatusEnum::UNPUBLISHED->value => 'danger',
-                        DefaultStatusEnum::DRAFT->value => 'warning',
-                        default => 'danger',
-                    })
+                self::getStatusColumn()
                 
             ])
             ->filters([

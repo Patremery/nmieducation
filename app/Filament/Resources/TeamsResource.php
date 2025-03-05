@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\TeamsResource\Pages;
 use App\Models\Team;
 use App\Traits\DefaultStatusField;
+use App\Traits\HasStatus;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
@@ -17,11 +18,11 @@ use Filament\Tables\Table;
 
 class TeamsResource extends Resource
 {
-    use DefaultStatusField;
+    use HasStatus;
     protected static ?string $model = Team::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Catalogue';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationGroup = 'CMS';
     protected static ?string $label = 'Equipe';
 
     public static function form(Form $form): Form
@@ -53,7 +54,7 @@ class TeamsResource extends Resource
                 TextColumn::make('position')->sortable()->searchable(),
                 TextColumn::make('facebook_url')->sortable()->searchable(),
                 TextColumn::make('linkedin_url')->sortable()->searchable(),
-                TextColumn::make('status')->sortable()
+                self::getStatusColumn()
             ])
             ->filters([
                 //

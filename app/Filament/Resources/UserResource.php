@@ -6,6 +6,7 @@ use App\Filament\Actions\GeneratePasswordAction;
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
@@ -57,6 +58,7 @@ class UserResource extends Resource
                 Section::make()
                     ->schema([
                         TextInput::make('name')
+                            ->label('Noms')
                             ->required()
                             ->maxLength(255),
                         TextInput::make('email')
@@ -85,6 +87,11 @@ class UserResource extends Resource
                             ->required()
                             ->visible(fn (Get $get): bool => filled($get('password')))
                             ->dehydrated(false),
+                            Select::make('roles')
+                            ->relationship('roles', 'name')
+                            ->multiple()
+                            ->preload()
+                            ->searchable(),
                     ]),
             ]);
     }
@@ -94,11 +101,16 @@ class UserResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->label("Nom")
+                    ->label("Noms")
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('email')
                     ->label("Email")
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('roles.name')
+                    ->label("Roles")
+                   // ->relationship('roles')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('created_at')

@@ -3,9 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PartnersResource\Pages;
-use App\Filament\Resources\PartnersResource\RelationManagers;
 use App\Models\Partners;
-use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
@@ -21,7 +19,7 @@ class PartnersResource extends Resource
     protected static ?string $model = Partners::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Catalogue';
+    protected static ?string $navigationGroup = 'CMS';
     protected static ?string $label = 'Partenaires';
 
     public static function form(Form $form): Form

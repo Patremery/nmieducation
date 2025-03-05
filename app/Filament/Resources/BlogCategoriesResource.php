@@ -19,6 +19,7 @@ class BlogCategoriesResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $navigationGroup = 'CMS';
+    protected static ?string $navigationParentItem = 'Articles';
     protected static ?string $label = 'Catégories';
 
     public static function form(Form $form): Form
@@ -57,14 +58,20 @@ class BlogCategoriesResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->sortable()->searchable(),
+                TextColumn::make('name')
+                ->label('Nom')
+                ->sortable()->searchable(),
                 TextColumn::make('slug')->searchable(),
                 TextColumn::make('parent_id')
-                        ->sortable()
-                        ->formatStateUsing(function ($state) {
-                            return BlogCategory::find($state)->name;
-                        }),
-                TextColumn::make('order')->sortable()->searchable()
+                    ->label('Parent')
+                    ->sortable()
+                    ->formatStateUsing(function ($state) {
+                        return BlogCategory::find($state)->name;
+                    }),
+                TextColumn::make('order')
+                    ->label('Position')
+                    ->sortable()
+                    ->searchable()
             ])
             ->filters([
                 //

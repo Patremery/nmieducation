@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\HasStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Post extends Model
 {
@@ -12,7 +13,7 @@ class Post extends Model
 
     protected $guarded = [];
 
-     public function categories()
+     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(BlogCategory::class, 'post_blog_category');
     }
