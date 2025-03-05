@@ -1,16 +1,15 @@
 {
     "name": "codewithdennis/larament",
     "type": "project",
-    "description": "A starter template for building projects with Laravel and FilamentPHP.",
+    "description": "NMI Education web app project",
     "keywords": [
         "laravel",
-        "framework",
-        "filamentphp",
+        "nmieducation",
         "filament",
         "php",
-        "starter",
-        "template",
-        "boilerplate"
+        "livewire",
+        "react",
+        "inertia"
     ],
     "license": "MIT",
     "require": {
