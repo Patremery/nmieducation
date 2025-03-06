@@ -183,14 +183,14 @@ const Footer: React.FC = () => {
                                         Télécharger nos catalogues
                                     </Link>
                                 </li>
-                                {/* <li className="mb-2">
+                                <li className="mb-2">
                                     <Link
                                         href="/authors"
                                         className="text-white text-decoration-none"
                                     >
                                         Auteurs
                                     </Link>
-                                </li> */}
+                                </li>
                             </ul>
                         </div>
                     </div>

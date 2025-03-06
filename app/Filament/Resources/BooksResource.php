@@ -30,6 +30,8 @@ use App\Enums\ClassroomsEnum;
 use App\Enums\CoursesEnum;
 use App\Enums\LiteratureGenreEnum;
 use App\Traits\HasStatus;
+use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Filters\SelectFilter;
 
 class BooksResource extends Resource
 {
@@ -284,8 +286,16 @@ class BooksResource extends Resource
                 self::getStatusColumn(),
             ])
             ->filters([
-                //
-            ])
+                SelectFilter::make("authors")
+                        ->label("Auteur")
+                        ->relationship('authors', 'name'),
+                SelectFilter::make("category")
+                        ->label("Catégorie")
+                        ->relationship('category', 'label'),
+                SelectFilter::make("language")
+                        ->label("Langue")
+                        ->relationship('language', 'name'),
+            ], layout: FiltersLayout::AboveContent)
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
