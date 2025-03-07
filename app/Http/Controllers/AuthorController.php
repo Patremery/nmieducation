@@ -15,7 +15,7 @@ class AuthorController extends Controller
         $authors = AuthorResource::collection($data);
         
         return Inertia::render('Authors', [
-            'authors' => $data,
+            'authors' => $authors,
             'title' => 'Auteurs'
         ]);
     }
