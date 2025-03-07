@@ -2,10 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\DefaultStatusEnum;
 use App\Filament\Resources\AuthorsResource\Pages;
 use App\Models\Author;
-use App\Traits\DefaultStatusField;
 use App\Traits\HasStatus;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
@@ -19,6 +17,7 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\RichEditor;
+use Filament\Tables\Columns\ImageColumn;
 
 class AuthorsResource extends Resource
 {
@@ -110,10 +109,8 @@ class AuthorsResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('photo')
-                            ->label("Photo")
-                            ->sortable()
-                            ->searchable(), 
+                ImageColumn::make('photo')
+                            ->label("Photo"), 
                 TextColumn::make('name')
                             ->label("Nom")
                             ->sortable()
