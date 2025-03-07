@@ -19,6 +19,7 @@ use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Columns\ImageColumn;
 
+
 class AuthorsResource extends Resource
 {
     use HasStatus;
