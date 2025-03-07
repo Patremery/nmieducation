@@ -1,0 +1,1 @@
+import{j as t}from"./app-CR6sq0J5.js";import r from"./Catalogue-BCjNFrYz.js";/* empty css            */import"./Slider-DUmvcx2y.js";import"./BookItem-BNmz-Ir4.js";import"./proxy-C_ZiKxok.js";import"./EbookSection-BetPJZfl.js";import"./InnerPageLayout-DR3NArj7.js";import"./ItemGrid-BqRNGWHZ.js";const j=({books:o})=>t.jsx(r,{books:o});export{j as default};
