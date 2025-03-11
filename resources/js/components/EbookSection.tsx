@@ -40,7 +40,7 @@ const EbookSection: React.FC = () => {
                         />
                     </div>
                     <div className="col-sm-6">
-                        <p className="mt-3 text-start">
+                        <p className="mt-3 text-start fs-5">
                             Les ouvrages édités par NMI Education sont
                             disponibles en lecture et en téléchargement au
                             format numérique sur les plateformes dédiées
@@ -55,7 +55,7 @@ const EbookSection: React.FC = () => {
                                     src={Adinkra}
                                     className="img-fluid img-responsive pt-2"
                                     style={{
-                                        width: "100px",
+                                        width: "130px",
                                         height: "auto",
                                         objectFit: "contain",
                                         objectPosition: "center",
@@ -72,7 +72,7 @@ const EbookSection: React.FC = () => {
                                     src={Youscribe}
                                     className="img-fluid img-responsive"
                                     style={{
-                                        width: "100px",
+                                        width: "130px",
                                         height: "auto",
                                         objectFit: "contain",
                                         objectPosition: "center",
@@ -88,7 +88,7 @@ const EbookSection: React.FC = () => {
                                 <img
                                     src={Amazon}
                                     style={{
-                                        width: "100px",
+                                        width: "130px",
                                         height: "auto",
                                         objectFit: "contain",
                                         objectPosition: "center",
