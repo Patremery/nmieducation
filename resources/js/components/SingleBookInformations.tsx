@@ -250,6 +250,8 @@ const SingleBookInformations = ({ book }: { book: Book }) => {
                                             className="dropdown-menu text-center"
                                             style={{
                                                 margin: "0 auto",
+                                                zIndex: 9999,
+                                                position: "absolute",
                                             }}
                                         >
                                             {book.amazon_url && (

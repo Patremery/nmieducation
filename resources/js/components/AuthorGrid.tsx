@@ -57,7 +57,7 @@ const AuthorGrid: React.FC<AuthorGridProps> = ({ authors, height }) => {
 
             <div className="row">
                 {filteredAuthors.slice(0, itemsToShow).map((author, index) => (
-                    <div key={author.id} className="col-md-3">
+                    <div key={author.id} className="col-md-2">
                         <AuthorItem
                             index={index}
                             author={author}

@@ -220,7 +220,7 @@ class BooksResource extends Resource
 
                                 Section::make('Liens')
                                     ->schema([
-                                    TextInput::make('amazon_url')->label("URL Amazon"),
+                                        TextInput::make('amazon_url')->label("URL Amazon"),
                                         TextInput::make('adinkra_url')->label("URL Adinkra"),
                                         TextInput::make('youscribe_url')->label("URL YouScribe"),
                                         TextInput::make('lq_url')->label("URL Librairies de Quartier"),
