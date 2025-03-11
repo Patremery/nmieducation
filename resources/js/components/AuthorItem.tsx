@@ -50,11 +50,7 @@ const AuthorItem: React.FC<AuthorItemProps> = ({ index, author, height }) => {
                             "linear-gradient(to right, transparent, #d0d0d0 50%, transparent)",
                     }}
                 />
-                {/* <p className="text-muted my-1">
-                    {book.author.length > 15
-                        ? `${book.author.substring(0, 15)}...`
-                        : book.author}
-                </p> */}
+
                 <hr
                     style={{
                         border: "none",
