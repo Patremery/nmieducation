@@ -35,14 +35,14 @@ const CopyrightSection = () => {
                                     Soumettre un manuscrit
                                 </Link>
                             </small>
-                            {/*  <small>
-                                <a
-                                    href="#"
+                            <small>
+                                <Link
+                                    href="/become-distributor"
                                     className="text-white text-decoration-none"
                                 >
-                                    Mentions légales
-                                </a>
-                            </small> */}
+                                    Devenir Distributeur
+                                </Link>
+                            </small>
                         </div>
                     </div>
                 </div>

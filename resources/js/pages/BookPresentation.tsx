@@ -28,7 +28,7 @@ const BookPresentation: React.FC<BookPresentationProps> = ({
             <div className="container p-5">
                 <SingleBookInformations book={book} />
             </div>
-            {similarBooks.length > 5 && (
+            {/* {similarBooks.length > 5 && (
                 <div
                     className="container-fluid p-4"
                     style={{ backgroundColor: "#FFFFFF" }}
@@ -51,7 +51,7 @@ const BookPresentation: React.FC<BookPresentationProps> = ({
                         />
                     </div>
                 </div>
-            )}
+            )} */}
         </InnerPageLayout>
     );
 };

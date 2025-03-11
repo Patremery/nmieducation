@@ -111,6 +111,14 @@ const Footer: React.FC = () => {
                                         Notre Catalogue
                                     </Link>
                                 </li>
+                                <li className="mb-2">
+                                    <Link
+                                        href="/authors"
+                                        className="text-white text-decoration-none"
+                                    >
+                                        Nos Auteurs
+                                    </Link>
+                                </li>
                             </ul>
                             {/* <h5 className="mb-3">Notre Actualité</h5>
                             <ul className="list-unstyled">
@@ -181,14 +189,6 @@ const Footer: React.FC = () => {
                                         className="text-white text-decoration-none"
                                     >
                                         Télécharger nos catalogues
-                                    </Link>
-                                </li>
-                                <li className="mb-2">
-                                    <Link
-                                        href="/authors"
-                                        className="text-white text-decoration-none"
-                                    >
-                                        Auteurs
                                     </Link>
                                 </li>
                             </ul>
