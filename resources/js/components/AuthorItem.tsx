@@ -35,7 +35,7 @@ const AuthorItem: React.FC<AuthorItemProps> = ({ index, author, height }) => {
                         objectFit: "cover",
                         width: "100%",
                         padding: 5,
-                        height: height ? height : "400px",
+                        height: height ? height : "250px",
                     }}
                 />
             </Link>
