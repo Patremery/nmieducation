@@ -2,7 +2,9 @@
 
 namespace App\Http\Resources;
 
+use App\Enums\LiteratureGenreEnum;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Enums\ClassroomsEnum;
 
 class BookResource extends JsonResource
 {
@@ -32,8 +34,10 @@ class BookResource extends JsonResource
             'cover' => asset("storage/".$this->featured_image),
             'summary' => $this->summary,
             'audience' => $this->audience,
-            'classrooms' => $this->classrooms ?? [],
-            'genre' => $this->theme,
+            'classrooms' => $this->classrooms ? collect($this->classrooms)->map(function ($classroom) {
+                return ClassroomsEnum::from($classroom)->label();
+            })->toArray() : [],
+            'genre' => $this->theme ? LiteratureGenreEnum::from($this->theme)->label() : null,
         ];
     }
 

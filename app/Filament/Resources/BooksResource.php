@@ -146,7 +146,8 @@ class BooksResource extends Resource
                                                 ->searchable()
                                                 ->visible(fn (Get $get) => 
                                                     static::isCategoryType($get('category_id'), 'literature') or 
-                                                    static::isCategoryType($get('category_id'), 'kids')
+                                                    static::isCategoryType($get('category_id'), 'kids') or 
+                                                    static::isCategoryType($get('category_id'), 'school')
                                                 ),
                                         DatePicker::make('publication_date')
                                             ->label("Date de publication"),
@@ -172,9 +173,6 @@ class BooksResource extends Resource
                                                 ) or static::isCategoryType(
                                                     $get('category_id'),
                                                     'catalog'
-                                                ) or static::isCategoryType(
-                                                    $get('category_id'),
-                                                    'literature'
                                                 ) or static::isCategoryType(
                                                     $get('category_id'),
                                                     'guides'
@@ -234,7 +232,9 @@ class BooksResource extends Resource
                                             ->default(fn ($record) => $record->file ?? null)
                                             ->preserveFilenames()
                                             ->optimize('webp')
-                                            ->required(),
+                                            ->required()
+                                            ->helperText(fn () => 'Taille maximale: ' . ini_get('upload_max_filesize') . ' - Format recommandé: webp')
+                                            ->maxSize(fn () => (int) ini_get('upload_max_filesize')),
                                         FileUpload::make('file')
                                             ->label("Fichier Numérique")
                                             ->acceptedFileTypes(['application/pdf'])
@@ -243,7 +243,9 @@ class BooksResource extends Resource
                                             ->required(fn (Get $get) => (in_array($get('category_id'), [3, 5])))
                                             ->default(fn ($record) => $record->file ?? null)
                                             ->optimize('pdf')
-                                            ->preserveFilenames(),
+                                            ->preserveFilenames()
+                                            ->helperText(fn () => 'Taille maximale: ' . ini_get('upload_max_filesize') . ' - Format recommandé: pdf')
+                                            ->maxSize(fn () => (int) ini_get('upload_max_filesize')),
                                     ]),
                             ])->columnSpan(['lg' => 1]),
                     ])->visible(fn (Get $get) => $get('category_id')),

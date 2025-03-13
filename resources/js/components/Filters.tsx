@@ -283,7 +283,9 @@ const Filters: React.FC<FiltersProps> = ({
                 }`}
             >
                 <div className="row g-3">
-                    {["literature", "kids"].includes(categoryCode) && (
+                    {["literature", "kids", "school"].includes(
+                        categoryCode
+                    ) && (
                         <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                             <div className="filter-group">
                                 <div className="position-relative">
