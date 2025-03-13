@@ -35,9 +35,15 @@ class BookResource extends JsonResource
             'summary' => $this->summary,
             'audience' => $this->audience,
             'classrooms' => $this->classrooms ? collect($this->classrooms)->map(function ($classroom) {
-                return ClassroomsEnum::from($classroom)->label();
+                return in_array($classroom, array_column(ClassroomsEnum::cases(), 'value'))
+                    ? ClassroomsEnum::from($classroom)->label()
+                    : $classroom;
             })->toArray() : [],
-            'genre' => $this->theme ? LiteratureGenreEnum::from($this->theme)->label() : null,
+            'genre' => $this->theme ? (
+                in_array($this->theme, array_column(LiteratureGenreEnum::cases(), 'value')) 
+                    ? LiteratureGenreEnum::from($this->theme)->label() 
+                    : $this->theme
+            ) : null,
         ];
     }
 
