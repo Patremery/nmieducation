@@ -234,7 +234,7 @@ class BooksResource extends Resource
                                             ->optimize('webp')
                                             ->required()
                                             ->helperText(fn () => 'Taille maximale: ' . ini_get('upload_max_filesize') . ' - Format recommandé: webp')
-                                            ->maxSize(fn () => (int) ini_get('upload_max_filesize')),
+                                            ,
                                         FileUpload::make('file')
                                             ->label("Fichier Numérique")
                                             ->acceptedFileTypes(['application/pdf'])
@@ -245,7 +245,7 @@ class BooksResource extends Resource
                                             ->optimize('pdf')
                                             ->preserveFilenames()
                                             ->helperText(fn () => 'Taille maximale: ' . ini_get('upload_max_filesize') . ' - Format recommandé: pdf')
-                                            ->maxSize(fn () => (int) ini_get('upload_max_filesize')),
+                                            ,
                                     ]),
                             ])->columnSpan(['lg' => 1]),
                     ])->visible(fn (Get $get) => $get('category_id')),
