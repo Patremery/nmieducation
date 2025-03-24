@@ -23,6 +23,7 @@ class HomeController extends Controller
     {
         $books = BookResource::collection(Book::published()->with(['authors', 'category', 'collection', 'language'])->get());
 
+
         return Inertia::render('Home', [
             'books' => $books
         ]);

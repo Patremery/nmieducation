@@ -7,6 +7,8 @@ import EbookSection from "../components/EbookSection";
 import GridDisplay1 from "../components/GridDisplay1";
 import CallToAction from "../components/CallToAction";
 import HomeGridDisplay2 from "../components/HomeGridDisplay2";
+import FeaturedBooks from "../components/FeaturedBooks";
+import BookExcerpt from "../components/BookExcerpt";
 
 interface HomeProps {
     books: Book[];
@@ -38,16 +40,37 @@ const Home: React.FC<HomeProps> = ({ books }) => {
     const newBooks = () => {
         return books.filter((book) => book.new === "Yes");
     };
+    const literatureBooks = () => {
+        return books.filter((book) => book.category === "literature");
+    };
+
     return (
         <InnerPageLayout displayBanner={false}>
             <motion.div
-                className="container mt-5"
+                className="container"
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
             >
+                <motion.div variants={itemVariants} className="mb-5">
+                    <FeaturedBooks />
+                </motion.div>
                 <motion.div variants={itemVariants}>
                     <NewArrivals books={newBooks()} />
+                </motion.div>
+                <motion.div variants={itemVariants}>
+                    <BookExcerpt books={literatureBooks()} />
+                </motion.div>
+                <motion.div variants={itemVariants}>
+                    <CallToAction
+                        title="Découvrez notre univers littéraire riche et varié"
+                        description="Nous sommes fiers de promouvoir la diversité culturelle et de soutenir les auteurs camerounais. Notre approche innovante de l'édition garantit des ouvrages modernes et adaptés aux besoins de tous."
+                        buttonText="Contactez-nous"
+                        buttonLink="/contact"
+                        backgroundColor="rgb(3 125 211)"
+                        textColor="black"
+                        titleColor="white"
+                    />
                 </motion.div>
                 <motion.div variants={itemVariants}>
                     <HomeGridDisplay2
@@ -74,6 +97,9 @@ const Home: React.FC<HomeProps> = ({ books }) => {
                         description="Nous sommes à la recherche de nouveaux talents. Si vous êtes un auteur, un éditeur ou un passionné de littérature, n'hésitez pas à nous contacter."
                         buttonText="Contactez-nous"
                         buttonLink="/contact"
+                        backgroundColor="rgb(224 224 224)"
+                        textColor="grey"
+                        titleColor="black"
                     />
                 </motion.div>
             </motion.div>
