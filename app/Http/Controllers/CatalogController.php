@@ -31,7 +31,14 @@ class CatalogController extends Controller
 
     public function show(string $slug)
     {
-        $book = Book::where("slug", $slug)->first()->toResource();
+        $book = Book::where("slug", $slug)->first();
+
+        if(is_null($book)) {
+            return back()->with('error', 'Le livre que vous cherchez n\'existe pas dans notre base de données.');
+        }
+
+        $book = $book->toResource();
+        
         $similarBooks = BookResource::collection(Book::published()
                         ->where("slug", "!=", $slug)
                         ->where('category_id', $book->category_id)

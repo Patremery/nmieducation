@@ -105,6 +105,7 @@ class BooksResource extends Resource
                                         ->default(false),
                                 Select::make('book_language_id')
                                         ->label("Langue")
+                                        ->required()
                                         ->options(BookLanguage::query()->published()->pluck("name", "id")),
                                 Select::make('collection_id')
                                     ->label("Collection")

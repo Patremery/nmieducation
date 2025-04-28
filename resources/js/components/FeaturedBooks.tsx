@@ -12,7 +12,6 @@ const FeaturedBooks = () => {
                 backgroundPosition: "center",
                 marginLeft: "calc(-50vw + 50%)",
                 marginRight: "calc(-50vw + 50%)",
-
                 width: "100vw",
                 position: "relative",
                 padding: "60px",
