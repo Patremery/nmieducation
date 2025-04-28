@@ -35,10 +35,10 @@ trait HasStatus
                             default => 'danger',
                         })
                         ->formatStateUsing(fn (string $state) => match ($state) {
-                            DefaultStatusEnum::PUBLISHED->value => __('general.published'),
-                            DefaultStatusEnum::UNPUBLISHED->value => __('general.unpublished'),
-                            DefaultStatusEnum::DRAFT->value => __('general.draft'),
-                            default => __('general.unpublished'),
+                            DefaultStatusEnum::PUBLISHED->value => trans('general.published'),
+                            DefaultStatusEnum::UNPUBLISHED->value => trans('general.unpublished'),
+                            DefaultStatusEnum::DRAFT->value => trans('general.draft'),
+                            default => trans('general.unpublished'),
                         });
     }
 
