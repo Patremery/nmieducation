@@ -1,0 +1,11 @@
+<?php
+
+return [
+    "Password successfully generated." => "Password successfully generated.",
+    "Profile" => "Profile",
+    "status" => [
+        "published" => "Published",
+        "unpublished" => "Unpublished",
+        "draft" => "Draft"
+    ]
+];
