@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Banner from "../components/Banner";
 import { BannerProps } from "../types/interfaces";
+import Head from "../components/Head";
 
 interface InnerPageLayoutProps {
     children: ReactNode;
@@ -17,6 +18,7 @@ const InnerPageLayout: React.FC<InnerPageLayoutProps> = ({
 }) => {
     return (
         <div className="min-vh-100 d-flex flex-column">
+            <Head />
             <Navbar />
             {displayBanner && (
                 <Banner

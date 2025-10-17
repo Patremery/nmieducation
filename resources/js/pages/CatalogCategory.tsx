@@ -87,9 +87,13 @@ const CatalogCategory: React.FC<CatalogCategoryProps> = ({
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.2 }}
-                    className="mb-5"
+                    className="pb-5"
                 >
-                    <InfiniteScroll data="books" preserve-url>
+                    <InfiniteScroll
+                        data="books"
+                        loading={() => "Loading..."}
+                        preserve-url
+                    >
                         <ItemGrid
                             items={books.data}
                             title={code}
