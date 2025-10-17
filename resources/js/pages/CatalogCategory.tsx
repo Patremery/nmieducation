@@ -77,34 +77,24 @@ const CatalogCategory: React.FC<CatalogCategoryProps> = ({
     );
 
     useEffect(() => {
-        // Ici, nous devons gérer les mises à jour lorsque `initialBooks` change (par exemple, suite à une navigation Inertia ou un filtre)
-        // Si la page actuelle des `initialBooks` est supérieure à la `currentPage` stockée,
-        // cela signifie qu'Inertia a chargé de nouveaux livres pour la page suivante.
-        if ((initialBooks.meta.current_page || 1) > currentPage) {
+        const newCurrentPage = initialBooks.meta.current_page || 1;
+        const newLastPage = initialBooks.meta.last_page || 1;
+        const newHasMore = newCurrentPage < newLastPage;
+
+        // Si la nouvelle page actuelle est supérieure à l'ancienne, nous ajoutons les nouveaux livres.
+        if (newCurrentPage > currentPage) {
             setDisplayedBooks((prevBooks) => [
                 ...prevBooks,
                 ...(initialBooks.data || []),
             ]);
-        } else if (
-            (initialBooks.meta.current_page || 1) === 1 &&
-            (initialBooks.data || []).length > 0
-        ) {
-            // Si c'est la première page, ou un changement de filtre qui réinitialise la pagination,
-            // nous remplaçons les livres affichés.
+        } else if (newCurrentPage === 1) {
+            // Si c'est la première page (ou un reset via les filtres), nous remplaçons les livres.
             setDisplayedBooks(initialBooks.data || []);
-        } else if (
-            (initialBooks.meta.current_page || 1) === 1 &&
-            (initialBooks.data || []).length === 0
-        ) {
-            // Si c'est la première page et qu'il n'y a pas de données, on vide la liste
-            setDisplayedBooks([]);
         }
-        setCurrentPage(initialBooks.meta.current_page || 1);
-        setLastPage(initialBooks.meta.last_page || 1);
-        setHasMore(
-            (initialBooks.meta.current_page || 1) <
-                (initialBooks.meta.last_page || 1)
-        );
+
+        setCurrentPage(newCurrentPage);
+        setLastPage(newLastPage);
+        setHasMore(newHasMore);
     }, [initialBooks]);
 
     const fetchMoreBooks = () => {
@@ -119,7 +109,9 @@ const CatalogCategory: React.FC<CatalogCategoryProps> = ({
             {
                 preserveScroll: true,
                 preserveState: true,
-                onFinish: () => setLoading(false),
+                onFinish: () => {
+                    setLoading(false);
+                },
             }
         );
     };
