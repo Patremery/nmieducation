@@ -87,10 +87,13 @@ class CatalogController extends Controller
             });
         }
 
+        $perPage = 12; // Nombre de livres par page
+        $page = $request->input('page', 1); // Page actuelle, par défaut 1
+
         $data = $query->published()
                       ->where('category_id', $category->id)
                       ->with(['authors','category', 'collection', 'language'])
-                      ->get();
+                      ->paginate($perPage, ['*'], 'page', $page);
 
         $books = BookResource::collection($data);
         $authors = AuthorResource::collection(Author::published()->whereHas('books', function ($q) use ($category) {
@@ -112,6 +115,10 @@ class CatalogController extends Controller
             'themes' => $themes,
             'collections' => $collections,
             'subjects' => $subjects,
+            'currentPage' => $data->currentPage(),
+            'lastPage' => $data->lastPage(),
+            'perPage' => $data->perPage(),
+            'total' => $data->total(),
         ]);
     }
 
