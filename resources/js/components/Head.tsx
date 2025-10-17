@@ -1,9 +1,9 @@
 import { Head as InertiaHead, usePage } from "@inertiajs/react";
-const Head = () => {
+const Head = ({ title }: { title: string }) => {
     const { settings } = usePage().props;
     return (
         <InertiaHead>
-            <title>{settings.site_name}</title>
+            <title>{title}</title>
             <meta name="description" content={settings.site_description} />
             <meta name="keywords" content={settings.site_keywords} />
             <meta name="author" content="NMI Education" />

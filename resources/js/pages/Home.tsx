@@ -45,7 +45,7 @@ const Home: React.FC<HomeProps> = ({ books }) => {
     };
 
     return (
-        <InnerPageLayout displayBanner={false}>
+        <InnerPageLayout title="Accueil" displayBanner={false}>
             <motion.div
                 className="container"
                 variants={containerVariants}

@@ -15,7 +15,7 @@ const ViewAuthor: React.FC<ViewAuthorProps> = ({ author, books }) => {
     };
 
     return (
-        <InnerPageLayout banner={banner}>
+        <InnerPageLayout title={author.name} banner={banner}>
             <div className="container p-5">
                 <SingleAuthorInformations author={author} books={books} />
             </div>

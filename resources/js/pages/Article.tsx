@@ -79,6 +79,7 @@ const Article: React.FC<ArticleProps> = ({
             banner={{
                 title: post.title,
             }}
+            title={post.title}
         >
             <div className="container py-4 py-md-5">
                 <div className="row">

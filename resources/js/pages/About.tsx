@@ -25,7 +25,7 @@ const About = ({ team }: { team: Team[] }) => {
     ];
 
     return (
-        <InnerPageLayout displayBanner={false}>
+        <InnerPageLayout title="A Propos" displayBanner={false}>
             <div className="container-fluid p-0">
                 <HeroSlider slides={slides} />
 

@@ -15,7 +15,7 @@ const Authors: React.FC<AuthorsProps> = ({ title, authors }) => {
         title: title,
     };
     return (
-        <InnerPageLayout banner={banner}>
+        <InnerPageLayout title="Nos Auteurs" banner={banner}>
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

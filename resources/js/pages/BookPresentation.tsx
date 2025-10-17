@@ -24,7 +24,7 @@ const BookPresentation: React.FC<BookPresentationProps> = ({
     };
 
     return (
-        <InnerPageLayout banner={banner}>
+        <InnerPageLayout title={book.title} banner={banner}>
             <div className="container p-5">
                 <SingleBookInformations book={book} />
             </div>

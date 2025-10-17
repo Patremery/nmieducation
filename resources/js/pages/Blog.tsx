@@ -54,6 +54,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
             banner={{
                 title: "Actualité",
             }}
+            title="Blog"
         >
             <div className="container mt-5 p-5">
                 <div className="row">

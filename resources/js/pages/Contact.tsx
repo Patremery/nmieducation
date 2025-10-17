@@ -44,7 +44,7 @@ const Contact: React.FC<ContactProps> = ({ contacts }) => {
     };
 
     return (
-        <InnerPageLayout banner={banner}>
+        <InnerPageLayout title="Contact" banner={banner}>
             <div className="container p-2 p-md-3">
                 <div className="row px-2 px-md-4 px-lg-5 mt-3 mt-md-5">
                     <div className="col-md-12 text-center">

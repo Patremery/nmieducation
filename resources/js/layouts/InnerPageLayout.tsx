@@ -9,16 +9,18 @@ interface InnerPageLayoutProps {
     children: ReactNode;
     banner?: BannerProps;
     displayBanner?: boolean;
+    title?: string;
 }
 
 const InnerPageLayout: React.FC<InnerPageLayoutProps> = ({
     children,
     banner,
     displayBanner = true,
+    title = "Accueil",
 }) => {
     return (
         <>
-            <Head />
+            <Head title={title} />
             <div className="min-vh-100 d-flex flex-column">
                 <Navbar />
                 {displayBanner && (

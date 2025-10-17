@@ -51,7 +51,7 @@ const Catalogue: React.FC<CatalogueProps> = ({ books }) => {
         title: "Nos Livres",
     };
     return (
-        <InnerPageLayout banner={banner}>
+        <InnerPageLayout banner={banner} title="Catalogue">
             <motion.div
                 className="container mt-5"
                 variants={containerVariants}

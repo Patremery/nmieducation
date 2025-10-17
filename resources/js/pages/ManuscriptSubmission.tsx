@@ -12,7 +12,7 @@ const ManuscriptSubmission = () => {
         className: "lead font-weight-600 p-5 display-7",
     };
     return (
-        <InnerPageLayout banner={banner}>
+        <InnerPageLayout title="Soumettre un Manuscrit" banner={banner}>
             <div className="manuscript-submission py-5 my-5">
                 <div className="container">
                     <div className="row justify-content-center">

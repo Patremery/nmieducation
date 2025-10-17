@@ -19,7 +19,7 @@ const BecomeDistributor = () => {
     };
 
     return (
-        <InnerPageLayout banner={banner}>
+        <InnerPageLayout title="Devenir Distributeur" banner={banner}>
             <div className="container p-2">
                 <div className="row px-5 mt-5">
                     <div className="col-md-10 text-center mx-auto">

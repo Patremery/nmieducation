@@ -13,7 +13,7 @@ const JoinUs = () => {
         className: "lead font-weight-600 p-5 display-7",
     };
     return (
-        <InnerPageLayout banner={banner}>
+        <InnerPageLayout title="Rejoignez-nous" banner={banner}>
             <div className="container" style={{ padding: "50px 20px" }}>
                 <div className="row">
                     {/* Left Column - Form */}
