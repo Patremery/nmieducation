@@ -6,8 +6,7 @@ import "sweetalert2/dist/sweetalert2.min.css";
 import "../css/app.css";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 
-const appName =
-    window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
+const appName = "NMI Education";
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
