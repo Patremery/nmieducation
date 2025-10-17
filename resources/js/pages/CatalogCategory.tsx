@@ -4,7 +4,7 @@ import Filters from "../components/Filters";
 import EbookSection from "../components/EbookSection";
 import InnerPageLayout from "../layouts/InnerPageLayout";
 import ItemGrid from "../components/ItemGrid";
-import { router } from "@inertiajs/react";
+import { InfiniteScroll } from "@inertiajs/react"; // Importer InfiniteScroll
 import {
     Author,
     BannerProps,
@@ -17,7 +17,7 @@ interface CatalogCategoryProps {
     title: string;
     books: {
         data: any[];
-        links: any[]; // Ajout pour la structure complète si nécessaire
+        links: any[];
         meta: {
             current_page: number;
             from: number;
@@ -39,19 +39,7 @@ interface CatalogCategoryProps {
 const CatalogCategory: React.FC<CatalogCategoryProps> = ({
     code,
     title,
-    books: initialBooks = {
-        data: [],
-        links: [],
-        meta: {
-            current_page: 1,
-            from: 0,
-            last_page: 1,
-            path: "",
-            per_page: 12,
-            to: 0,
-            total: 0,
-        },
-    },
+    books,
     authors,
     languages,
     classrooms,
@@ -62,74 +50,6 @@ const CatalogCategory: React.FC<CatalogCategoryProps> = ({
     const banner: BannerProps = {
         title: "Notre Catalogue",
     };
-
-    const [displayedBooks, setDisplayedBooks] = useState(
-        initialBooks.data || []
-    );
-    const [currentPage, setCurrentPage] = useState(
-        initialBooks.meta.current_page || 1
-    );
-    const [lastPage, setLastPage] = useState(initialBooks.meta.last_page || 1);
-    const [loading, setLoading] = useState(false);
-    const [hasMore, setHasMore] = useState(
-        (initialBooks.meta.current_page || 1) <
-            (initialBooks.meta.last_page || 1)
-    );
-
-    useEffect(() => {
-        const newCurrentPage = initialBooks.meta.current_page || 1;
-        const newLastPage = initialBooks.meta.last_page || 1;
-        const newHasMore = newCurrentPage < newLastPage;
-
-        // Si la nouvelle page actuelle est supérieure à l'ancienne, nous ajoutons les nouveaux livres.
-        if (newCurrentPage > currentPage) {
-            setDisplayedBooks((prevBooks) => [
-                ...prevBooks,
-                ...(initialBooks.data || []),
-            ]);
-        } else if (newCurrentPage === 1) {
-            // Si c'est la première page (ou un reset via les filtres), nous remplaçons les livres.
-            setDisplayedBooks(initialBooks.data || []);
-        }
-
-        setCurrentPage(newCurrentPage);
-        setLastPage(newLastPage);
-        setHasMore(newHasMore);
-    }, [initialBooks]);
-
-    const fetchMoreBooks = () => {
-        if (loading || !hasMore) return;
-
-        setLoading(true);
-        const nextPage = currentPage + 1;
-
-        router.get(
-            window.location.pathname,
-            { page: nextPage },
-            {
-                preserveScroll: true,
-                preserveState: true,
-                onFinish: () => {
-                    setLoading(false);
-                },
-            }
-        );
-    };
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const scrollThresholdMet =
-                window.innerHeight + document.documentElement.scrollTop >=
-                document.documentElement.offsetHeight - 100; // -100 pour charger un peu avant la fin
-
-            if (scrollThresholdMet && hasMore && !loading) {
-                fetchMoreBooks();
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, [currentPage, lastPage, loading, hasMore]);
 
     const getDisplayHeight = () => {
         if (["kids", "catalog"].includes(code)) {
@@ -168,14 +88,15 @@ const CatalogCategory: React.FC<CatalogCategoryProps> = ({
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.2 }}
                 >
-                    <ItemGrid
-                        items={displayedBooks}
-                        title={code}
-                        height={getDisplayHeight()}
-                        itemsToShow={12}
-                    />
+                    <InfiniteScroll data="books" preserve-url>
+                        <ItemGrid
+                            items={books.data}
+                            title={code}
+                            height={getDisplayHeight()}
+                            itemsToShow={books.data.length}
+                        />
+                    </InfiniteScroll>
                 </motion.div>
-                {loading && <p className="text-center">Chargement...</p>}
 
                 <motion.div
                     initial={{ opacity: 0 }}

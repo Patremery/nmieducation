@@ -94,9 +94,9 @@ class CatalogController extends Controller
                       ->latest()
                       ->where('category_id', $category->id)
                       ->with(['authors','category', 'collection', 'language'])
-                      ->paginate($perPage, ['*'], 'page', $page);
+                      ->paginate();
 
-        $books = BookResource::collection($data);
+        $books = Inertia::scroll(BookResource::collection($data));
         $authors = AuthorResource::collection(Author::published()->whereHas('books', function ($q) use ($category) {
             $q->where('category_id', $category->id);
         })->get());
@@ -116,10 +116,6 @@ class CatalogController extends Controller
             'themes' => $themes,
             'collections' => $collections,
             'subjects' => $subjects,
-            'currentPage' => $data->currentPage(),
-            'lastPage' => $data->lastPage(),
-            'perPage' => $data->perPage(),
-            'total' => $data->total(),
         ]);
     }
 
