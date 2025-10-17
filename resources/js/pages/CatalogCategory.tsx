@@ -15,15 +15,19 @@ import {
 interface CatalogCategoryProps {
     code: string;
     title: string;
-    books: any[];
+    books: {
+        data: any[];
+        current_page: number;
+        last_page: number;
+        per_page: number;
+        total: number;
+    };
     authors: Author[];
     languages: BookLanguage[];
     classrooms: string[];
     themes: string[];
     collections: Collection[];
     subjects: string[];
-    currentPage: number;
-    lastPage: number;
 }
 
 const CatalogCategory: React.FC<CatalogCategoryProps> = ({
@@ -36,34 +40,32 @@ const CatalogCategory: React.FC<CatalogCategoryProps> = ({
     themes,
     collections,
     subjects,
-    currentPage: initialCurrentPage,
-    lastPage: initialLastPage,
 }) => {
     const banner: BannerProps = {
         title: "Notre Catalogue",
     };
 
-    const [displayedBooks, setDisplayedBooks] = useState(books);
-    const [currentPage, setCurrentPage] = useState(initialCurrentPage);
-    const [lastPage, setLastPage] = useState(initialLastPage);
+    const [displayedBooks, setDisplayedBooks] = useState(books.data);
+    const [currentPage, setCurrentPage] = useState(books.current_page);
+    const [lastPage, setLastPage] = useState(books.last_page);
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(
-        initialCurrentPage < initialLastPage
+        books.current_page < books.last_page
     );
 
     useEffect(() => {
         // Si la nouvelle page est supérieure à la page actuelle, cela signifie qu'Inertia a chargé de nouveaux livres.
         // Nous les ajoutons à la liste existante.
-        if (initialCurrentPage > currentPage) {
-            setDisplayedBooks((prevBooks) => [...prevBooks, ...books]);
+        if (books.current_page > currentPage) {
+            setDisplayedBooks((prevBooks) => [...prevBooks, ...books.data]);
         } else {
             // Sinon, c'est un chargement initial ou un changement de filtre qui remplace les livres.
-            setDisplayedBooks(books);
+            setDisplayedBooks(books.data);
         }
-        setCurrentPage(initialCurrentPage);
-        setLastPage(initialLastPage);
-        setHasMore(initialCurrentPage < initialLastPage);
-    }, [books, initialCurrentPage, initialLastPage]);
+        setCurrentPage(books.current_page);
+        setLastPage(books.last_page);
+        setHasMore(books.current_page < books.last_page);
+    }, [books]);
 
     const fetchMoreBooks = () => {
         if (loading || !hasMore) return;
