@@ -21,8 +21,7 @@ class HomeController extends Controller
 {
      public function index()
     {
-        $books = BookResource::collection(Book::published()->with(['authors', 'category', 'collection', 'language'])->get());
-
+        $books = BookResource::collection(Book::published()->with(['authors', 'category', 'collection', 'language'])->latest()->get());
 
         return Inertia::render('Home', [
             'books' => $books
@@ -65,7 +64,7 @@ class HomeController extends Controller
         ]);
     }
     public function blog() {
-        $posts = PostResource::collection(Post::published()->with(['categories', 'tags'])->get());
+        $posts = PostResource::collection(Post::published()->with(['categories', 'tags'])->latest()->get());
 
         return Inertia::render('Blog', [
             'posts' => $posts

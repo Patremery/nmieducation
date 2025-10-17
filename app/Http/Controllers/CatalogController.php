@@ -91,6 +91,7 @@ class CatalogController extends Controller
         $page = $request->input('page', 1); // Page actuelle, par défaut 1
 
         $data = $query->published()
+                      ->latest()
                       ->where('category_id', $category->id)
                       ->with(['authors','category', 'collection', 'language'])
                       ->paginate($perPage, ['*'], 'page', $page);
