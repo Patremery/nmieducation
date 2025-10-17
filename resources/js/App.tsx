@@ -6,12 +6,15 @@ import "sweetalert2/dist/sweetalert2.min.css";
 import "../css/app.css";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 
+const appName =
+    window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
+
 createInertiaApp({
-    title: (title) => `${title} - NMI Education`,
+    title: (title) => `${title} - ${appName}`,
     resolve: (name) =>
         resolvePageComponent(
-            `./Pages/${name}.tsx`,
-            import.meta.glob("./Pages/**/*.tsx")
+            `./pages/${name}.tsx`,
+            import.meta.glob("./pages/**/*.tsx")
         ),
     setup({ el, App, props }) {
         const root = createRoot(el);
