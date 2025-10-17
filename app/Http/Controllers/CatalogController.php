@@ -87,9 +87,7 @@ class CatalogController extends Controller
             });
         }
 
-        $perPage = 12; // Nombre de livres par page
-        $page = $request->input('page', 1); // Page actuelle, par défaut 1
-
+        $perPage = 12; 
         $data = $query->published()
                       ->latest()
                       ->where('category_id', $category->id)
