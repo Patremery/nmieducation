@@ -17,10 +17,16 @@ interface CatalogCategoryProps {
     title: string;
     books: {
         data: any[];
-        current_page: number;
-        last_page: number;
-        per_page: number;
-        total: number;
+        links: any[]; // Ajout pour la structure complète si nécessaire
+        meta: {
+            current_page: number;
+            from: number;
+            last_page: number;
+            path: string;
+            per_page: number;
+            to: number;
+            total: number;
+        };
     };
     authors: Author[];
     languages: BookLanguage[];
@@ -35,10 +41,16 @@ const CatalogCategory: React.FC<CatalogCategoryProps> = ({
     title,
     books: initialBooks = {
         data: [],
-        current_page: 1,
-        last_page: 1,
-        per_page: 12,
-        total: 0,
+        links: [],
+        meta: {
+            current_page: 1,
+            from: 0,
+            last_page: 1,
+            path: "",
+            per_page: 12,
+            to: 0,
+            total: 0,
+        },
     },
     authors,
     languages,
@@ -51,66 +63,51 @@ const CatalogCategory: React.FC<CatalogCategoryProps> = ({
         title: "Notre Catalogue",
     };
 
-    console.log("Initial Props:", {
-        initialBooks,
-        currentPage: initialBooks.current_page,
-        lastPage: initialBooks.last_page,
-    });
-
     const [displayedBooks, setDisplayedBooks] = useState(
         initialBooks.data || []
     );
     const [currentPage, setCurrentPage] = useState(
-        initialBooks.current_page || 1
+        initialBooks.meta.current_page || 1
     );
-    const [lastPage, setLastPage] = useState(initialBooks.last_page || 1);
+    const [lastPage, setLastPage] = useState(initialBooks.meta.last_page || 1);
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(
-        (initialBooks.current_page || 1) < (initialBooks.last_page || 1)
+        (initialBooks.meta.current_page || 1) <
+            (initialBooks.meta.last_page || 1)
     );
 
     useEffect(() => {
-        console.log("useEffect initialBooks triggered:", {
-            initialBooks,
-            currentPage,
-            lastPage,
-            hasMore,
-        });
         // Ici, nous devons gérer les mises à jour lorsque `initialBooks` change (par exemple, suite à une navigation Inertia ou un filtre)
         // Si la page actuelle des `initialBooks` est supérieure à la `currentPage` stockée,
         // cela signifie qu'Inertia a chargé de nouveaux livres pour la page suivante.
-        if ((initialBooks.current_page || 1) > currentPage) {
+        if ((initialBooks.meta.current_page || 1) > currentPage) {
             setDisplayedBooks((prevBooks) => [
                 ...prevBooks,
                 ...(initialBooks.data || []),
             ]);
         } else if (
-            (initialBooks.current_page || 1) === 1 &&
+            (initialBooks.meta.current_page || 1) === 1 &&
             (initialBooks.data || []).length > 0
         ) {
             // Si c'est la première page, ou un changement de filtre qui réinitialise la pagination,
             // nous remplaçons les livres affichés.
             setDisplayedBooks(initialBooks.data || []);
         } else if (
-            (initialBooks.current_page || 1) === 1 &&
+            (initialBooks.meta.current_page || 1) === 1 &&
             (initialBooks.data || []).length === 0
         ) {
             // Si c'est la première page et qu'il n'y a pas de données, on vide la liste
             setDisplayedBooks([]);
         }
-        setCurrentPage(initialBooks.current_page || 1);
-        setLastPage(initialBooks.last_page || 1);
+        setCurrentPage(initialBooks.meta.current_page || 1);
+        setLastPage(initialBooks.meta.last_page || 1);
         setHasMore(
-            (initialBooks.current_page || 1) < (initialBooks.last_page || 1)
+            (initialBooks.meta.current_page || 1) <
+                (initialBooks.meta.last_page || 1)
         );
     }, [initialBooks]);
 
     const fetchMoreBooks = () => {
-        console.log("fetchMoreBooks called.", {
-            loading,
-            hasMore,
-            currentPage,
-        });
         if (loading || !hasMore) return;
 
         setLoading(true);
@@ -133,12 +130,6 @@ const CatalogCategory: React.FC<CatalogCategoryProps> = ({
                 window.innerHeight + document.documentElement.scrollTop >=
                 document.documentElement.offsetHeight - 100; // -100 pour charger un peu avant la fin
 
-            console.log("handleScroll triggered:", {
-                scrollThresholdMet,
-                hasMore,
-                loading,
-            });
-
             if (scrollThresholdMet && hasMore && !loading) {
                 fetchMoreBooks();
             }
@@ -155,8 +146,6 @@ const CatalogCategory: React.FC<CatalogCategoryProps> = ({
 
         return 270;
     };
-
-    console.log("Displayed Books:", displayedBooks);
 
     return (
         <InnerPageLayout banner={banner}>
@@ -195,11 +184,7 @@ const CatalogCategory: React.FC<CatalogCategoryProps> = ({
                     />
                 </motion.div>
                 {loading && <p className="text-center">Chargement...</p>}
-                {!hasMore && (
-                    <p className="text-center">
-                        Tous les livres ont été affichés.
-                    </p>
-                )}
+
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
