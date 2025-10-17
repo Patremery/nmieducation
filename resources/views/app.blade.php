@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     @inertiaHead
     @viteReactRefresh
-    @vite(['resources/css/app.css', 'resources/js/app.tsx'])
+    @vite(['resources/css/app.css', 'resources/js/App.tsx'])
   </head>
-  <body style="margin: 0">
+  <body class="font-sans antialiased">
     @inertia
   </body>  
 </html>
