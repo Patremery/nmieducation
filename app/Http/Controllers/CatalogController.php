@@ -22,7 +22,7 @@ class CatalogController extends Controller
 {
     public function index(string $search = null)
     {
-        $books = BookResource::collection(Book::published()->with(['authors', 'category', 'collection', 'language'])->get());
+        $books = BookResource::collection(Book::published()->with(['authors', 'category', 'collection', 'language'])->latest()->get());
 
         return Inertia::render('Catalogue', [
             'books' => $books
