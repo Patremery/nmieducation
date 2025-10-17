@@ -11,7 +11,7 @@ const Head = () => {
                 name="viewport"
                 content="width=device-width, initial-scale=1.0"
             />
-            <link rel="icon" href={settings.site_favicon} />
+            <link rel="icon" href={settings.favicon} />
         </InertiaHead>
     );
 };

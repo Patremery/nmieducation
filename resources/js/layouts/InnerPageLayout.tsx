@@ -17,26 +17,28 @@ const InnerPageLayout: React.FC<InnerPageLayoutProps> = ({
     displayBanner = true,
 }) => {
     return (
-        <div className="min-vh-100 d-flex flex-column">
+        <>
             <Head />
-            <Navbar />
-            {displayBanner && (
-                <Banner
-                    title={banner?.title}
-                    description={banner?.description}
-                    backgroundImage={banner?.backgroundImage}
-                    textAlign={banner?.textAlign || "center"}
-                    className={banner?.className}
-                />
-            )}
-            <main
-                className="flex-grow-1"
-                style={{ backgroundColor: "#F7F7F7" }}
-            >
-                {children}
-            </main>
-            <Footer />
-        </div>
+            <div className="min-vh-100 d-flex flex-column">
+                <Navbar />
+                {displayBanner && (
+                    <Banner
+                        title={banner?.title}
+                        description={banner?.description}
+                        backgroundImage={banner?.backgroundImage}
+                        textAlign={banner?.textAlign || "center"}
+                        className={banner?.className}
+                    />
+                )}
+                <main
+                    className="flex-grow-1"
+                    style={{ backgroundColor: "#F7F7F7" }}
+                >
+                    {children}
+                </main>
+                <Footer />
+            </div>
+        </>
     );
 };
 
