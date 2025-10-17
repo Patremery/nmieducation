@@ -94,7 +94,7 @@ class CatalogController extends Controller
                       ->latest()
                       ->where('category_id', $category->id)
                       ->with(['authors','category', 'collection', 'language'])
-                      ->paginate();
+                      ->paginate($perPage);
 
         $books = Inertia::scroll(BookResource::collection($data));
         $authors = AuthorResource::collection(Author::published()->whereHas('books', function ($q) use ($category) {
