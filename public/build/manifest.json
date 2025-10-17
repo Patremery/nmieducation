@@ -1,14 +1,14 @@
 {
-  "_BookItem-CUTGBOUs.js": {
-    "file": "assets/BookItem-CUTGBOUs.js",
+  "_BookItem-HUjfsMa-.js": {
+    "file": "assets/BookItem-HUjfsMa-.js",
     "name": "BookItem",
     "imports": [
       "resources/js/App.tsx",
-      "_proxy-DBVJNPXp.js"
+      "_proxy-B-HZI2L-.js"
     ]
   },
-  "_EbookSection-B8cqo55W.js": {
-    "file": "assets/EbookSection-B8cqo55W.js",
+  "_EbookSection-C-Gt5nQt.js": {
+    "file": "assets/EbookSection-C-Gt5nQt.js",
     "name": "EbookSection",
     "imports": [
       "resources/js/App.tsx"
@@ -20,8 +20,8 @@
       "assets/amazon-Dw6rYaWB.png"
     ]
   },
-  "_InnerPageLayout-isAzB2Ku.js": {
-    "file": "assets/InnerPageLayout-isAzB2Ku.js",
+  "_InnerPageLayout-dQBO9lTJ.js": {
+    "file": "assets/InnerPageLayout-dQBO9lTJ.js",
     "name": "InnerPageLayout",
     "imports": [
       "resources/js/App.tsx"
@@ -32,24 +32,24 @@
       "assets/banner-DtbGbjVo.jpg"
     ]
   },
-  "_ItemGrid-CmFM_hYY.js": {
-    "file": "assets/ItemGrid-CmFM_hYY.js",
+  "_ItemGrid-SR_DMQ-X.js": {
+    "file": "assets/ItemGrid-SR_DMQ-X.js",
     "name": "ItemGrid",
     "imports": [
       "resources/js/App.tsx",
-      "_BookItem-CUTGBOUs.js"
+      "_BookItem-HUjfsMa-.js"
     ]
   },
   "_NewArrivals-!~{00q}~.js": {
     "file": "assets/NewArrivals-DkBSsmpK.css",
     "src": "_NewArrivals-!~{00q}~.js"
   },
-  "_NewArrivals-Coo5J7hy.js": {
-    "file": "assets/NewArrivals-Coo5J7hy.js",
+  "_NewArrivals-BV2wtS0E.js": {
+    "file": "assets/NewArrivals-BV2wtS0E.js",
     "name": "NewArrivals",
     "imports": [
       "resources/js/App.tsx",
-      "_Slider-B_CSfBMD.js"
+      "_Slider-BoptU0aA.js"
     ],
     "css": [
       "assets/NewArrivals-DkBSsmpK.css"
@@ -62,12 +62,12 @@
       "assets/slick-BlzDm7g2.svg"
     ]
   },
-  "_Slider-B_CSfBMD.js": {
-    "file": "assets/Slider-B_CSfBMD.js",
+  "_Slider-BoptU0aA.js": {
+    "file": "assets/Slider-BoptU0aA.js",
     "name": "Slider",
     "imports": [
       "resources/js/App.tsx",
-      "_BookItem-CUTGBOUs.js"
+      "_BookItem-HUjfsMa-.js"
     ]
   },
   "_default-lqQUKbo2.js": {
@@ -77,22 +77,22 @@
       "assets/default-vTumSY3j.png"
     ]
   },
-  "_index-BFuFJwd9.js": {
-    "file": "assets/index-BFuFJwd9.js",
+  "_index-CyHg8OyR.js": {
+    "file": "assets/index-CyHg8OyR.js",
     "name": "index",
     "imports": [
       "resources/js/App.tsx"
     ]
   },
-  "_index-HkaT-aHm.js": {
-    "file": "assets/index-HkaT-aHm.js",
+  "_index-oVHbJy96.js": {
+    "file": "assets/index-oVHbJy96.js",
     "name": "index",
     "imports": [
       "resources/js/App.tsx"
     ]
   },
-  "_proxy-DBVJNPXp.js": {
-    "file": "assets/proxy-DBVJNPXp.js",
+  "_proxy-B-HZI2L-.js": {
+    "file": "assets/proxy-B-HZI2L-.js",
     "name": "proxy",
     "imports": [
       "resources/js/App.tsx"
@@ -102,8 +102,8 @@
     "file": "assets/style-Bbgo5x5y.css",
     "src": "_style-!~{00n}~.js"
   },
-  "_style-g8uhVFYr.js": {
-    "file": "assets/style-g8uhVFYr.js",
+  "_style-BJA0Xlrm.js": {
+    "file": "assets/style-BJA0Xlrm.js",
     "name": "style",
     "imports": [
       "resources/js/App.tsx"
@@ -143,7 +143,7 @@
     "isEntry": true
   },
   "resources/js/App.tsx": {
-    "file": "assets/App-BQi2gLBz.js",
+    "file": "assets/App-CLMlBvF2.js",
     "name": "App",
     "src": "resources/js/App.tsx",
     "isEntry": true,
@@ -232,13 +232,13 @@
     "src": "resources/js/assets/img/youscribe.png"
   },
   "resources/js/pages/About.tsx": {
-    "file": "assets/About-BfT8Kt-c.js",
+    "file": "assets/About-BU8tkWcz.js",
     "name": "About",
     "src": "resources/js/pages/About.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/App.tsx",
-      "_InnerPageLayout-isAzB2Ku.js"
+      "_InnerPageLayout-dQBO9lTJ.js"
     ],
     "css": [
       "assets/app-COs-ziQ1.css"
@@ -250,123 +250,123 @@
     ]
   },
   "resources/js/pages/Article.tsx": {
-    "file": "assets/Article-DJsvqK92.js",
+    "file": "assets/Article-CeKyYy-x.js",
     "name": "Article",
     "src": "resources/js/pages/Article.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/App.tsx",
-      "_InnerPageLayout-isAzB2Ku.js",
-      "_index-BFuFJwd9.js",
-      "_index-HkaT-aHm.js"
+      "_InnerPageLayout-dQBO9lTJ.js",
+      "_index-oVHbJy96.js",
+      "_index-CyHg8OyR.js"
     ],
     "css": [
       "assets/app-COs-ziQ1.css"
     ]
   },
   "resources/js/pages/Authors.tsx": {
-    "file": "assets/Authors-BtwRUps5.js",
+    "file": "assets/Authors-BsRR8wGI.js",
     "name": "Authors",
     "src": "resources/js/pages/Authors.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/App.tsx",
-      "_EbookSection-B8cqo55W.js",
-      "_InnerPageLayout-isAzB2Ku.js",
+      "_EbookSection-C-Gt5nQt.js",
+      "_InnerPageLayout-dQBO9lTJ.js",
       "_default-lqQUKbo2.js",
-      "_proxy-DBVJNPXp.js"
+      "_proxy-B-HZI2L-.js"
     ],
     "css": [
       "assets/app-COs-ziQ1.css"
     ]
   },
   "resources/js/pages/BecomeDistributor.tsx": {
-    "file": "assets/BecomeDistributor-Db3Gz0Kr.js",
+    "file": "assets/BecomeDistributor-BU-DiCij.js",
     "name": "BecomeDistributor",
     "src": "resources/js/pages/BecomeDistributor.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/App.tsx",
-      "_InnerPageLayout-isAzB2Ku.js"
+      "_InnerPageLayout-dQBO9lTJ.js"
     ],
     "css": [
       "assets/app-COs-ziQ1.css"
     ]
   },
   "resources/js/pages/Blog.tsx": {
-    "file": "assets/Blog-CBy4X_jb.js",
+    "file": "assets/Blog-KMZteDYy.js",
     "name": "Blog",
     "src": "resources/js/pages/Blog.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/App.tsx",
-      "_InnerPageLayout-isAzB2Ku.js",
-      "_index-BFuFJwd9.js"
+      "_InnerPageLayout-dQBO9lTJ.js",
+      "_index-oVHbJy96.js"
     ],
     "css": [
       "assets/app-COs-ziQ1.css"
     ]
   },
   "resources/js/pages/BookPresentation.tsx": {
-    "file": "assets/BookPresentation-Bi99nr9g.js",
+    "file": "assets/BookPresentation-DCFlBwL7.js",
     "name": "BookPresentation",
     "src": "resources/js/pages/BookPresentation.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/App.tsx",
-      "_InnerPageLayout-isAzB2Ku.js",
-      "_style-g8uhVFYr.js"
+      "_InnerPageLayout-dQBO9lTJ.js",
+      "_style-BJA0Xlrm.js"
     ],
     "css": [
       "assets/app-COs-ziQ1.css"
     ]
   },
   "resources/js/pages/CatalogCategory.tsx": {
-    "file": "assets/CatalogCategory-7X3jThoL.js",
+    "file": "assets/CatalogCategory-Bs2Vd9lj.js",
     "name": "CatalogCategory",
     "src": "resources/js/pages/CatalogCategory.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/App.tsx",
-      "_EbookSection-B8cqo55W.js",
-      "_InnerPageLayout-isAzB2Ku.js",
-      "_ItemGrid-CmFM_hYY.js",
-      "_proxy-DBVJNPXp.js",
-      "_BookItem-CUTGBOUs.js"
+      "_EbookSection-C-Gt5nQt.js",
+      "_InnerPageLayout-dQBO9lTJ.js",
+      "_ItemGrid-SR_DMQ-X.js",
+      "_proxy-B-HZI2L-.js",
+      "_BookItem-HUjfsMa-.js"
     ],
     "css": [
       "assets/app-COs-ziQ1.css"
     ]
   },
   "resources/js/pages/Catalogue.tsx": {
-    "file": "assets/Catalogue-DqqceSE9.js",
+    "file": "assets/Catalogue-CX16Fnu-.js",
     "name": "Catalogue",
     "src": "resources/js/pages/Catalogue.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/App.tsx",
-      "_NewArrivals-Coo5J7hy.js",
-      "_EbookSection-B8cqo55W.js",
-      "_InnerPageLayout-isAzB2Ku.js",
-      "_ItemGrid-CmFM_hYY.js",
-      "_proxy-DBVJNPXp.js",
-      "_Slider-B_CSfBMD.js",
-      "_BookItem-CUTGBOUs.js"
+      "_NewArrivals-BV2wtS0E.js",
+      "_EbookSection-C-Gt5nQt.js",
+      "_InnerPageLayout-dQBO9lTJ.js",
+      "_ItemGrid-SR_DMQ-X.js",
+      "_proxy-B-HZI2L-.js",
+      "_Slider-BoptU0aA.js",
+      "_BookItem-HUjfsMa-.js"
     ],
     "css": [
       "assets/app-COs-ziQ1.css"
     ]
   },
   "resources/js/pages/Contact.tsx": {
-    "file": "assets/Contact-DM4qAfbi.js",
+    "file": "assets/Contact-DQhJ14Qo.js",
     "name": "Contact",
     "src": "resources/js/pages/Contact.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/App.tsx",
-      "_InnerPageLayout-isAzB2Ku.js",
-      "_style-g8uhVFYr.js",
-      "_index-HkaT-aHm.js"
+      "_InnerPageLayout-dQBO9lTJ.js",
+      "_style-BJA0Xlrm.js",
+      "_index-CyHg8OyR.js"
     ],
     "css": [
       "assets/app-COs-ziQ1.css"
@@ -376,18 +376,18 @@
     ]
   },
   "resources/js/pages/Home.tsx": {
-    "file": "assets/Home-CCHp3dYx.js",
+    "file": "assets/Home-Qn-CxJoS.js",
     "name": "Home",
     "src": "resources/js/pages/Home.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/App.tsx",
-      "_InnerPageLayout-isAzB2Ku.js",
-      "_NewArrivals-Coo5J7hy.js",
-      "_EbookSection-B8cqo55W.js",
-      "_proxy-DBVJNPXp.js",
-      "_Slider-B_CSfBMD.js",
-      "_BookItem-CUTGBOUs.js"
+      "_InnerPageLayout-dQBO9lTJ.js",
+      "_NewArrivals-BV2wtS0E.js",
+      "_EbookSection-C-Gt5nQt.js",
+      "_proxy-B-HZI2L-.js",
+      "_Slider-BoptU0aA.js",
+      "_BookItem-HUjfsMa-.js"
     ],
     "css": [
       "assets/app-COs-ziQ1.css"
@@ -400,44 +400,44 @@
     ]
   },
   "resources/js/pages/JoinUs.tsx": {
-    "file": "assets/JoinUs-DZDBfUMs.js",
+    "file": "assets/JoinUs-_daeAiTj.js",
     "name": "JoinUs",
     "src": "resources/js/pages/JoinUs.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/App.tsx",
-      "_InnerPageLayout-isAzB2Ku.js"
+      "_InnerPageLayout-dQBO9lTJ.js"
     ],
     "css": [
       "assets/app-COs-ziQ1.css"
     ]
   },
   "resources/js/pages/ManuscriptSubmission.tsx": {
-    "file": "assets/ManuscriptSubmission-aNueDACJ.js",
+    "file": "assets/ManuscriptSubmission-CBYInqNQ.js",
     "name": "ManuscriptSubmission",
     "src": "resources/js/pages/ManuscriptSubmission.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/App.tsx",
-      "_style-g8uhVFYr.js",
-      "_InnerPageLayout-isAzB2Ku.js"
+      "_style-BJA0Xlrm.js",
+      "_InnerPageLayout-dQBO9lTJ.js"
     ],
     "css": [
       "assets/app-COs-ziQ1.css"
     ]
   },
   "resources/js/pages/ViewAuthor.tsx": {
-    "file": "assets/ViewAuthor-w0OehSTT.js",
+    "file": "assets/ViewAuthor-DNGOoUuU.js",
     "name": "ViewAuthor",
     "src": "resources/js/pages/ViewAuthor.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/App.tsx",
-      "_InnerPageLayout-isAzB2Ku.js",
+      "_InnerPageLayout-dQBO9lTJ.js",
       "_default-lqQUKbo2.js",
-      "_Slider-B_CSfBMD.js",
-      "_BookItem-CUTGBOUs.js",
-      "_proxy-DBVJNPXp.js"
+      "_Slider-BoptU0aA.js",
+      "_BookItem-HUjfsMa-.js",
+      "_proxy-B-HZI2L-.js"
     ],
     "css": [
       "assets/app-COs-ziQ1.css"
