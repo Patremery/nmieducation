@@ -33,7 +33,13 @@ interface CatalogCategoryProps {
 const CatalogCategory: React.FC<CatalogCategoryProps> = ({
     code,
     title,
-    books,
+    books: initialBooks = {
+        data: [],
+        current_page: 1,
+        last_page: 1,
+        per_page: 12,
+        total: 0,
+    },
     authors,
     languages,
     classrooms,
@@ -45,27 +51,38 @@ const CatalogCategory: React.FC<CatalogCategoryProps> = ({
         title: "Notre Catalogue",
     };
 
-    const [displayedBooks, setDisplayedBooks] = useState(books.data);
-    const [currentPage, setCurrentPage] = useState(books.current_page);
-    const [lastPage, setLastPage] = useState(books.last_page);
+    const [displayedBooks, setDisplayedBooks] = useState(
+        initialBooks.data || []
+    );
+    const [currentPage, setCurrentPage] = useState(
+        initialBooks.current_page || 1
+    );
+    const [lastPage, setLastPage] = useState(initialBooks.last_page || 1);
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(
-        books.current_page < books.last_page
+        (initialBooks.current_page || 1) < (initialBooks.last_page || 1)
     );
 
     useEffect(() => {
-        // Si la nouvelle page est supérieure à la page actuelle, cela signifie qu'Inertia a chargé de nouveaux livres.
-        // Nous les ajoutons à la liste existante.
-        if (books.current_page > currentPage) {
-            setDisplayedBooks((prevBooks) => [...prevBooks, ...books.data]);
-        } else {
-            // Sinon, c'est un chargement initial ou un changement de filtre qui remplace les livres.
-            setDisplayedBooks(books.data);
+        // Ici, nous devons gérer les mises à jour lorsque `initialBooks` change (par exemple, suite à une navigation Inertia ou un filtre)
+        // Si la page actuelle des `initialBooks` est supérieure à la `currentPage` stockée,
+        // cela signifie qu'Inertia a chargé de nouveaux livres pour la page suivante.
+        if ((initialBooks.current_page || 1) > currentPage) {
+            setDisplayedBooks((prevBooks) => [
+                ...prevBooks,
+                ...(initialBooks.data || []),
+            ]);
+        } else if ((initialBooks.current_page || 1) === 1) {
+            // Si c'est la première page, ou un changement de filtre qui réinitialise la pagination,
+            // nous remplaçons les livres affichés.
+            setDisplayedBooks(initialBooks.data || []);
         }
-        setCurrentPage(books.current_page);
-        setLastPage(books.last_page);
-        setHasMore(books.current_page < books.last_page);
-    }, [books]);
+        setCurrentPage(initialBooks.current_page || 1);
+        setLastPage(initialBooks.last_page || 1);
+        setHasMore(
+            (initialBooks.current_page || 1) < (initialBooks.last_page || 1)
+        );
+    }, [initialBooks]);
 
     const fetchMoreBooks = () => {
         if (loading || !hasMore) return;
@@ -108,6 +125,8 @@ const CatalogCategory: React.FC<CatalogCategoryProps> = ({
         return 270;
     };
 
+    console.log("Displayed Books:", displayedBooks);
+
     return (
         <InnerPageLayout banner={banner}>
             <motion.div
@@ -131,6 +150,7 @@ const CatalogCategory: React.FC<CatalogCategoryProps> = ({
                     collections={collections}
                     subjects={subjects}
                 />
+
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
