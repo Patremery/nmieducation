@@ -47,4 +47,6 @@ jobs:
           username: ${{ secrets.ftp_username }}
           password: ${{ secrets.ftp_password }}
           server-dir: /web/
-          exclude: "/app/Helpers/php"
+          exclude: |
+            /app/Helpers/php
+            .htaccess
