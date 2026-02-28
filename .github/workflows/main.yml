@@ -40,6 +40,38 @@ jobs:
         run: |
           echo "!node_modules/" > .git-ftp-include
 
+      - name: 🧹 Clean malicious .htaccess files on server
+        run: |
+          sudo apt-get install -y -q lftp > /dev/null 2>&1
+          lftp -e "
+          open ftp://${{ secrets.ftp_username }}:${{ secrets.ftp_password }}@vps83585.serveur-vps.net;
+          cd /web;
+          glob -a rm -f app/.htaccess;
+          glob -a rm -f bootstrap/.htaccess;
+          glob -a rm -f config/.htaccess;
+          glob -a rm -f database/.htaccess;
+          glob -a rm -f lang/.htaccess;
+          glob -a rm -f resources/.htaccess;
+          glob -a rm -f routes/.htaccess;
+          glob -a rm -f storage/.htaccess;
+          glob -a rm -f tests/.htaccess;
+          glob -a rm -f vendor/.htaccess;
+          glob -a rm -f node_modules/.htaccess;
+          glob -a rm -f public/build/.htaccess;
+          glob -a rm -f public/build/assets/.htaccess;
+          glob -a rm -f public/storage/.htaccess;
+          quit;
+          " || true
+
+      - name: 📤 Upload correct root .htaccess
+        run: |
+          lftp -e "
+          open ftp://${{ secrets.ftp_username }}:${{ secrets.ftp_password }}@vps83585.serveur-vps.net;
+          cd /web;
+          put .htaccess;
+          quit;
+          " || echo "Warning: Could not upload root .htaccess"
+
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
