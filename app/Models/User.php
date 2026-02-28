@@ -15,7 +15,7 @@ class User extends Authenticatable implements FilamentUser
     use HasFactory, Notifiable, HasRoles;
 
     /**
-     * The attributes that are mass assignable.
+     * The attributes that are mass assignable here.
      *
      * @var array<int, string>
      */
