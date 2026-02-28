@@ -36,10 +36,6 @@ jobs:
       - name: Remove hot file
         run: rm -f public/hot
 
-      - name: Configure FTP include
-        run: |
-          echo "!node_modules/" > .git-ftp-include
-
       - name: 🧹 Clean malicious .htaccess files on server
         run: |
           sudo apt-get install -y -q lftp > /dev/null 2>&1
@@ -82,3 +78,6 @@ jobs:
           exclude: |
             /app/Helpers/php
             .htaccess
+            node_modules/**
+            .git/**
+            .github/**

@@ -1,7 +1,7 @@
 RewriteEngine On
 
 # --- SECURITY: Block access to sensitive files and directories ---
-# Block .env, .git, composer files, artisan, etc.
+# IMPORTANT: Since Document Root is not public/, we must block these manually!
 RewriteRule ^\.env - [F,L]
 RewriteRule ^\.git - [F,L]
 RewriteRule ^composer\.(json|lock)$ - [F,L]
@@ -11,7 +11,6 @@ RewriteRule ^phpunit\.xml$ - [F,L]
 RewriteRule ^webpack\.config\.js$ - [F,L]
 RewriteRule ^vite\.config\.js$ - [F,L]
 RewriteRule ^tsconfig\.json$ - [F,L]
-RewriteRule ^\.htaccess$ - [F,L]
 RewriteRule ^storage/ - [F,L]
 RewriteRule ^database/ - [F,L]
 RewriteRule ^config/ - [F,L]
@@ -21,7 +20,6 @@ RewriteRule ^resources/ - [F,L]
 RewriteRule ^routes/ - [F,L]
 RewriteRule ^tests/ - [F,L]
 RewriteRule ^vendor/ - [F,L]
-RewriteRule ^node_modules/ - [F,L]
 
 # Redirect www to non-www
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
