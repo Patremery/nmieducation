@@ -24,60 +24,29 @@ jobs:
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
 
-      - name: Link Storage
-        run: php artisan storage:link
-
       - name: Install NPM Dependencies
         run: npm ci
-
-      - name: Build Assets
-        run: npm run build
 
       - name: Remove hot file
         run: rm -f public/hot
 
-      - name: 🧹 Clean malicious .htaccess files on server
+      - name: 📂 Sync files (lftp mirror)
         run: |
           sudo apt-get install -y -q lftp > /dev/null 2>&1
-          lftp -e "
-          open ftp://${{ secrets.ftp_username }}:${{ secrets.ftp_password }}@vps83585.serveur-vps.net;
-          cd /web;
-          glob -a rm -f app/.htaccess;
-          glob -a rm -f bootstrap/.htaccess;
-          glob -a rm -f config/.htaccess;
-          glob -a rm -f database/.htaccess;
-          glob -a rm -f lang/.htaccess;
-          glob -a rm -f resources/.htaccess;
-          glob -a rm -f routes/.htaccess;
-          glob -a rm -f storage/.htaccess;
-          glob -a rm -f tests/.htaccess;
-          glob -a rm -f vendor/.htaccess;
-          glob -a rm -f node_modules/.htaccess;
-          glob -a rm -f public/build/.htaccess;
-          glob -a rm -f public/build/assets/.htaccess;
-          glob -a rm -f public/storage/.htaccess;
-          quit;
-          " || true
-
-      - name: 📤 Upload correct root .htaccess
-        run: |
-          lftp -e "
-          open ftp://${{ secrets.ftp_username }}:${{ secrets.ftp_password }}@vps83585.serveur-vps.net;
-          cd /web;
-          put .htaccess;
-          quit;
-          " || echo "Warning: Could not upload root .htaccess"
-
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-        with:
-          server: vps83585.serveur-vps.net
-          username: ${{ secrets.ftp_username }}
-          password: ${{ secrets.ftp_password }}
-          server-dir: /web/
-          exclude: |
-            /app/Helpers/php
-            .htaccess
-            node_modules/**
-            .git/**
-            .github/**
+          lftp -c "
+            set ftp:ssl-allow no;
+            open ftp://${{ secrets.ftp_username }}:${{ secrets.ftp_password }}@vps83585.serveur-vps.net;
+            cd /web;
+            mirror --reverse --continue --dereference --verbose \
+                   --exclude-glob=node_modules/ \
+                   --exclude-glob=.git/ \
+                   --exclude-glob=.github/ \
+                   --exclude-glob=.htaccess \
+                   --exclude-glob=app/Helpers/php/ \
+                   --exclude-glob=storage/framework/cache/ \
+                   --exclude-glob=storage/framework/sessions/ \
+                   --exclude-glob=storage/framework/views/ \
+                   --exclude-glob=storage/logs/ \
+                   ./ ./;
+            quit;
+          "
