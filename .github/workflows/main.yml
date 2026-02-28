@@ -30,6 +30,12 @@ jobs:
       - name: Install NPM Dependencies
         run: npm ci
 
+      - name: Build Assets
+        run: npm run build
+
+      - name: Remove hot file
+        run: rm -f public/hot
+
       - name: Configure FTP include
         run: |
           echo "!node_modules/" > .git-ftp-include
