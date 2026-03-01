@@ -30,15 +30,58 @@ jobs:
       - name: Remove hot file
         run: rm -f public/hot
 
-      - name: 📂 Sync files (lftp mirror)
+      - name: Create Unzip Script
+        run: |
+          cat << 'EOF' > unzip.php
+          <?php
+          $zipFile = __DIR__ . '/deploy.zip';
+          if (file_exists($zipFile) && class_exists('ZipArchive')) {
+              $zip = new ZipArchive;
+              if ($zip->open($zipFile) === TRUE) {
+                  $zip->extractTo(__DIR__);
+                  $zip->close();
+                  echo "Success";
+                  unlink($zipFile);
+                  unlink(__FILE__);
+              } else {
+                  echo "Failed to open zip";
+                  http_response_code(500);
+              }
+          } else {
+              echo "ZipArchive missing or file not found";
+              http_response_code(500);
+          }
+          EOF
+
+      - name: Zip Vendor and Build folders
+        run: zip -rq deploy.zip vendor/ public/build/
+
+      - name: 📤 Upload Zip and Script via lftp
         run: |
           sudo apt-get install -y -q lftp > /dev/null 2>&1
           lftp -c "
             set ftp:ssl-allow no;
             open ftp://${{ secrets.ftp_username }}:${{ secrets.ftp_password }}@vps83585.serveur-vps.net;
             cd /web;
+            put deploy.zip;
+            put unzip.php;
+            quit;
+          "
+
+      - name: 📦 Extract on Server
+        run: |
+          curl -s -f "https://nmieducation.com/unzip.php" || echo "Extraction might have failed or timed out. Check manually."
+
+      - name: 📂 Sync other app files (Fast mirror)
+        run: |
+          lftp -c "
+            set ftp:ssl-allow no;
+            open ftp://${{ secrets.ftp_username }}:${{ secrets.ftp_password }}@vps83585.serveur-vps.net;
+            cd /web;
             mirror --reverse --continue --dereference --verbose \
                    --exclude-glob=node_modules/ \
+                   --exclude-glob=vendor/ \
+                   --exclude-glob=public/build/ \
                    --exclude-glob=.git/ \
                    --exclude-glob=.github/ \
                    --exclude-glob=.htaccess \
@@ -47,6 +90,8 @@ jobs:
                    --exclude-glob=storage/framework/sessions/ \
                    --exclude-glob=storage/framework/views/ \
                    --exclude-glob=storage/logs/ \
+                   --exclude deploy.zip \
+                   --exclude unzip.php \
                    ./ ./;
             quit;
           "
