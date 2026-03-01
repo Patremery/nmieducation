@@ -24,9 +24,6 @@ jobs:
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
 
-      - name: Install NPM Dependencies
-        run: npm ci
-
       - name: Remove hot file
         run: rm -f public/hot
 
