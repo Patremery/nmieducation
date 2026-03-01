@@ -49,41 +49,59 @@ const PostGridItem = ({ post, isLoading = false }: PostGridItemProps) => {
         return textContent.substring(0, limit) + "...";
     };
 
-    // Styles pour les effets de survol
+    // Date formatter
+    const formatDate = (dateString: string) => {
+        if (!dateString) return "";
+        const options: Intl.DateTimeFormatOptions = { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        };
+        return new Date(dateString).toLocaleDateString('fr-FR', options);
+    };
+
+    // Styles
     const cardStyle = {
-        transition: "all 0.3s ease",
+        transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
         height: "100%",
         overflow: "hidden",
-        boxShadow: "0 4px 6px rgba(0,0,0,0.05)",
+        boxShadow: "0 5px 15px rgba(0,0,0,0.03)",
+        border: "1px solid rgba(0,0,0,0.05)",
+        borderRadius: "16px",
     };
 
     const cardHoverStyle = {
-        transform: "translateY(-5px)",
-        boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
+        transform: "translateY(-8px)",
+        boxShadow: "0 15px 30px rgba(0,0,0,0.08)",
+        border: "1px solid rgba(0,0,0,0.08)",
     };
 
-    // Composant de chargement (skeleton)
+    // Loading Skeleton
     if (isLoading) {
         return (
-            <div className="col-md-4 mb-4">
-                <div className="card shadow-sm" style={cardStyle}>
+            <div className="col-md-6 col-lg-4 mb-5">
+                <div className="card" style={cardStyle}>
                     <div
-                        className="card-img-top bg-light animate-pulse"
-                        style={{ height: "200px" }}
+                        className="card-img-top bg-light animate-pulse object-fit-cover"
+                        style={{ height: "240px" }}
                     ></div>
-                    <div className="card-body">
+                    <div className="card-body p-4">
                         <div
-                            className="h5 card-title bg-light animate-pulse mb-3"
-                            style={{ height: "24px", width: "80%" }}
+                            className="bg-light animate-pulse mb-3 rounded-pill"
+                            style={{ height: "20px", width: "40%" }}
                         ></div>
                         <div
-                            className="card-text bg-light animate-pulse mb-3"
+                            className="h4 card-title bg-light animate-pulse mb-3"
+                            style={{ height: "28px", width: "90%" }}
+                        ></div>
+                        <div
+                            className="card-text bg-light animate-pulse mb-4"
                             style={{ height: "60px" }}
                         ></div>
-                        <div
-                            className="bg-light animate-pulse"
-                            style={{ height: "38px", width: "120px" }}
-                        ></div>
+                        <div className="d-flex align-items-center mt-auto">
+                           <div className="rounded-circle bg-light animate-pulse me-3" style={{ width: "40px", height: "40px" }}></div>
+                           <div className="bg-light animate-pulse rounded-pill" style={{ height: "15px", width: "80px" }}></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -91,9 +109,9 @@ const PostGridItem = ({ post, isLoading = false }: PostGridItemProps) => {
     }
 
     return (
-        <div className="col-md-4 mb-4" key={post.id}>
+        <div className="col-md-6 col-lg-4 mb-5" key={post.id}>
             <div
-                className="card h-100 border-0"
+                className="card h-100 bg-white"
                 style={cardStyle}
                 onMouseEnter={(e) => {
                     Object.assign(e.currentTarget.style, cardHoverStyle);
@@ -103,18 +121,18 @@ const PostGridItem = ({ post, isLoading = false }: PostGridItemProps) => {
                     }
                 }}
                 onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "";
-                    e.currentTarget.style.boxShadow =
-                        "0 4px 6px rgba(0,0,0,0.05)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "0 5px 15px rgba(0,0,0,0.03)";
+                    e.currentTarget.style.border = "1px solid rgba(0,0,0,0.05)";
                     const img = e.currentTarget.querySelector("img");
                     if (img) {
-                        img.style.transform = "";
+                        img.style.transform = "scale(1)";
                     }
                 }}
             >
                 <div
-                    className="card-img-container"
-                    style={{ height: "200px", backgroundColor: "#f8f9fa" }}
+                    className="card-img-container position-relative overflow-hidden"
+                    style={{ height: "240px", backgroundColor: "#f8f9fa" }}
                 >
                     <Link
                         href={`/posts/${post.slug}`}
@@ -128,34 +146,69 @@ const PostGridItem = ({ post, isLoading = false }: PostGridItemProps) => {
                             alt={post.title}
                             style={{
                                 objectFit: "cover",
-                                transition: "transform 0.5s ease",
+                                transition: "transform 0.6s ease",
                             }}
                             onError={(e) => {
                                 e.currentTarget.src = "/images/placeholder.jpg";
                             }}
                         />
                     </Link>
+                    {/* Category Badge overlay */}
+                    {post.categories && post.categories.length > 0 && (
+                        <div className="position-absolute top-0 start-0 m-3 z-index-2">
+                            <span className="badge bg-primary px-3 py-2 rounded-pill fw-medium shadow-sm" style={{ letterSpacing: '0.5px' }}>
+                                {post.categories[0].name}
+                            </span>
+                        </div>
+                    )}
                 </div>
-                <div className="card-body d-flex flex-column">
-                    <h5 className="card-title">
+                <div className="card-body p-4 d-flex flex-column">
+                    <div className="text-muted small mb-2 fw-medium d-flex align-items-center">
+                        <i className="far fa-calendar-alt me-2"></i>
+                        {formatDate(post.published_at)}
+                    </div>
+                    <h4 className="card-title fw-bold mb-3 overflow-hidden" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: '1.4' }}>
                         <Link
                             href={`/posts/${post.slug}`}
-                            className="text-dark text-decoration-none"
+                            className="text-dark text-decoration-none hover-primary transition-colors"
                         >
-                            {parse(limitTitle(post.title))}
+                            {parse(limitTitle(post.title, 80))}
                         </Link>
-                    </h5>
-                    <p className="card-text" style={{ fontStyle: "italic" }}>
-                        {stripHtmlAndLimit(post.content)}
+                    </h4>
+                    <p className="card-text text-muted mb-4" style={{ display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical',  overflow: 'hidden', lineHeight: '1.6' }}>
+                        {stripHtmlAndLimit(post.content, 120)}
                     </p>
-                    <Link
-                        href={`/posts/${post.slug}`}
-                        className="btn btn-primary mt-auto"
-                    >
-                        Lire plus <i className="fas fa-angles-right fa-sm"></i>
-                    </Link>
+                    
+                    <div className="mt-auto d-flex align-items-center justify-content-between pt-3 border-top border-light">
+                         <div className="d-flex align-items-center">
+                            <div className="rounded-circle bg-light d-flex align-items-center justify-content-center me-3" style={{ width: "40px", height: "40px", color: 'var(--bs-primary)' }}>
+                                <i className="fas fa-feather-alt"></i>
+                            </div>
+                            <span className="fw-medium small text-dark">NMI Édition</span>
+                         </div>
+                        
+                        <Link
+                            href={`/posts/${post.slug}`}
+                            className="btn btn-sm btn-outline-primary rounded-pill px-3 fw-medium"
+                        >
+                            Lire <i className="fas fa-arrow-right ms-1 fa-sm"></i>
+                        </Link>
+                    </div>
                 </div>
             </div>
+            <style>
+                {`
+                    .hover-primary:hover {
+                        color: var(--bs-primary) !important;
+                    }
+                    .transition-colors {
+                        transition: color 0.3s ease;
+                    }
+                    .z-index-2 {
+                        z-index: 2;
+                    }
+                `}
+            </style>
         </div>
     );
 };

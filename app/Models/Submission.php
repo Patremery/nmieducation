@@ -6,5 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Submission extends Model
 {
-    //
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'address',
+        'city',
+        'country',
+        'title',
+        'category',
+        'summary',
+        'file',
+    ];
 }
