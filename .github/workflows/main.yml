@@ -32,17 +32,17 @@ jobs:
 
       - name: Create Unzip Script
         run: |
-          cat << 'EOF' > unzip.php
+          cat << 'EOF' > public/unzip.php
           <?php
-          $zipFile = __DIR__ . '/deploy.zip';
+          $zipFile = __DIR__ . '/../deploy.zip';
           if (file_exists($zipFile) && class_exists('ZipArchive')) {
               $zip = new ZipArchive;
               if ($zip->open($zipFile) === TRUE) {
-                  $zip->extractTo(__DIR__);
+                  $zip->extractTo(__DIR__ . '/..');
                   $zip->close();
                   echo "Success";
-                  unlink($zipFile);
-                  unlink(__FILE__);
+                  @unlink($zipFile);
+                  @unlink(__FILE__);
               } else {
                   echo "Failed to open zip";
                   http_response_code(500);
@@ -64,7 +64,8 @@ jobs:
             open ftp://${{ secrets.ftp_username }}:${{ secrets.ftp_password }}@vps83585.serveur-vps.net;
             cd /web;
             put deploy.zip;
-            put unzip.php;
+            cd public;
+            put public/unzip.php -o unzip.php;
             quit;
           "
 
