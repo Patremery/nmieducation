@@ -1,0 +1,167 @@
+on:
+  workflow_dispatch:
+
+name: 🧹 Clean Server & Fresh Deploy
+
+jobs:
+  web-deploy:
+    name: 🎉 Clean & Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 21
+        uses: actions/setup-node@v2
+        with:
+          node-version: "21"
+
+      - name: Install Composer Dependencies
+        run: composer install --no-scripts --no-interaction --prefer-dist
+
+      - name: Generate autoload files
+        run: composer dump-autoload
+
+      - name: Create Cleaner & Unzip Script
+        run: |
+          cat << 'EOF' > public/clean_and_unzip.php
+          <?php
+          $publicDir = __DIR__;
+          $webDir = dirname(__DIR__);
+          $zipFile = $webDir . '/deploy.zip';
+
+          // 1. Delete everything except protected items
+          $protected = ['.', '..', 'storage', '.env', '.ftp-deploy-sync-state.json', 'deploy.zip', 'public', 'cgi-bin'];
+          $deletedItems = [];
+
+          function safeDelete($path) {
+              global $deletedItems;
+              if (is_file($path)) {
+                  $deletedItems[] = $path;
+                  // Neutralise self-replicating malware before deletion
+                  @file_put_contents($path, '');
+                  @chmod($path, 0000);
+                  @unlink($path);
+              }
+          }
+
+          function deleteDir($dirPath) {
+              if (!is_dir($dirPath)) return;
+              $items = scandir($dirPath);
+              foreach ($items as $item) {
+                  if ($item == '.' || $item == '..') continue;
+                  $path = $dirPath . '/' . $item;
+                  if (is_dir($path)) {
+                      deleteDir($path);
+                  } else {
+                      safeDelete($path);
+                  }
+              }
+              @chmod($dirPath, 0000);
+              @rmdir($dirPath);
+          }
+
+          // Clean /web
+          $items = scandir($webDir);
+          foreach ($items as $item) {
+              if (!in_array($item, $protected)) {
+                  $path = $webDir . '/' . $item;
+                  if (is_dir($path)) {
+                      deleteDir($path);
+                  } else {
+                      safeDelete($path);
+                  }
+              }
+          }
+
+          // Clean /web/public, except for this script itself
+          $publicItems = scandir($publicDir);
+          foreach ($publicItems as $item) {
+              if ($item != '.' && $item != '..' && $item != basename(__FILE__)) {
+                  $path = $publicDir . '/' . $item;
+                  if (is_dir($path)) {
+                      deleteDir($path);
+                  } else {
+                      safeDelete($path);
+                  }
+              }
+          }
+
+          // 2. Unzip the fresh application
+          if (file_exists($zipFile) && class_exists('ZipArchive')) {
+              $zip = new ZipArchive;
+              if ($zip->open($zipFile) === TRUE) {
+                  $zip->extractTo($webDir);
+                  $zip->close();
+                  echo "Successfully extracted. ";
+              } else {
+                  echo "Failed to open zip. ";
+                  http_response_code(500);
+                  exit;
+              }
+          } else {
+              echo "ZipArchive missing or file not found. ";
+              http_response_code(500);
+              exit;
+          }
+
+          // 3. Scan storage for malicious files
+          $storageDir = $webDir . '/storage';
+          if (is_dir($storageDir)) {
+              $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($storageDir));
+              foreach ($iterator as $file) {
+                  if ($file->isFile()) {
+                      $ext = strtolower($file->getExtension());
+                      $filename = strtolower($file->getFilename());
+                      // Only allow specific non-php files in storage, but mainly block malicious ones.
+                      // Remove any raw PHP scripts inside storage to prevent backdoors
+                      if ($ext === 'php' || $filename === '.htaccess') {
+                          safeDelete($file->getRealPath());
+                      }
+                  }
+              }
+          }
+
+          // 4. Create symlink
+          $target = $webDir . '/storage/app/public';
+          $link = $publicDir . '/storage';
+          if (!file_exists($link)) {
+              @symlink($target, $link);
+          }
+
+          // Cleanup self and zip
+          @unlink($zipFile);
+          @unlink(__FILE__);
+          
+          echo "\n=== CLEANUP REPORT ===\n";
+          echo "Total files neutralized and deleted: " . count($deletedItems) . "\n";
+          if (count($deletedItems) > 0) {
+              echo "List of deleted files:\n";
+              foreach ($deletedItems as $deleted) {
+                  echo "- " . $deleted . "\n";
+              }
+          }
+          echo "======================\n\n";
+          
+          echo "Cleanup and deploy complete.\n";
+          EOF
+
+      - name: Zip Entire Application
+        run: zip -rq deploy.zip . -x "*.git*" "*.github*" "node_modules/*" "tests/*" "storage/*" "deploy.zip"
+
+      - name: 📤 Upload Zip and Script via lftp
+        run: |
+          sudo apt-get install -y -q lftp > /dev/null 2>&1
+          lftp -c "
+            set ftp:ssl-allow no;
+            open ftp://${{ secrets.ftp_username }}:${{ secrets.ftp_password }}@vps83585.serveur-vps.net;
+            cd /web;
+            put deploy.zip;
+            cd public;
+            put public/clean_and_unzip.php -o clean_and_unzip.php;
+            quit;
+          "
+
+      - name: 📦 Execute Clean, Extract, and Scan on Server
+        run: |
+          curl -s -f "https://nmieducation.com/clean_and_unzip.php" || echo "Script execution might have failed or timed out. Check manually."
