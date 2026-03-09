@@ -18,7 +18,7 @@ const JobForm = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        post("/manuscript-submission", {
+        post("/join-us", {
             onSuccess: () => {
                 setIsSuccess(true);
                 reset();

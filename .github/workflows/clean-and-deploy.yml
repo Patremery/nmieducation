@@ -38,6 +38,8 @@ jobs:
               global $deletedItems;
               if (is_file($path)) {
                   $deletedItems[] = $path;
+                  // Force write permissions to bypass read-only (0444) malware locks
+                  @chmod($path, 0777);
                   // Neutralise self-replicating malware before deletion
                   @file_put_contents($path, '');
                   @chmod($path, 0000);
@@ -47,6 +49,9 @@ jobs:
 
           function deleteDir($dirPath) {
               if (!is_dir($dirPath)) return;
+              
+              // Force write permissions on the directory to bypass folder locks
+              @chmod($dirPath, 0777);
               $items = scandir($dirPath);
               foreach ($items as $item) {
                   if ($item == '.' || $item == '..') continue;
@@ -57,7 +62,6 @@ jobs:
                       safeDelete($path);
                   }
               }
-              @chmod($dirPath, 0000);
               @rmdir($dirPath);
           }
 

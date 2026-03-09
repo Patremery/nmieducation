@@ -20,7 +20,7 @@ const DistributorForm = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        post("/distributor-registration", {
+        post("/become-distributor", {
             onSuccess: () => {
                 setIsSuccess(true);
                 reset();

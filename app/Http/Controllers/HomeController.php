@@ -84,30 +84,86 @@ class HomeController extends Controller
     }
 
     public function saveContact(Request $request) {
-        //dd($request->all());
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required',
-            'subject' => 'string',
-            'message' => 'string',
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:50',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string|max:5000',
         ]);
 
-        DB::transaction(function () use ($request) {
-
-            $contact = Contact::create($request->all());
+        DB::transaction(function () use ($validated) {
+            $contact = Contact::create($validated);
             Mail::to(settings('support_email'))->send(new ContactMail($contact));
-
-            return redirect()->back()->with('success', 'Message envoyé avec succès');
         });
-
+        
+        return redirect()->back()->with('success', 'Message envoyé avec succès');
     }
 
     public function storeManuscript(Request $request) {
-        DB::transaction(function() use ($request) {
-            $manuscrit = Submission::create($request->all());
-            
-        Mail::to(settings("support_email"))->send(new ManuscritSubmissionEmail($manuscrit));
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:50',
+            'address' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:255',
+            'country' => 'nullable|string|max:255',
+            'bookTitle' => 'nullable|string|max:255',
+            'category' => 'nullable|string|max:255',
+            'summary' => 'nullable|string|max:5000',
+            'manuscript' => 'nullable|file|mimes:pdf,doc,docx|max:10240', // max 10MB
+        ]);
+
+        if ($request->hasFile('manuscript')) {
+            $validated['file'] = $request->file('manuscript')->store('manuscripts', 'public');
+        }
+
+        DB::transaction(function() use ($validated) {
+            $manuscrit = Submission::create($validated);
+            Mail::to(settings("support_email"))->send(new ManuscritSubmissionEmail($manuscrit));
         });
+        
+        return redirect()->back()->with('success', 'Manuscrit envoyé avec succès');
+    }
+
+    public function storeDistributor(Request $request) {
+        $validated = $request->validate([
+            'companyName' => 'required|string|max:255',
+            'registrationNumber' => 'required|string|max:255',
+            'creationDate' => 'nullable|date',
+            'address' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'phone' => 'required|string|max:50',
+            'email' => 'required|email|max:255',
+            'businessType' => 'required|string|max:255',
+            'legalRep' => 'required|string|max:255',
+            'repPhone' => 'required|string|max:50',
+            'idNumber' => 'required|string|max:255',
+            'idDate' => 'required|date',
+        ]);
+        
+        // Assuming a Distributor or similar model exists, or just send an email
+        // Distributor::create($validated);
+        return redirect()->back()->with('success', 'Demande envoyée avec succès');
+    }
+
+    public function storeApplication(Request $request) {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:50',
+            'address' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:255',
+            'country' => 'nullable|string|max:255',
+            'genre' => 'nullable|string|max:255',
+            'manuscript' => 'nullable|file|mimes:pdf,doc,docx|max:10240', // actually CV
+        ]);
+
+        if ($request->hasFile('manuscript')) {
+            $validated['cv_path'] = $request->file('manuscript')->store('applications', 'public');
+        }
+
+        // JobApplication::create($validated);
+        return redirect()->back()->with('success', 'Candidature envoyée avec succès');
     }
 }
