@@ -151,7 +151,7 @@ jobs:
           EOF
 
       - name: Zip Entire Application
-        run: zip -rq deploy.zip . -x "*.git*" "*.github*" "node_modules/*" "tests/*" "storage/*" "deploy.zip"
+        run: zip -rq deploy.zip . -x "*.git*" "*.github*" "node_modules/*" "tests/*" "storage/*" ".env" "deploy.zip"
 
       - name: 📤 Upload Zip and Script via lftp
         run: |

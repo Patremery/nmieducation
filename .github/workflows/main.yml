@@ -50,8 +50,8 @@ jobs:
           }
           EOF
 
-      - name: Zip Vendor and Build folders
-        run: zip -rq deploy.zip vendor/ public/build/
+      - name: Zip Entire Application
+        run: zip -rq deploy.zip . -x "*.git*" "*.github*" "node_modules/*" "tests/*" "storage/*" ".env" "deploy.zip"
 
       - name: 📤 Upload Zip and Script via lftp
         run: |
@@ -70,26 +70,3 @@ jobs:
         run: |
           curl -s -f "https://nmieducation.com/unzip.php" || echo "Extraction might have failed or timed out. Check manually."
 
-      - name: 📂 Sync other app files (Fast mirror)
-        run: |
-          lftp -c "
-            set ftp:ssl-allow no;
-            open ftp://${{ secrets.ftp_username }}:${{ secrets.ftp_password }}@vps83585.serveur-vps.net;
-            cd /web;
-            mirror --reverse --continue --dereference --verbose \
-                   --exclude-glob=node_modules/ \
-                   --exclude-glob=vendor/ \
-                   --exclude-glob=public/build/ \
-                   --exclude-glob=.git/ \
-                   --exclude-glob=.github/ \
-                   --exclude-glob=.htaccess \
-                   --exclude-glob=app/Helpers/php/ \
-                   --exclude-glob=storage/framework/cache/ \
-                   --exclude-glob=storage/framework/sessions/ \
-                   --exclude-glob=storage/framework/views/ \
-                   --exclude-glob=storage/logs/ \
-                   --exclude deploy.zip \
-                   --exclude unzip.php \
-                   ./ ./;
-            quit;
-          "
