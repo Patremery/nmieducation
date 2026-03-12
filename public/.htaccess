@@ -9,6 +9,14 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
+    # Hide index.php from URL — redirect to clean URL
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+index\.php[?\s/] [NC]
+    RewriteRule ^index\.php$ / [R=301,L]
+
+    # Block PHP execution in sensitive subdirectories
+    RewriteCond %{REQUEST_URI} ^/(storage|build|css|js)/.*\.php$ [NC]
+    RewriteRule ^ - [F,L]
+
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
