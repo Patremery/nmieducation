@@ -28,7 +28,7 @@ class CategoryResource extends Resource
                 TextInput::make('code')
                     ->required()
                     ->unique(ignoreRecord: true)
-                    ->disabled(fn (?Category $record) => $record?->isSystem()),
+                    ->disabled(fn (?Category $record) => $record?->isDefault()),
                     
                 TextInput::make('label')
                     ->required(),
@@ -36,7 +36,7 @@ class CategoryResource extends Resource
                 Toggle::make('is_active')
                     ->label('Actif')
                     ->default(true)
-                    ->disabled(fn (?Category $record) => $record?->isSystem()),
+                    ->disabled(fn (?Category $record) => $record?->isDefault()),
             ]);
     }
 
@@ -59,8 +59,8 @@ class CategoryResource extends Resource
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('is_active'),
-                Tables\Filters\SelectFilter::make('system')
-                    ->query(fn ($query) => $query->system()),
+                Tables\Filters\SelectFilter::make('default')
+                    ->query(fn ($query) => $query->default()),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

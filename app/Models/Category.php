@@ -12,8 +12,8 @@ class Category extends Model
 
     protected $fillable = ['code', 'label'];
 
-    // Constantes pour les catégories système (non supprimables)
-    public const SYSTEM_CATEGORIES = [
+    // Constantes pour les catégories par défaut (non supprimables)
+    public const DEFAULT_CATEGORIES = [
         'LITERATURE' => 'literature',
         'SCHOOL' => 'school',
         'GUIDES' => 'guides',
@@ -21,16 +21,16 @@ class Category extends Model
         'CATALOG' => 'catalog',
     ];
 
-    // Scope pour les catégories système
-    public function scopeSystem($query)
+    // Scope pour les catégories par défaut
+    public function scopeDefault($query)
     {
-        return $query->whereIn('code', array_values(self::SYSTEM_CATEGORIES));
+        return $query->whereIn('code', array_values(self::DEFAULT_CATEGORIES));
     }
 
-    // Vérifie si c'est une catégorie système
-    public function isSystem(): bool
+    // Vérifie si c'est une catégorie par défaut
+    public function isDefault(): bool
     {
-        return in_array($this->code, array_values(self::SYSTEM_CATEGORIES));
+        return in_array($this->code, array_values(self::DEFAULT_CATEGORIES));
     }
 
     public function toResource()
