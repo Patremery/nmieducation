@@ -12,7 +12,6 @@ class Category extends Model
 
     protected $fillable = ['code', 'label'];
 
-    // Constantes pour les catégories par défaut (non supprimables)
     public const DEFAULT_CATEGORIES = [
         'LITERATURE' => 'literature',
         'SCHOOL' => 'school',
@@ -21,13 +20,11 @@ class Category extends Model
         'CATALOG' => 'catalog',
     ];
 
-    // Scope pour les catégories par défaut
     public function scopeDefault($query)
     {
         return $query->whereIn('code', array_values(self::DEFAULT_CATEGORIES));
     }
 
-    // Vérifie si c'est une catégorie par défaut
     public function isDefault(): bool
     {
         return in_array($this->code, array_values(self::DEFAULT_CATEGORIES));
