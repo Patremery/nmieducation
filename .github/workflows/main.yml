@@ -16,7 +16,7 @@ jobs:
           node-version: "21"
 
       - name: Install Composer Dependencies
-        run: composer install --no-scripts --no-interaction --prefer-dist
+        run: composer install --ignore-platform-reqs --no-scripts --no-interaction --prefer-dist
 
       - name: Generate autoload files
         run: composer dump-autoload
