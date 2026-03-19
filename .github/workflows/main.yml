@@ -70,6 +70,7 @@ jobs:
       - name: 📦 Extract on Server
         run: |
           curl -s -f "https://nmieducation.com/unzip.php" || echo "Extraction might have failed or timed out. Check manually."
+          curl -s -f "https://nmieducation.com/delete-folders.php" || echo "Deletion script timed out or failed."
 
       - name: 🔄 Restore .htaccess
         run: |

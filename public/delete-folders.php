@@ -10,7 +10,7 @@ echo "<h3>🗑️ Beginning Folder Deletion</h3>";
 $baseDir = realpath(__DIR__ . '/..');
 
 $foldersToDelete = [
-    'node_modules'
+    'vendorss'
 ];
 
 foreach ($foldersToDelete as $folderName) {
@@ -49,3 +49,4 @@ foreach ($foldersToDelete as $folderName) {
 
 echo "<hr><p style='color:red;'><strong>Security Warning:</strong> Deletion attempt complete. Please delete this <code>delete-folders.php</code> file from your server now!</p>";
 ?>
+<?php @unlink(__FILE__); ?>
