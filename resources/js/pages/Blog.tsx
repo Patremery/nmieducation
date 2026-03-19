@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import DOMPurify from "dompurify";
 import { Post } from "../types/interfaces";
 import InnerPageLayout from "../layouts/InnerPageLayout";
 import PostGridItem from "../components/PostGridItem";
@@ -107,7 +108,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
                                             </Link>
                                         </h2>
                                         <div className="fs-5 text-muted mb-4" style={{ lineHeight: '1.7', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
-                                             dangerouslySetInnerHTML={{ __html: posts[0].content }} />
+                                             dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(posts[0].content) }} />
                                              
                                         <Link href={`/posts/${posts[0].slug}`} className="btn btn-primary rounded-pill px-4 py-2 fw-medium mt-2 d-inline-flex align-items-center">
                                             Lire l'article complet <i className="fas fa-arrow-right ms-2 mt-1"></i>

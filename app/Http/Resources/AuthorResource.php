@@ -20,7 +20,7 @@ class AuthorResource extends JsonResource
             'slug' => $this->slug,
             'profession' => $this->profession,
             'biography' => $this->biography,
-            'photo' => asset('storage/'.$this->photo),
+            'photo' => $this->photo ? asset('storage/'.$this->photo) : null,
             'linkedin' => $this->linkedin_url,
             'facebook' => $this->facebook_url,
             'twitter' => $this->twitter_url,

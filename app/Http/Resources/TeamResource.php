@@ -18,7 +18,7 @@ class TeamResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'position' => $this->position,
-            'photo' => asset('storage/'.$this->photo),
+            'photo' => $this->photo ? asset('storage/'.$this->photo) : null,
             'facebook' => $this->facebook_url,
             'linkedin' => $this->linkedin_url,
             'bio' => $this->bio,

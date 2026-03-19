@@ -1,4 +1,5 @@
 import React from "react";
+import DOMPurify from "dompurify";
 
 interface HomeGridDisplay2Props {
     title: string;
@@ -41,7 +42,7 @@ const HomeGridDisplay2 = ({
                     </div>
                     <div className="col-6">
                         <div
-                            dangerouslySetInnerHTML={{ __html: description }}
+                            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(description) }}
                         />
                     </div>
                 </div>

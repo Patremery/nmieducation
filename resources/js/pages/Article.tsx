@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import DOMPurify from "dompurify";
 import { Post } from "../types/interfaces";
 import InnerPageLayout from "../layouts/InnerPageLayout";
 import Sidebar from "../components/sidebar";
@@ -302,7 +303,7 @@ const Article: React.FC<ArticleProps> = ({
                             </style>
                             <div
                                 dangerouslySetInnerHTML={{
-                                    __html: post.content,
+                                    __html: DOMPurify.sanitize(post.content),
                                 }}
                             />
                         </div>

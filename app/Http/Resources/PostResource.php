@@ -19,7 +19,7 @@ class PostResource extends JsonResource
             'title' => $this->title,
             'content' => $this->content,
             'slug' => $this->slug,
-            'featured_image' => asset('storage/'.$this->featured_image),
+            'featured_image' => $this->featured_image ? asset('storage/'.$this->featured_image) : null,
             'published_at' => $this->published_at,
             'categories' => $this->categories,
             'tags' => $this->tags,

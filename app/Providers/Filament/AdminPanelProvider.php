@@ -34,7 +34,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login(Login::class)
-            ->brandLogo(asset('storage/'.settings('site_logo')))
+            ->brandLogo(settings('site_logo') ? asset('storage/'.settings('site_logo')) : null)
             ->brandLogoHeight("70px")
             ->passwordReset()
             ->sidebarCollapsibleOnDesktop()
@@ -69,6 +69,7 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->plugins([
+                \MKWebDesign\FilamentWatchdog\FilamentWatchdogPlugin::make(),
                 //FilamentScaffoldPlugin::make(),
                 FilamentShieldPlugin::make(),
                 FilamentEmail::make(),

@@ -47,8 +47,8 @@ class HandleInertiaRequests extends Middleware
                 'address' => settings('address'), */
                 'site_name' => settings('site_name'),
                 'site_description' => settings('site_description'),
-                'logo' => asset('storage/'.settings('site_logo')),
-                'favicon' => asset('storage/'.settings('site_favicon')),
+                'logo' => settings('site_logo') ? asset('storage/'.settings('site_logo')) : null,
+                'favicon' => settings('site_favicon') ? asset('storage/'.settings('site_favicon')) : null,
                
                 'theme_color' => settings('theme_color'),
             ],

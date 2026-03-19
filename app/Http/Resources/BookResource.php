@@ -31,7 +31,7 @@ class BookResource extends JsonResource
             'adinkra_url' => $this->adinkra_url,
             'isbn' => $this->ISBN,
             'description' => strip_tags($this->description),
-            'cover' => asset("storage/".$this->featured_image),
+            'cover' => $this->featured_image ? asset("storage/".$this->featured_image) : null,
             'summary' => $this->summary,
             'audience' => $this->audience,
             'classrooms' => $this->classrooms ? collect($this->classrooms)->map(function ($classroom) {

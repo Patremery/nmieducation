@@ -26,4 +26,9 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
+    # Block access to environment variables
+    <FilesMatch "^\.env">
+        Require all denied
+    </FilesMatch>
 </IfModule>
