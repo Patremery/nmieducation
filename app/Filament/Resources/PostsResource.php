@@ -51,39 +51,47 @@ class PostsResource extends Resource
                         ->schema([
                             TextInput::make('title')
                                 ->label('Titre')
-                                ->required(),
-                            TextInput::make('slug')->required(),
-                            Textarea::make('description')
+                                ->required()
+                                ->maxLength(255),
+                            TextInput::make('slug')
+                                ->label('Slug (URL)')
+                                ->required()
+                                ->maxLength(255)
+                                ->unique('posts', 'slug', ignorable: fn($record) => $record),
+                            Textarea::make('sub_title')
                                 ->label('Résumé')
-                                ->required(),
-                            TiptapEditor::make('content')
+                                ->required()
+                                ->rows(3)
+                                ->maxLength(1000),
+                            TiptapEditor::make('body')
                                 ->label('Contenu')
                                 ->profile('default')
                                 ->maxContentWidth('5xl')
                                 ->disk('public')
                                 ->directory('posts')
-                                //->columnSpanFull()
                                 ->required(),
                         ]),
                     
                     Section::make('Paramètres de publication')
                         ->columnSpan(1)
+                        ->description('Configurez les détails de publication de cet article')
                         ->schema([
-                            FileUpload::make('featured_image')
+                            FileUpload::make('cover_photo_path')
                                 ->label('Image mise en avant')
                                 ->image()
                                 ->disk('public')
                                 ->directory('blog')
-                                ->default(fn($state) => $state)
                                 ->optimize('webp')
                                 ->required(),
-                            TextInput::make('ordering')
-                                ->label('Ordering')
+                            TextInput::make('photo_alt_text')
+                                ->label('Texte alternatif image')
+                                ->maxLength(255)
                                 ->required(),
                             self::getStatusField(),
                             DatePicker::make('published_at')
                                 ->label('Date de publication')
-                                ->required(),
+                                ->helperText('Sera définie automatiquement si non spécifiée')
+                                ->native(false),
                             Select::make('categories')
                                 ->label('Catégories')
                                 ->relationship("categories", "name")
@@ -106,7 +114,7 @@ class PostsResource extends Resource
         return $table
             ->columns([
                 //TextColumn::make('user_id')->sortable()->searchable(),
-                ImageColumn::make('featured_image')->label(''),
+                ImageColumn::make('cover_photo_path')->label('Image'),
                 TextColumn::make('title')
                 ->label("Titre")
                 ->formatStateUsing(function($state) {

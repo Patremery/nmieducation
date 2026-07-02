@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
- */
 class tagsFactory extends Factory
 {
+    protected $model = Tag::class;
+
     /**
      * Define the model's default state.
      *
@@ -16,8 +16,12 @@ class tagsFactory extends Factory
      */
     public function definition(): array
     {
+        $name = $this->faker->unique()->word();
+        
         return [
-            //
+            'name' => $name,
+            'slug' => \Str::slug($name),
         ];
     }
 }
+

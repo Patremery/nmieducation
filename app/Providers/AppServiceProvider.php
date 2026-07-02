@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Post;
+use App\Observers\PostObserver;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\Placeholder;
 use Filament\Infolists\Components\Entry;
@@ -47,5 +49,8 @@ class AppServiceProvider extends ServiceProvider
         $this->configureModels();
         $this->translatableComponents();
         JsonResource::withoutWrapping();
+        
+        // Register model observers
+        Post::observe(PostObserver::class);
     }
 }
