@@ -130,7 +130,6 @@ class BooksResource extends Resource
                                         ->optimize('webp'),
                                
                             ])->columnSpan(['lg' => 2]),
-
                         Grid::make()
                             ->schema([
                                 Section::make('Détails')
