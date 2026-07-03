@@ -52,6 +52,7 @@ class PostsResource extends Resource
                             TextInput::make('title')
                                 ->label('Titre')
                                 ->required()
+                                ->unique(ignoreRecord: true)
                                 ->live()
                                 ->afterStateUpdated(function (Set $set, $state) {
                                     if ($state) {
