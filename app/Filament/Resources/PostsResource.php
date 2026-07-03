@@ -64,8 +64,7 @@ class PostsResource extends Resource
                                 ->disabled()
                                 ->required()
                                 ->unique(ignoreRecord: true)
-                                ->maxLength(255)
-                                ->unique('posts', 'slug', ignorable: fn($record) => $record),
+                                ->maxLength(255),
                             TiptapEditor::make('content')
                                 ->label('Contenu')
                                 ->profile('default')
