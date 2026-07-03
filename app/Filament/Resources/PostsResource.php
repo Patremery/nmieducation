@@ -53,7 +53,7 @@ class PostsResource extends Resource
                                 ->label('Titre')
                                 ->required()
                                 ->live()
-                                ->afterStateHydrated(function (Set $set, $state) {
+                                ->afterStateUpdated(function (Set $set, $state) {
                                     if ($state) {
                                         $set('slug', Str::slug($state ?? ''));
                                     }
