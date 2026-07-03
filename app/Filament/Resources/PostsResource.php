@@ -114,7 +114,7 @@ class PostsResource extends Resource
         return $table
             ->columns([
                 //TextColumn::make('user_id')->sortable()->searchable(),
-                ImageColumn::make('cover_photo_path')->label('Image'),
+                ImageColumn::make('featured_image')->label('Image'),
                 TextColumn::make('title')
                 ->label("Titre")
                 ->formatStateUsing(function($state) {

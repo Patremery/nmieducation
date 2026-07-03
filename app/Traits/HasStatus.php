@@ -35,17 +35,17 @@ trait HasStatus
                             default => 'danger',
                         })
                         ->formatStateUsing(fn (string $state) => match ($state) {
-                            DefaultStatusEnum::PUBLISHED->value => trans('general.published'),
-                            DefaultStatusEnum::UNPUBLISHED->value => trans('general.unpublished'),
-                            DefaultStatusEnum::DRAFT->value => trans('general.draft'),
-                            default => trans('general.unpublished'),
+                            DefaultStatusEnum::PUBLISHED->value => trans('general.status.published'),
+                            DefaultStatusEnum::UNPUBLISHED->value => trans('general.status.unpublished'),
+                            DefaultStatusEnum::DRAFT->value => trans('general.status.draft'),
+                            default => trans('general.status.unpublished'),
                         });
     }
 
     public static function getStatusField(): Select
     {
         return Select::make('status')
-            ->label(__('Statut'))
+            ->label(__('label'))
             ->options(options: DefaultStatusEnum::options())
             ->enum(DefaultStatusEnum::class)
             ->required();
