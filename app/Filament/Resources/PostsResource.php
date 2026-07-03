@@ -8,7 +8,6 @@ use App\Traits\HasStatus;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -18,8 +17,9 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use FilamentTiptapEditor\TiptapEditor;
 use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
+use Illuminate\Support\Str;
+use Filament\Forms\Set;
 
 class PostsResource extends Resource
 {
@@ -52,18 +52,21 @@ class PostsResource extends Resource
                             TextInput::make('title')
                                 ->label('Titre')
                                 ->required()
+                                ->live()
+                                ->afterStateHydrated(function (Set $set, $state) {
+                                    if ($state) {
+                                        $set('slug', Str::slug($state ?? ''));
+                                    }
+                                })
                                 ->maxLength(255),
                             TextInput::make('slug')
                                 ->label('Slug (URL)')
+                                ->disabled()
                                 ->required()
+                                ->unique(ignoreRecord: true)
                                 ->maxLength(255)
                                 ->unique('posts', 'slug', ignorable: fn($record) => $record),
-                            Textarea::make('sub_title')
-                                ->label('Résumé')
-                                ->required()
-                                ->rows(3)
-                                ->maxLength(1000),
-                            TiptapEditor::make('body')
+                            TiptapEditor::make('content')
                                 ->label('Contenu')
                                 ->profile('default')
                                 ->maxContentWidth('5xl')
@@ -76,21 +79,18 @@ class PostsResource extends Resource
                         ->columnSpan(1)
                         ->description('Configurez les détails de publication de cet article')
                         ->schema([
-                            FileUpload::make('cover_photo_path')
+                            FileUpload::make('featured_image')
                                 ->label('Image mise en avant')
                                 ->image()
                                 ->disk('public')
                                 ->directory('blog')
                                 ->optimize('webp')
                                 ->required(),
-                            TextInput::make('photo_alt_text')
-                                ->label('Texte alternatif image')
-                                ->maxLength(255)
-                                ->required(),
-                            self::getStatusField(),
+                          
                             DatePicker::make('published_at')
                                 ->label('Date de publication')
                                 ->helperText('Sera définie automatiquement si non spécifiée')
+                                ->format('Y')
                                 ->native(false),
                             Select::make('categories')
                                 ->label('Catégories')
