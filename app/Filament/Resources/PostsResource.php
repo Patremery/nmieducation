@@ -61,7 +61,7 @@ class PostsResource extends Resource
                                 ->maxLength(255),
                             TextInput::make('slug')
                                 ->label('Slug (URL)')
-                                ->disabled()
+                                ->readonly()
                                 ->required()
                                 ->unique(ignoreRecord: true)
                                 ->maxLength(255),
