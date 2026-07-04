@@ -53,7 +53,7 @@ class PostsResource extends Resource
                                 ->label('Titre')
                                 ->required()
                                 ->unique(ignoreRecord: true)
-                                ->live()
+                                ->live(onBlur: true)
                                 ->afterStateUpdated(function (Set $set, $state) {
                                     if ($state) {
                                         $set('slug', Str::slug($state ?? ''));

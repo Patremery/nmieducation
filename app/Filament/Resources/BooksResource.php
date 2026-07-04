@@ -90,7 +90,7 @@ class BooksResource extends Resource
                                     ->label('Titre')
                                     ->unique(ignoreRecord: true)
                                     ->required()
-                                    ->live()
+                                    ->live(onBlur: true)
                                     ->afterStateUpdated(function ($state, $set) {
                                         $set('slug', str()->slug($state));
                                     })
