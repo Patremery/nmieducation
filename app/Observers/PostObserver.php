@@ -14,7 +14,7 @@ class PostObserver
     public function creating(Post $post): void
     {
         // When creating a post, ensure consistency between status and published_at
-        if ($post->status === DefaultStatusEnum::PUBLISHED->value && !$post->published_at) {
+        if ($post->status === DefaultStatusEnum::PUBLISHED->value && !$this->isValidPublishedAt($post->published_at)) {
             $post->published_at = now();
         }
     }
@@ -26,7 +26,7 @@ class PostObserver
     {
         // If status changed to published, set published_at if not already set
         if ($post->isDirty('status') && $post->status === DefaultStatusEnum::PUBLISHED->value) {
-            if (!$post->published_at) {
+            if (!$this->isValidPublishedAt($post->published_at)) {
                 $post->published_at = now();
             }
         }
@@ -77,5 +77,18 @@ class PostObserver
     public function forceDeleted(Post $post): void
     {
         //
+    }
+
+    private function isValidPublishedAt($publishedAt): bool
+    {
+        if (!$publishedAt) {
+            return false;
+        }
+
+        if ($publishedAt instanceof Carbon && ($publishedAt->isEpoch() || $publishedAt->year <= 1970)) {
+            return false;
+        }
+
+        return true;
     }
 }

@@ -90,7 +90,7 @@ class PostsResource extends Resource
                             DatePicker::make('published_at')
                                 ->label('Date de publication')
                                 ->helperText('Sera définie automatiquement si non spécifiée')
-                                ->format('Y')
+                                ->default(now())
                                 ->native(false),
                             Select::make('categories')
                                 ->label('Catégories')
