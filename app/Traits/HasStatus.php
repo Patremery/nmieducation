@@ -23,23 +23,24 @@ trait HasStatus
         return $query->where('status', DefaultStatusEnum::DRAFT->value);
     }
 
-    public static function getStatusColumn(): TextColumn {
+    public static function getStatusColumn(): TextColumn
+    {
         return TextColumn::make('status')
-                        ->label("Statut")
-                        ->sortable()
-                        ->badge()
-                        ->color(fn (string $state): string => match ($state) {
-                            DefaultStatusEnum::PUBLISHED->value => 'success',
-                            DefaultStatusEnum::UNPUBLISHED->value => 'danger',
-                            DefaultStatusEnum::DRAFT->value => 'warning',
-                            default => 'danger',
-                        })
-                        ->formatStateUsing(fn (string $state) => match ($state) {
-                            DefaultStatusEnum::PUBLISHED->value => trans('general.status.published'),
-                            DefaultStatusEnum::UNPUBLISHED->value => trans('general.status.unpublished'),
-                            DefaultStatusEnum::DRAFT->value => trans('general.status.draft'),
-                            default => trans('general.status.unpublished'),
-                        });
+            ->label('Statut')
+            ->sortable()
+            ->badge()
+            ->color(fn (string $state): string => match ($state) {
+                DefaultStatusEnum::PUBLISHED->value => 'success',
+                DefaultStatusEnum::UNPUBLISHED->value => 'danger',
+                DefaultStatusEnum::DRAFT->value => 'warning',
+                default => 'danger',
+            })
+            ->formatStateUsing(fn (string $state) => match ($state) {
+                DefaultStatusEnum::PUBLISHED->value => trans('general.status.published'),
+                DefaultStatusEnum::UNPUBLISHED->value => trans('general.status.unpublished'),
+                DefaultStatusEnum::DRAFT->value => trans('general.status.draft'),
+                default => trans('general.status.unpublished'),
+            });
     }
 
     public static function getStatusField(): Select
@@ -50,4 +51,4 @@ trait HasStatus
             ->enum(DefaultStatusEnum::class)
             ->required();
     }
-} 
+}

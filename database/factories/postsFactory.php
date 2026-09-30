@@ -19,13 +19,13 @@ class postsFactory extends Factory
     public function definition(): array
     {
         $title = $this->faker->sentence();
-        
+
         return [
             'title' => $title,
             'slug' => \Str::slug($title),
             'sub_title' => $this->faker->paragraph(),
             'body' => $this->faker->paragraphs(5, true),
-            'cover_photo_path' => 'blog/' . $this->faker->image('public/storage/blog', 640, 480, null, false),
+            'cover_photo_path' => 'blog/'.$this->faker->image('public/storage/blog', 640, 480, null, false),
             'photo_alt_text' => $this->faker->sentence(),
             'status' => DefaultStatusEnum::DRAFT->value,
             'published_at' => null,
@@ -55,4 +55,3 @@ class postsFactory extends Factory
         ]);
     }
 }
-

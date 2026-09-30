@@ -1,5 +1,6 @@
 import React from "react";
 import InnerPageLayout from "../layouts/InnerPageLayout";
+import { useSeo } from "../hooks/useSeo";
 import {
     Author,
     BannerProps,
@@ -17,6 +18,7 @@ interface ViewAuthorProps {
 }
 
 const ViewAuthor: React.FC<ViewAuthorProps> = ({ author, books }) => {
+    const seo = useSeo();
     const banner: BannerProps = {
         title: "Nos Auteurs",
     };
@@ -28,7 +30,7 @@ const ViewAuthor: React.FC<ViewAuthorProps> = ({ author, books }) => {
     ];
 
     return (
-        <InnerPageLayout title={author.name} banner={banner}>
+        <InnerPageLayout {...seo} banner={banner}>
             <div className="container pt-4 px-5">
                 <Breadcrumb items={breadcrumbItems} />
             </div>

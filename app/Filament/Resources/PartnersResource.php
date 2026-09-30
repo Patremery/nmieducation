@@ -19,7 +19,9 @@ class PartnersResource extends Resource
     protected static ?string $model = Partners::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
     protected static ?string $navigationGroup = 'CMS';
+
     protected static ?string $label = 'Partenaires';
 
     public static function form(Form $form): Form
@@ -27,10 +29,10 @@ class PartnersResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                        ->label('Nom')
-                        ->required(),
+                    ->label('Nom')
+                    ->required(),
                 TextInput::make('website')
-                        ->label('Site Web'),
+                    ->label('Site Web'),
                 FileUpload::make('logo_url')
                     ->default(fn ($state) => $state)
                     ->image()
@@ -38,7 +40,7 @@ class PartnersResource extends Resource
                     ->optimize('webp')
                     ->directory('partners')
                     ->columnSpanFull(),
-                
+
                 RichEditor::make('description')->columnSpanFull(),
             ]);
     }
@@ -49,10 +51,10 @@ class PartnersResource extends Resource
             ->columns([
                 TextColumn::make('name')->sortable()->searchable(),
                 TextColumn::make('website')->sortable()->searchable(),
-                
+
                 ImageColumn::make('logo_url')->sortable()->searchable(),
-                
-                TextColumn::make('description')->searchable()
+
+                TextColumn::make('description')->searchable(),
             ])
             ->filters([
                 //

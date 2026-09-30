@@ -16,32 +16,32 @@ class DownloadsExporter extends Exporter
         return [
             ExportColumn::make('id')
                 ->label('ID'),
-                
+
             ExportColumn::make('downloader.name')
                 ->label('Nom du téléchargeur'),
-                
+
             ExportColumn::make('downloader.email')
                 ->label('Email du téléchargeur'),
-                
+
             ExportColumn::make('downloader.phone')
                 ->label('Téléphone du téléchargeur'),
-                
+
             ExportColumn::make('book.title')
                 ->label('Titre du livre'),
-                
+
             ExportColumn::make('book.category.label')
                 ->label('Catégorie du livre'),
-                
+
             ExportColumn::make('ip_address')
                 ->label('Adresse IP'),
-                
+
             ExportColumn::make('created_at')
                 ->label('Date de téléchargement'),
         ];
     }
-    
+
     public static function getCompletedNotificationBody(Export $export): string
     {
-        return "Votre exportation est terminée et prête à être téléchargée.";
+        return 'Votre exportation est terminée et prête à être téléchargée.';
     }
-} 
+}

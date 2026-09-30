@@ -24,8 +24,9 @@ class AuthorResource extends JsonResource
             'linkedin' => $this->linkedin_url,
             'facebook' => $this->facebook_url,
             'twitter' => $this->twitter_url,
-            //'latest_book' => $this->books->published()->latest()->first(),
-           // 'books' => BookResource::collection($this->whenLoaded('books')),
+            'books_count' => $this->whenCounted('books'),
+            // 'latest_book' => $this->books->published()->latest()->first(),
+            // 'books' => BookResource::collection($this->whenLoaded('books')),
         ];
     }
 }

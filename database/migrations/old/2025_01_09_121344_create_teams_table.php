@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-$table->string('position');
-$table->string('photo');
-$table->string('facebook_url')->nullable();
-$table->string('linkedin_url')->nullable();
-$table->text('bio')->nullable();
-$table->timestamps();
-$table->softDeletes();
-    });
+            $table->string('position');
+            $table->string('photo');
+            $table->string('facebook_url')->nullable();
+            $table->string('linkedin_url')->nullable();
+            $table->text('bio')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**

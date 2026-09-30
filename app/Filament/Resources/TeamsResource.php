@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\TeamsResource\Pages;
 use App\Models\Team;
-use App\Traits\DefaultStatusField;
 use App\Traits\HasStatus;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
@@ -19,10 +18,13 @@ use Filament\Tables\Table;
 class TeamsResource extends Resource
 {
     use HasStatus;
+
     protected static ?string $model = Team::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
+
     protected static ?string $navigationGroup = 'CMS';
+
     protected static ?string $label = 'Equipe';
 
     public static function form(Form $form): Form
@@ -41,7 +43,7 @@ class TeamsResource extends Resource
                 TextInput::make('facebook_url'),
                 TextInput::make('linkedin_url'),
                 RichEditor::make('bio'),
-                self::getStatusField()
+                self::getStatusField(),
             ]);
     }
 
@@ -54,7 +56,7 @@ class TeamsResource extends Resource
                 TextColumn::make('position')->sortable()->searchable(),
                 TextColumn::make('facebook_url')->sortable()->searchable(),
                 TextColumn::make('linkedin_url')->sortable()->searchable(),
-                self::getStatusColumn()
+                self::getStatusColumn(),
             ])
             ->filters([
                 //
@@ -83,7 +85,7 @@ class TeamsResource extends Resource
             'index' => Pages\ListTeams::route('/'),
             'create' => Pages\CreateTeams::route('/create'),
             'view' => Pages\ViewTeams::route('/{record}'),
-            'edit' => Pages\EditTeams::route('/{record}/edit'), 
+            'edit' => Pages\EditTeams::route('/{record}/edit'),
         ];
     }
 }

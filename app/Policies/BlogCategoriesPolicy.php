@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\BlogCategory;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class BlogCategoriesPolicy
 {
@@ -63,7 +62,6 @@ class BlogCategoriesPolicy
     {
         return $user->can('force_delete_blog::categories');
     }
-
 
     public function import_data(User $user): bool
     {

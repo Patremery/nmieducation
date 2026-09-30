@@ -6,12 +6,12 @@ enum BookFormat: string
 {
     case PAPER = 'paper';
     case DIGITAL = 'digital';
-    
+
     case BOTH = 'both';
 
     public function label(): string
     {
-        return match($this) {
+        return match ($this) {
             self::PAPER => 'Papier',
             self::DIGITAL => 'Numérique',
             self::BOTH => 'Papier et numérique',
@@ -27,4 +27,4 @@ enum BookFormat: string
     {
         return array_column(self::cases(), 'value');
     }
-} 
+}

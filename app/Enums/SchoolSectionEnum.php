@@ -9,7 +9,7 @@ enum SchoolSectionEnum: string
 
     public static function options(): array
     {
-        return array_map(fn(SchoolSectionEnum $section) => $section->value, SchoolSectionEnum::cases());
+        return array_map(fn (SchoolSectionEnum $section) => $section->value, SchoolSectionEnum::cases());
     }
 
     public static function label(string $value): string

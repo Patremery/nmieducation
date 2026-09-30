@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import EbookSection from "../components/EbookSection";
 import InnerPageLayout from "../layouts/InnerPageLayout";
+import { useSeo } from "../hooks/useSeo";
 import { Author, BannerProps } from "../types/interfaces";
 import AuthorGrid from "../components/AuthorGrid";
 
@@ -11,11 +12,12 @@ interface AuthorsProps {
 }
 
 const Authors: React.FC<AuthorsProps> = ({ title, authors }) => {
+    const seo = useSeo();
     const banner: BannerProps = {
         title: title,
     };
     return (
-        <InnerPageLayout title="Nos Auteurs" banner={banner}>
+        <InnerPageLayout {...seo} banner={banner}>
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

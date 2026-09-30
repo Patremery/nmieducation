@@ -2,9 +2,9 @@
 
 namespace App\Http\Resources;
 
+use App\Enums\ClassroomsEnum;
 use App\Enums\LiteratureGenreEnum;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Enums\ClassroomsEnum;
 
 class BookResource extends JsonResource
 {
@@ -12,7 +12,7 @@ class BookResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            //'author' => $this->author?->name ?? 'NMI Education',
+            // 'author' => $this->author?->name ?? 'NMI Education',
             'slug' => $this->slug,
             'authors' => $this->getAuthors(),
             'title' => $this->title,
@@ -23,7 +23,7 @@ class BookResource extends JsonResource
             'new' => $this->new ? 'Yes' : 'No',
             'support' => $this->support,
             'pages' => $this->pages,
-            'collection' => $this->collection ? new CollectionResource($this->whenLoaded("collection")) : null,
+            'collection' => $this->collection ? new CollectionResource($this->whenLoaded('collection')) : null,
             'publicationDate' => $this->publication_date,
             'language' => $this->language->name,
             'youscribe_url' => $this->youscribe_url,
@@ -32,7 +32,7 @@ class BookResource extends JsonResource
             'adinkra_url' => $this->adinkra_url,
             'isbn' => $this->ISBN,
             'description' => strip_tags($this->description),
-            'cover' => $this->featured_image ? asset("storage/".$this->featured_image) : null,
+            'cover' => $this->featured_image ? asset('storage/'.$this->featured_image) : null,
             'summary' => $this->summary,
             'audience' => $this->audience,
             'classrooms' => $this->classrooms ? collect($this->classrooms)->map(function ($classroom) {
@@ -41,8 +41,8 @@ class BookResource extends JsonResource
                     : $classroom;
             })->toArray() : [],
             'genre' => $this->theme ? (
-                in_array($this->theme, array_column(LiteratureGenreEnum::cases(), 'value')) 
-                    ? LiteratureGenreEnum::from($this->theme)->label() 
+                in_array($this->theme, array_column(LiteratureGenreEnum::cases(), 'value'))
+                    ? LiteratureGenreEnum::from($this->theme)->label()
                     : $this->theme
             ) : null,
         ];
@@ -53,4 +53,3 @@ class BookResource extends JsonResource
         return AuthorResource::collection($this->authors);
     }
 }
-

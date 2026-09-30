@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('Classroom', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-    });
+        });
     }
 
     /**

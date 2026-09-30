@@ -18,6 +18,7 @@ class TagsResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $navigationGroup = 'CMS';
+
     protected static ?string $navigationParentItem = 'Articles';
 
     public static function form(Form $form): Form
@@ -26,7 +27,7 @@ class TagsResource extends Resource
             ->schema([
                 TextInput::make('name')->columnSpanFull()->required(),
                 TextInput::make('slug')->required(),
-                TextInput::make('order_column')->required()
+                TextInput::make('order_column')->required(),
             ]);
     }
 
@@ -36,7 +37,7 @@ class TagsResource extends Resource
             ->columns([
                 TextColumn::make('name')->sortable()->searchable(),
                 TextColumn::make('slug')->sortable()->searchable(),
-                TextColumn::make('order_column')->sortable()->searchable()
+                TextColumn::make('order_column')->sortable()->searchable(),
             ])
             ->filters([
                 //
@@ -63,7 +64,7 @@ class TagsResource extends Resource
     {
         return [
             'index' => Pages\ListTags::route('/'),
-           /*  'create' => Pages\CreateTags::route('/create'),
+            /*  'create' => Pages\CreateTags::route('/create'),
             'view' => Pages\ViewTags::route('/{record}'),
             'edit' => Pages\EditTags::route('/{record}/edit'), */
         ];

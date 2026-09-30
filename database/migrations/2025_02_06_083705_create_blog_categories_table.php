@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('blog_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-$table->string('slug')->nullable();
-$table->bigInteger('parent_id')->nullable();
-$table->integer('order')->nullable();
-$table->timestamps();
-$table->softDeletes();
-    });
+            $table->string('slug')->nullable();
+            $table->bigInteger('parent_id')->nullable();
+            $table->integer('order')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**

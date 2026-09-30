@@ -3,9 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\SubmissionsResource\Pages;
-use App\Filament\Resources\SubmissionsResource\RelationManagers;
 use App\Models\Submission;
-use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -19,28 +17,29 @@ class SubmissionsResource extends Resource
     protected static ?string $model = Submission::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = "CMS";
 
-    protected static ?string $label = "Manuscrits";
+    protected static ?string $navigationGroup = 'CMS';
+
+    protected static ?string $label = 'Manuscrits';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 TextInput::make('name')
-                        ->label("Noms")
-                        ->required(),
+                    ->label('Noms')
+                    ->required(),
                 TextInput::make('email')
-                ->label('E-mail'),
+                    ->label('E-mail'),
                 TextInput::make('phone')
-                ->label("Téléphone"),
-                TextInput::make('address')->label("Adresse"),
-                TextInput::make('country')->label("Pays"),
-                TextInput::make('city')->label("Ville"),
-                TextInput::make('title')->label("Titre"),
-                TextInput::make('category')->label("Catégorie"),
-                TextInput::make('summary')->label("Résumé"),
-                FileUpload::make('file')->label("Fichier")
+                    ->label('Téléphone'),
+                TextInput::make('address')->label('Adresse'),
+                TextInput::make('country')->label('Pays'),
+                TextInput::make('city')->label('Ville'),
+                TextInput::make('title')->label('Titre'),
+                TextInput::make('category')->label('Catégorie'),
+                TextInput::make('summary')->label('Résumé'),
+                FileUpload::make('file')->label('Fichier'),
             ]);
     }
 
@@ -57,7 +56,7 @@ class SubmissionsResource extends Resource
                 TextColumn::make('title')->sortable()->searchable(),
                 TextColumn::make('category')->sortable()->searchable(),
                 TextColumn::make('summary')->sortable()->searchable(),
-                TextColumn::make('file')->sortable()->searchable()
+                TextColumn::make('file')->sortable()->searchable(),
             ])
             ->filters([
                 //

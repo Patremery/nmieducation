@@ -2,38 +2,41 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Forms\Components\SeoSection;
 use App\Filament\Resources\AuthorsResource\Pages;
 use App\Models\Author;
 use App\Traits\HasStatus;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Hidden;
-use Filament\Forms\Components\RichEditor;
-use Filament\Tables\Columns\ImageColumn;
-
 
 class AuthorsResource extends Resource
 {
     use HasStatus;
+
     protected static ?string $model = Author::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
 
     protected static ?string $navigationGroup = 'Catalogue';
+
     public static function getNavigationLabel(): string
     {
         return __('Auteurs');
     }
 
-    public static function getLabel() : string {
+    public static function getLabel(): string
+    {
         return __('Auteurs');
     }
 
@@ -62,12 +65,12 @@ class AuthorsResource extends Resource
                                         $set('slug', str()->slug($state));
                                     }),
                                 TextInput::make('profession')
-                                        ->label("Profession"),
+                                    ->label('Profession'),
                                 Hidden::make('slug')
                                     ->unique(ignoreRecord: true)
                                     ->required(),
                                 DatePicker::make('latest_publication_date')
-                                        ->label("Date de dernière publication"),
+                                    ->label('Date de dernière publication'),
                                 RichEditor::make('biography')
                                     ->label('Biographie')
                                     ->columnSpanFull(),
@@ -79,15 +82,14 @@ class AuthorsResource extends Resource
                                 Section::make('Statut')
                                     ->schema([
                                         self::getStatusField(),
-                                        
+
                                         TextInput::make('facebook_url')
-                                                ->label("Profil Facebook"),
+                                            ->label('Profil Facebook'),
                                         TextInput::make('linkedin_url')
-                                                ->label("Profil LinkedIn"),
+                                            ->label('Profil LinkedIn'),
                                         TextInput::make('twitter_url')
-                                                ->label("Profil Twitter"),
+                                            ->label('Profil Twitter'),
                                     ]),
-                                
 
                                 Section::make('Photo')
                                     ->schema([
@@ -100,9 +102,10 @@ class AuthorsResource extends Resource
                                             ->optimize('webp'),
                                     ]),
 
-                                
                             ])->columnSpan(['lg' => 1]),
                     ]),
+
+                ...SeoSection::make('seo/authors'),
             ]);
     }
 
@@ -111,20 +114,20 @@ class AuthorsResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('photo')
-                            ->label("Photo"), 
+                    ->label('Photo'),
                 TextColumn::make('name')
-                            ->label("Nom")
-                            ->sortable()
-                            ->searchable(),
+                    ->label('Nom')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('profession')
-                            ->label("Profession")
-                            ->sortable()
-                            ->searchable(),
-               /*  TextColumn::make('biography')
+                    ->label('Profession')
+                    ->sortable()
+                    ->searchable(),
+                /*  TextColumn::make('biography')
                             ->label("Biographie")
                             ->searchable(), */
-                self::getStatusColumn()
-                
+                self::getStatusColumn(),
+
             ])
             ->filters([
                 //

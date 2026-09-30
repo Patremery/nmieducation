@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DOMPurify from "dompurify";
 import { Post } from "../types/interfaces";
 import InnerPageLayout from "../layouts/InnerPageLayout";
+import { useSeo } from "../hooks/useSeo";
 import Sidebar from "../components/sidebar";
 import {
     FaFacebookF,
@@ -23,6 +24,7 @@ const Article: React.FC<ArticleProps> = ({
     latestPosts,
     similarPosts,
 }) => {
+    const seo = useSeo();
     const [linkCopied, setLinkCopied] = useState(false);
 
     // Styles pour le contenu de l'article
@@ -88,10 +90,10 @@ const Article: React.FC<ArticleProps> = ({
 
     return (
         <InnerPageLayout
+            {...seo}
             banner={{
                 title: post.title,
             }}
-            title={post.title}
         >
             {/* Article Hero Header */}
             <div className="bg-white pb-5 border-bottom border-light">

@@ -39,7 +39,7 @@ class FeaturedImageUploadTest extends TestCase
         ]);
 
         // Vérifier que le fichier est stocké
-        Storage::disk('public')->assertExists('blog/' . $file->hashName());
+        Storage::disk('public')->assertExists('blog/'.$file->hashName());
 
         // Vérifier que le chemin est sauvegardé dans la BD
         $this->assertNotNull($post->cover_photo_path);
@@ -55,8 +55,8 @@ class FeaturedImageUploadTest extends TestCase
             ]);
 
         // Simuler l'asset helper
-        $assetUrl = asset('storage/' . $post->cover_photo_path);
-        
+        $assetUrl = asset('storage/'.$post->cover_photo_path);
+
         // Vérifier que l'URL est correcte
         $this->assertStringContainsString('/storage/blog/test-image.webp', $assetUrl);
     }

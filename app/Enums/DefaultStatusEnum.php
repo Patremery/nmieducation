@@ -8,8 +8,9 @@ enum DefaultStatusEnum: string
     case UNPUBLISHED = 'unpublished';
     case DRAFT = 'draft';
 
-    public function label(): string {
-        return match($this) {
+    public function label(): string
+    {
+        return match ($this) {
             self::PUBLISHED => __('Publié'),
             self::UNPUBLISHED => __('Désactivé'),
             self::DRAFT => __('Brouillon'),
@@ -25,5 +26,4 @@ enum DefaultStatusEnum: string
     {
         return array_column(self::cases(), 'value');
     }
-
 }

@@ -5,22 +5,26 @@ import Banner from "../components/Banner";
 import { BannerProps } from "../types/interfaces";
 import Head from "../components/Head";
 
-interface InnerPageLayoutProps {
+export interface InnerPageLayoutProps {
     children: ReactNode;
     banner?: BannerProps;
     displayBanner?: boolean;
-    title?: string;
+    /**
+     * SEO payload produced by `App\Services\SeoService` (see `useSeo`). Every key
+     * except `children` is forwarded to `<Head>`; unknown keys are ignored there.
+     */
+    [key: string]: unknown;
 }
 
 const InnerPageLayout: React.FC<InnerPageLayoutProps> = ({
     children,
     banner,
     displayBanner = true,
-    title = "Accueil",
+    ...seo
 }) => {
     return (
         <>
-            <Head title={title} />
+            <Head {...seo} />
             <div className="min-vh-100 d-flex flex-column">
                 <Navbar />
                 {displayBanner && (

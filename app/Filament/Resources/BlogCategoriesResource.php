@@ -19,7 +19,9 @@ class BlogCategoriesResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $navigationGroup = 'CMS';
+
     protected static ?string $navigationParentItem = 'Articles';
+
     protected static ?string $label = 'Catégories';
 
     public static function form(Form $form): Form
@@ -27,30 +29,29 @@ class BlogCategoriesResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                        ->label('Nom')
-                        ->columnSpanFull()
-                        ->live()
-                        ->afterStateUpdated(function ($state, $set) 
-                        {
-                            $set('slug', str()->slug($state));
-                        })
-                        ->required(),
+                    ->label('Nom')
+                    ->columnSpanFull()
+                    ->live()
+                    ->afterStateUpdated(function ($state, $set) {
+                        $set('slug', str()->slug($state));
+                    })
+                    ->required(),
                 TextInput::make('slug')
-                        ->columnSpanFull()
-                        ->unique(ignoreRecord: true)
-                        ->required(),
+                    ->columnSpanFull()
+                    ->unique(ignoreRecord: true)
+                    ->required(),
                 Select::make('parent_id')
-                        ->label('Catégorie parente')
-                        ->options(function (BlogCategory $record = null) {
-                            return BlogCategory::query()
-                                ->when($record, function ($query) use ($record) {
-                                    $query->where('id', '!=', $record->id);
-                                })
-                                ->pluck('name', 'id');
-                        })
-                        ->searchable()
-                        ->preload(),
-                TextInput::make('order')
+                    ->label('Catégorie parente')
+                    ->options(function (?BlogCategory $record = null) {
+                        return BlogCategory::query()
+                            ->when($record, function ($query) use ($record) {
+                                $query->where('id', '!=', $record->id);
+                            })
+                            ->pluck('name', 'id');
+                    })
+                    ->searchable()
+                    ->preload(),
+                TextInput::make('order'),
             ]);
     }
 
@@ -59,8 +60,8 @@ class BlogCategoriesResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
-                ->label('Nom')
-                ->sortable()->searchable(),
+                    ->label('Nom')
+                    ->sortable()->searchable(),
                 TextColumn::make('slug')->searchable(),
                 TextColumn::make('parent_id')
                     ->label('Parent')
@@ -71,7 +72,7 @@ class BlogCategoriesResource extends Resource
                 TextColumn::make('order')
                     ->label('Position')
                     ->sortable()
-                    ->searchable()
+                    ->searchable(),
             ])
             ->filters([
                 //

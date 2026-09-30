@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Filters from "../components/Filters";
 import EbookSection from "../components/EbookSection";
 import InnerPageLayout from "../layouts/InnerPageLayout";
+import { useSeo } from "../hooks/useSeo";
 import ItemGrid from "../components/ItemGrid";
 import { InfiniteScroll } from "@inertiajs/react"; // Importer InfiniteScroll
 import {
@@ -47,6 +48,7 @@ const CatalogCategory: React.FC<CatalogCategoryProps> = ({
     collections,
     subjects,
 }) => {
+    const seo = useSeo();
     const banner: BannerProps = {
         title: "Notre Catalogue",
     };
@@ -60,7 +62,7 @@ const CatalogCategory: React.FC<CatalogCategoryProps> = ({
     };
 
     return (
-        <InnerPageLayout title={title} banner={banner}>
+        <InnerPageLayout {...seo} banner={banner}>
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

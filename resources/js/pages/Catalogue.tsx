@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import NewArrivals from "../components/NewArrivals";
 import EbookSection from "../components/EbookSection";
 import InnerPageLayout from "../layouts/InnerPageLayout";
+import { useSeo } from "../hooks/useSeo";
 import { BannerProps, Book } from "../types/interfaces";
 import CategoryLine from "../components/CategoryLine";
 
@@ -11,6 +12,7 @@ interface CatalogueProps {
 }
 
 const Catalogue: React.FC<CatalogueProps> = ({ books }) => {
+    const seo = useSeo();
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -51,7 +53,7 @@ const Catalogue: React.FC<CatalogueProps> = ({ books }) => {
         title: "Nos Livres",
     };
     return (
-        <InnerPageLayout banner={banner} title="Catalogue">
+        <InnerPageLayout {...seo} banner={banner}>
             <motion.div
                 className="container mt-5"
                 variants={containerVariants}

@@ -49,7 +49,7 @@ class AppServiceProvider extends ServiceProvider
         $this->configureModels();
         $this->translatableComponents();
         JsonResource::withoutWrapping();
-        
+
         // Register model observers
         Post::observe(PostObserver::class);
     }

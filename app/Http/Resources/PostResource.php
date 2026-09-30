@@ -22,8 +22,33 @@ class PostResource extends JsonResource
             'slug' => $this->slug,
             'featured_image' => $this->featured_image ? asset('storage/'.$this->featured_image) : null,
             'published_at' => $this->published_at,
-            'categories' => $this->categories,
-            'tags' => $this->tags,
+            'author' => $this->whenLoaded('author', fn () => $this->author?->name),
+            'categories' => $this->whenLoaded(
+                'categories',
+                fn () => $this->categories->map(fn ($category) => [
+                    'id' => $category->id,
+                    'name' => $category->name,
+                    'slug' => $category->slug,
+                ])->all(),
+                fn () => $this->categories->map(fn ($category) => [
+                    'id' => $category->id,
+                    'name' => $category->name,
+                    'slug' => $category->slug,
+                ])->all()
+            ),
+            'tags' => $this->whenLoaded(
+                'tags',
+                fn () => $this->tags->map(fn ($tag) => [
+                    'id' => $tag->id,
+                    'name' => $tag->name,
+                    'slug' => $tag->slug,
+                ])->all(),
+                fn () => $this->tags->map(fn ($tag) => [
+                    'id' => $tag->id,
+                    'name' => $tag->name,
+                    'slug' => $tag->slug,
+                ])->all()
+            ),
         ];
     }
 }

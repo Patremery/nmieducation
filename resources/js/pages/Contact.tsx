@@ -1,5 +1,6 @@
 import React from "react";
 import InnerPageLayout from "../layouts/InnerPageLayout";
+import { useSeo } from "../hooks/useSeo";
 import { BannerProps } from "../types/interfaces";
 import BannerImage from "../assets/img/nmi-office.jpg";
 import ContactForm from "../components/ContactForm";
@@ -20,6 +21,7 @@ interface ContactProps {
 }
 
 const Contact: React.FC<ContactProps> = ({ contacts }) => {
+    const seo = useSeo();
     const description = (
         <p className="text-white">
             <strong>
@@ -44,7 +46,7 @@ const Contact: React.FC<ContactProps> = ({ contacts }) => {
     };
 
     return (
-        <InnerPageLayout title="Contact" banner={banner}>
+        <InnerPageLayout {...seo} banner={banner}>
             <div className="container p-2 p-md-3">
                 <div className="row px-2 px-md-4 px-lg-5 mt-3 mt-md-5">
                     <div className="col-md-12 text-center">

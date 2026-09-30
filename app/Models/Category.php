@@ -34,4 +34,4 @@ class Category extends Model
     {
         return new CategoryResource($this);
     }
-} 
+}

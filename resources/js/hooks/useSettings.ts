@@ -1,5 +1,5 @@
 import { usePage } from "@inertiajs/react";
 
-export function useSettings() {
-    return usePage().props.settings;
+export function useSettings(): Settings {
+    return usePage<SharedPageProps>().props.settings;
 }

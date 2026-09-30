@@ -14,17 +14,17 @@ return new class extends Migration
         Schema::create('submissions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-$table->string('email');
-$table->string('phone');
-$table->string('address');
-$table->string('city');
-$table->string('country');
-$table->string('title');
-$table->string('category');
-$table->text('summary');
-$table->string('file');
-$table->timestamps();
-    });
+            $table->string('email');
+            $table->string('phone');
+            $table->string('address');
+            $table->string('city');
+            $table->string('country');
+            $table->string('title');
+            $table->string('category');
+            $table->text('summary');
+            $table->string('file');
+            $table->timestamps();
+        });
     }
 
     /**

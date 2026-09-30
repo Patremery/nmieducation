@@ -1,5 +1,6 @@
 import React from "react";
 import InnerPageLayout from "../layouts/InnerPageLayout";
+import { useSeo } from "../hooks/useSeo";
 import HeroSlider from "../components/HeroSlider";
 import TeamCarousel from "../components/TeamCarousel";
 import Slide1Image from "../assets/img/reading.jpg";
@@ -8,6 +9,7 @@ import { Team } from "../types/interfaces";
 import AfricaMapImage from "../assets/img/map.png";
 
 const About = ({ team }: { team: Team[] }) => {
+    const seo = useSeo();
     const slides = [
         {
             id: 1,
@@ -25,7 +27,7 @@ const About = ({ team }: { team: Team[] }) => {
     ];
 
     return (
-        <InnerPageLayout title="A Propos" displayBanner={false}>
+        <InnerPageLayout {...seo} displayBanner={false}>
             <div className="container-fluid p-0">
                 <HeroSlider slides={slides} />
 

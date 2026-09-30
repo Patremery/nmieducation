@@ -9,8 +9,10 @@ import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 const appName = "NMI Education";
 
 createInertiaApp({
-    title: (title) => `${title} - ${appName}`,
-    resolve: (name) =>
+    // `<Head>` already composes the final "<page> | <site>" string, so the
+    // callback only provides the fallback for pages that do not set a title.
+    title: (title) => (title ? title : appName),
+    resolve: (name: string) =>
         resolvePageComponent(
             `./pages/${name}.tsx`,
             import.meta.glob("./pages/**/*.tsx")

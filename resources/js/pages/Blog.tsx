@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import DOMPurify from "dompurify";
 import { Post } from "../types/interfaces";
 import InnerPageLayout from "../layouts/InnerPageLayout";
+import { useSeo } from "../hooks/useSeo";
 import PostGridItem from "../components/PostGridItem";
 import { Link } from "@inertiajs/react";
 
@@ -10,6 +11,7 @@ interface BlogProps {
 }
 
 const Blog: React.FC<BlogProps> = ({ posts }) => {
+    const seo = useSeo();
     const POSTS_PER_PAGE = 6;
     const [displayedPosts, setDisplayedPosts] = useState(POSTS_PER_PAGE);
     const [isLoading, setIsLoading] = useState(false);
@@ -64,10 +66,10 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
 
     return (
         <InnerPageLayout
+            {...seo}
             banner={{
                 title: "Actualité",
             }}
-            title="Blog"
         >
             <div className="container mt-5 p-5">
                 <div className="row">

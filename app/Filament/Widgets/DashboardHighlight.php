@@ -4,8 +4,6 @@ namespace App\Filament\Widgets;
 
 use App\Models\Author;
 use App\Models\Book;
-use App\Models\Collection;
-use App\Models\Team;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -31,12 +29,12 @@ class DashboardHighlight extends BaseWidget
             Stat::make('Catalogues', Book::where('category_id', 5)->count())
                 ->description('Catalogues')
                 ->descriptionIcon('heroicon-m-arrow-trending-up'),
-            
+
             Stat::make('Total des auteurs', Author::count())
                 ->description('Auteurs')
                 ->description('Auteurs')
                 ->descriptionIcon('heroicon-m-arrow-trending-up'),
-            
+
         ];
     }
 }

@@ -1,9 +1,11 @@
 import React from "react";
 import ManuscritForm from "../components/ManuscritForm";
 import InnerPageLayout from "../layouts/InnerPageLayout";
+import { useSeo } from "../hooks/useSeo";
 import { BannerProps } from "../types/interfaces";
 
 const ManuscriptSubmission = () => {
+    const seo = useSeo();
     const description =
         "Envoyez-nous votre manuscrit et ensemble donnons vie à votre projet littéraire";
     const banner: BannerProps = {
@@ -12,7 +14,7 @@ const ManuscriptSubmission = () => {
         className: "lead font-weight-600 p-5 display-7",
     };
     return (
-        <InnerPageLayout title="Soumettre un Manuscrit" banner={banner}>
+        <InnerPageLayout {...seo} banner={banner}>
             <div className="manuscript-submission py-5 my-5">
                 <div className="container">
                     <div className="row justify-content-center">

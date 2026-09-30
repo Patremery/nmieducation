@@ -18,5 +18,4 @@ class BookLanguage extends Model
     {
         return $this->hasMany(Book::class, 'book_language_id');
     }
-    
 }

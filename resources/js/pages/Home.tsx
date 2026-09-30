@@ -1,6 +1,7 @@
 import React from "react";
 import { BannerProps, Book } from "../types/interfaces";
 import InnerPageLayout from "../layouts/InnerPageLayout";
+import { useSeo } from "../hooks/useSeo";
 import { motion } from "framer-motion";
 import NewArrivals from "../components/NewArrivals";
 import EbookSection from "../components/EbookSection";
@@ -15,6 +16,7 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({ books }) => {
+    const seo = useSeo();
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -45,7 +47,7 @@ const Home: React.FC<HomeProps> = ({ books }) => {
     };
 
     return (
-        <InnerPageLayout title="Accueil" displayBanner={false}>
+        <InnerPageLayout {...seo} displayBanner={false}>
             <motion.div
                 className="container"
                 variants={containerVariants}

@@ -2,26 +2,28 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\DefaultStatusEnum;
 use App\Filament\Resources\BookLanguagesResource\Pages;
 use App\Models\BookLanguage;
 use App\Traits\HasStatus;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Table;
-use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 
 class BookLanguagesResource extends Resource
 {
     use HasStatus;
+
     protected static ?string $model = BookLanguage::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-language';
+
     protected static ?string $navigationGroup = 'Catalogue';
 
-    public static function getLabel() : string {
+    public static function getLabel(): string
+    {
         return __('Langues');
     }
 
@@ -35,12 +37,12 @@ class BookLanguagesResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                            ->label("Nom")
-                            ->columnSpanFull()
-                            ->required(),
+                    ->label('Nom')
+                    ->columnSpanFull()
+                    ->required(),
                 TextInput::make('flag')
-                        ->label("Drapeau"),
-                self::getStatusField()
+                    ->label('Drapeau'),
+                self::getStatusField(),
             ]);
     }
 
@@ -49,14 +51,14 @@ class BookLanguagesResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
-                            ->label("Nom")
-                            ->sortable()
-                            ->searchable(),
+                    ->label('Nom')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('flag')
-                            ->label("Drapeau")
-                            ->sortable()
-                            ->searchable(),
-                self::getStatusColumn()
+                    ->label('Drapeau')
+                    ->sortable()
+                    ->searchable(),
+                self::getStatusColumn(),
             ])
             ->filters([
                 //

@@ -23,6 +23,6 @@ class TeamResource extends JsonResource
             'linkedin' => $this->linkedin_url,
             'bio' => $this->bio,
         ];
-       
+
     }
 }

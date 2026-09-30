@@ -28,7 +28,8 @@ class UserResource extends Resource
 
     protected static ?string $navigationGroup = 'Settings';
 
-    public static function getLabel() : string {
+    public static function getLabel(): string
+    {
         return __('Utilisateurs');
     }
 
@@ -87,7 +88,7 @@ class UserResource extends Resource
                             ->required()
                             ->visible(fn (Get $get): bool => filled($get('password')))
                             ->dehydrated(false),
-                            Select::make('roles')
+                        Select::make('roles')
                             ->relationship('roles', 'name')
                             ->multiple()
                             ->preload()
@@ -101,25 +102,25 @@ class UserResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->label("Noms")
+                    ->label('Noms')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('email')
-                    ->label("Email")
+                    ->label('Email')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('roles.name')
-                    ->label("Roles")
+                    ->label('Roles')
                    // ->relationship('roles')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('created_at')
-                    ->label("Date de création")
+                    ->label('Date de création')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->label("Date de modification")
+                    ->label('Date de modification')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

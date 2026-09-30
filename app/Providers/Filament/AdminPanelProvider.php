@@ -3,9 +3,9 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\App\Profile;
-use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use App\Filament\Pages\Auth\Login;
 use App\Filament\Widgets\DashboardHighlight;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Brickx\MaintenanceSwitch\MaintenanceSwitchPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -22,6 +22,7 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Joaopaulolndev\FilamentGeneralSettings\FilamentGeneralSettingsPlugin;
+use MKWebDesign\FilamentWatchdog\FilamentWatchdogPlugin;
 use RickDBCN\FilamentEmail\FilamentEmail;
 use Solutionforest\FilamentScaffold\FilamentScaffoldPlugin;
 
@@ -35,7 +36,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('control-panel')
             ->login(Login::class)
             ->brandLogo(settings('site_logo') ? asset('storage/'.settings('site_logo')) : null)
-            ->brandLogoHeight("70px")
+            ->brandLogoHeight('70px')
             ->passwordReset()
             ->sidebarCollapsibleOnDesktop()
             ->spa()
@@ -69,13 +70,13 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->plugins([
-                \MKWebDesign\FilamentWatchdog\FilamentWatchdogPlugin::make(),
-                //FilamentScaffoldPlugin::make(),
+                FilamentWatchdogPlugin::make(),
+                // FilamentScaffoldPlugin::make(),
                 FilamentShieldPlugin::make(),
                 FilamentEmail::make(),
                 MaintenanceSwitchPlugin::make(),
                 FilamentGeneralSettingsPlugin::make()
-                    ->canAccess(fn() => auth()->id() === 1)
+                    ->canAccess(fn () => auth()->id() === 1)
                     ->setSort(3)
                     ->setIcon('heroicon-o-cog')
                     ->setNavigationGroup('Settings')

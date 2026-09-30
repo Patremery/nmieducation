@@ -18,7 +18,9 @@ class CategoryResource extends Resource
     protected static ?string $model = Category::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
     protected static ?string $navigationGroup = 'Catalogue';
+
     protected static ?string $label = 'Catégories';
 
     public static function form(Form $form): Form
@@ -29,10 +31,10 @@ class CategoryResource extends Resource
                     ->required()
                     ->unique(ignoreRecord: true)
                     ->disabled(fn (?Category $record) => $record?->isDefault()),
-                    
+
                 TextInput::make('label')
                     ->required(),
-                    
+
                 Toggle::make('is_active')
                     ->label('Actif')
                     ->default(true)
@@ -45,17 +47,17 @@ class CategoryResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('label')
-                        ->label('Nom')
-                        ->sortable()
-                        ->searchable(),
+                    ->label('Nom')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('code')->sortable()->searchable(),
                 ToggleColumn::make('is_active')
                     ->label('Actif')
                     ->sortable()
-                    ->searchable()
-                    //->boolean()
-                    //->trueIcon('heroicon-o-check-circle')
-                    //->falseIcon('heroicon-o-x-circle')
+                    ->searchable(),
+                // ->boolean()
+                // ->trueIcon('heroicon-o-check-circle')
+                // ->falseIcon('heroicon-o-x-circle')
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('is_active'),

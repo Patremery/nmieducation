@@ -5,33 +5,37 @@ namespace App\Filament\Resources;
 use App\Enums\DefaultStatusEnum;
 use App\Filament\Resources\CollectionsResource\Pages;
 use App\Models\Collection;
-use App\Traits\DefaultStatusField;
 use App\Traits\HasStatus;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Hidden;
-use Filament\Forms\Components\Section;
-use Filament\Tables\Columns\ImageColumn;
 
 class CollectionsResource extends Resource
 {
     use HasStatus;
+
     protected static ?string $model = Collection::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
-    protected static ?string $navigationGroup = 'Catalogue';   
+
+    protected static ?string $navigationGroup = 'Catalogue';
+
     protected static ?string $navigationParent = 'Books';
+
     protected static ?int $navigationSort = 1; // Ordre dans le sous-menu
 
-    public static function getLabel() : string {
+    public static function getLabel(): string
+    {
         return __('Collections');
     }
 
@@ -65,7 +69,7 @@ class CollectionsResource extends Resource
                                     ->required()
                                     ->columnSpanFull(),
                                 Textarea::make('summary')
-                                    ->label("Résumé")
+                                    ->label('Résumé')
                                     ->columnSpanFull(),
                             ])->columnSpan(['lg' => 2]),
 
@@ -73,13 +77,13 @@ class CollectionsResource extends Resource
                             ->schema([
                                 Section::make('Statut')
                                     ->schema([
-                                        self::getStatusField()
+                                        self::getStatusField(),
                                     ]),
 
                                 Section::make('Image')
                                     ->schema([
                                         FileUpload::make('featured_image')
-                                            ->label("Image principale")
+                                            ->label('Image principale')
                                             ->default(fn ($state) => $state)
                                             ->image()
                                             ->optimize('webp')
@@ -96,16 +100,16 @@ class CollectionsResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('featured_image')
-                            ->label('')
-                            ->sortable()
-                            ->searchable(),
+                    ->label('')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('name')
-                            ->sortable()
-                            ->searchable(),
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('slug')
-                            ->toggleable(isToggledHiddenByDefault: true)
-                            ->sortable()
-                            ->searchable(),
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('status')
                     ->sortable()
                     ->badge()
@@ -116,14 +120,14 @@ class CollectionsResource extends Resource
                         default => 'danger',
                     }),
                 TextColumn::make('description')
-                            ->toggleable(isToggledHiddenByDefault: true)
-                            ->searchable(),
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->searchable(),
                 TextColumn::make('summary')
-                            ->toggleable(isToggledHiddenByDefault: true)
-                            ->sortable()
-                            ->searchable(),
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('images')
-                             ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

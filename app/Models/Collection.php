@@ -12,6 +12,7 @@ class Collection extends Model
     use HasFactory, HasStatus;
 
     protected $guarded = [];
+
     protected $casts = [
         'status' => DefaultStatusEnum::class,
         'images' => 'array',
@@ -21,5 +22,4 @@ class Collection extends Model
     {
         return $this->hasMany(Book::class);
     }
-    
 }

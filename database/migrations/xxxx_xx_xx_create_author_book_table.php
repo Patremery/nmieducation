@@ -17,7 +17,7 @@ return new class extends Migration
                 ->constrained()
                 ->onDelete('cascade');
             $table->timestamps();
-            
+
             // Index pour optimiser les performances
             $table->index(['author_id', 'book_id']);
         });
@@ -27,4 +27,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('author_book');
     }
-}; 
+};

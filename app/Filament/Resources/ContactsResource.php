@@ -16,7 +16,8 @@ class ContactsResource extends Resource
     protected static ?string $model = Contact::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = "CMS";
+
+    protected static ?string $navigationGroup = 'CMS';
 
     public static function form(Form $form): Form
     {
@@ -26,7 +27,7 @@ class ContactsResource extends Resource
                 TextInput::make('email')->required(),
                 TextInput::make('phone')->required(),
                 TextInput::make('subject')->required(),
-                TextInput::make('message')->required()
+                TextInput::make('message')->required(),
             ]);
     }
 
@@ -35,25 +36,25 @@ class ContactsResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
-                        ->label("Noms")
-                        ->sortable()
-                        ->searchable(),
+                    ->label('Noms')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('email')
-                        ->label("Adresse E-mail")
-                        ->sortable()
-                        ->searchable(),
+                    ->label('Adresse E-mail')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('phone')
-                        ->label("Téléphone")
-                        ->sortable()
-                        ->searchable(),
+                    ->label('Téléphone')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('subject')
-                        ->label("Objet")
-                        ->sortable()
-                        ->searchable(),
+                    ->label('Objet')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('message')
-                        ->label("Message")
-                        ->sortable()
-                        ->searchable()
+                    ->label('Message')
+                    ->sortable()
+                    ->searchable(),
             ])
             ->filters([
                 //
@@ -80,9 +81,9 @@ class ContactsResource extends Resource
     {
         return [
             'index' => Pages\ListContacts::route('/'),
-            //'create' => Pages\CreateContacts::route('/create'),
+            // 'create' => Pages\CreateContacts::route('/create'),
             'view' => Pages\ViewContacts::route('/{record}'),
-            //'edit' => Pages\EditContacts::route('/{record}/edit'),
+            // 'edit' => Pages\EditContacts::route('/{record}/edit'),
         ];
     }
 }

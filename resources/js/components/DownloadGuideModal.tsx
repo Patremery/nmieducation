@@ -27,12 +27,6 @@ const DownloadGuideModal: React.FC<DownloadGuideModalProps> = ({
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         post("/download-guide", {
-            data: {
-                name: data.username,
-                email: data.email,
-                phone: data.phone,
-                bookId: bookId,
-            },
             onSuccess: () => {
                 setIsSuccess(true);
             },

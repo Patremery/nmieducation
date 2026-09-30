@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Enums\DefaultStatusEnum;
-use App\Models\Post;
 use App\Models\BlogCategory;
+use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -193,10 +193,9 @@ class PostPublishingTest extends TestCase
             ]);
 
         $resource = $post->getAttributes();
-        
+
         // Vérifier que le champ cover_photo_path existe
         $this->assertArrayHasKey('cover_photo_path', $resource);
         $this->assertEquals('blog/featured.webp', $resource['cover_photo_path']);
     }
 }
-

@@ -19,7 +19,7 @@ class CollectionResource extends JsonResource
             'name' => $this->name,
             'slug' => $this->slug,
             'description' => $this->description,
-            //'image' => asset($this->image),
+            // 'image' => asset($this->image),
         ];
     }
 }

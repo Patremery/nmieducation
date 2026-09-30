@@ -4,15 +4,18 @@ namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Mail\Mailables\Attachment;
 
 class DownloadBookEmail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $user, $book;
+
+    public $user;
+
+    public $book;
 
     /**
      * Create a new message instance.
@@ -29,7 +32,7 @@ class DownloadBookEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Votre document : ' . $this->book->title,
+            subject: 'Votre document : '.$this->book->title,
         );
     }
 
@@ -50,17 +53,17 @@ class DownloadBookEmail extends Mailable
     /**
      * Get the attachments for the message.
      *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     * @return array<int, Attachment>
      */
     public function attachments(): array
     {
-        if (!$this->book->file) {
+        if (! $this->book->file) {
             return [];
         }
-        
+
         return [
-            Attachment::fromPath(storage_path('app/public/' . $this->book->file))
-                ->as($this->book->title . '.pdf')
+            Attachment::fromPath(storage_path('app/public/'.$this->book->file))
+                ->as($this->book->title.'.pdf')
                 ->withMime('application/pdf'),
         ];
     }

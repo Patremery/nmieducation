@@ -3,8 +3,8 @@
 namespace App\Policies;
 
 use App\Models\User;
-use RickDBCN\FilamentEmail\Models\Email;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use RickDBCN\FilamentEmail\Models\Email;
 
 class EmailPolicy
 {

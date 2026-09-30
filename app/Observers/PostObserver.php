@@ -14,7 +14,7 @@ class PostObserver
     public function creating(Post $post): void
     {
         // When creating a post, ensure consistency between status and published_at
-        if ($post->status === DefaultStatusEnum::PUBLISHED->value && !$this->isValidPublishedAt($post->published_at)) {
+        if ($post->status === DefaultStatusEnum::PUBLISHED->value && ! $this->isValidPublishedAt($post->published_at)) {
             $post->published_at = now();
         }
     }
@@ -26,11 +26,11 @@ class PostObserver
     {
         // If status changed to published, set published_at if not already set
         if ($post->isDirty('status') && $post->status === DefaultStatusEnum::PUBLISHED->value) {
-            if (!$this->isValidPublishedAt($post->published_at)) {
+            if (! $this->isValidPublishedAt($post->published_at)) {
                 $post->published_at = now();
             }
         }
-        
+
         // If status changed from published to unpublished/draft, clear published_at
         if ($post->isDirty('status') && $post->status !== DefaultStatusEnum::PUBLISHED->value) {
             if ($post->published_at && $post->getOriginal('status') === DefaultStatusEnum::PUBLISHED->value) {
@@ -81,7 +81,7 @@ class PostObserver
 
     private function isValidPublishedAt($publishedAt): bool
     {
-        if (!$publishedAt) {
+        if (! $publishedAt) {
             return false;
         }
 

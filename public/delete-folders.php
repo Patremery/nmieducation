@@ -3,40 +3,43 @@
  * Script to completely delete specific folders on the server root.
  * Upload this to /web/public/ and access it via https://nmieducation.com/delete-folders.php
  */
-
-echo "<h3>🗑️ Beginning Folder Deletion</h3>";
+echo '<h3>🗑️ Beginning Folder Deletion</h3>';
 
 // The base directory is one level up from public/ (i.e., /web/)
-$baseDir = realpath(__DIR__ . '/..');
+$baseDir = realpath(__DIR__.'/..');
 
 $foldersToDelete = [
-    'vendorss'
+    'vendorss',
 ];
 
 foreach ($foldersToDelete as $folderName) {
-    $folderPath = $baseDir . DIRECTORY_SEPARATOR . $folderName;
-    
+    $folderPath = $baseDir.DIRECTORY_SEPARATOR.$folderName;
+
     echo "Checking for <strong>$folderName</strong> at <code>$folderPath</code>...<br>";
 
     if (is_dir($folderPath)) {
         // Native PHP Recursive Delete (Bypasses system() restrictions)
         $it = new RecursiveDirectoryIterator($folderPath, RecursiveDirectoryIterator::SKIP_DOTS);
         $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
-        
+
         $success = true;
-        foreach($files as $file) {
+        foreach ($files as $file) {
             if ($file->isDir()) {
-                if (!@rmdir($file->getRealPath())) $success = false;
+                if (! @rmdir($file->getRealPath())) {
+                    $success = false;
+                }
             } else {
-                if (!@unlink($file->getRealPath())) $success = false;
+                if (! @unlink($file->getRealPath())) {
+                    $success = false;
+                }
             }
         }
-        
-        if (!@rmdir($folderPath)) {
+
+        if (! @rmdir($folderPath)) {
             $success = false;
         }
-        
-        if ($success && !is_dir($folderPath)) {
+
+        if ($success && ! is_dir($folderPath)) {
             echo "<span style='color:green;'>✅ Successfully deleted: $folderName</span><br><br>";
         } else {
             echo "<span style='color:red;'>❌ Failed to delete: $folderName</span><br>";

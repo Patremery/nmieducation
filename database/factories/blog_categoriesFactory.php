@@ -17,7 +17,7 @@ class blog_categoriesFactory extends Factory
     public function definition(): array
     {
         $name = $this->faker->unique()->word();
-        
+
         return [
             'name' => $name,
             'slug' => \Str::slug($name),
@@ -26,4 +26,3 @@ class blog_categoriesFactory extends Factory
         ];
     }
 }
-

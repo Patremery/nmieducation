@@ -1,9 +1,11 @@
 import React from "react";
 import InnerPageLayout from "../layouts/InnerPageLayout";
+import { useSeo } from "../hooks/useSeo";
 import { BannerProps } from "../types/interfaces";
 import DistributorForm from "../components/DistributorForm";
 
 const BecomeDistributor = () => {
+    const seo = useSeo();
     const description =
         "Devenez distributeur agréé des manuels scolaires et ouvrages de littérature édités par NMI Education";
 
@@ -19,7 +21,7 @@ const BecomeDistributor = () => {
     };
 
     return (
-        <InnerPageLayout title="Devenir Distributeur" banner={banner}>
+        <InnerPageLayout {...seo} banner={banner}>
             <div className="container p-2">
                 <div className="row px-5 mt-5">
                     <div className="col-md-10 text-center mx-auto">

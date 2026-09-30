@@ -11,6 +11,7 @@
         "@types/bootstrap": "^5.2.10",
         "@types/react": "^19.0.4",
         "@types/react-dom": "^19.0.2",
+        "@types/react-slick": "^0.23.13",
         "@vitejs/plugin-react": "^4.3.4",
         "autoprefixer": "^10.4.19",
         "axios": "^1.7.4",
@@ -22,6 +23,7 @@
         "vite": "^5.4.11"
     },
     "dependencies": {
+        "@inertiajs/core": "^2.2.21",
         "@inertiajs/react": "^2.2.8",
         "@popperjs/core": "^2.11.8",
         "@types/dompurify": "^3.2.0",

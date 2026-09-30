@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Services\SeoService;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -29,29 +30,30 @@ class HandleInertiaRequests extends Middleware
     /**
      * Define the props that are shared by default.
      *
+     * Controllers that build a page-specific SEO payload (via `SeoService`) pass
+     * it as a `seo` prop; this fallback covers the pages that do not.
+     *
      * @see https://inertiajs.com/shared-data
      *
      * @return array<string, mixed>
      */
     public function share(Request $request): array
     {
-        return array_merge(parent::share($request), [
+        $props = array_merge(parent::share($request), [
             'settings' => [
                 'support_phone' => settings('support_phone'),
                 'support_email' => settings('support_email'),
-                /* 'facebook' => settings('facebook'),
-                'twitter' => settings('twitter'),
-                'instagram' => settings('instagram'),
-                'linkedin' => settings('linkedin'),
-                'youtube' => settings('youtube'),
-                'address' => settings('address'), */
-                'site_name' => settings('site_name'),
+                'address' => config('seo.publisher.address.address_locality'),
+                'site_name' => settings('site_name') ?? config('app.name'),
                 'site_description' => settings('site_description'),
-                'logo' => settings('site_logo') ? asset('storage/'.settings('site_logo')) : null,
-                'favicon' => settings('site_favicon') ? asset('storage/'.settings('site_favicon')) : null,
-               
+                'logo' => setting_url(settings('site_logo')),
+                'favicon' => setting_url(settings('site_favicon')),
                 'theme_color' => settings('theme_color'),
             ],
         ]);
+
+        $props['seo'] = $props['seo'] ?? SeoService::make()->toArray();
+
+        return $props;
     }
 }

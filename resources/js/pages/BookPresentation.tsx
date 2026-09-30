@@ -1,5 +1,6 @@
 import React from "react";
 import InnerPageLayout from "../layouts/InnerPageLayout";
+import { useSeo } from "../hooks/useSeo";
 import BookSlider from "../components/Slider";
 import SingleBookInformations from "../components/SingleBookInformations";
 import Breadcrumb from "../components/Breadcrumb";
@@ -14,6 +15,7 @@ const BookPresentation: React.FC<BookPresentationProps> = ({
     book,
     similarBooks,
 }) => {
+    const seo = useSeo();
     const getImageHeight = () => {
         if (book.category === "kids") {
             return 200;
@@ -39,7 +41,7 @@ const BookPresentation: React.FC<BookPresentationProps> = ({
     ];
 
     return (
-        <InnerPageLayout title={book.title} banner={banner}>
+        <InnerPageLayout {...seo} banner={banner}>
             <div className="container pt-4 px-5">
                 <Breadcrumb items={breadcrumbItems} />
             </div>

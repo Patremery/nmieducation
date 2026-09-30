@@ -1,10 +1,12 @@
 import React from "react";
 import ManuscritForm from "../components/ManuscritForm";
 import InnerPageLayout from "../layouts/InnerPageLayout";
+import { useSeo } from "../hooks/useSeo";
 import { BannerProps } from "../types/interfaces";
 import JobForm from "../components/JobForm";
 
 const JoinUs = () => {
+    const seo = useSeo();
     const description =
         "Vous rêvez d'une carrière dans le secteur de l'édition ? Postulez chez NMI Education";
     const banner: BannerProps = {
@@ -13,7 +15,7 @@ const JoinUs = () => {
         className: "lead font-weight-600 p-5 display-7",
     };
     return (
-        <InnerPageLayout title="Rejoignez-nous" banner={banner}>
+        <InnerPageLayout {...seo} banner={banner}>
             <div className="container" style={{ padding: "50px 20px" }}>
                 <div className="row">
                     {/* Left Column - Form */}

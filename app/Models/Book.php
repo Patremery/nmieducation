@@ -7,6 +7,7 @@ use App\Http\Resources\BookResource;
 use App\Traits\HasStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Book extends Model
@@ -14,40 +15,41 @@ class Book extends Model
     use HasFactory, HasStatus;
 
     protected $guarded = [];
+
     protected $casts = [
         'images' => 'array',
         'new' => 'boolean',
         'classrooms' => 'array',
     ];
 
-    //protected $with = ['authors'];
+    // protected $with = ['authors'];
 
     public function authors(): BelongsToMany
     {
         return $this->belongsToMany(Author::class, 'author_book');
     }
 
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-    public function language()
+    public function language(): BelongsTo
     {
         return $this->belongsTo(BookLanguage::class, 'book_language_id');
     }
 
-    public function collection()
+    public function collection(): BelongsTo
     {
         return $this->belongsTo(Collection::class, 'collection_id');
     }
 
     public function getClassroomEnumsAttribute()
     {
-        if (!$this->classrooms) {
+        if (! $this->classrooms) {
             return [];
         }
-        
+
         return array_map(function ($value) {
             return ClassroomsEnum::from($value);
         }, $this->classrooms);
