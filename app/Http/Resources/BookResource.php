@@ -17,6 +17,7 @@ class BookResource extends JsonResource
             'authors' => $this->getAuthors(),
             'title' => $this->title,
             'category' => $this->category->code,
+            'categoryLabel' => $this->category?->label,
             'price' => $this->price,
             'images' => $this->images ?? [],
             'new' => $this->new ? 'Yes' : 'No',

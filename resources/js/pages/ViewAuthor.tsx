@@ -1,8 +1,15 @@
 import React from "react";
 import InnerPageLayout from "../layouts/InnerPageLayout";
-import { Author, BannerProps, Book } from "../types/interfaces";
+import {
+    Author,
+    BannerProps,
+    Book,
+    BreadcrumbItem,
+} from "../types/interfaces";
 import SingleAuthorInformations from "../components/SingleAuthorInformations";
 import BookSlider from "../components/Slider";
+import Breadcrumb from "../components/Breadcrumb";
+import ItemGrid from "../components/ItemGrid";
 
 interface ViewAuthorProps {
     author: Author;
@@ -14,12 +21,21 @@ const ViewAuthor: React.FC<ViewAuthorProps> = ({ author, books }) => {
         title: "Nos Auteurs",
     };
 
+    const breadcrumbItems: BreadcrumbItem[] = [
+        { label: "Accueil", href: "/" },
+        { label: "Nos Auteurs", href: "/authors" },
+        { label: author.name },
+    ];
+
     return (
         <InnerPageLayout title={author.name} banner={banner}>
+            <div className="container pt-4 px-5">
+                <Breadcrumb items={breadcrumbItems} />
+            </div>
             <div className="container p-5">
                 <SingleAuthorInformations author={author} books={books} />
             </div>
-            {books.length > 5 && (
+            {books.length > 0 && (
                 <div
                     className="container-fluid p-4"
                     style={{ backgroundColor: "#FFFFFF" }}
@@ -35,11 +51,15 @@ const ViewAuthor: React.FC<ViewAuthorProps> = ({ author, books }) => {
                     </div>
 
                     <div className="row mt-3 py-3 py-md-4 mb-4 mb-md-5 px-2 px-md-4 px-lg-5">
-                        <BookSlider
-                            books={books}
-                            slideNumber={6}
-                            imageHeight={300}
-                        />
+                        {books.length > 6 ? (
+                            <BookSlider
+                                books={books}
+                                slideNumber={6}
+                                imageHeight={300}
+                            />
+                        ) : (
+                            <ItemGrid items={books} height={300} />
+                        )}
                     </div>
                 </div>
             )}

@@ -211,7 +211,7 @@ const Navbar: React.FC = () => {
                                             href="/catalogue/category/catalog"
                                             onClick={handleNavigation}
                                         >
-                                            Catalogues
+                                            Télécharger nos catalogues
                                         </InertiaLink>
                                     </li>
                                     <li>
@@ -324,8 +324,6 @@ const Navbar: React.FC = () => {
                                     className="nav-link dropdown-toggle"
                                     href="/catalogue"
                                     id="catalogueDropdownDesktop"
-                                    role="button"
-                                    data-bs-toggle="dropdown"
                                 >
                                     Notre catalogue
                                 </InertiaLink>
@@ -403,8 +401,6 @@ const Navbar: React.FC = () => {
                                     className="nav-link dropdown-toggle"
                                     href="/contact"
                                     id="contactDropdownDesktop"
-                                    role="button"
-                                    data-bs-toggle="dropdown"
                                 >
                                     Nous contacter
                                 </InertiaLink>

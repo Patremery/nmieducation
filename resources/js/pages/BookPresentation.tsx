@@ -2,7 +2,8 @@ import React from "react";
 import InnerPageLayout from "../layouts/InnerPageLayout";
 import BookSlider from "../components/Slider";
 import SingleBookInformations from "../components/SingleBookInformations";
-import { BannerProps, Book } from "../types/interfaces";
+import Breadcrumb from "../components/Breadcrumb";
+import { BannerProps, Book, BreadcrumbItem } from "../types/interfaces";
 
 interface BookPresentationProps {
     book: Book;
@@ -23,8 +24,25 @@ const BookPresentation: React.FC<BookPresentationProps> = ({
         title: "Nos Livres",
     };
 
+    const breadcrumbItems: BreadcrumbItem[] = [
+        { label: "Accueil", href: "/" },
+        { label: "Catalogue", href: "/catalogue" },
+        ...(book.categoryLabel
+            ? [
+                  {
+                      label: book.categoryLabel,
+                      href: `/catalogue/category/${book.category}`,
+                  },
+              ]
+            : []),
+        { label: book.title },
+    ];
+
     return (
         <InnerPageLayout title={book.title} banner={banner}>
+            <div className="container pt-4 px-5">
+                <Breadcrumb items={breadcrumbItems} />
+            </div>
             <div className="container p-5">
                 <SingleBookInformations book={book} />
             </div>

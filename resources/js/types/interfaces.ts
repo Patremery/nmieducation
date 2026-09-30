@@ -12,6 +12,7 @@ interface Book {
     description: string;
     collection: Collection;
     category: string;
+    categoryLabel?: string;
     theme: string;
     audience: string;
     language: string;
@@ -26,6 +27,11 @@ interface Book {
     youscribe_url: PlatformUrl;
     lq_url: PlatformUrl;
     classrooms: string[];
+}
+
+interface BreadcrumbItem {
+    label: string;
+    href?: string;
 }
 
 interface BannerProps {
@@ -119,6 +125,7 @@ export type {
     PlatformUrl,
     Author,
     BannerProps,
+    BreadcrumbItem,
     Team,
     Post,
     BlogCategory,
