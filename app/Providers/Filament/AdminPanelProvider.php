@@ -32,7 +32,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->path('admin')
+            ->path('control-panel')
             ->login(Login::class)
             ->brandLogo(settings('site_logo') ? asset('storage/'.settings('site_logo')) : null)
             ->brandLogoHeight("70px")
