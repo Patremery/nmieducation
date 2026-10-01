@@ -30,7 +30,7 @@ const SingleAuthorInformations = ({
             </div>
             <div className="col-12 col-md-8">
                 <h1>{author.name}</h1>
-                <p>{author.biography}</p>
+                {author.biography}
             </div>
         </div>
     );

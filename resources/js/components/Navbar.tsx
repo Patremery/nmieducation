@@ -377,7 +377,7 @@ const Navbar: React.FC = () => {
                                             className="dropdown-item"
                                             href="/catalogue/category/catalog"
                                         >
-                                            Catalogues
+                                           Télécharger nos Catalogues
                                         </InertiaLink>
                                     </li>
                                     <li>
