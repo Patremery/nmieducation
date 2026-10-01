@@ -149,30 +149,32 @@ const Head = ({
                     head-key="seo-og-image"
                 />
             )}
-            {shareImage && (
-                <>
-                    <meta
-                        property="og:image:secure_url"
-                        content={shareImage}
-                        head-key="seo-og-image-secure"
-                    />
-                    <meta
-                        property="og:image:width"
-                        content="1200"
-                        head-key="seo-og-image-width"
-                    />
-                    <meta
-                        property="og:image:height"
-                        content="630"
-                        head-key="seo-og-image-height"
-                    />
-                    <meta
-                        property="og:image:alt"
-                        content={pageTitle}
-                        head-key="seo-og-image-alt"
-                    />
-                </>
-            )}
+            {shareImage && [
+                <meta
+                    key="og-image-secure"
+                    property="og:image:secure_url"
+                    content={shareImage}
+                    head-key="seo-og-image-secure"
+                />,
+                <meta
+                    key="og-image-width"
+                    property="og:image:width"
+                    content="1200"
+                    head-key="seo-og-image-width"
+                />,
+                <meta
+                    key="og-image-height"
+                    property="og:image:height"
+                    content="630"
+                    head-key="seo-og-image-height"
+                />,
+                <meta
+                    key="og-image-alt"
+                    property="og:image:alt"
+                    content={pageTitle}
+                    head-key="seo-og-image-alt"
+                />,
+            ]}
             {canonicalUrl && (
                 <meta
                     property="og:url"
@@ -182,38 +184,40 @@ const Head = ({
             )}
 
             {/* ---- Article / Book specifics ---- */}
-            {(type === "article" || type === "book") && (
-                <>
-                    {publishedTime && (
-                        <meta
-                            property="article:published_time"
-                            content={publishedTime}
-                            head-key="seo-article-published"
-                        />
-                    )}
-                    {modifiedTime && (
-                        <meta
-                            property="article:modified_time"
-                            content={modifiedTime}
-                            head-key="seo-article-modified"
-                        />
-                    )}
-                    {section && (
-                        <meta
-                            property="article:section"
-                            content={section}
-                            head-key="seo-article-section"
-                        />
-                    )}
-                    {tags?.length ? (
-                        <meta
-                            property="article:tag"
-                            content={tags.join(", ")}
-                            head-key="seo-article-tag"
-                        />
-                    ) : null}
-                </>
-            )}
+            {(type === "article" || type === "book") && [
+                publishedTime && (
+                    <meta
+                        key="article-published"
+                        property="article:published_time"
+                        content={publishedTime}
+                        head-key="seo-article-published"
+                    />
+                ),
+                modifiedTime && (
+                    <meta
+                        key="article-modified"
+                        property="article:modified_time"
+                        content={modifiedTime}
+                        head-key="seo-article-modified"
+                    />
+                ),
+                section && (
+                    <meta
+                        key="article-section"
+                        property="article:section"
+                        content={section}
+                        head-key="seo-article-section"
+                    />
+                ),
+                tags?.length ? (
+                    <meta
+                        key="article-tag"
+                        property="article:tag"
+                        content={tags.join(", ")}
+                        head-key="seo-article-tag"
+                    />
+                ) : null,
+            ]}
 
             {/* ---- Twitter Card ---- */}
             <meta
