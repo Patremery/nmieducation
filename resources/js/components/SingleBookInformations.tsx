@@ -259,6 +259,8 @@ const SingleBookInformations = ({ book }: { book: Book }) => {
                                                     <a
                                                         className="dropdown-item"
                                                         href={book.amazon_url}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
                                                     >
                                                         Amazon
                                                     </a>
@@ -269,6 +271,8 @@ const SingleBookInformations = ({ book }: { book: Book }) => {
                                                     <a
                                                         className="dropdown-item"
                                                         href={book.adinkra_url}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
                                                     >
                                                         Adinkra
                                                     </a>
@@ -281,6 +285,8 @@ const SingleBookInformations = ({ book }: { book: Book }) => {
                                                         href={
                                                             book.youscribe_url
                                                         }
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
                                                     >
                                                         Youscribe
                                                     </a>
@@ -291,6 +297,8 @@ const SingleBookInformations = ({ book }: { book: Book }) => {
                                                     <a
                                                         className="dropdown-item"
                                                         href={book.lq_url}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
                                                     >
                                                         Les Librairies du
                                                         quartier

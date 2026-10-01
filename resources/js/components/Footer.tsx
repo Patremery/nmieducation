@@ -1,15 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Logo from "../assets/img/logo.png";
 import QRCode from "../assets/img/qr.png";
 import CopyrightSection from "./CopyrightSection";
 import { Link } from "@inertiajs/react";
 import { useSettings } from "../hooks/useSettings";
+import { FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 
 const Footer: React.FC = () => {
     const settings = useSettings();
-    useEffect(() => {
-        console.log(settings);
-    }, []);
     return (
         <>
             <footer className="bg-primary text-white py-4 py-md-5">
@@ -29,8 +27,27 @@ const Footer: React.FC = () => {
                             </Link>
                             <p className="text-white mb-3">
                                 Nomayos, Entrée route Ngoumou <br />
-                                Tel: {settings.support_phone}
                             </p>
+                            <div className="d-flex flex-column align-items-center align-items-sm-start gap-2">
+                                {settings.support_phone && (
+                                    <a
+                                        href={`tel:${settings.support_phone.replace(/[^0-9+]/g, "")}`}
+                                        className="text-white text-decoration-none d-inline-flex align-items-center gap-2"
+                                    >
+                                        <FaPhoneAlt aria-hidden="true" />
+                                        <span>{settings.support_phone}</span>
+                                    </a>
+                                )}
+                                {settings.support_email && (
+                                    <a
+                                        href={`mailto:${settings.support_email}`}
+                                        className="text-white text-decoration-none d-inline-flex align-items-center gap-2"
+                                    >
+                                        <FaEnvelope aria-hidden="true" />
+                                        <span>{settings.support_email}</span>
+                                    </a>
+                                )}
+                            </div>
                         </div>
                         <div className="col-12 col-sm-6 col-lg-3 text-center text-sm-start">
                             <h5 className="mb-3">Suivez notre actualité</h5>
