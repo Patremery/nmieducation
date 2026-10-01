@@ -1,5 +1,6 @@
 import { Author, Book } from "../types/interfaces";
 import DEFAULT_PROFILE_IMG from "../assets/img/default.png";
+import DOMPurify from "dompurify";
 
 interface SingleAuthorInformationsProps {
     author: Author;
@@ -30,7 +31,11 @@ const SingleAuthorInformations = ({
             </div>
             <div className="col-12 col-md-8">
                 <h1>{author.name}</h1>
-                {author.biography}
+                <div
+                    dangerouslySetInnerHTML={{
+                        __html: DOMPurify.sanitize(author.biography ?? ""),
+                    }}
+                />
             </div>
         </div>
     );
