@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Services\SeoService;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -30,8 +29,9 @@ class HandleInertiaRequests extends Middleware
     /**
      * Define the props that are shared by default.
      *
-     * Controllers that build a page-specific SEO payload (via `SeoService`) pass
-     * it as a `seo` prop; this fallback covers the pages that do not.
+     * Page-specific SEO is built by each controller (via `SeoService`) and passed
+     * as a `seo` prop; it is intentionally not rebuilt here to avoid computing
+     * the payload twice on every request.
      *
      * @see https://inertiajs.com/shared-data
      *
@@ -39,7 +39,7 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        $props = array_merge(parent::share($request), [
+        return array_merge(parent::share($request), [
             'settings' => [
                 'support_phone' => settings('support_phone'),
                 'support_email' => settings('support_email'),
@@ -51,9 +51,5 @@ class HandleInertiaRequests extends Middleware
                 'theme_color' => settings('theme_color'),
             ],
         ]);
-
-        $props['seo'] = $props['seo'] ?? SeoService::make()->toArray();
-
-        return $props;
     }
 }

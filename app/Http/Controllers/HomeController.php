@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Resources\BookResource;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\TeamResource;
+use App\Mail\ApplicationSubmissionEmail;
 use App\Mail\ContactMail;
 use App\Mail\ManuscritSubmissionEmail;
+use App\Models\Application;
 use App\Models\Book;
 use App\Models\Contact;
 use App\Models\Post;
@@ -267,6 +269,9 @@ class HomeController extends Controller
             $validated['file'] = $request->file('manuscript')->store('manuscripts', 'public');
         }
 
+        $validated['title'] = $validated['bookTitle'] ?? null;
+        unset($validated['bookTitle'], $validated['manuscript']);
+
         DB::transaction(function () use ($validated) {
             $manuscrit = Submission::create($validated);
             Mail::to(settings('support_email') ?: config('mail.from.address'))->send(new ManuscritSubmissionEmail($manuscrit));
@@ -297,16 +302,35 @@ class HomeController extends Controller
 
     public function storeApplication(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:50',
             'address' => 'nullable|string|max:255',
             'city' => 'nullable|string|max:255',
             'country' => 'nullable|string|max:255',
-            'genre' => 'nullable|string|max:255',
+            'genre' => 'nullable|string|max:255', // niveau d'étude
             'manuscript' => 'nullable|file|mimes:pdf,doc,docx|max:10240', // actually CV
         ]);
+
+        $application = [
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone' => $validated['phone'],
+            'address' => $validated['address'] ?? null,
+            'city' => $validated['city'] ?? null,
+            'country' => $validated['country'] ?? null,
+            'study_level' => $validated['genre'] ?? null,
+        ];
+
+        if ($request->hasFile('manuscript')) {
+            $application['file'] = $request->file('manuscript')->store('applications', 'public');
+        }
+
+        DB::transaction(function () use ($application) {
+            $record = Application::create($application);
+            Mail::to(settings('support_email') ?: config('mail.from.address'))->send(new ApplicationSubmissionEmail($record));
+        });
 
         return redirect()->back()->with('success', 'Candidature envoyée avec succès');
     }

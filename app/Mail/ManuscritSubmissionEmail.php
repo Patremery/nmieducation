@@ -38,7 +38,7 @@ class ManuscritSubmissionEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.new_submission',
+            markdown: 'emails.new_submission',
         );
     }
 

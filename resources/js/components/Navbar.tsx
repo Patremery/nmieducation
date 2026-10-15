@@ -72,7 +72,7 @@ const Navbar: React.FC = () => {
                             <span className="navbar-toggler-icon"></span>
                         </button>
 
-                        <InertiaLink
+                        <InertiaLink prefetch
                             className="navbar-brand text-center position-absolute start-50 translate-middle-x"
                             href="/"
                         >
@@ -117,7 +117,7 @@ const Navbar: React.FC = () => {
 
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <InertiaLink
+                                <InertiaLink prefetch
                                     className="nav-link"
                                     href="/"
                                     onClick={handleNavigation}
@@ -126,7 +126,7 @@ const Navbar: React.FC = () => {
                                 </InertiaLink>
                             </li>
                             <li className="nav-item">
-                                <InertiaLink
+                                <InertiaLink prefetch
                                     className="nav-link"
                                     href="/about"
                                     onClick={handleNavigation}
@@ -139,7 +139,7 @@ const Navbar: React.FC = () => {
                                     openDropdowns.catalogue ? "show" : ""
                                 }`}
                             >
-                                <InertiaLink
+                                <InertiaLink prefetch
                                     className={`nav-link dropdown-toggle ${
                                         openDropdowns.catalogue ? "show" : ""
                                     }`}
@@ -161,7 +161,7 @@ const Navbar: React.FC = () => {
                                     aria-labelledby="catalogueDropdown"
                                 >
                                     <li>
-                                        <InertiaLink
+                                        <InertiaLink prefetch
                                             className="dropdown-item"
                                             href="/catalogue"
                                             onClick={handleNavigation}
@@ -170,7 +170,7 @@ const Navbar: React.FC = () => {
                                         </InertiaLink>
                                     </li>
                                     <li>
-                                        <InertiaLink
+                                        <InertiaLink prefetch
                                             className="dropdown-item"
                                             href="/catalogue/category/school"
                                             onClick={handleNavigation}
@@ -179,7 +179,7 @@ const Navbar: React.FC = () => {
                                         </InertiaLink>
                                     </li>
                                     <li>
-                                        <InertiaLink
+                                        <InertiaLink prefetch
                                             className="dropdown-item"
                                             href="/catalogue/category/literature"
                                             onClick={handleNavigation}
@@ -188,7 +188,7 @@ const Navbar: React.FC = () => {
                                         </InertiaLink>
                                     </li>
                                     <li>
-                                        <InertiaLink
+                                        <InertiaLink prefetch
                                             className="dropdown-item"
                                             href="/catalogue/category/kids"
                                             onClick={handleNavigation}
@@ -197,7 +197,7 @@ const Navbar: React.FC = () => {
                                         </InertiaLink>
                                     </li>
                                     <li>
-                                        <InertiaLink
+                                        <InertiaLink prefetch
                                             className="dropdown-item"
                                             href="/catalogue/category/guides"
                                             onClick={handleNavigation}
@@ -206,7 +206,7 @@ const Navbar: React.FC = () => {
                                         </InertiaLink>
                                     </li>
                                     <li>
-                                        <InertiaLink
+                                        <InertiaLink prefetch
                                             className="dropdown-item"
                                             href="/catalogue/category/catalog"
                                             onClick={handleNavigation}
@@ -215,7 +215,7 @@ const Navbar: React.FC = () => {
                                         </InertiaLink>
                                     </li>
                                     <li>
-                                        <InertiaLink
+                                        <InertiaLink prefetch
                                             className="dropdown-item"
                                             href="/authors"
                                             onClick={handleNavigation}
@@ -227,7 +227,7 @@ const Navbar: React.FC = () => {
                             </li>
 
                             <li className="nav-item">
-                                <InertiaLink
+                                <InertiaLink prefetch
                                     className="nav-link"
                                     href="/blog"
                                     onClick={handleNavigation}
@@ -240,7 +240,7 @@ const Navbar: React.FC = () => {
                                     openDropdowns.contact ? "show" : ""
                                 }`}
                             >
-                                <InertiaLink
+                                <InertiaLink prefetch
                                     className={`nav-link dropdown-toggle ${
                                         openDropdowns.contact ? "show" : ""
                                     }`}
@@ -262,7 +262,7 @@ const Navbar: React.FC = () => {
                                     aria-labelledby="contactDropdown"
                                 >
                                     <li>
-                                        <InertiaLink
+                                        <InertiaLink prefetch
                                             className="dropdown-item"
                                             href="/contact"
                                             onClick={handleNavigation}
@@ -271,7 +271,7 @@ const Navbar: React.FC = () => {
                                         </InertiaLink>
                                     </li>
                                     <li>
-                                        <InertiaLink
+                                        <InertiaLink prefetch
                                             className="dropdown-item"
                                             href="/submit-your-manuscrit"
                                             onClick={handleNavigation}
@@ -281,7 +281,7 @@ const Navbar: React.FC = () => {
                                     </li>
 
                                     <li>
-                                        <InertiaLink
+                                        <InertiaLink prefetch
                                             className="dropdown-item"
                                             href="/become-distributor"
                                             onClick={handleNavigation}
@@ -290,7 +290,7 @@ const Navbar: React.FC = () => {
                                         </InertiaLink>
                                     </li>
                                     <li>
-                                        <InertiaLink
+                                        <InertiaLink prefetch
                                             className="dropdown-item"
                                             href="/join-us"
                                             onClick={handleNavigation}
@@ -310,17 +310,17 @@ const Navbar: React.FC = () => {
                     >
                         <ul className="navbar-nav mx-auto gap-2">
                             <li className="nav-item">
-                                <InertiaLink className="nav-link" href="/">
+                                <InertiaLink prefetch className="nav-link" href="/">
                                     Accueil
                                 </InertiaLink>
                             </li>
                             <li className="nav-item">
-                                <InertiaLink className="nav-link" href="/about">
+                                <InertiaLink prefetch className="nav-link" href="/about">
                                     À propos de nous
                                 </InertiaLink>
                             </li>
                             <li className="nav-item dropdown">
-                                <InertiaLink
+                                <InertiaLink prefetch
                                     className="nav-link dropdown-toggle"
                                     href="/catalogue"
                                     id="catalogueDropdownDesktop"
@@ -333,7 +333,7 @@ const Navbar: React.FC = () => {
                                     aria-labelledby="catalogueDropdownDesktop"
                                 >
                                     <li>
-                                        <InertiaLink
+                                        <InertiaLink prefetch
                                             className="dropdown-item"
                                             href="/catalogue"
                                         >
@@ -341,7 +341,7 @@ const Navbar: React.FC = () => {
                                         </InertiaLink>
                                     </li>
                                     <li>
-                                        <InertiaLink
+                                        <InertiaLink prefetch
                                             className="dropdown-item"
                                             href="/catalogue/category/school"
                                         >
@@ -349,7 +349,7 @@ const Navbar: React.FC = () => {
                                         </InertiaLink>
                                     </li>
                                     <li>
-                                        <InertiaLink
+                                        <InertiaLink prefetch
                                             className="dropdown-item"
                                             href="/catalogue/category/literature"
                                         >
@@ -357,7 +357,7 @@ const Navbar: React.FC = () => {
                                         </InertiaLink>
                                     </li>
                                     <li>
-                                        <InertiaLink
+                                        <InertiaLink prefetch
                                             className="dropdown-item"
                                             href="/catalogue/category/kids"
                                         >
@@ -365,7 +365,7 @@ const Navbar: React.FC = () => {
                                         </InertiaLink>
                                     </li>
                                     <li>
-                                        <InertiaLink
+                                        <InertiaLink prefetch
                                             className="dropdown-item"
                                             href="/catalogue/category/guides"
                                         >
@@ -373,7 +373,7 @@ const Navbar: React.FC = () => {
                                         </InertiaLink>
                                     </li>
                                     <li>
-                                        <InertiaLink
+                                        <InertiaLink prefetch
                                             className="dropdown-item"
                                             href="/catalogue/category/catalog"
                                         >
@@ -381,7 +381,7 @@ const Navbar: React.FC = () => {
                                         </InertiaLink>
                                     </li>
                                     <li>
-                                        <InertiaLink
+                                        <InertiaLink prefetch
                                             className="dropdown-item"
                                             href="/authors"
                                         >
@@ -392,12 +392,12 @@ const Navbar: React.FC = () => {
                             </li>
 
                             <li className="nav-item">
-                                <InertiaLink className="nav-link" href="/blog">
+                                <InertiaLink prefetch className="nav-link" href="/blog">
                                     Actualité
                                 </InertiaLink>
                             </li>
                             <li className="nav-item dropdown">
-                                <InertiaLink
+                                <InertiaLink prefetch
                                     className="nav-link dropdown-toggle"
                                     href="/contact"
                                     id="contactDropdownDesktop"
@@ -410,7 +410,7 @@ const Navbar: React.FC = () => {
                                     aria-labelledby="contactDropdownDesktop"
                                 >
                                     <li>
-                                        <InertiaLink
+                                        <InertiaLink prefetch
                                             className="dropdown-item"
                                             href="/contact"
                                         >
@@ -418,7 +418,7 @@ const Navbar: React.FC = () => {
                                         </InertiaLink>
                                     </li>
                                     <li>
-                                        <InertiaLink
+                                        <InertiaLink prefetch
                                             className="dropdown-item"
                                             href="/submit-your-manuscrit"
                                         >
@@ -427,7 +427,7 @@ const Navbar: React.FC = () => {
                                     </li>
 
                                     <li>
-                                        <InertiaLink
+                                        <InertiaLink prefetch
                                             className="dropdown-item"
                                             href="/become-distributor"
                                         >
@@ -435,7 +435,7 @@ const Navbar: React.FC = () => {
                                         </InertiaLink>
                                     </li>
                                     <li>
-                                        <InertiaLink
+                                        <InertiaLink prefetch
                                             className="dropdown-item"
                                             href="/join-us"
                                         >
