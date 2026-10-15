@@ -42,13 +42,20 @@ const JobForm = () => {
                             ></i>
                         </div>
                         <h3 className="mb-3">
-                            Candidature spontanée envoyé avec succès!
+                            Candidature spontanée envoyée avec succès!
                         </h3>
                         <p className="mb-4">
                             Merci de nous avoir contacté. Nous avons bien reçu
                             votre candidature et nous vous répondrons dans les
                             plus brefs délais.
                         </p>
+                        <button
+                            type="button"
+                            className="btn btn-primary"
+                            onClick={handleNewMessage}
+                        >
+                            Soumettre une nouvelle candidature
+                        </button>
                     </div>
                 ) : (
                     <form onSubmit={handleSubmit} className="row g-3">
@@ -167,7 +174,18 @@ const JobForm = () => {
                                 className="btn btn-primary call-to-action btn-lg px-5"
                                 disabled={processing}
                             >
-                                Envoyer ma candidature
+                                {processing ? (
+                                    <>
+                                        <span
+                                            className="spinner-border spinner-border-sm me-2"
+                                            role="status"
+                                            aria-hidden="true"
+                                        ></span>
+                                        Envoi en cours...
+                                    </>
+                                ) : (
+                                    "Envoyer ma candidature"
+                                )}
                             </button>
                         </div>
                     </form>

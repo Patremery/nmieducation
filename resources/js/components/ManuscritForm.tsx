@@ -176,7 +176,18 @@ const ManuscritForm = () => {
                             className="btn btn-primary call-to-action btn-lg px-5"
                             disabled={processing}
                         >
-                            Envoyer mon manuscrit
+                            {processing ? (
+                                <>
+                                    <span
+                                        className="spinner-border spinner-border-sm me-2"
+                                        role="status"
+                                        aria-hidden="true"
+                                    ></span>
+                                    Envoi en cours...
+                                </>
+                            ) : (
+                                "Envoyer mon manuscrit"
+                            )}
                         </button>
                     </div>
                 </form>
